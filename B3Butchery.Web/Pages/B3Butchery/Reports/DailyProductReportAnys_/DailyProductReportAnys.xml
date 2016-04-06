@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Select xmlns="urn:XDQuery">
+	<Columns>
+	</Columns>
+	<From>
+			<DmoClass class="BWP.B3Butchery.BO.Views.DailyProductReportView, B3Butchery"/>
+	</From>
+	<Where>
+		<And>
+			<QBEIn>
+				<Field name="PlanNumber_ID"/>
+				<QBE paramName="PlanNumber_ID"/>
+			</QBEIn>
+			<QBEIn>
+				<Field name="AccountingUnit_ID"/>
+				<QBE paramName="AccountingUnit_ID"/>
+			</QBEIn>
+		</And>
+	</Where>
+</Select>

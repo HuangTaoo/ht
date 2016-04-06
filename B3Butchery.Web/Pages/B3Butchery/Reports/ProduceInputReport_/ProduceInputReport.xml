@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Select xmlns="urn:XDQuery">
+	<Columns>
+	</Columns>
+	<From>
+		<Join>
+			<DmoClass class="BWP.B3Butchery.BO.ProduceInput, B3Butchery"/>
+			<DmoClass class="BWP.B3Butchery.BO.ProduceInput_Detail, B3Butchery" alias="detail"/>
+			<Condition>
+				<EQ>
+					<Field name="ID"/>
+					<Field name="ProduceInput_ID" alias="detail"/>
+				</EQ>
+			</Condition>
+		</Join>
+	</From>
+	<Where>
+		<And>
+			<QBEIn>
+				<Field name="PlanNumber_ID"/>
+				<QBE paramName="PlanNumber_ID"/>
+			</QBEIn>
+			<QBEIn>
+				<Field name="AccountingUnit_ID"/>
+				<QBE paramName="AccountingUnit_ID"/>
+			</QBEIn>
+			<QBEIn>
+				<Field name="Department_ID"/>
+				<QBE paramName="Department_ID"/>
+			</QBEIn>
+			<QBEIn>
+				<Field name="Employee_ID"/>
+				<QBE paramName="Employee_ID"/>
+			</QBEIn>
+			<QBEIn>
+				<Field name="ProductLinks_ID"/>
+				<QBE paramName="ProductLinks_ID"/>
+			</QBEIn>
+		</And>
+	</Where>
+</Select>

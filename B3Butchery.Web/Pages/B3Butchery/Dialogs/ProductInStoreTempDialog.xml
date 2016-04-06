@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Select xmlns="urn:XDQuery">
+  <Columns>
+  </Columns>
+  <From>
+    <DmoClass class="BWP.B3Butchery.BO.ProductInStore_Temp, B3Butchery"/>
+  </From>
+  <Where>
+    <And>
+      <Or>
+        <Contains>
+          <Field name="Name"/>
+          <QBE paramName="Name"/>
+        </Contains>
+        <Contains>
+          <Field name="Spell"/>
+          <QBE paramName="Name"/>
+        </Contains>
+      </Or>
+      <EQ>
+        <Field name="ID" />
+        <QBE paramName="ID"/>
+      </EQ>
+      <EQ>
+        <Field name="AccountingUnit_ID" />
+        <QBE paramName="AccountingUnit_ID"/>
+      </EQ>
+      <EQ>
+        <Field name="Department_ID" />
+        <QBE paramName="Department_ID"/>
+      </EQ>
+      <EQ>
+        <Field name="Employee_ID" />
+        <QBE paramName="Employee_ID"/>
+      </EQ>
+      
+      <Contains>
+        <Field name="Goods_Name"/>
+        <QBE paramName="Goods_Name"/>
+      </Contains>
+      <Contains>
+        <Field name="Goods_Spec"/>
+        <QBE paramName="Goods_Spec"/>
+      </Contains>
+      <Contains>
+        <Field name="Goods_Code"/>
+        <QBE paramName="Goods_Code"/>
+      </Contains>
+      <EQ>
+        <Field name="GoodsProperty_ID"/>
+        <QBE paramName="GoodsProperty_ID"/>
+      </EQ>
+    </And>
+  </Where>
+</Select>
+

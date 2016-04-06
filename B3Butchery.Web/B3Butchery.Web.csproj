@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EB36D5D9-F5D9-4F14-8C22-40929ACCBF35}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BWP.Web</RootNamespace>
+    <AssemblyName>B3Butchery.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <KeyContainerName>BwpApp</KeyContainerName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="B3Frameworks, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a04fa581c0f74d43, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\tsref\Debug\B3Frameworks.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="B3Frameworks.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a04fa581c0f74d43, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\tsref\Debug\B3Frameworks.Web.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="B3ProduceUnitedInfos, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3a973053c7ebf11c, processorArchitecture=MSIL" />
+    <Reference Include="B3System, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a04fa581c0f74d43, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\tsref\Debug\B3System.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="B3UnitedInfos, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a04fa581c0f74d43, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\tsref\Debug\B3UnitedInfos.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Forks.EnterpriseServices, Version=3.1.0.0, Culture=neutral, PublicKeyToken=7254430f49d10aae, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\tsref\Debug\Forks.EnterpriseServices.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Forks.Utils, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7254430f49d10aae, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\tsref\Debug\Forks.Utils.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Core">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Web">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Data">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Xml">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="TSingSoft.WebControls2, Version=2.1.0.0, Culture=neutral, PublicKeyToken=a04fa581c0f74d43, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\tsref\Debug\TSingSoft.WebControls2.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Wpf, Version=1.3.0.0, Culture=neutral, PublicKeyToken=a04fa581c0f74d43, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\tsref\Debug\Wpf.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Wpf.System, Version=1.3.0.0, Culture=neutral, PublicKeyToken=a04fa581c0f74d43, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\tsref\Debug\Wpf.System.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Wpf.System.Web, Version=1.3.0.0, Culture=neutral, PublicKeyToken=a04fa581c0f74d43, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\tsref\Debug\Wpf.System.Web.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\version\tsapp_version.cs">
+      <Link>tsapp_version.cs</Link>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\InStoreType_\InStoreTypeEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\InStoreType_\InStoreTypeList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\ProductInStoreTemplate_\ProductInStoreTemplateEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\ProductInStoreTemplate_\ProductInStoreTemplateList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\ProductInStore_Temp_\ProductInStore_TempEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\ProductInStore_Temp_\ProductInStore_TempList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\ProductLine_\ProductLineEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\ProductLine_\ProductLineList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\ProductLinks_\ProductLinksEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\ProductLinks_\ProductLinksList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\ProductLinkTemplate_\ProductLinkTemplateEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\ProductLinkTemplate_\ProductLinkTemplateList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\DailyProductReport_\DailyProductReportEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\DailyProductReport_\DailyProductReportList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProduceInput_\ProduceInputEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProduceInput_\ProduceInputList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProductInStore_Temp_\ProductInStore_TempEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProduceOutput_\ProduceOutputEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProduceOutput_\ProduceOutputList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProductInStore_Temp_\ProductInStore_TempList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProductInStore_\ProductInStoreEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProductInStore_\ProductInStoreList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProductInStore_\ProductInStorePrint.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProductNotice_\ProductNoticePrint.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProductNotice_\ProductNoticeList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProductNotice_\ProductNoticeEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProductPlan_\ProductPlanEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProductPlan_\ProductPlanList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Dialogs\GoodsBatchEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Dialogs\ProductInStoreTempDialog.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Dialogs\SelectGoodsDialog.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Reports\DailyProductReportAnys_\DailyProductReportAnys.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Reports\OutPutInStoreDiffReport_\OutPutInStoreDiffReport.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Reports\ProduceInputReport_\ProduceInputReport.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Reports\ProduceOutputReport_\ProduceOutputReport.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Reports\ProductInStoreReport_\ProductInStoreReport.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Reports\ProductNoticeReport_\ProductNoticeReport.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Tools\ChengPinToBanChengPinConfigPage_\ChengPinToBanChengPinConfigPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Tools\GoodsReferencePriceConfig_\GoodsReferencePriceConfig.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PluginClass.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\ChoiceBoxProvider.cs" />
+    <Compile Include="Utils\MainToSecondConvertRowManger.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\ProductLinkTemplate_\ProductLinkTemplateList.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\B3Butchery\B3Butchery.csproj">
+      <Project>{63A9DD54-BAA1-4448-A575-72C8DA16FAA9}</Project>
+      <Name>B3Butchery</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\ProductLine_\ProductLineList.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductPlan_\ProductPlanList.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\ProductLinks_\ProductLinksList.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Bills\ProduceOutput_\ProduceOutputList.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Bills\ProduceInput_\ProduceInputList.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\InStoreType_\InStoreTypeList.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductInStore_\ProductInStoreList.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\ProductInStoreTemplate_\ProductInStoreTemplateList.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Reports\ProductInStoreReport_\ProductInStoreReport.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Reports\ProduceInputReport_\ProduceInputReport.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Reports\ProduceOutputReport_\ProduceOutputReport.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Reports\OutPutInStoreDiffReport_\OutPutInStoreDiffReport.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Bills\DailyProductReport_\DailyProductReportList.xml" />
+    <EmbeddedResource Include="Pages\B3Butchery\Reports\DailyProductReportAnys_\DailyProductReportAnys.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Tools\GoodsReferencePriceConfig_\GoodsReferencePriceConfig.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Dialogs\SelectGoodsDialog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Tools\ChengPinToBanChengPinConfigPage_\ChengPinToBanChengPinConfigPage.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductInStore_Temp_\ProductInStore_TempList.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Dialogs\ProductInStoreTempDialog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductNotice_\ProductNoticeList.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Pages\B3Butchery\BaseInfos\ProductInStore_Temp_\ProductInStore_TempList.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <EmbeddedResource Include="Pages\B3Butchery\Reports\ProductNoticeReport_\ProductNoticeReport.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

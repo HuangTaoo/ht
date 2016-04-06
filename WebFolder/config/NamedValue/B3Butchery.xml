@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NamedValueSettings>
+	<NamedValue type="BWP.B3Butchery.Utils.采集方式,B3Butchery">
+		<Word name="投入" value="0" />
+		<Word name="产出" value="1" />
+	</NamedValue>
+</NamedValueSettings>

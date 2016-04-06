@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Select xmlns="urn:XDQuery">
+	<Columns>
+	</Columns>
+	<From>
+		<Join>
+			<DmoClass class="BWP.B3Butchery.BO.ProductInStore, B3Butchery"/>
+			<DmoClass class="BWP.B3Butchery.BO.ProductInStore_Detail, B3Butchery" alias="detail"/>
+			<Condition>
+				<EQ>
+					<Field name="ID"/>
+					<Field name="ProductInStore_ID" alias="detail"/>
+				</EQ>
+			</Condition>
+		</Join>
+	</From>
+	<Where>
+		<And>
+      <EQ>
+        <Field name="ID"/>
+        <QBE paramName="ID"/>
+      </EQ>
+			<QBEIn>
+				<Field name="AccountingUnit_ID"/>
+				<QBE paramName="AccountingUnit_ID"/>
+			</QBEIn>
+			<QBEIn>
+				<Field name="Department_ID"/>
+				<QBE paramName="Department_ID"/>
+			</QBEIn>
+			<QBEIn>
+				<Field name="Store_ID"/>
+				<QBE paramName="Store_ID"/>
+			</QBEIn>
+			<QBEIn>
+				<Field name="InStoreType_ID"/>
+				<QBE paramName="InStoreType_ID"/>
+			</QBEIn>
+			<GreaterThanOrEqual>
+				<Field name="CheckDate"/>
+				<QBE paramName="MinCheckDate" />
+			</GreaterThanOrEqual>
+			<LessThanOrEqual>
+				<Field name="CheckDate"/>
+				<QBE paramName="MaxCheckDate"/>
+			</LessThanOrEqual>
+			<GreaterThanOrEqual>
+				<Field name="ProductionDate" alias="detail"/>
+				<QBE paramName="MinProductionDate" />
+			</GreaterThanOrEqual>
+			<LessThanOrEqual>
+				<Field name="ProductionDate" alias="detail"/>
+				<QBE paramName="MaxProductionDate"/>
+			</LessThanOrEqual>
+			<QBEIn>
+				<Field name="ProductPlan_ID" alias="detail"/>
+				<QBE paramName="ProductPlan_ID"/>
+			</QBEIn>
+      <Like>
+        <Field name="Remark"/>
+        <QBE paramName="Remark"/>
+      </Like>
+      <EQ>
+        <Field name="BillState"/>
+        <QBE paramName="BillState"/>
+      </EQ>
+      <QBEIn>
+        <Field name="Goods_ID" alias="detail"/>
+        <QBE paramName="Goods_ID"/>
+      </QBEIn>
+      <GreaterThanOrEqual>
+        <Field name="InStoreDate"/>
+        <QBE paramName="MinInStoreDate" />
+      </GreaterThanOrEqual>
+      <LessThanOrEqual>
+        <Field name="InStoreDate"/>
+        <QBE paramName="MaxInStoreDate"/>
+      </LessThanOrEqual>
+      <Like>
+        <Field name="Remark" alias="detail"/>
+        <QBE paramName="DRemark"/>
+      </Like>
+		</And>
+	</Where>
+</Select>

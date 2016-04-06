@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BillReports xmlns="urn:BillReports" version="1.0" displayName="生产通知单" phyName="生产通知单">
+  <Report phyName="标准格式">
+    <BillReport xmlns="urn:BillReport" version="1" displayName="标准格式" >
+      <Bands>
+        <TextBand fontName="黑体" fontSize="15" align="Center">生产通知单№$Dmo.ID</TextBand>
+        <DFInfoBand object="$Dmo" cols="4">
+          <Field name="Date" lblWidth="4"/>
+          <Field name="Department_Name" lblWidth="4"/>
+          <Field name="AccountingUnit_Name" lblWidth="4"/>
+          <Field name="Employee_Name" lblWidth="4"/> 
+          <Field name="ProductionUnit_Name" lblWidth="4"/>
+          <Field name="Remark" lblWidth="4"/>
+        </DFInfoBand>
+        <HtmlBand>
+          <![CDATA[<h2>明细清单</h2>]]>
+        </HtmlBand>
+        <DFListBand collection="$Details" itemType="$DetailType" enablePaging="true" >
+          <Field name="Goods_Name"/>
+          <Field name="Goods_Spec"/>
+          <Field name="Goods_Code"/> 
+          <Field name="Number" sum="true"/>
+          <Field name="Goods_MainUnit"/>
+          <Field name="SecondNumber" sum="true"/>
+          <Field name="Goods_SecondUnit" />
+          <Field name="ProduceRequest"/>
+          <Field name="ProduceDate" />
+          <Field name="DeliveryDate" />
+        </DFListBand>
+      </Bands>
+    </BillReport>
+  </Report>
+</BillReports>
