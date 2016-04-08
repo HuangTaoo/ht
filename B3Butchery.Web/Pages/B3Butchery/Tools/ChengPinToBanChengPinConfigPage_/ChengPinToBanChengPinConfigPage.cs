@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using BWP.B3Butchery.BO;
 using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks.Utils;
-using BWP.B3UnitedInfos;
 using BWP.B3UnitedInfos.BO;
 using BWP.Web.Layout;
 using BWP.Web.Utils;
@@ -44,6 +40,7 @@ namespace BWP.Web.Pages.B3Butchery.Tools.ChengPinToBanChengPinConfigPage_
 			var vPanel = form.EAdd(new VLayoutPanel());
 			AddQueryControl(vPanel);
 			AddQueryResult(vPanel);
+      B3ButcheryWebUtil.CreateExportExcelPart(vPanel, grid, "成品转半成品配置导出.xlsx");
 		}
 
 		private void AddQueryControl(VLayoutPanel vPanel)

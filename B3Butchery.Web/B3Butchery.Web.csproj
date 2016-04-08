@@ -44,7 +44,7 @@
       <HintPath>..\..\..\tsref\Debug\B3Frameworks.Web.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="B3ProduceUnitedInfos, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3a973053c7ebf11c, processorArchitecture=MSIL" />
+    <Reference Include="B3ProduceUnitedInfos, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3a973053c7ebf11c, processorArchitecture=MSIL"><SpecificVersion>False</SpecificVersion><Private>False</Private></Reference>
     <Reference Include="B3System, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a04fa581c0f74d43, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\tsref\Debug\B3System.dll</HintPath>
@@ -82,7 +82,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp">
       <SpecificVersion>False</SpecificVersion>
-    </Reference>
+    <Private>False</Private></Reference>
     <Reference Include="System.Data">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
