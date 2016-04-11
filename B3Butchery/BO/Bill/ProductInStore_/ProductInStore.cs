@@ -22,6 +22,7 @@ namespace BWP.B3Butchery.BO
   [BusinessCaseSlaveBO]
   [EditUrl("~/B3Butchery/Bills/ProductInStore_/ProductInStoreEdit.aspx")]
   [ListUrl("~/B3Butchery/Bills/ProductInStore_/ProductInStoreList.aspx")]
+  [BillTimeField("InStoreDate")]
   public class ProductInStore : DepartmentWorkFlowBill
 	{
 		[LogicName("仓库")]

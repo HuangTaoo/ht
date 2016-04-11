@@ -126,7 +126,7 @@
     <Reference Include="Wpf.System.Web, Version=1.3.0.0, Culture=neutral, PublicKeyToken=a04fa581c0f74d43, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\web\B3\bin\Wpf.System.Web.dll</HintPath>
-    </Reference>
+    <Private>False</Private></Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\version\tsapp_version.cs">
