@@ -49,6 +49,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
 				AddDFBrowseGridColumn(grid, "InStoreDate");
 				AddDFBrowseGridColumn(grid, "CheckEmployee_Name");
 				AddDFBrowseGridColumn(grid, "CheckDate");
+        AddDFBrowseGridColumn(grid, "CheckUser_Name");
         AddDFBrowseGridColumn(grid, "Remark");
       }
 		}

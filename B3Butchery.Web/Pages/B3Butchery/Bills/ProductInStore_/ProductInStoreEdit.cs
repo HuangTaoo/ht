@@ -87,7 +87,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
           return false;
         return CanSave;
       };
-      detailGrid = titlePanel.EAdd(new DFEditGrid(detailGridEditor) { Width = Unit.Percentage(100) });
+      detailGrid = titlePanel.EAdd(new DFEditGrid(detailGridEditor) { Width = Unit.Percentage(100),ShowLineNo =true });
       detailGrid.Columns.Add(new DFEditGridColumn("ProductionDate"));
       var productPlanCol = new DFEditGridColumn<DFChoiceBox>("ProductPlan_ID");
       productPlanCol.InitEditControl += delegate(object sender, InitEditControlEventArgs<DFChoiceBox> e)
