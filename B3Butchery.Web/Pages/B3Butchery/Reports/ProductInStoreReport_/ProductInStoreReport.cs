@@ -73,6 +73,9 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
       checkbox.Items.Add(new ListItem("备注", "DRemark"));
       checkbox.Items.Add(new ListItem("标签", "Names"));
       checkbox.Items.Add(new ListItem("单据状态", "BillState"));
+      checkbox.Items.Add(new ListItem("每日"));
+      checkbox.Items.Add(new ListItem("每月"));
+      checkbox.Items.Add(new ListItem("每年"));
 
       panel.EAdd(checkbox);
       panel.EAddLiteral("<BR/>");
@@ -150,7 +153,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
 			{
 				if (field.Selected)
 				{
-          if (sumFileds.Contains(field.Value))
+				  if (sumFileds.Contains(field.Value))
           {
             query.Columns.Add(DQSelectColumn.Sum(detail, field.Value));
             SumColumnIndexs.Add(query.Columns.Count - 1);
@@ -165,9 +168,27 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
             query.Columns.Add(DQSelectColumn.Field(field.Value));
             query.GroupBy.Expressions.Add(DQExpression.Field(field.Value));
           }
+          else if (field.Text == "每日")
+          {
+            var snippetDay = DQExpression.Snippet<DateTime?>("(Convert(nvarchar(10),[bill].[InStoreDate], 23))");
+            query.Columns.Add(DQSelectColumn.Create(snippetDay, "每日"));
+            query.GroupBy.Expressions.Add(snippetDay);
+          }
+          else if (field.Text == "每月")
+          {
+            var snippetMonth = DQExpression.Snippet<string>("Left(Convert(nvarchar(10),[bill].[InStoreDate], 23),7)");
+            query.Columns.Add(DQSelectColumn.Create(snippetMonth, "每月"));
+            query.GroupBy.Expressions.Add(snippetMonth);
+          }
+          else if (field.Text == "每年")
+          {
+            var snippetMonth = DQExpression.Snippet<string>("Left(Convert(nvarchar(10),[bill].[InStoreDate], 23),4)");
+            query.Columns.Add(DQSelectColumn.Create(snippetMonth, "每月"));
+            query.GroupBy.Expressions.Add(snippetMonth);
+          }
           else if (field.Text == "标签")
           {
-            var tarName = new JoinAlias(typeof(Dmo_TagNames));
+            var tarName = new JoinAlias(typeof (Dmo_TagNames));
             query.From.AddJoin(JoinType.Left, new DQDmoSource(tarName), DQCondition.And(DQCondition.EQ(tarName, "DmoID", query.From.RootSource.Alias, "ID"), DQCondition.EQ(tarName, "DmoTypeID", mDmoTypeID)));
             query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(tarName, "Names"), "标签"));
             query.GroupBy.Expressions.Add(DQExpression.Field(tarName, "Names"));
@@ -190,10 +211,10 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
                 v = 8;
               for (var i = 1; i <= v; i++)
               {
-                var p = new JoinAlias("_p" + i, typeof(GoodsPropertyCatalog));
+                var p = new JoinAlias("_p" + i, typeof (GoodsPropertyCatalog));
                 query.From.AddJoin(JoinType.Left, new DQDmoSource(p), DQCondition.EQ(p, "ID", propertyCatalog, string.Format("TreeDeep{0}ID", i)));
                 query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(p, "Name"), i + "级分类"));
-                query.GroupBy.Expressions.Add(DQExpression.Field(p,"Name"));
+                query.GroupBy.Expressions.Add(DQExpression.Field(p, "Name"));
               }
             }
           }

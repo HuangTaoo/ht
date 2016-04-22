@@ -4,7 +4,7 @@
 	</Columns>
 	<From>
 		<Join>
-			<DmoClass class="BWP.B3Butchery.BO.ProductInStore, B3Butchery"/>
+			<DmoClass class="BWP.B3Butchery.BO.ProductInStore, B3Butchery" alias="bill"/>
 			<DmoClass class="BWP.B3Butchery.BO.ProductInStore_Detail, B3Butchery" alias="detail"/>
 			<Condition>
 				<EQ>
