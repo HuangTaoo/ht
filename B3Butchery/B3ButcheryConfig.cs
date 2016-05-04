@@ -27,16 +27,5 @@ namespace BWP.B3Butchery
 			get { return mDoCheckCreatedInStore; }
 			set { mDoCheckCreatedInStore = value; }
 		}
-
-        private BoolConfigRef mDoSaveGoodsBatch = new BoolConfigRef(false);
-        [DomainConfigurationItem]
-        [LogicName("成品入库自动生成{批号}")]
-        [ConfigurationItemGroup("屠宰分割")]
-        [ConfigurationItemDescription("默认为“否”，选择为“是”时，成品入库保存时自动生成{批号}")]
-        public BoolConfigRef DoSaveGoodsBatch
-        {
-            get { return mDoSaveGoodsBatch; }
-            set { mDoSaveGoodsBatch = value; }
-        }
   }
 }
