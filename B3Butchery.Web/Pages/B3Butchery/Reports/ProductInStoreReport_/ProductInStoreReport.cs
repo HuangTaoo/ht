@@ -140,6 +140,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
 		{
 			var query = base.GetQueryDom();
 			OrganizationUtil.AddOrganizationLimit<Department>(query, "Department_ID");
+      OrganizationUtil.AddOrganizationLimit<Store>(query, "Store_ID");
       var bill = query.From.RootSource.Alias;
 			var detail = JoinAlias.Create("detail");
 			var goodsAlias = new JoinAlias(typeof(Goods));
