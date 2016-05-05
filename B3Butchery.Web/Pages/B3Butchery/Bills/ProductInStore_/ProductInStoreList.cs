@@ -71,8 +71,6 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
 		protected override void InitToolBar(HLayoutPanel toolbar)
 		{
 			base.InitToolBar(toolbar);
-      if (!CheckDefaultRole("数据分析", true))
-        return;
 			if (User.IsInRole("B3Butchery.报表.成品入库分析"))
 			{
 				var dataAnysBtn = new TSButton() { Text = "数据分析", UseSubmitBehavior = false };
