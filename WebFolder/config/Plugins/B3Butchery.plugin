@@ -106,6 +106,7 @@
 			<Function index="10" name="完毕"/>
 			<Function index="11" name="撤销完毕"/>
       <Function index="12" name="批量审核"/>
+      <Function index="13" name="数据分析"/>
 		</FunctionGroup>
 		<FunctionGroup name="成品入库模板" roleSchemas="employee" features="B3Butchery.0008">
 			<Function index="0" name="访问"/>
