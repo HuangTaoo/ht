@@ -43,7 +43,17 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
 		protected override void InitQueryPanel(QueryPanel queryPanel)
 		{
 			base.InitQueryPanel(queryPanel);
-			var panel = queryPanel.CreateTab("显示字段");
+      var panel = queryPanel.CreateTab("显示字段");
+      _showTypeList = new CheckBoxList {
+        RepeatColumns = 6,
+        RepeatDirection = RepeatDirection.Horizontal
+      };
+      _showTypeList.Items.Add(new ListItem("合并单元格") {
+        Selected = true
+      });
+
+      panel.EAdd(new HLayoutPanel() { new SimpleLabel("显示格式"), _showTypeList });
+      mQueryControls.Add("显示格式", _showTypeList);
 			checkbox = new CheckBoxListWithReverseSelect() { RepeatColumns = 6, RepeatDirection = RepeatDirection.Horizontal };
       checkbox.Items.Add(new ListItem("单号", "ID"));
       checkbox.Items.Add(new ListItem("会计单位", "AccountingUnit_Name"));
@@ -136,8 +146,10 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
     string[] mainFields = new string[] { "ID", "AccountingUnit_Name", "Department_Name", "Store_Name", "InStoreType_Name", "InStoreDate", "CheckDate", "CreateUser_Name", "Remark", "BillState" };
 		string[] sumFileds = new string[] { "Number", "SecondNumber", "Money" };
         string[] goodsFields = new string[] { "Name", "GoodsProperty_Name", "Code", "Spec", "MainUnit", "SecondUnit", "Origin", "Brand" };
-		protected override DQueryDom GetQueryDom()
-		{
+	  private CheckBoxList _showTypeList;
+
+	  protected override DQueryDom GetQueryDom() {
+      mBrowseGrid.EnableRowsGroup = _showTypeList.Items.FindByText("合并单元格").Selected;
 			var query = base.GetQueryDom();
 			OrganizationUtil.AddOrganizationLimit<Department>(query, "Department_ID");
       OrganizationUtil.AddOrganizationLimit<Store>(query, "Store_ID");
