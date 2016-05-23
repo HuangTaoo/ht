@@ -5,9 +5,11 @@ using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BO;
 using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks.Utils;
+using BWP.B3UnitedInfos;
 using BWP.Web.Layout;
 using BWP.Web.WebControls;
 using Forks.EnterpriseServices.DataForm;
+using Forks.Utils.Collections;
 using TSingSoft.WebControls2;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.ProductPackaging_
@@ -72,11 +74,28 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductPackaging_
       _detailGrid = vPanel.Add(new DFEditGrid(detailEditor) { Width = Unit.Percentage(100) });
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
-      _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("NeiGoods_Name"));
+      _detailGrid.Columns.EAdd(new DFEditGridColumn<DFChoiceBox>("NeiGoods_ID")).InitEditControl += (sender, e) =>
+      {
+        e.Control.DataKind = B3ButcheryDataSource.存货带编号;
+        e.Control.DFDisplayField = "NeiGoods_Name";
+        e.Control.Width = Unit.Pixel(180);
+        e.Control.EnableInputArgument = true;
+        e.Control.EnableTopItem = true;
+      };
+
+
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("NeiGoods_Code"));
-      _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("WaiGoods_Name"));
+
+      _detailGrid.Columns.EAdd(new DFEditGridColumn<DFChoiceBox>("WaiGoods_ID")).InitEditControl += (sender, e) =>
+      {
+        e.Control.DataKind = B3ButcheryDataSource.存货带编号;
+        e.Control.DFDisplayField = "WaiGoods_Name";
+        e.Control.Width = Unit.Pixel(180);
+        e.Control.EnableInputArgument = true;
+        e.Control.EnableTopItem = true;
+      };
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("WaiGoods_Code"));
-      _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Remark"));
+      _detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Remark"));
       var section = mPageLayoutManager.AddSection("DetaiColumns", "明细列");
       section.ApplyLayout(_detailGrid, mPageLayoutManager, DFInfo.Get(typeof(ProductPackaging_Detail)));
       titlePanel.SetPageLayoutSetting(mPageLayoutManager, section.Name);
