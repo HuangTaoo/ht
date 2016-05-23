@@ -126,7 +126,8 @@
     <Reference Include="Wpf.System.Web, Version=1.3.0.0, Culture=neutral, PublicKeyToken=a04fa581c0f74d43, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\web\B3\bin\Wpf.System.Web.dll</HintPath>
-    <Private>False</Private></Reference>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\version\tsapp_version.cs">
@@ -144,6 +145,7 @@
     <Compile Include="BL\Bill\ProductInStoreBL_\ProductInStoreBL.cs" />
     <Compile Include="BL\Bill\ProductInStoreTempBL_\ProductInStore_TempBL.cs" />
     <Compile Include="BL\Bill\ProductNotice\ProductNoticeBL.cs" />
+    <Compile Include="BL\Bill\ProductPackagingBL_\ProductPackagingBL.cs" />
     <Compile Include="BL\Bill\ProductPlanBL_\ProductPlanBL.cs" />
     <Compile Include="BO\B3ButcheryUserProfile.cs" />
     <Compile Include="BO\BaseInfo\InStoreType_\InStoreType.cs" />
@@ -170,6 +172,8 @@
     <Compile Include="BO\Bill\ProductInStore_\ProductInStore_Detail.cs" />
     <Compile Include="BO\Bill\ProductNotice\ProductNotice_Detail.cs" />
     <Compile Include="BO\Bill\ProductNotice\ProductNotice.cs" />
+    <Compile Include="BO\Bill\ProductPackaging_\ProductPackaging.cs" />
+    <Compile Include="BO\Bill\ProductPackaging_\ProductPackaging_Detail.cs" />
     <Compile Include="BO\Bill\ProductPlan_\ProductPlan.cs" />
     <Compile Include="BO\Bill\ProductPlan_\ProductPlan_InputDetail.cs" />
     <Compile Include="BO\Bill\ProductPlan_\ProductPlan_OutputDetail.cs" />

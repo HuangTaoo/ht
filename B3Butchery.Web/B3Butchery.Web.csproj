@@ -44,7 +44,10 @@
       <HintPath>..\..\..\tsref\Debug\B3Frameworks.Web.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="B3ProduceUnitedInfos, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3a973053c7ebf11c, processorArchitecture=MSIL"><SpecificVersion>False</SpecificVersion><Private>False</Private></Reference>
+    <Reference Include="B3ProduceUnitedInfos, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3a973053c7ebf11c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="B3System, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a04fa581c0f74d43, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\tsref\Debug\B3System.dll</HintPath>
@@ -82,7 +85,8 @@
     </Reference>
     <Reference Include="Microsoft.CSharp">
       <SpecificVersion>False</SpecificVersion>
-    <Private>False</Private></Reference>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Data">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -190,6 +194,12 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\B3Butchery\Bills\ProductNotice_\ProductNoticeEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProductPackaging_\ProductPackagingEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProductPackaging_\ProductPackagingList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\B3Butchery\Bills\ProductPlan_\ProductPlanEdit.cs">
@@ -310,6 +320,7 @@
     <Content Include="Pages\B3Butchery\BaseInfos\ProductInStore_Temp_\ProductInStore_TempList.xml">
       <SubType>Designer</SubType>
     </Content>
+    <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductPackaging_\ProductPackagingList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\ProductNoticeReport_\ProductNoticeReport.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
