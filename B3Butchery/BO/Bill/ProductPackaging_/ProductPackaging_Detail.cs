@@ -4,6 +4,7 @@ using BWP.B3UnitedInfos.BO;
 using Forks.EnterpriseServices;
 using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
+using Forks.Utils;
 
 namespace BWP.B3Butchery.BO
 {
@@ -27,7 +28,6 @@ namespace BWP.B3Butchery.BO
     [Join("Goods_ID", "ID")]
     public string Goods_Code { get; set; }
 
-
     [LogicName("内包装名称")]
     public long? NeiGoods_ID { get; set; }
 
@@ -41,6 +41,9 @@ namespace BWP.B3Butchery.BO
     [Join("NeiGoods_ID", "ID")]
     public string NeiGoods_Code { get; set; }
 
+    [LogicName("内包装比例")]
+    public Money<decimal>? NeiGoodsRatio { get; set; }
+
     [LogicName("外包装名称")]
     public long? WaiGoods_ID { get; set; }
 
@@ -53,6 +56,9 @@ namespace BWP.B3Butchery.BO
     [ReferenceTo(typeof(Goods), "Code")]
     [Join("WaiGoods_ID", "ID")]
     public string WaiGoods_Code { get; set; }
+
+    [LogicName("外包装比例")]
+    public Money<decimal>? WaiGoodsRatio { get; set; }
 
     [LogicName("摘要")]
     [DbColumn(Length = 1000)]

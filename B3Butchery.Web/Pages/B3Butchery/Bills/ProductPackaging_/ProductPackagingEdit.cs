@@ -85,7 +85,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductPackaging_
 
 
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("NeiGoods_Code"));
-
+      _detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("NeiGoodsRatio"));
       _detailGrid.Columns.EAdd(new DFEditGridColumn<DFChoiceBox>("WaiGoods_ID")).InitEditControl += (sender, e) =>
       {
         e.Control.DataKind = B3ButcheryDataSource.存货带编号;
@@ -95,6 +95,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductPackaging_
         e.Control.EnableTopItem = true;
       };
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("WaiGoods_Code"));
+      _detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("WaiGoodsRatio"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Remark"));
       var section = mPageLayoutManager.AddSection("DetaiColumns", "明细列");
       section.ApplyLayout(_detailGrid, mPageLayoutManager, DFInfo.Get(typeof(ProductPackaging_Detail)));

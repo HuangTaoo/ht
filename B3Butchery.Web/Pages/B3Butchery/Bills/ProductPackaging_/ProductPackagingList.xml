@@ -4,7 +4,7 @@
     <Field name="ID"/>
   </Columns>
   <From>
-    <DmoClass class="BWP.B3Butchery.BO.ProduceInput, B3Butchery"/>
+    <DmoClass class="BWP.B3Butchery.BO.ProductPackaging, B3Butchery"/>
   </From>
   <Where>
     <And>
