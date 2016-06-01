@@ -7,6 +7,7 @@ using Forks.EnterpriseServices;
 using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
 using BWP.B3Frameworks.Attributes;
+using Forks.Utils;
 
 namespace BWP.B3Butchery.BO
 {
@@ -34,6 +35,13 @@ namespace BWP.B3Butchery.BO
     [Join("CargoSpace_ID", "ID")]
     [DFPrompt("货位")]
     public string CargoSpace_Name { get; set; }
+
+    #region 仙坛个性字段
+
+    [LogicName("参考单价")]
+    public Money<decimal>? AvgPrice { get; set; }
+
+    #endregion
 
     [NonDmoProperty]
     public short BillType {

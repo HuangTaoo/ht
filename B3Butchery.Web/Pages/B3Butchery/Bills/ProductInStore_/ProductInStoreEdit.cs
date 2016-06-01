@@ -25,7 +25,7 @@ using BWP.B3UnitedInfos.Utils;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
 {
-  class ProductInStoreEdit : DepartmentWorkFlowBillEditPage<ProductInStore, IProductInStoreBL>
+  public class ProductInStoreEdit : DepartmentWorkFlowBillEditPage<ProductInStore, IProductInStoreBL>
   {
     protected override void BuildBody(Control container)
     {
@@ -133,6 +133,7 @@ function(result,dfContainer){
       detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_SecondUnit"));
       detailGrid.Columns.EAdd(new DFEditGridColumn<DFTextBox>("SecondNumber")).SumMode = SumMode.Sum;
       detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Price"));
+      AddColumn(detailGrid);
       detailGrid.Columns.EAdd(new DFEditGridColumn<DFTextBox>("Money")).SumMode = SumMode.Sum;
       detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Remark"));
       detailGrid.ValueColumns.Add("Goods_ID");
@@ -143,6 +144,11 @@ function(result,dfContainer){
       var section = mPageLayoutManager.AddSection("DetailColumns", "明细列");
       section.ApplyLayout(detailGrid, mPageLayoutManager, DFInfo.Get(typeof(ProductInStore_Detail)));
       titlePanel.SetPageLayoutSetting(mPageLayoutManager, section.Name);
+    }
+
+    public virtual void AddColumn(DFEditGrid detailGrid)
+    {
+      
     }
 
     private void AddToolsBar(HLayoutPanel hPanel) {
