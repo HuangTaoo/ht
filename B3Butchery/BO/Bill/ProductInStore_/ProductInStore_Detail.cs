@@ -8,6 +8,7 @@ using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
 using BWP.B3Frameworks.Attributes;
 using Forks.Utils;
+using BWP.B3Frameworks.BO.MoneyTemplate;
 
 namespace BWP.B3Butchery.BO
 {
@@ -40,6 +41,9 @@ namespace BWP.B3Butchery.BO
 
     [LogicName("参考单价")]
     public Money<decimal>? AvgPrice { get; set; }
+
+     [LogicName("参考金额")]
+    public Money<金额>? AvgMoeny { get; set; }
 
     #endregion
 
