@@ -23,6 +23,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductPackaging_
       var config = new AutoLayoutConfig();
       config.Add("AccountingUnit_ID");
       config.Add("Department_ID");
+      config.Add("Store_ID");
       config.Add("Remark");
 
       layoutManager.Config = config;
