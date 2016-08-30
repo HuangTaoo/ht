@@ -58,14 +58,16 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
       hPanel.Add(new LiteralControl("<h2>入库清单：</h2>"));
       AddToolsBar(hPanel);
 
-      hPanel.Add(new TSButton("复制", delegate {
+      hPanel.Add(new TSButton("复制", delegate
+      {
         GoodsDetailSummaryClipboardUtil.Copy(Dmo.Details.Select((item) => (GoodsDetailSummaryBase)item).ToList());
         AspUtil.Alert(this, "复制成功");
       }));
 
       if (CanSave)
       {
-        hPanel.Add(new TSButton("粘贴", delegate {
+        hPanel.Add(new TSButton("粘贴", delegate
+        {
           var list = GoodsDetailSummaryClipboardUtil.Paste<ProductInStore_Detail>();
           foreach (var detail in list)
           {
@@ -87,7 +89,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
           return false;
         return CanSave;
       };
-      detailGrid = titlePanel.EAdd(new DFEditGrid(detailGridEditor) { Width = Unit.Percentage(100),ShowLineNo =true });
+      detailGrid = titlePanel.EAdd(new DFEditGrid(detailGridEditor) { Width = Unit.Percentage(100), ShowLineNo = true });
       detailGrid.Columns.Add(new DFEditGridColumn("ProductionDate"));
       var productPlanCol = new DFEditGridColumn<DFChoiceBox>("ProductPlan_ID");
       productPlanCol.InitEditControl += delegate(object sender, InitEditControlEventArgs<DFChoiceBox> e)
@@ -132,9 +134,11 @@ function(result,dfContainer){
       detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_MainUnit"));
       detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_SecondUnit"));
       detailGrid.Columns.EAdd(new DFEditGridColumn<DFTextBox>("SecondNumber")).SumMode = SumMode.Sum;
-      detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Price"));
+      if (CheckDefaultRole("隐藏单价"))
+        detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Price"));
       AddColumn(detailGrid);
-      detailGrid.Columns.EAdd(new DFEditGridColumn<DFTextBox>("Money")).SumMode = SumMode.Sum;
+      if (CheckDefaultRole("隐藏单价"))
+        detailGrid.Columns.EAdd(new DFEditGridColumn<DFTextBox>("Money")).SumMode = SumMode.Sum;
       detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Remark"));
       detailGrid.ValueColumns.Add("Goods_ID");
       detailGrid.ValueColumns.Add("Goods_UnitConvertDirection");
@@ -148,25 +152,31 @@ function(result,dfContainer){
 
     public virtual void AddColumn(DFEditGrid detailGrid)
     {
-      
+
     }
 
-    private void AddToolsBar(HLayoutPanel hPanel) {
+    private void AddToolsBar(HLayoutPanel hPanel)
+    {
       if (!CanSave)
         return;
       hPanel.Add(new SimpleLabel("选择存货"));
       var selectGoods =
-        hPanel.Add(new ChoiceBox(B3ButcheryDataSource.存货带编号) {
+        hPanel.Add(new ChoiceBox(B3ButcheryDataSource.存货带编号)
+        {
           Width = Unit.Pixel(130),
           EnableMultiSelection = true,
           EnableInputArgument = true,
           AutoPostBack = true
         });
-      selectGoods.SelectedValueChanged += delegate {
+      selectGoods.SelectedValueChanged += delegate
+      {
         detailGrid.GetFromUI();
-        if (!selectGoods.IsEmpty) {
-          foreach (var item in selectGoods.GetValues()) {
-            var d = new ProductInStore_Detail() {
+        if (!selectGoods.IsEmpty)
+        {
+          foreach (var item in selectGoods.GetValues())
+          {
+            var d = new ProductInStore_Detail()
+            {
               Goods_ID = long.Parse(item),
               ProductionDate = DateTime.Today,
               Price = 0
@@ -179,14 +189,17 @@ function(result,dfContainer){
         detailGrid.DataBind();
       };
 
-      var addGoodsbt = hPanel.Add(new DialogButton {
+      var addGoodsbt = hPanel.Add(new DialogButton
+      {
         Text = "选择存货",
       });
       addGoodsbt.Url = "/B3Butchery/Dialogs/SelectGoodsDialog.aspx";
-      addGoodsbt.Click += delegate {
+      addGoodsbt.Click += delegate
+      {
         detailGrid.GetFromUI();
         var details = DialogUtil.GetCachedObj<TemGoodsDetail>(this);
-        foreach (var temGoodsDetail in details) {
+        foreach (var temGoodsDetail in details)
+        {
           var detail = new ProductInStore_Detail();
           detail.Goods_ID = temGoodsDetail.Goods_ID;
           DmoUtil.RefreshDependency(detail, "Goods_ID");
@@ -199,14 +212,17 @@ function(result,dfContainer){
       };
 
       var quickSelctButton = new DialogButton() { Url = "~/B3UnitedInfos/Dialogs/QucicklySelectGoodsDetailsDialog.aspx", Text = "快速选择" };
-      quickSelctButton.Click += delegate {
+      quickSelctButton.Click += delegate
+      {
         ReceiveSelectedGoodsDetailDialog();
       };
       hPanel.Add(quickSelctButton);
 
-      hPanel.Add(new TSButton("更新生产计划号", delegate {
+      hPanel.Add(new TSButton("更新生产计划号", delegate
+      {
         GetFromUI();
-        foreach (var item in Dmo.Details) {
+        foreach (var item in Dmo.Details)
+        {
           item.ProductPlan_ID = Dmo.ProductPlan_ID;
           item.ProductPlan_Name = Dmo.ProductPlan_Name;
         }
@@ -214,7 +230,8 @@ function(result,dfContainer){
       }));
       var loadProductInStoreTemp = hPanel.Add(new DialogButton { Text = "选择模板", });
       loadProductInStoreTemp.Url = "/B3Butchery/Dialogs/ProductInStoreTempDialog.aspx";
-      loadProductInStoreTemp.Click += delegate {
+      loadProductInStoreTemp.Click += delegate
+      {
         detailGrid.GetFromUI();
         var temp = DialogUtil.GetCachedObj<ProductInStore_Temp>(this).FirstOrDefault();
 
@@ -232,7 +249,8 @@ function(result,dfContainer){
         Dmo.CheckEmployee_Name = temp.CheckEmployee_Name;
         Dmo.CheckDate = temp.CheckDate;
         Dmo.InStoreDate = temp.InStoreDate;
-        foreach (var de in temp.Details) {
+        foreach (var de in temp.Details)
+        {
           var detail = new ProductInStore_Detail();
           detail.Goods_ID = de.Goods_ID;
           detail.Goods_Name = de.Goods_Name;
@@ -246,15 +264,17 @@ function(result,dfContainer){
       };
     }
 
-    private void ReceiveSelectedGoodsDetailDialog() {
+    private void ReceiveSelectedGoodsDetailDialog()
+    {
       var selectedList = DialogUtil.GetCachedObj<SelectedGoodsDetail>(this);
 
-      selectedList.Select((item) => new ProductInStore_Detail() {
+      selectedList.Select((item) => new ProductInStore_Detail()
+      {
         Goods_ID = item.Goods_ID,
         Number = item.Number,
         SecondNumber = item.SecondNumber
       })
-        .ToList()  
+        .ToList()
         .EEnumerate((detail) => DmoUtil.RefreshDependency(detail, "Goods_ID"))
         .EAddToCollection(Dmo.Details);
       detailGrid.DataBind();
@@ -295,10 +315,10 @@ function(result,dfContainer){
       //AutoPostBackControl.Controls.Add(buttonGroup);
     }
 
-   
+
     private void AddModelAction(ButtonGroup buttonGroup)
     {
-      buttonGroup.Actions.Add(  new SimpleServerAction("模板", () => true, delegate
+      buttonGroup.Actions.Add(new SimpleServerAction("模板", () => true, delegate
       {
         //Dmo.Details.Clear();
         //var list = GetProductInstoreTemp();
@@ -337,8 +357,8 @@ function(result,dfContainer){
         //}
         //else
         //{
-          string url = "~/B3Butchery/Bills/ProductInStore_Temp_/ProductInStore_TempEdit.aspx";
-          AspUtil.Redirect(url);
+        string url = "~/B3Butchery/Bills/ProductInStore_Temp_/ProductInStore_TempEdit.aspx";
+        AspUtil.Redirect(url);
         //}
       }));
     }
