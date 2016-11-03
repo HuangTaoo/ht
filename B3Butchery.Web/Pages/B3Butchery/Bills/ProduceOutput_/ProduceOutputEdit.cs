@@ -20,7 +20,7 @@ using BWP.B3Butchery.Utils;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.ProduceOutput_
 {
-  class ProduceOutputEdit : DepartmentWorkFlowBillEditPage<ProduceOutput, IProduceOutputBL>
+  public class ProduceOutputEdit : DepartmentWorkFlowBillEditPage<ProduceOutput, IProduceOutputBL>
   {
     protected override void BuildBody(Control container)
     {
@@ -53,7 +53,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceOutput_
         {
           GetFromUI();
           Dmo.Details.Clear();
-          mBL.GetGoodsDetailList(Dmo);
+          AddLoadDetailQy();
           outputDetailGrid.DataBind();
           AspUtil.Alert(this, "载入产出明细成功");
         };
@@ -94,6 +94,11 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceOutput_
       outputDetailGrid.ValueColumns.Add("Goods_MainUnitRatio");
       outputDetailGrid.ValueColumns.Add("Goods_SecondUnitRatio");
       new Main_Second_ConvertRatioRowManager(outputDetailGrid, "Number", "SecondNumber");
+    }
+
+    protected virtual void AddLoadDetailQy()
+    {
+      mBL.GetGoodsDetailList(Dmo);
     }
 
     protected override void OnLoad(EventArgs e)

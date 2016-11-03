@@ -17,7 +17,7 @@ using TSingSoft.WebPluginFramework;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.ProduceInput_
 {
-  class ProduceInputEdit : DepartmentWorkFlowBillEditPage<ProduceInput, IProduceInputBL>
+  public class ProduceInputEdit : DepartmentWorkFlowBillEditPage<ProduceInput, IProduceInputBL>
   {
     protected override void BuildBody(Control container)
     {
@@ -50,7 +50,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceInput_
         {
           GetFromUI();
           Dmo.Details.Clear();
-          mBL.GetGoodsDetailList(Dmo);
+          AddLoadDetailQy();
           outputDetailGrid.DataBind();
           AspUtil.Alert(this,"载入投入明细成功");
         };
@@ -91,6 +91,11 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceInput_
       outputDetailGrid.ValueColumns.Add("Goods_MainUnitRatio");
       outputDetailGrid.ValueColumns.Add("Goods_SecondUnitRatio");
       new Main_Second_ConvertRatioRowManager(outputDetailGrid, "Number", "SecondNumber");
+    }
+
+    protected virtual void AddLoadDetailQy()
+    {
+      mBL.GetGoodsDetailList(Dmo);
     }
 
     protected override void OnLoad(EventArgs e)
