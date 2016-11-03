@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BWP.B3ProduceUnitedInfos;
+﻿using BWP.B3ProduceUnitedInfos;
 using Bwp.Hippo;
 using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks;
@@ -26,8 +22,8 @@ namespace BWP.B3Butchery.Hippo
 			RegisterProduceOutputForm();
 			RegisterProductInStoreList();
 			RegisterProductInStoreForm();
-            RegisterProductNoticeForm();
-		    RegisterProductNoticeList();
+      RegisterProductNoticeForm();
+		  RegisterProductNoticeList();
 		}
 
 		static void RegisterProduceInputList()
@@ -36,7 +32,7 @@ namespace BWP.B3Butchery.Hippo
 			{
 				Title = "投入单",
 				ItemFormat =
-						"单号: [ID]\n单据状态: [BillState]\n时间:[Time]\n计划号: [PlanNumber_Name]\n会计单位: [AccountingUnit_Name]\n部门: [Department_Name]\n经办人: [Employee_Name]\n生产环节: [ProductLinks_Name]",
+            "单号: [ID]\n单据状态: [BillState]\n时间:[Time]\n计划号: [PlanNumber_Name]\n会计单位: [AccountingUnit_Name]\n部门: [Department_Name]\n经办人: [Employee_Name]\n生产环节: [ProductLinks_Name]\n投入类型: [InputType]",
 				OpeningView = CUSASK + "/ProduceInputAction/ProduceInputEdit",
 				OpeningViewType = "form",
 				QueryFields = new[]
@@ -50,6 +46,7 @@ namespace BWP.B3Butchery.Hippo
 																										 new FieldDesc{Name="Department_ID",Title="部门",DataKind=B3FrameworksConsts.DataSources.授权部门全部,DisplayField="Department_Name"},
 																										 new FieldDesc{Name="Employee_ID",Title="经办人",DataKind=B3FrameworksConsts.DataSources.授权员工全部,DisplayField="Employee_Name"},
 																										 new FieldDesc{Name="ProductLinks_ID",Title="生产环节",DataKind=B3ButcheryDataSource.生产环节全部,DisplayField="ProductLinks_Name"},
+																										 new FieldDesc{Name="InputType",Title="投入类型"}
 
 																									 },
 				QueryRpc = CUSASK + "/Actions_/ProduceInputAction/Query",
@@ -71,7 +68,8 @@ namespace BWP.B3Butchery.Hippo
 					new FieldDesc{Name="AccountingUnit_ID", Title = "会计单位", DataKind = B3FrameworksConsts.DataSources.授权会计单位,DisplayField = "AccountingUnit_Name"},
 					new FieldDesc{Name="Department_ID",Title="部门",DataKind=B3FrameworksConsts.DataSources.授权部门,DisplayField="Department_Name"},
 					new FieldDesc{Name="Employee_ID",Title="经办人",DataKind=B3FrameworksConsts.DataSources.授权员工,DisplayField="Employee_Name"},
-						new FieldDesc{Name="ProductLinks_ID",Title="生产环节",DataKind=B3ButcheryDataSource.生产环节,DisplayField="ProductLinks_Name"},
+					new FieldDesc{Name="ProductLinks_ID",Title="生产环节",DataKind=B3ButcheryDataSource.生产环节,DisplayField="ProductLinks_Name"},
+					new FieldDesc{Name="InputType",Title="投入类型"}
 							 },
 				ActionRpc = CUSASK + "/Actions_/ProduceInputAction/FormActions",
 				ActionBar = "Save SaveAndNew Prev Next"

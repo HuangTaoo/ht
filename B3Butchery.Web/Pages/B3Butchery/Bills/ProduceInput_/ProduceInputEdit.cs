@@ -32,6 +32,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceInput_
       config.Add("Department_ID");
       config.Add("Employee_ID");
       config.Add("ProductLinks_ID");
+      config.Add("InputType");
       layoutManager.Config = config;
       container.Controls.Add(layoutManager.CreateLayout());
 

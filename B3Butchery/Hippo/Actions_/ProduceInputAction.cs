@@ -33,6 +33,7 @@ namespace BWP.B3Butchery.Hippo.Actions_
 			query.Columns.Add(DQSelectColumn.Field("Department_Name"));
 			query.Columns.Add(DQSelectColumn.Field("Employee_Name"));
 			query.Columns.Add(DQSelectColumn.Field("ProductLinks_Name"));
+      query.Columns.Add(DQSelectColumn.Field("InputType"));
 			query.OrderBy.Expressions.Add(DQOrderByExpression.Create("ID", true));
 			HippoUtil.AddEQ(query, "ID", queryobj.ID);
 			HippoUtil.AddEQ(query, "BillState", queryobj.BillState);
@@ -41,6 +42,7 @@ namespace BWP.B3Butchery.Hippo.Actions_
 			HippoUtil.AddEQ(query, "Employee_ID", queryobj.Employee_ID);
 			HippoUtil.AddEQ(query, "PlanNumber_ID", queryobj.PlanNumber_ID);
 			HippoUtil.AddEQ(query, "ProductLinks_ID", queryobj.ProductLinks_ID);
+      HippoUtil.AddEQ(query, "InputType", queryobj.InputType);
 			if (queryobj.MinTime.HasValue)
 				query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual("Time", queryobj.MinTime.Value));
 			if (queryobj.MaxTime.HasValue)

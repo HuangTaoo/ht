@@ -8,6 +8,7 @@ using BWP.B3Frameworks.BO;
 using Forks.EnterpriseServices.DomainObjects2;
 using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks;
+using Forks.Utils;
 using TSingSoft.WebControls2;
 
 namespace BWP.B3Butchery.BO
@@ -28,6 +29,9 @@ namespace BWP.B3Butchery.BO
 
     [LogicName("计划号")]
     public long? PlanNumber_ID { get; set; }
+
+    [LogicName("投入类型")]
+    public NamedValue<投入类型>? InputType { get; set; }
 
     [LogicName("计划号")]
     [ReferenceTo(typeof(ProductPlan), "PlanNumber")]

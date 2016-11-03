@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks.BO.NamedValueTemplate;
+using Forks.EnterpriseServices;
 using Forks.EnterpriseServices.JsonRpc;
 using Forks.Utils;
 
@@ -38,5 +40,8 @@ namespace BWP.B3Butchery.Hippo.QueryObjs
 		public long? ProductLinks_ID { get; set; }
 
 		public string ProductLinks_Name { get; set; }
+
+    [LogicName("投入类型")]
+    public NamedValue<投入类型>? InputType { get; set; }
 	}
 }

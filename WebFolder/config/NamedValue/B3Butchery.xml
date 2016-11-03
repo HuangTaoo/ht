@@ -4,4 +4,8 @@
 		<Word name="投入" value="0" />
 		<Word name="产出" value="1" />
 	</NamedValue>
+  <NamedValue type="BWP.B3Butchery.Utils.投入类型,B3Butchery">
+    <Word name="当日屠宰" value="0" />
+    <Word name="非当日屠宰" value="1" />
+  </NamedValue>
 </NamedValueSettings>
