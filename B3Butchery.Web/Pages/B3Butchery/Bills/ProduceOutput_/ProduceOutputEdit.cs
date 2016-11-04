@@ -89,11 +89,13 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceOutput_
       outputDetailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_MainUnit"));
       outputDetailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("SecondNumber"));
       outputDetailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_SecondUnit"));
+      outputDetailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("SecondNumber2"));
+      outputDetailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_SecondUnit2"));
       outputDetailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Remark"));
       outputDetailGrid.ValueColumns.Add("Goods_UnitConvertDirection");
       outputDetailGrid.ValueColumns.Add("Goods_MainUnitRatio");
       outputDetailGrid.ValueColumns.Add("Goods_SecondUnitRatio");
-      new Main_Second_ConvertRatioRowManager(outputDetailGrid, "Number", "SecondNumber");
+      new Main_Second_ConvertRatioRowManager(outputDetailGrid, "Number", "SecondNumber", "SecondNumber2");
     }
 
     protected virtual void AddLoadDetailQy()
