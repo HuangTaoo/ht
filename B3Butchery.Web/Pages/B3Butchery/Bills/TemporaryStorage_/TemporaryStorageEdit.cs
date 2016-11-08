@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BWP.B3Butchery.BL;
@@ -8,7 +9,6 @@ using BWP.B3Frameworks.Utils;
 using BWP.Web.Layout;
 using BWP.Web.WebControls;
 using Forks.EnterpriseServices.DataForm;
-using Forks.Utils.Collections;
 using TSingSoft.WebControls2;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.TemporaryStorage_
@@ -57,9 +57,15 @@ namespace BWP.Web.Pages.B3Butchery.Bills.TemporaryStorage_
           _detailGrid.GetFromUI();
           if (!selectGoods.IsEmpty)
           {
+            var index = 1;
             foreach (var item in selectGoods.GetValues())
             {
               var d = new TemporaryStorage_Detail { Goods_ID = long.Parse(item) };
+              var serialNumber = Dmo.Details.Max(x => x.SerialNumber);
+              if (serialNumber == null)
+                d.SerialNumber = index++;
+              else
+                d.SerialNumber = serialNumber + 1;
               DmoUtil.RefreshDependency(d, "Goods_ID");
               Dmo.Details.Add(d);
             }
@@ -77,7 +83,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.TemporaryStorage_
       };
 
       _detailGrid = vPanel.Add(new DFEditGrid(detailEditor) { Width = Unit.Percentage(100) });
-      _detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("SerialNumber"));
+      _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("SerialNumber"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Spec"));
