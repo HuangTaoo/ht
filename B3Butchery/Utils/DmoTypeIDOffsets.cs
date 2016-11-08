@@ -15,5 +15,6 @@ namespace BWP.B3Butchery.Utils
     public const byte ProductInStore_Temp = 6;
     public const byte ProductNotice = 7;
     public const byte ProductPackaging = 8;
+    public const byte TemporaryStorage = 9;
   }
 }

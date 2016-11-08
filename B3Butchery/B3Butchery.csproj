@@ -147,6 +147,7 @@
     <Compile Include="BL\Bill\ProductNotice\ProductNoticeBL.cs" />
     <Compile Include="BL\Bill\ProductPackagingBL_\ProductPackagingBL.cs" />
     <Compile Include="BL\Bill\ProductPlanBL_\ProductPlanBL.cs" />
+    <Compile Include="BL\Bill\TemporaryStorage_\TemporaryStorageBL.cs" />
     <Compile Include="BO\B3ButcheryUserProfile.cs" />
     <Compile Include="BO\BaseInfo\InStoreType_\InStoreType.cs" />
     <Compile Include="BO\BaseInfo\ProductInStoreTemplate_\ProductInStoreTemplate.cs" />
@@ -177,6 +178,8 @@
     <Compile Include="BO\Bill\ProductPlan_\ProductPlan.cs" />
     <Compile Include="BO\Bill\ProductPlan_\ProductPlan_InputDetail.cs" />
     <Compile Include="BO\Bill\ProductPlan_\ProductPlan_OutputDetail.cs" />
+    <Compile Include="BO\Bill\TemporaryStorage_\TemporaryStorage.cs" />
+    <Compile Include="BO\Bill\TemporaryStorage_\TemporaryStorage_Detail.cs" />
     <Compile Include="BO\Ref\ChengPinToBanChengPinConfig.cs" />
     <Compile Include="BO\Ref\GoodsReferencePrice.cs" />
     <Compile Include="BO\Views\DailyProductReportView.cs" />

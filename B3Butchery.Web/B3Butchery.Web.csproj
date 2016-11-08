@@ -208,6 +208,12 @@
     <Compile Include="Pages\B3Butchery\Bills\ProductPlan_\ProductPlanList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\TemporaryStorage_\TemporaryStorageEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\TemporaryStorage_\TemporaryStorageList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\Dialogs\GoodsBatchEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -320,6 +326,7 @@
     <Content Include="Pages\B3Butchery\BaseInfos\ProductInStore_Temp_\ProductInStore_TempList.xml">
       <SubType>Designer</SubType>
     </Content>
+    <EmbeddedResource Include="Pages\B3Butchery\Bills\TemporaryStorage_\TemporaryStorageList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductPackaging_\ProductPackagingList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\ProductNoticeReport_\ProductNoticeReport.xml" />
   </ItemGroup>

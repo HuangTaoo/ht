@@ -1,175 +1,175 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Plugin appVersion="$appVersion" displayName="屠宰分割" name="B3Butchery"  schemaVersion="1.0"  version="1.0" xmlns="http://www.TSingSoft.com/Schemas/WPF.xsd"
         pluginClass="BWP.B3Butchery.PluginClass,B3Butchery.Web" >
-	<Requires>
-		<Plugin name="B3UnitedInfos" version="$appVersion" />  
-		<Plugin name="B3ProduceUnitedInfos" version="$appVersion" />
-		<Plugin name="B3SaleInterface" version="$appVersion" />    
-	</Requires>
-	<Assemblies>
-		<File name="B3Butchery.dll" type="bo bl" />
-		<File name="B3Butchery.Web.dll" type="web" />
-	</Assemblies>
-	<ContentFiles>
-		<File name="Config/ioc/B3ButcheryMenu.txt"/>
-		<File name="Images/ChildSystemIcons/B3Butchery.png"/>
-		<File name="Images/ChildSystemIcons/B3Butchery_NotSelected.png"/>
-	</ContentFiles>
-	<DbResources>
-	</DbResources>
-	<Profiles>
-	</Profiles>
-	<Security>
-		<FunctionGroup name="生产线" roleSchemas="employee" features="B3Butchery.0001">
-			<Function index="0" name="访问"/>
-			<Function index="1" name="新建"/>
-			<Function index="2" name="编辑"/>
-			<Function index="3" name="删除"/>
-			<Function index="4" name="停用"/>
-			<Function index="5" name="启用"/>
-			<Function index="6" name="锁定"/>
-			<Function index="7" name="解锁"/>
-		</FunctionGroup>
-		<FunctionGroup name="生产环节" roleSchemas="employee" features="B3Butchery.0002">
-			<Function index="0" name="访问"/>
-			<Function index="1" name="新建"/>
-			<Function index="2" name="编辑"/>
-			<Function index="3" name="删除"/>
-			<Function index="4" name="停用"/>
-			<Function index="5" name="启用"/>
-			<Function index="6" name="锁定"/>
-			<Function index="7" name="解锁"/>
-		</FunctionGroup>
-		<FunctionGroup name="生产计划" roleSchemas="employee" features="B3Butchery.0003">
-			<Function index="0" name="访问" />
-			<Function index="1" name="新建" />
-			<Function index="2" name="编辑" />
-			<Function index="3" name="删除" />
-			<Function index="4" name="审核" />
-			<Function index="5" name="撤销" />
-			<Function index="6" name="锁定" />
-			<Function index="7" name="解锁" />
-			<Function index="8" name="管理" />
-			<Function index="9" name="作废" />
-			<Function index="10" name="完毕"/>
-			<Function index="11" name="撤销完毕"/>
-		</FunctionGroup>
-		<FunctionGroup name="产出单" roleSchemas="employee" features="B3Butchery.0004">
-			<Function index="0" name="访问" />
-			<Function index="1" name="新建" />
-			<Function index="2" name="编辑" />
-			<Function index="3" name="删除" />
-			<Function index="4" name="审核" />
-			<Function index="5" name="撤销" />
-			<Function index="6" name="锁定" />
-			<Function index="7" name="解锁" />
-			<Function index="8" name="管理" />
-			<Function index="9" name="作废" />
-			<Function index="10" name="完毕"/>
-			<Function index="11" name="撤销完毕"/>
-		</FunctionGroup>
-		<FunctionGroup name="投入单" roleSchemas="employee" features="B3Butchery.0005">
-			<Function index="0" name="访问" />
-			<Function index="1" name="新建" />
-			<Function index="2" name="编辑" />
-			<Function index="3" name="删除" />
-			<Function index="4" name="审核" />
-			<Function index="5" name="撤销" />
-			<Function index="6" name="锁定" />
-			<Function index="7" name="解锁" />
-			<Function index="8" name="管理" />
-			<Function index="9" name="作废" />
-			<Function index="10" name="完毕"/>
-			<Function index="11" name="撤销完毕"/>
-		</FunctionGroup>
-		<FunctionGroup name="入库类型" roleSchemas="employee" features="B3Butchery.0006">
-			<Function index="0" name="访问"/>
-			<Function index="1" name="新建"/>
-			<Function index="2" name="编辑"/>
-			<Function index="3" name="删除"/>
-			<Function index="4" name="停用"/>
-			<Function index="5" name="启用"/>
-			<Function index="6" name="锁定"/>
-			<Function index="7" name="解锁"/>
-		</FunctionGroup>
-		<FunctionGroup name="成品入库" roleSchemas="employee" features="B3Butchery.0007">
-			<Function index="0" name="访问" />
-			<Function index="1" name="新建" />
-			<Function index="2" name="编辑" />
-			<Function index="3" name="删除" />
-			<Function index="4" name="审核" />
-			<Function index="5" name="撤销" />
-			<Function index="6" name="锁定" />
-			<Function index="7" name="解锁" />
-			<Function index="8" name="管理" />
-			<Function index="9" name="作废" />
-			<Function index="10" name="完毕"/>
-			<Function index="11" name="撤销完毕"/>
+  <Requires>
+    <Plugin name="B3UnitedInfos" version="$appVersion" />
+    <Plugin name="B3ProduceUnitedInfos" version="$appVersion" />
+    <Plugin name="B3SaleInterface" version="$appVersion" />
+  </Requires>
+  <Assemblies>
+    <File name="B3Butchery.dll" type="bo bl" />
+    <File name="B3Butchery.Web.dll" type="web" />
+  </Assemblies>
+  <ContentFiles>
+    <File name="Config/ioc/B3ButcheryMenu.txt"/>
+    <File name="Images/ChildSystemIcons/B3Butchery.png"/>
+    <File name="Images/ChildSystemIcons/B3Butchery_NotSelected.png"/>
+  </ContentFiles>
+  <DbResources>
+  </DbResources>
+  <Profiles>
+  </Profiles>
+  <Security>
+    <FunctionGroup name="生产线" roleSchemas="employee" features="B3Butchery.0001">
+      <Function index="0" name="访问"/>
+      <Function index="1" name="新建"/>
+      <Function index="2" name="编辑"/>
+      <Function index="3" name="删除"/>
+      <Function index="4" name="停用"/>
+      <Function index="5" name="启用"/>
+      <Function index="6" name="锁定"/>
+      <Function index="7" name="解锁"/>
+    </FunctionGroup>
+    <FunctionGroup name="生产环节" roleSchemas="employee" features="B3Butchery.0002">
+      <Function index="0" name="访问"/>
+      <Function index="1" name="新建"/>
+      <Function index="2" name="编辑"/>
+      <Function index="3" name="删除"/>
+      <Function index="4" name="停用"/>
+      <Function index="5" name="启用"/>
+      <Function index="6" name="锁定"/>
+      <Function index="7" name="解锁"/>
+    </FunctionGroup>
+    <FunctionGroup name="生产计划" roleSchemas="employee" features="B3Butchery.0003">
+      <Function index="0" name="访问" />
+      <Function index="1" name="新建" />
+      <Function index="2" name="编辑" />
+      <Function index="3" name="删除" />
+      <Function index="4" name="审核" />
+      <Function index="5" name="撤销" />
+      <Function index="6" name="锁定" />
+      <Function index="7" name="解锁" />
+      <Function index="8" name="管理" />
+      <Function index="9" name="作废" />
+      <Function index="10" name="完毕"/>
+      <Function index="11" name="撤销完毕"/>
+    </FunctionGroup>
+    <FunctionGroup name="产出单" roleSchemas="employee" features="B3Butchery.0004">
+      <Function index="0" name="访问" />
+      <Function index="1" name="新建" />
+      <Function index="2" name="编辑" />
+      <Function index="3" name="删除" />
+      <Function index="4" name="审核" />
+      <Function index="5" name="撤销" />
+      <Function index="6" name="锁定" />
+      <Function index="7" name="解锁" />
+      <Function index="8" name="管理" />
+      <Function index="9" name="作废" />
+      <Function index="10" name="完毕"/>
+      <Function index="11" name="撤销完毕"/>
+    </FunctionGroup>
+    <FunctionGroup name="投入单" roleSchemas="employee" features="B3Butchery.0005">
+      <Function index="0" name="访问" />
+      <Function index="1" name="新建" />
+      <Function index="2" name="编辑" />
+      <Function index="3" name="删除" />
+      <Function index="4" name="审核" />
+      <Function index="5" name="撤销" />
+      <Function index="6" name="锁定" />
+      <Function index="7" name="解锁" />
+      <Function index="8" name="管理" />
+      <Function index="9" name="作废" />
+      <Function index="10" name="完毕"/>
+      <Function index="11" name="撤销完毕"/>
+    </FunctionGroup>
+    <FunctionGroup name="入库类型" roleSchemas="employee" features="B3Butchery.0006">
+      <Function index="0" name="访问"/>
+      <Function index="1" name="新建"/>
+      <Function index="2" name="编辑"/>
+      <Function index="3" name="删除"/>
+      <Function index="4" name="停用"/>
+      <Function index="5" name="启用"/>
+      <Function index="6" name="锁定"/>
+      <Function index="7" name="解锁"/>
+    </FunctionGroup>
+    <FunctionGroup name="成品入库" roleSchemas="employee" features="B3Butchery.0007">
+      <Function index="0" name="访问" />
+      <Function index="1" name="新建" />
+      <Function index="2" name="编辑" />
+      <Function index="3" name="删除" />
+      <Function index="4" name="审核" />
+      <Function index="5" name="撤销" />
+      <Function index="6" name="锁定" />
+      <Function index="7" name="解锁" />
+      <Function index="8" name="管理" />
+      <Function index="9" name="作废" />
+      <Function index="10" name="完毕"/>
+      <Function index="11" name="撤销完毕"/>
       <Function index="12" name="批量审核"/>
       <Function index="13" name="隐藏单价"/>
-		</FunctionGroup>
-		<FunctionGroup name="成品入库模板" roleSchemas="employee" features="B3Butchery.0008">
-			<Function index="0" name="访问"/>
-			<Function index="1" name="新建"/>
-			<Function index="2" name="编辑"/>
-			<Function index="3" name="删除"/>
-			<Function index="4" name="停用"/>
-			<Function index="5" name="启用"/>
-			<Function index="6" name="锁定"/>
-			<Function index="7" name="解锁"/>
-		</FunctionGroup>
-		<FunctionGroup name="报表" roleSchemas="employee">
-			<Function index="0" name="成品入库分析" features="B3Butchery.0009"/>
-			<Function index="1" name="投入单分析"/>
-			<Function index="2" name="产出单分析"/>
-			<Function index="3" name="差异表"/>
-			<Function index="4" name="生产日报数据分析"/>
+    </FunctionGroup>
+    <FunctionGroup name="成品入库模板" roleSchemas="employee" features="B3Butchery.0008">
+      <Function index="0" name="访问"/>
+      <Function index="1" name="新建"/>
+      <Function index="2" name="编辑"/>
+      <Function index="3" name="删除"/>
+      <Function index="4" name="停用"/>
+      <Function index="5" name="启用"/>
+      <Function index="6" name="锁定"/>
+      <Function index="7" name="解锁"/>
+    </FunctionGroup>
+    <FunctionGroup name="报表" roleSchemas="employee">
+      <Function index="0" name="成品入库分析" features="B3Butchery.0009"/>
+      <Function index="1" name="投入单分析"/>
+      <Function index="2" name="产出单分析"/>
+      <Function index="3" name="差异表"/>
+      <Function index="4" name="生产日报数据分析"/>
       <Function index="5" name="生产通知分析"/>
-		</FunctionGroup>
-		<FunctionGroup name="生产环节模板" roleSchemas="employee" features="B3Butchery.0010">
-			<Function index="0" name="访问"/>
-			<Function index="1" name="新建"/>
-			<Function index="2" name="编辑"/>
-			<Function index="3" name="删除"/>
-			<Function index="4" name="停用"/>
-			<Function index="5" name="启用"/>
-			<Function index="6" name="锁定"/>
-			<Function index="7" name="解锁"/>
-		</FunctionGroup>
-		<FunctionGroup name="生产日报" roleSchemas="employee" features="B3Butchery.0011">
-			<Function index="0" name="访问" />
-			<Function index="1" name="新建" />
-			<Function index="2" name="编辑" />
-			<Function index="3" name="删除" />
-			<Function index="4" name="审核" />
-			<Function index="5" name="撤销" />
-			<Function index="6" name="锁定" />
-			<Function index="7" name="解锁" />
-			<Function index="8" name="管理" />
-			<Function index="9" name="作废" />
-			<Function index="10" name="完毕"/>
-			<Function index="11" name="撤销完毕"/>
-		</FunctionGroup>
-		<FunctionGroup name="生产通知单" roleSchemas="employee" features="B3Butchery.0013" >
-			<Function index="0" name="访问" />
-			<Function index="1" name="新建" />
-			<Function index="2" name="编辑" />
-			<Function index="3" name="删除" />
-			<Function index="4" name="审核" />
-			<Function index="5" name="撤销" />
-			<Function index="6" name="锁定" />
-			<Function index="7" name="解锁" />
-			<Function index="8" name="管理" />
-			<Function index="9" name="作废" />
-			<Function index="10" name="完毕"/>
-			<Function index="11" name="撤销完毕"/>
-			<Function index="12" name="打印" />
-      
-		</FunctionGroup>    
-		<FunctionGroup name="功能" roleSchemas="employee">
-			<Function index="0" name="存货参考单价配置"/>
-			<Function index="1" name="成品转半成品配置"/>
-		</FunctionGroup>
+    </FunctionGroup>
+    <FunctionGroup name="生产环节模板" roleSchemas="employee" features="B3Butchery.0010">
+      <Function index="0" name="访问"/>
+      <Function index="1" name="新建"/>
+      <Function index="2" name="编辑"/>
+      <Function index="3" name="删除"/>
+      <Function index="4" name="停用"/>
+      <Function index="5" name="启用"/>
+      <Function index="6" name="锁定"/>
+      <Function index="7" name="解锁"/>
+    </FunctionGroup>
+    <FunctionGroup name="生产日报" roleSchemas="employee" features="B3Butchery.0011">
+      <Function index="0" name="访问" />
+      <Function index="1" name="新建" />
+      <Function index="2" name="编辑" />
+      <Function index="3" name="删除" />
+      <Function index="4" name="审核" />
+      <Function index="5" name="撤销" />
+      <Function index="6" name="锁定" />
+      <Function index="7" name="解锁" />
+      <Function index="8" name="管理" />
+      <Function index="9" name="作废" />
+      <Function index="10" name="完毕"/>
+      <Function index="11" name="撤销完毕"/>
+    </FunctionGroup>
+    <FunctionGroup name="生产通知单" roleSchemas="employee" features="B3Butchery.0013" >
+      <Function index="0" name="访问" />
+      <Function index="1" name="新建" />
+      <Function index="2" name="编辑" />
+      <Function index="3" name="删除" />
+      <Function index="4" name="审核" />
+      <Function index="5" name="撤销" />
+      <Function index="6" name="锁定" />
+      <Function index="7" name="解锁" />
+      <Function index="8" name="管理" />
+      <Function index="9" name="作废" />
+      <Function index="10" name="完毕"/>
+      <Function index="11" name="撤销完毕"/>
+      <Function index="12" name="打印" />
+
+    </FunctionGroup>
+    <FunctionGroup name="功能" roleSchemas="employee">
+      <Function index="0" name="存货参考单价配置"/>
+      <Function index="1" name="成品转半成品配置"/>
+    </FunctionGroup>
     <FunctionGroup name="模板" roleSchemas="employee" >
       <Function index="0" name="访问"/>
       <Function index="1" name="新建"/>
@@ -194,51 +194,65 @@
       <Function index="10" name="完毕"/>
       <Function index="11" name="撤销完毕"/>
     </FunctionGroup>
-	</Security>
-	<Menus>
-		<Menu id="0001" name="/屠宰分割/信息设置/档案/生产线/新建" roles="B3Butchery.生产线.新建" url="B3Butchery/BaseInfos/ProductLine_/ProductLineEdit.aspx"/>
-		<Menu id="0002" name="/屠宰分割/信息设置/档案/生产线/列表" roles="B3Butchery.生产线.访问" url="B3Butchery/BaseInfos/ProductLine_/ProductLineList.aspx"/>
-		<Menu id="0003" name="/屠宰分割/信息设置/档案/生产环节/新建" roles="B3Butchery.生产环节.新建" url="B3Butchery/BaseInfos/ProductLinks_/ProductLinksEdit.aspx"/>
-		<Menu id="0004" name="/屠宰分割/信息设置/档案/生产环节/列表" roles="B3Butchery.生产环节.访问" url="B3Butchery/BaseInfos/ProductLinks_/ProductLinksList.aspx"/>
-		<Menu id="0005" name="/屠宰分割/业务单据/生产计划/新建" roles="B3Butchery.生产计划.新建" url="B3Butchery/Bills/ProductPlan_/ProductPlanEdit.aspx"/>
-		<Menu id="0006" name="/屠宰分割/业务单据/生产计划/列表" roles="B3Butchery.生产计划.访问" url="B3Butchery/Bills/ProductPlan_/ProductPlanList.aspx"/>
-		<Menu id="0007" name="/屠宰分割/业务单据/产出单/新建" roles="B3Butchery.产出单.新建" url="B3Butchery/Bills/ProduceOutput_/ProduceOutputEdit.aspx"/>
-		<Menu id="0008" name="/屠宰分割/业务单据/产出单/列表" roles="B3Butchery.产出单.访问" url="B3Butchery/Bills/ProduceOutput_/ProduceOutputList.aspx"/>
-		<Menu id="0009" name="/屠宰分割/业务单据/投入单/新建" roles="B3Butchery.投入单.新建" url="B3Butchery/Bills/ProduceInput_/ProduceInputEdit.aspx"/>
-		<Menu id="0010" name="/屠宰分割/业务单据/投入单/列表" roles="B3Butchery.投入单.访问" url="B3Butchery/Bills/ProduceInput_/ProduceInputList.aspx"/>
-		<Menu id="0011" name="/屠宰分割/信息设置/档案/入库类型/列表" roles="B3Butchery.入库类型.访问" url="B3Butchery/BaseInfos/InStoreType_/InStoreTypeList.aspx"/>
-		<Menu id="0012" name="/屠宰分割/业务单据/成品入库/列表" roles="B3Butchery.成品入库.访问" url="B3Butchery/Bills/ProductInStore_/ProductInStoreList.aspx"/>
-		<Menu id="0013" name="/屠宰分割/信息设置/档案/成品入库模板/列表" roles="B3Butchery.成品入库模板.访问" url="B3Butchery/BaseInfos/ProductInStoreTemplate_/ProductInStoreTemplateList.aspx"/>
-		<Menu id="0014" name="/屠宰分割/信息设置/档案/生产环节模板/列表" roles="B3Butchery.生产环节模板.访问" url="B3Butchery/BaseInfos/ProductLinkTemplate_/ProductLinkTemplateList.aspx"/>
-		<Menu id="0015" name="/屠宰分割/报表/差异表" roles="B3Butchery.报表.差异表" url="B3Butchery/Reports/OutPutInStoreDiffReport_/OutPutInStoreDiffReport.aspx"/>
-		<Menu id="0016" name="/屠宰分割/业务单据/生产日报/列表" roles="B3Butchery.生产日报.访问" url="B3Butchery/Bills/DailyProductReport_/DailyProductReportList.aspx"/>
-		<Menu id="0017" name="/屠宰分割/功能/存货参考单价配置" roles="B3Butchery.功能.存货参考单价配置" url="B3Butchery/Tools/GoodsReferencePriceConfig_/GoodsReferencePriceConfig.aspx"/>
-		<Menu id="0018" name="/屠宰分割/功能/成品转半成品配置" roles="B3Butchery.功能.成品转半成品配置" url="B3Butchery/Tools/ChengPinToBanChengPinConfigPage_/ChengPinToBanChengPinConfigPage.aspx"/>
+    <FunctionGroup name="暂存单" roleSchemas="employee">
+      <Function index="0" name="访问" />
+      <Function index="1" name="新建" />
+      <Function index="2" name="编辑" />
+      <Function index="3" name="删除" />
+      <Function index="4" name="审核" />
+      <Function index="5" name="撤销" />
+      <Function index="6" name="锁定" />
+      <Function index="7" name="解锁" />
+      <Function index="8" name="管理" />
+      <Function index="9" name="作废" />
+      <Function index="10" name="完毕"/>
+      <Function index="11" name="撤销完毕"/>
+    </FunctionGroup>
+  </Security>
+  <Menus>
+    <Menu id="0001" name="/屠宰分割/信息设置/档案/生产线/新建" roles="B3Butchery.生产线.新建" url="B3Butchery/BaseInfos/ProductLine_/ProductLineEdit.aspx"/>
+    <Menu id="0002" name="/屠宰分割/信息设置/档案/生产线/列表" roles="B3Butchery.生产线.访问" url="B3Butchery/BaseInfos/ProductLine_/ProductLineList.aspx"/>
+    <Menu id="0003" name="/屠宰分割/信息设置/档案/生产环节/新建" roles="B3Butchery.生产环节.新建" url="B3Butchery/BaseInfos/ProductLinks_/ProductLinksEdit.aspx"/>
+    <Menu id="0004" name="/屠宰分割/信息设置/档案/生产环节/列表" roles="B3Butchery.生产环节.访问" url="B3Butchery/BaseInfos/ProductLinks_/ProductLinksList.aspx"/>
+    <Menu id="0005" name="/屠宰分割/业务单据/生产计划/新建" roles="B3Butchery.生产计划.新建" url="B3Butchery/Bills/ProductPlan_/ProductPlanEdit.aspx"/>
+    <Menu id="0006" name="/屠宰分割/业务单据/生产计划/列表" roles="B3Butchery.生产计划.访问" url="B3Butchery/Bills/ProductPlan_/ProductPlanList.aspx"/>
+    <Menu id="0007" name="/屠宰分割/业务单据/产出单/新建" roles="B3Butchery.产出单.新建" url="B3Butchery/Bills/ProduceOutput_/ProduceOutputEdit.aspx"/>
+    <Menu id="0008" name="/屠宰分割/业务单据/产出单/列表" roles="B3Butchery.产出单.访问" url="B3Butchery/Bills/ProduceOutput_/ProduceOutputList.aspx"/>
+    <Menu id="0009" name="/屠宰分割/业务单据/投入单/新建" roles="B3Butchery.投入单.新建" url="B3Butchery/Bills/ProduceInput_/ProduceInputEdit.aspx"/>
+    <Menu id="0010" name="/屠宰分割/业务单据/投入单/列表" roles="B3Butchery.投入单.访问" url="B3Butchery/Bills/ProduceInput_/ProduceInputList.aspx"/>
+    <Menu id="0011" name="/屠宰分割/信息设置/档案/入库类型/列表" roles="B3Butchery.入库类型.访问" url="B3Butchery/BaseInfos/InStoreType_/InStoreTypeList.aspx"/>
+    <Menu id="0012" name="/屠宰分割/业务单据/成品入库/列表" roles="B3Butchery.成品入库.访问" url="B3Butchery/Bills/ProductInStore_/ProductInStoreList.aspx"/>
+    <Menu id="0013" name="/屠宰分割/信息设置/档案/成品入库模板/列表" roles="B3Butchery.成品入库模板.访问" url="B3Butchery/BaseInfos/ProductInStoreTemplate_/ProductInStoreTemplateList.aspx"/>
+    <Menu id="0014" name="/屠宰分割/信息设置/档案/生产环节模板/列表" roles="B3Butchery.生产环节模板.访问" url="B3Butchery/BaseInfos/ProductLinkTemplate_/ProductLinkTemplateList.aspx"/>
+    <Menu id="0015" name="/屠宰分割/报表/差异表" roles="B3Butchery.报表.差异表" url="B3Butchery/Reports/OutPutInStoreDiffReport_/OutPutInStoreDiffReport.aspx"/>
+    <Menu id="0016" name="/屠宰分割/业务单据/生产日报/列表" roles="B3Butchery.生产日报.访问" url="B3Butchery/Bills/DailyProductReport_/DailyProductReportList.aspx"/>
+    <Menu id="0017" name="/屠宰分割/功能/存货参考单价配置" roles="B3Butchery.功能.存货参考单价配置" url="B3Butchery/Tools/GoodsReferencePriceConfig_/GoodsReferencePriceConfig.aspx"/>
+    <Menu id="0018" name="/屠宰分割/功能/成品转半成品配置" roles="B3Butchery.功能.成品转半成品配置" url="B3Butchery/Tools/ChengPinToBanChengPinConfigPage_/ChengPinToBanChengPinConfigPage.aspx"/>
     <Menu id="0019" name="/屠宰分割/信息设置/档案/模板/列表" roles="B3Butchery.模板.访问" url="B3Butchery/Bills/ProductInStore_Temp_/ProductInStore_TempList.aspx"/>
-		<Menu id="0020" name="/屠宰分割/业务单据/生产通知单/列表" roles="B3Butchery.生产通知单.访问" url="B3Butchery/Bills/ProductNotice_/ProductNoticeList.aspx"/>    
-		<Menu id="0021" name="/屠宰分割/业务单据/成品包装配置/列表" roles="B3Butchery.成品包装配置.访问" url="B3Butchery/Bills/ProductPackaging_/ProductPackagingList.aspx"/>    
-    
-	</Menus>
+    <Menu id="0020" name="/屠宰分割/业务单据/生产通知单/列表" roles="B3Butchery.生产通知单.访问" url="B3Butchery/Bills/ProductNotice_/ProductNoticeList.aspx"/>
+    <Menu id="0021" name="/屠宰分割/业务单据/成品包装配置/列表" roles="B3Butchery.成品包装配置.访问" url="B3Butchery/Bills/ProductPackaging_/ProductPackagingList.aspx"/>
+    <Menu id="0022" name="/屠宰分割/业务单据/暂存单/列表" roles="B3Butchery.暂存单.访问" url="B3Butchery/Bills/TemporaryStorage_/TemporaryStorageList.aspx"/>
+  </Menus>
 
-	<Hippo>
-		<Tile id="0001"  title="屠宰投入" path="/MainSystem/B3Butchery/Hippo/ProduceInputList" type="list" roles="B3Butchery.投入单.访问"/>
-		<Tile id="0002"  title="屠宰产出" path="/MainSystem/B3Butchery/Hippo/ProduceOutputList" type="list" roles="B3Butchery.产出单.访问"/>
-		<Tile id="0003"  title="屠宰入库" path="/MainSystem/B3Butchery/Hippo/ProductInStoreList" type="list" roles="B3Butchery.成品入库.访问"/>
+  <Hippo>
+    <Tile id="0001"  title="屠宰投入" path="/MainSystem/B3Butchery/Hippo/ProduceInputList" type="list" roles="B3Butchery.投入单.访问"/>
+    <Tile id="0002"  title="屠宰产出" path="/MainSystem/B3Butchery/Hippo/ProduceOutputList" type="list" roles="B3Butchery.产出单.访问"/>
+    <Tile id="0003"  title="屠宰入库" path="/MainSystem/B3Butchery/Hippo/ProductInStoreList" type="list" roles="B3Butchery.成品入库.访问"/>
     <Tile id="0004"  title="生产通知单" path="/MainSystem/B3Butchery/Hippo/ProductNoticeList" type="list" roles="B3Butchery.生产通知单.访问"/>
-	</Hippo>
+  </Hippo>
 
-	<Features>
-		<Feature id="0001" name="生产线"/>
-		<Feature id="0002" name="生产环节"/>
-		<Feature id="0003" name="生产计划"/>
-		<Feature id="0004" name="产出单"/>
-		<Feature id="0005" name="投入单"/>
-		<Feature id="0006" name="入库类型"/>
-		<Feature id="0007" name="成品入库"/>
-		<Feature id="0008" name="成品入库模板"/>
-		<Feature id="0009" name="成品入库分析"/>
-		<Feature id="0010" name="生产环节模板"/>
-		<Feature id="0011" name="生产日报"/>
-	<Feature id="0013" name="生产通知单"/>	
-	</Features>
+  <Features>
+    <Feature id="0001" name="生产线"/>
+    <Feature id="0002" name="生产环节"/>
+    <Feature id="0003" name="生产计划"/>
+    <Feature id="0004" name="产出单"/>
+    <Feature id="0005" name="投入单"/>
+    <Feature id="0006" name="入库类型"/>
+    <Feature id="0007" name="成品入库"/>
+    <Feature id="0008" name="成品入库模板"/>
+    <Feature id="0009" name="成品入库分析"/>
+    <Feature id="0010" name="生产环节模板"/>
+    <Feature id="0011" name="生产日报"/>
+    <Feature id="0013" name="生产通知单"/>
+  </Features>
 </Plugin>
