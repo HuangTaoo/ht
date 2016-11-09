@@ -38,5 +38,9 @@ namespace BWP.B3Butchery.Hippo.QueryObjs
 		public long? ProductLinks_ID { get; set; }
 
 		public string ProductLinks_Name { get; set; }
+
+    public long? ProductLinkTemplate_ID { get; set; }
+
+    public string ProductLinkTemplate_Name { get; set; }
 	}
 }

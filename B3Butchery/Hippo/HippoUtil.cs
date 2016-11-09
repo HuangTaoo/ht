@@ -139,7 +139,7 @@ namespace BWP.B3Butchery.Hippo
 					new FieldDesc{Name="Department_ID",Title="部门",DataKind=B3FrameworksConsts.DataSources.授权部门,DisplayField="Department_Name"},
 					new FieldDesc{Name="Employee_ID",Title="经办人",DataKind=B3FrameworksConsts.DataSources.授权员工,DisplayField="Employee_Name"},
 						new FieldDesc{Name="ProductLinks_ID",Title="生产环节",DataKind=B3ButcheryDataSource.生产环节,DisplayField="ProductLinks_Name"},
-							new FieldDesc{Name="ProductLinkTemplate_ID",Title="生产环节模板",DataKind=B3ButcheryDataSource.生产环节模板,DisplayField="ProductLinkTemplate_ID"},
+							new FieldDesc{Name="ProductLinkTemplate_ID",Title="生产环节模板",DataKind=B3ButcheryDataSource.生产环节模板,DisplayField="ProductLinkTemplate_Name"},
 							 },
 				ActionRpc = CUSASK + "/Actions_/ProduceOutputAction/FormActions",
 				ActionBar = "Save SaveAndNew Prev Next LoadDetail ReferToCreate"

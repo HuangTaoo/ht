@@ -47,8 +47,11 @@ namespace BWP.B3Butchery.BO
 		public string ProductLinks_Name { get; set; }
 
 		[LogicName("生产环节模板")]
-		[NonDmoProperty, RpcProperty]
 		public long? ProductLinkTemplate_ID { get; set; }
+
+    [ReferenceTo(typeof(ProductLinkTemplate), "Name")]
+    [Join("ProductLinkTemplate_ID", "ID")]
+    public string ProductLinkTemplate_Name { get; set; }
 
 		[ReferenceTo(typeof(Department), "TreeDeep1ID")]
 		[Join("Department_ID", "ID")]
