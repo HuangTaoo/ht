@@ -35,6 +35,7 @@ namespace BWP.B3Butchery.Hippo.Actions_
 			query.Columns.Add(DQSelectColumn.Field("InStoreDate"));
 			query.Columns.Add(DQSelectColumn.Field("CheckEmployee_Name"));
 			query.Columns.Add(DQSelectColumn.Field("CheckDate"));
+      query.Columns.Add(DQSelectColumn.Field("ProductInStoreTemplate_Name"));
 			query.OrderBy.Expressions.Add(DQOrderByExpression.Create("ID", true));
 			HippoUtil.AddEQ(query, "ID", queryobj.ID);
 			HippoUtil.AddEQ(query, "BillState", queryobj.BillState);

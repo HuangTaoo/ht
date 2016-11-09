@@ -213,7 +213,7 @@ namespace BWP.B3Butchery.Hippo
 							new FieldDesc{Name="InStoreDate", Title = "入库日期",Widget="datetime"},
 						new FieldDesc{Name="CheckEmployee_ID",Title="验收人",DataKind=B3FrameworksConsts.DataSources.授权员工,DisplayField="CheckEmployee_Name"},
 					new FieldDesc{Name="CheckDate", Title = "验收日期"},
-						new FieldDesc{Name="ProductInStoreTemplate_ID", Title = "成品入库模板",DisplayField="ProductInStoreTemplate_ID", DataKind = B3ButcheryDataSource.成品入库模板},
+						new FieldDesc{Name="ProductInStoreTemplate_ID", Title = "成品入库模板",DisplayField="ProductInStoreTemplate_Name", DataKind = B3ButcheryDataSource.成品入库模板},
 
 							 },
 				ActionRpc = CUSASK + "/Actions_/ProductInStoreAction/FormActions",

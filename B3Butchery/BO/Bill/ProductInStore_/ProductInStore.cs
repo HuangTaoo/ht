@@ -84,8 +84,12 @@ namespace BWP.B3Butchery.BO
         public string DeviceId { get; set; }//记录从手持机传入单据的ID，防止传入2次
 
 		[LogicName("成品入库模板")]
-		[NonDmoProperty, RpcProperty]
 		public long? ProductInStoreTemplate_ID { get; set; }
+
+    [LogicName("成品入库模板")]
+    [ReferenceTo(typeof(ProductInStoreTemplate), "Name")]
+    [Join("ProductInStoreTemplate_ID", "ID")]
+    public string ProductInStoreTemplate_Name { get; set; }
 
 		[ReferenceTo(typeof(Department), "TreeDeep1ID")]
 		[Join("Department_ID", "ID")]
