@@ -79,6 +79,7 @@ namespace BWP.B3Butchery.Hippo.Actions_
 				case FormActionNames.New:
 					var dmo = new ProduceOutput();
 					data.MainObject = dmo;
+			    dmo.Time = DateTime.Now;
 					break;
 				case FormActionNames.Prev:
 					var prevDmo = GetPrevOrNext(productOutput.ID);
