@@ -82,6 +82,7 @@ namespace BWP.B3Butchery.Hippo.Actions_
 				case FormActionNames.New:
 					var dmo = new ProductInStore();
 					data.MainObject = dmo;
+          bl.InitNewDmo(dmo);
 					break;
 				case FormActionNames.Prev:
 					var prevDmo = GetPrevOrNext(productInStore.ID);
