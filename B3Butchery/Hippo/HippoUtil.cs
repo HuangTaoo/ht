@@ -161,11 +161,12 @@ namespace BWP.B3Butchery.Hippo
 					new FieldDesc {Name = "SecondNumber2", Title = "辅单位数量Ⅱ"},
 					new FieldDesc {Name = "Remark", Title = "备注"}                 
 								},
-				ItemFormat = "存货名称: [Goods_Name]\n存货编码: [Goods_Code]\n规格: [Goods_Spec]\n主数量: [Number]\n辅数量: [SecondNumber]\n备注: [Remark]",
+        ItemFormat = "存货名称: [Goods_Name]\n存货编码: [Goods_Code]\n规格: [Goods_Spec]\n主数量: [Number]\n辅单位数量Ⅱ: [SecondNumber2]\n备注: [Remark]",
 				ActionBar = "New"
 			};
 			model.Collections.Add(detail);
-      detail.DynamicUpdates.Add("$Number $Goods_SecondUnitRatio * $Goods_MainUnitRatio / $SecondNumber2 = ");
+      //detail.DynamicUpdates.Add("$Number $Goods_SecondUnitRatio * $Goods_MainUnitRatio / $SecondNumber2 = ");
+      detail.DynamicUpdates.Add("$SecondNumber2 $Goods_MainUnitRatio * $Goods_SecondUnitRatio / $Number = ");
 			FormModel.Register(CUSASK + "/ProduceOutputAction/ProduceOutputEdit", model);
 		}
 
