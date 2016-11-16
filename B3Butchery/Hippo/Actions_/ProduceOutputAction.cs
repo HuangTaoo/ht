@@ -95,6 +95,7 @@ namespace BWP.B3Butchery.Hippo.Actions_
           break;
         case "LoadDetail":
           LoadDetail(productOutput);
+          bl.Update(productOutput);
           break;
         case "ReferToCreate":
           data.MainObject = HippoUtil.ReferenceToCreate<ProduceOutput>(productOutput);
@@ -134,6 +135,7 @@ namespace BWP.B3Butchery.Hippo.Actions_
       {
         dmo.Details.Add(add);
       }
+     
     }
   }
 }

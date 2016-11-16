@@ -98,6 +98,7 @@ namespace BWP.B3Butchery.Hippo.Actions_
 					break;
 				case "LoadDetail":
 					LoadDetail(productInStore);
+          bl.Update(productInStore);
 					break;
 				case "ReferToCreate":
 					data.MainObject = HippoUtil.ReferenceToCreate<ProductInStore>(productInStore);
