@@ -11,6 +11,7 @@ using Forks.EnterpriseServices.DomainObjects2;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.EnterpriseServices.JsonRpc;
 using Forks.EnterpriseServices.SqlDoms;
+using Forks.Utils;
 using TSingSoft.WebPluginFramework;
 
 namespace BWP.B3Butchery.Hippo.Actions_
@@ -128,14 +129,29 @@ namespace BWP.B3Butchery.Hippo.Actions_
       query.Columns.Add(DQSelectColumn.Field("Goods_Name"));
       query.Columns.Add(DQSelectColumn.Field("Goods_Code"));
       query.Columns.Add(DQSelectColumn.Field("Goods_Spec"));
+      query.Columns.Add(DQSelectColumn.Field("Goods_MainUnitRatio"));
+      query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitRatio"));
       query.Where.Conditions.Add(DQCondition.EQ("ProductLinkTemplate_ID", dmo.ProductLinkTemplate_ID));
-      var list = query.EExecuteList<long, string, string, string>().Select(x => new ProduceOutput_Detail { Goods_ID = x.Item1, Goods_Name = x.Item2, Goods_Code = x.Item3,Goods_Spec = x.Item4});
       dmo.Details.Clear();
-      foreach (var add in list)
+      using (var context = new TransactionContext())
       {
-        dmo.Details.Add(add);
+        using (var reader = context.Session.ExecuteReader(query))
+        {
+          while (reader.Read())
+          {
+            var detail = new ProduceOutput_Detail
+            {
+              Goods_ID = (long) reader[0],
+              Goods_Name = (string) reader[1],
+              Goods_Code = (string) reader[2],
+              Goods_Spec = (string) reader[3],
+              Goods_MainUnitRatio = (Money<decimal>?) reader[4],
+              Goods_SecondUnitRatio = (Money<decimal>?) reader[5]
+            };
+            dmo.Details.Add(detail);
+          }
+        }
       }
-     
     }
   }
 }
