@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using BWP.B3Frameworks.BO.NamedValueTemplate;
 using Bwp.Hippo;
 using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BO;
@@ -67,6 +68,8 @@ namespace BWP.B3Butchery.Hippo.Actions_
           data.MainObject = dom;
           break;
         case FormActionNames.Save:
+          if (productOutput.Details.Count <= 0)
+            LoadDetail(productOutput);
           if (productOutput.ID == 0)
           {
             bl.InitNewDmo(productOutput);
@@ -81,6 +84,12 @@ namespace BWP.B3Butchery.Hippo.Actions_
           data.MainObject = dmo;
           dmo.Time = DateTime.Now;
           bl.InitNewDmo(dmo);
+          var productPlan = GetProductPlan(dmo.AccountingUnit_ID, dmo.Department_ID, Convert.ToDateTime(Convert.ToDateTime(dmo.Time).ToShortDateString()));
+          if (productPlan != null)
+          {
+            dmo.PlanNumber_ID = productPlan.Item1;
+            dmo.PlanNumber_Name = productPlan.Item2;
+          }
           break;
         case FormActionNames.Prev:
           var prevDmo = GetPrevOrNext(productOutput.ID);
@@ -141,17 +150,26 @@ namespace BWP.B3Butchery.Hippo.Actions_
           {
             var detail = new ProduceOutput_Detail
             {
-              Goods_ID = (long) reader[0],
-              Goods_Name = (string) reader[1],
-              Goods_Code = (string) reader[2],
-              Goods_Spec = (string) reader[3],
-              Goods_MainUnitRatio = (Money<decimal>?) reader[4],
-              Goods_SecondUnitRatio = (Money<decimal>?) reader[5]
+              Goods_ID = (long)reader[0],
+              Goods_Name = (string)reader[1],
+              Goods_Code = (string)reader[2],
+              Goods_Spec = (string)reader[3],
+              Goods_MainUnitRatio = (Money<decimal>?)reader[4],
+              Goods_SecondUnitRatio = (Money<decimal>?)reader[5]
             };
             dmo.Details.Add(detail);
           }
         }
       }
+    }
+
+    static Tuple<long?, string> GetProductPlan(long? nullable1, long? nullable2, DateTime? nullable3)
+    {
+      var query = new DQueryDom(new JoinAlias(typeof(ProductPlan)));
+      query.Columns.Add(DQSelectColumn.Field("ID"));
+      query.Columns.Add(DQSelectColumn.Field("PlanNumber"));
+      query.Where.Conditions.Add(DQCondition.And(DQCondition.EQ("AccountingUnit_ID", nullable1), DQCondition.EQ("Department_ID", nullable2), DQCondition.EQ("Date", nullable3), DQCondition.EQ("BillState", 单据状态.已审核)));
+      return query.EExecuteScalar<long?, string>();
     }
   }
 }

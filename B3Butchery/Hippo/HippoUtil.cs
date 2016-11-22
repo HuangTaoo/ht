@@ -103,7 +103,7 @@ namespace BWP.B3Butchery.Hippo
 			{
 				Title = "产出单",
 				ItemFormat =
-						"单号: [ID]\n单据状态: [BillState]\n时间:[Time]\n计划号: [PlanNumber_Name]\n会计单位: [AccountingUnit_Name]\n部门: [Department_Name]\n经办人: [Employee_Name]\n生产环节: [ProductLinks_Name]",
+						"单号: [ID]\n单据状态: [BillState]\n时间:[Time]\n计划号: [PlanNumber_Name]\n会计单位: [AccountingUnit_Name]\n部门: [Department_Name]\n经办人: [Employee_Name]",
 				OpeningView = CUSASK + "/ProduceOutputAction/ProduceOutputEdit",
 				OpeningViewType = "form",
 				QueryFields = new[]
@@ -115,8 +115,7 @@ namespace BWP.B3Butchery.Hippo
 																										  new FieldDesc{Name="PlanNumber_ID",Title="计划号",DataKind=B3ButcheryDataSource.计划号,DisplayField="PlanNumber_Name"},
 																										 new FieldDesc{Name="AccountingUnit_ID",Title="会计单位",DataKind=B3FrameworksConsts.DataSources.授权会计单位全部,DisplayField="AccountingUnit_Name"},
 																										 new FieldDesc{Name="Department_ID",Title="部门",DataKind=B3FrameworksConsts.DataSources.授权部门全部,DisplayField="Department_Name"},
-																										 new FieldDesc{Name="Employee_ID",Title="经办人",DataKind=B3FrameworksConsts.DataSources.授权员工全部,DisplayField="Employee_Name"},
-																										 new FieldDesc{Name="ProductLinks_ID",Title="生产环节",DataKind=B3ButcheryDataSource.生产环节全部,DisplayField="ProductLinks_Name"},
+																										 new FieldDesc{Name="Employee_ID",Title="经办人",DataKind=B3FrameworksConsts.DataSources.授权员工全部,DisplayField="Employee_Name"}
 
 																									 },
 				QueryRpc = CUSASK + "/Actions_/ProduceOutputAction/Query",
@@ -138,8 +137,7 @@ namespace BWP.B3Butchery.Hippo
 					new FieldDesc{Name="AccountingUnit_ID", Title = "会计单位", DataKind = B3FrameworksConsts.DataSources.授权会计单位,DisplayField = "AccountingUnit_Name"},
 					new FieldDesc{Name="Department_ID",Title="部门",DataKind=B3FrameworksConsts.DataSources.授权部门,DisplayField="Department_Name"},
 					new FieldDesc{Name="Employee_ID",Title="经办人",DataKind=B3FrameworksConsts.DataSources.授权员工,DisplayField="Employee_Name"},
-						new FieldDesc{Name="ProductLinks_ID",Title="生产环节",DataKind=B3ButcheryDataSource.生产环节,DisplayField="ProductLinks_Name"},
-							new FieldDesc{Name="ProductLinkTemplate_ID",Title="生产环节模板",DataKind=B3ButcheryDataSource.生产环节模板,DisplayField="ProductLinkTemplate_Name"},
+					new FieldDesc{Name="ProductLinkTemplate_ID",Title="生产环节模板",DataKind=B3ButcheryDataSource.生产环节模板,DisplayField="ProductLinkTemplate_Name"},
 							 },
 				ActionRpc = CUSASK + "/Actions_/ProduceOutputAction/FormActions",
 				ActionBar = "Save SaveAndNew Prev Next LoadDetail ReferToCreate"
@@ -166,7 +164,8 @@ namespace BWP.B3Butchery.Hippo
 			};
 			model.Collections.Add(detail);
       //detail.DynamicUpdates.Add("$Number $Goods_SecondUnitRatio * $Goods_MainUnitRatio / $SecondNumber2 = ");
-      detail.DynamicUpdates.Add("$SecondNumber2 $Goods_MainUnitRatio * $Goods_SecondUnitRatio / $Number = ");
+      //$Number=$SecondNumber2*$Goods_SecondUnitII_MainUnitRatio/$Goods_SecondUnitII_SecondUnitRatio
+      detail.DynamicUpdates.Add("$SecondNumber2 $Goods_SecondUnitII_MainUnitRatio * $Goods_SecondUnitII_SecondUnitRatio / $Number = ");
 			FormModel.Register(CUSASK + "/ProduceOutputAction/ProduceOutputEdit", model);
 		}
 
