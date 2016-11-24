@@ -133,14 +133,19 @@ namespace BWP.B3Butchery.Hippo.Actions_
     {
       if (dmo.ProductLinkTemplate_ID == null)
         throw new ArgumentException("请先选择生产环节模板");
-      var query = new DQueryDom(new JoinAlias(typeof(ProductLinkTemplate_Detail)));
-      query.Columns.Add(DQSelectColumn.Field("Goods_ID"));
-      query.Columns.Add(DQSelectColumn.Field("Goods_Name"));
-      query.Columns.Add(DQSelectColumn.Field("Goods_Code"));
-      query.Columns.Add(DQSelectColumn.Field("Goods_Spec"));
-      query.Columns.Add(DQSelectColumn.Field("Goods_MainUnitRatio"));
-      query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitRatio"));
-      query.Where.Conditions.Add(DQCondition.EQ("ProductLinkTemplate_ID", dmo.ProductLinkTemplate_ID));
+      var bill = new JoinAlias(typeof(ProductLinkTemplate));
+      var productLinkDetail = new JoinAlias(typeof(ProductLinkTemplate_Detail));
+      var query = new DQueryDom(productLinkDetail);
+      query.From.AddJoin(JoinType.Left, new DQDmoSource(bill), DQCondition.EQ(bill, "ID", productLinkDetail, "ProductLinkTemplate_ID"));
+      query.Columns.Add(DQSelectColumn.Field("Goods_ID", productLinkDetail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_Name", productLinkDetail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_Code", productLinkDetail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_Spec", productLinkDetail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_MainUnitRatio", productLinkDetail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitRatio", productLinkDetail));
+      query.Where.Conditions.Add(DQCondition.EQ(productLinkDetail, "ProductLinkTemplate_ID", dmo.ProductLinkTemplate_ID));
+      query.Where.Conditions.Add(DQCondition.EQ(bill, "AccountingUnit_ID", dmo.AccountingUnit_ID));
+      query.Where.Conditions.Add(DQCondition.EQ(bill, "Department_ID", dmo.Department_ID));
       dmo.Details.Clear();
       using (var context = new TransactionContext())
       {
