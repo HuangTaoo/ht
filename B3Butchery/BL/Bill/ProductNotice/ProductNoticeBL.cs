@@ -23,18 +23,27 @@ namespace BWP.B3Butchery.BL {
   }
 
   public class ProductNoticeBL : DepartmentWorkFlowBillBL<ProductNotice>, IProductNoticeBL {
-      public void CheckDetailGoods(ProductNotice dmo)
-      {
-          if (dmo.Customer_ID == null) return;
-          var query = SaleForecastQuery(dmo.Customer_ID, dmo.Date);
-          query.Columns.Clear();
-          query.Columns.Add(DQSelectColumn.Field("SaleGoods_ID"));
-          var result = query.EExecuteList<long>();
-          foreach (var detail in dmo.Details.Where(detail => detail.DmoID != null && !result.Contains(detail.Goods_ID)))
-          {
-              throw new Exception(detail.Goods_Name + "和销售预报中不相符");
-          }
+    private const short SaleForecastTypeID = B3FrameworksConsts.DmoTypeIDBases.B3Sale + 26;
+
+    public void CheckDetailGoods(ProductNotice dmo) {
+      if (dmo.Customer_ID == null)
+        return;
+      var ids =
+        dmo.Details.Where(x => x.DmoID.HasValue && (x.DmoTypeID == null || x.DmoTypeID == SaleForecastTypeID)).Select
+          (x => x.DmoID);
+      var query = SaleForecastQuery(dmo.Customer_ID, dmo.Date, ids);
+      query.Columns.Clear();
+      query.Columns.Add(DQSelectColumn.Field("SaleGoods_ID"));
+      var result = query.EExecuteList<long>();
+      foreach (var detail in dmo.Details) {
+        if (detail.DmoID == null)
+          continue;
+        if (detail.DmoTypeID.HasValue && detail.DmoTypeID != SaleForecastTypeID)
+          continue;
+        if (!result.Contains(detail.Goods_ID))
+          throw new Exception(detail.Goods_Name + "和销售预报中不相符");
       }
+    }
 
       public void LoadPredictDetail(ProductNotice dmo)
       {
@@ -45,7 +54,7 @@ namespace BWP.B3Butchery.BL {
               throw new ArgumentException("请先选择生产日期");
           }
           var goods = CheckCustomer(dmo.Customer_ID);
-          var query = SaleForecastQuery(dmo.Customer_ID, dmo.Date);
+          var query = SaleForecastQuery(dmo.Customer_ID, dmo.Date );
           using (var reader = Session.ExecuteReader(query))
           {
               while (reader.Read())
@@ -65,6 +74,7 @@ namespace BWP.B3Butchery.BL {
                   selectDmo.Goods_Code = reader[9] + "";
                   selectDmo.Goods_Name = reader[10] + "";
                   selectDmo.Goods_Spec = reader[11] + "";
+                  selectDmo.DmoTypeID = SaleForecastTypeID;
                   dmo.Details.Add(selectDmo);
               }
           }
@@ -92,7 +102,7 @@ namespace BWP.B3Butchery.BL {
           return dic;
       }
 
-      DQueryDom SaleForecastQuery(long? customer,DateTime? dates)
+    static DQueryDom SaleForecastQuery(long? customer, DateTime? dates, IEnumerable<long?> ids=null)
       {
           if (!PluginManager.Current.Installed("B3Sale")) return null;
           var detail = new JoinAlias(Type.GetType("BWP.B3Sale.BO.SaleForecast_Detail, B3Sale"));
@@ -114,6 +124,9 @@ namespace BWP.B3Butchery.BL {
           dom.Where.Conditions.Add(DQCondition.EQ(bill, "Customer_ID", customer));
           dom.Where.Conditions.Add(DQCondition.EQ(bill, "BillState", 单据状态.已审核));
           dom.Where.Conditions.Add(DQCondition.EQ(bill, "Domain_ID", DomainContext.Current.ID));
+          if (ids != null) {
+            dom.Where.Conditions.EFieldInList(DQExpression.Field(bill, "ID"), ids.ToArray());
+          }
           var date = dates ?? BLContext.Today;
           dom.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(bill, "Date", date.Date.AddDays(-7)));//只显示7天内的预报
           return dom;

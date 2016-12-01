@@ -174,7 +174,7 @@ namespace BWP.B3Butchery.Hippo.Actions_
                     {
                         var selectDmo = new ProductNotice_Detail();
                         selectDmo.DmoID = (long)reader[0];
-
+                        selectDmo.DmoTypeID = B3FrameworksConsts.DmoTypeIDBases.B3Sale + 26;
                         selectDmo.Goods_ID = (long) reader[1];
                         selectDmo.Number = (Money<decimal>?) reader[2];
                         selectDmo.Goods_MainUnit = reader[3].ToString();

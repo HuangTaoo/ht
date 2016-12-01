@@ -27,7 +27,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
 
     protected override void BuildBasePropertiesEditor(TitlePanel titlePanel, PageLayoutSection pageLayoutSection) {
       var layoutManager = new LayoutManager("", mDFInfo, mDFContainer);
-      layoutManager.Add("CustomerAddress", mDFContainer.Add(new DFTextBox(mDFInfo.Fields["CustomerAddress"]), "CustomerAddress"));
+      layoutManager.Add("CustomerAddress", new DFTextBox(mDFInfo.Fields["CustomerAddress"]) );
       var config = new AutoLayoutConfig();
       layoutManager.Config = config;
       config.Add("AccountingUnit_ID");      
@@ -73,6 +73,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       _detailGrid.Columns.EAdd(new DFEditGridColumn<DFTextBox>("ProduceRequest")).InitEditControl += (sender, e) => { e.Control.Width = 150;};
       _detailGrid.Columns.EAdd(new DFEditGridColumn<DFDateInput>("ProduceDate"));
       _detailGrid.Columns.EAdd(new DFEditGridColumn<DFDateInput>("DeliveryDate"));
+      _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("DmoTypeID"));
         _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("DmoID"));
       _detailGrid.Columns.Add(new DFEditGridColumn("Remark"));
       _detailGrid.ValueColumns.Add("Goods_ID");
