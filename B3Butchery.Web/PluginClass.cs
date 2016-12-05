@@ -9,6 +9,7 @@ using BWP.B3Butchery.Hippo;
 
 namespace BWP.B3Butchery
 {
+
   public class PluginClass : IPluginClass
   {
     public void OnInit()
