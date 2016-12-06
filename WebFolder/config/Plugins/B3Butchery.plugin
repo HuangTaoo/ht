@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Plugin appVersion="$appVersion" displayName="屠宰分割" name="B3Butchery"  schemaVersion="1.0"  version="1.0" xmlns="http://www.TSingSoft.com/Schemas/WPF.xsd"
+<Plugin appVersion="$appVersion" displayName="禽类屠宰分割" name="B3Butchery"  schemaVersion="1.0"  version="1.0" xmlns="http://www.TSingSoft.com/Schemas/WPF.xsd"
         pluginClass="BWP.B3Butchery.PluginClass,B3Butchery.Web" >
   <Requires>
     <Plugin name="B3UnitedInfos" version="$appVersion" />
