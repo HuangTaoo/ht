@@ -42,7 +42,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
       config.Add("CheckEmployee_ID");
       config.Add("CheckDate");
       config.Add("ProductPlan_ID");
-      config.Add("ProductionUnit_ID");
+      AddProductionUnit(config);
       config.Add("Remark");
       layoutManager.Config = config;
       var section = mPageLayoutManager.AddSection("BaseProperties", "基本属性");
@@ -50,6 +50,9 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
       mainInfo.Controls.Add(layoutManager.CreateLayout());
       mainInfo.SetPageLayoutSetting(mPageLayoutManager, section.Name);
       CreateDetailPanel(container.EAdd(new TitlePanel("明细信息")));
+    }
+    protected virtual void AddProductionUnit(AutoLayoutConfig config)
+    {
     }
 
     DFEditGrid detailGrid;
