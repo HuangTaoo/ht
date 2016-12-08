@@ -42,6 +42,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
       config.Add("CheckEmployee_ID");
       config.Add("CheckDate");
       config.Add("ProductPlan_ID");
+      config.Add("ProductionUnit_ID");
       config.Add("Remark");
       layoutManager.Config = config;
       var section = mPageLayoutManager.AddSection("BaseProperties", "基本属性");

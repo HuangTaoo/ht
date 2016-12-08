@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks;
 using BWP.B3Frameworks.BO;
+using BWP.B3ProduceUnitedInfos;
+using BWP.B3ProduceUnitedInfos.BO;
 using BWP.B3UnitedInfos;
 using Forks.EnterpriseServices;
 using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
-using Forks.EnterpriseServices.JsonRpc;
 using TSingSoft.WebControls2;
 using BWP.B3Frameworks.Attributes;
 
@@ -90,6 +89,20 @@ namespace BWP.B3Butchery.BO
     [ReferenceTo(typeof(ProductInStoreTemplate), "Name")]
     [Join("ProductInStoreTemplate_ID", "ID")]
     public string ProductInStoreTemplate_Name { get; set; }
+
+    #region 客户预留字段
+
+    [LogicName("生产单位")]
+    [DFDataKind(B3ProduceUnitedInfosDataSources.生产单位全部)]
+    [DFExtProperty(B3FrameworksConsts.DFExtProperties.DisplayField, "ProductionUnit_Name")]
+    public long? ProductionUnit_ID { get; set; }
+
+    [LogicName("生产单位")]
+    [ReferenceTo(typeof(ProductionUnit), "Name")]
+    [Join("ProductionUnit_ID", "ID")]
+    public string ProductionUnit_Name { get; set; }
+
+    #endregion
 
 		[ReferenceTo(typeof(Department), "TreeDeep1ID")]
 		[Join("Department_ID", "ID")]
