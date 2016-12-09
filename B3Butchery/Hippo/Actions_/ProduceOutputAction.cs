@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks.BO.NamedValueTemplate;
 using Bwp.Hippo;
 using BWP.B3Butchery.BL;
@@ -173,7 +174,8 @@ namespace BWP.B3Butchery.Hippo.Actions_
       var query = new DQueryDom(new JoinAlias(typeof(ProductPlan)));
       query.Columns.Add(DQSelectColumn.Field("ID"));
       query.Columns.Add(DQSelectColumn.Field("PlanNumber"));
-      query.Where.Conditions.Add(DQCondition.And(DQCondition.EQ("AccountingUnit_ID", nullable1), DQCondition.EQ("Department_ID", nullable2), DQCondition.EQ("Date", nullable3), DQCondition.EQ("BillState", 单据状态.已审核)));
+      query.Where.Conditions.Add(DQCondition.And(DQCondition.EQ("AccountingUnit_ID", nullable1), DQCondition.EQ("Date", nullable3), DQCondition.EQ("BillState", 单据状态.已审核)));
+      query.Where.Conditions.Add(B3ButcheryUtil.部门或上级部门条件(nullable2 ?? 0));
       return query.EExecuteScalar<long?, string>();
     }
   }

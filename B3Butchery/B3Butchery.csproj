@@ -203,6 +203,7 @@
     <Compile Include="Rpcs\GoodsInfoRpc.cs" />
     <Compile Include="Tasks\NullifyProductNoticeTask.cs" />
     <Compile Include="Utils\B3ButcheryDataSource.cs" />
+    <Compile Include="Utils\B3ButcheryUtil.cs" />
     <Compile Include="Utils\B3ButcheryWebUtil.cs" />
     <Compile Include="Utils\B3Butchery_MemoDataKinds.cs" />
     <Compile Include="Utils\B3Butchery_NamedValue.cs" />
