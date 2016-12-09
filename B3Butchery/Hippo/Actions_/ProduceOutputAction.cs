@@ -70,12 +70,18 @@ namespace BWP.B3Butchery.Hippo.Actions_
           break;
         case FormActionNames.Save:
           if (productOutput.Details.Count <= 0)
+          {
             LoadDetail(productOutput);
+            //在 save 的 FormAction 里，向客户端返回脚本: "scrollToCollection(0)", 也就是: "0 ()scrollToCollection "
+            data.Codes = "0 ()scrollToCollection ";
+          }
           if (productOutput.ID == 0)
           {
             bl.InitNewDmo(productOutput);
             bl.Insert(productOutput);
             data.MainObject = productOutput;
+            //在 save 的 FormAction 里，向客户端返回脚本: "scrollToCollection(0)", 也就是: "0 ()scrollToCollection "
+            data.Codes = "0 ()scrollToCollection ";
             return FormActions(FormActionNames.Load, data);
           }
           bl.Update(productOutput);
