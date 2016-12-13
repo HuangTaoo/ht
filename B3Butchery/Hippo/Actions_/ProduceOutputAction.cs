@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks.BO.NamedValueTemplate;
 using Bwp.Hippo;
@@ -151,8 +150,6 @@ namespace BWP.B3Butchery.Hippo.Actions_
       query.Columns.Add(DQSelectColumn.Field("Goods_MainUnitRatio", productLinkDetail));
       query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitRatio", productLinkDetail));
       query.Where.Conditions.Add(DQCondition.EQ(productLinkDetail, "ProductLinkTemplate_ID", dmo.ProductLinkTemplate_ID));
-      query.Where.Conditions.Add(DQCondition.EQ(bill, "AccountingUnit_ID", dmo.AccountingUnit_ID));
-      query.Where.Conditions.Add(DQCondition.EQ(bill, "Department_ID", dmo.Department_ID));
       dmo.Details.Clear();
       using (var context = new TransactionContext())
       {
