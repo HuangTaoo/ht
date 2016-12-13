@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices;
 using BWP.B3Frameworks.BO;
@@ -9,7 +6,6 @@ using Forks.EnterpriseServices.DomainObjects2;
 using BWP.B3Frameworks;
 using BWP.B3Butchery.Utils;
 using TSingSoft.WebControls2;
-using Forks.EnterpriseServices.JsonRpc;
 
 namespace BWP.B3Butchery.BO
 {

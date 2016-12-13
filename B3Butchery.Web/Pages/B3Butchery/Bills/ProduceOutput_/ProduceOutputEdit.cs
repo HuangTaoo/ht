@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using BWP.B3Butchery.BO;
 using BWP.B3Butchery.BL;
 using System.Web.UI;
 using BWP.Web.Layout;
 using TSingSoft.WebControls2;
-using BWP.B3Frameworks.BO.NamedValueTemplate;
-using Forks.EnterpriseServices.BusinessInterfaces;
 using System.Web.UI.WebControls;
 using BWP.B3UnitedInfos;
 using BWP.B3Frameworks.Utils;
@@ -35,11 +31,16 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceOutput_
       config.Add("Department_ID");
       config.Add("Employee_ID");
       config.Add("ProductLinks_ID");
+      AddProductLinkTemplate(layoutManager, config);
       layoutManager.Config = config;
       container.Controls.Add(layoutManager.CreateLayout());
 
       var vPanel = container.EAdd(new VLayoutPanel());
       CreateOutputDetailPanel(vPanel);
+    }
+
+    protected virtual void AddProductLinkTemplate(LayoutManager layoutManager, AutoLayoutConfig config)
+    {
     }
 
     DFEditGrid outputDetailGrid;
@@ -53,7 +54,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceOutput_
         {
           GetFromUI();
           Dmo.Details.Clear();
-          AddLoadDetailQy();
+          AddLoadDetailQy(Dmo);
           outputDetailGrid.DataBind();
           AspUtil.Alert(this, "载入产出明细成功");
         };
@@ -98,7 +99,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceOutput_
       new Main_Second_ConvertRatioRowManager(outputDetailGrid, "Number", "SecondNumber", "SecondNumber2");
     }
 
-    protected virtual void AddLoadDetailQy()
+    protected virtual void AddLoadDetailQy(ProduceOutput dmo)
     {
       mBL.GetGoodsDetailList(Dmo);
     }

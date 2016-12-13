@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using TSingSoft.WebControls2;
 using BWP.B3Butchery.Utils;
@@ -108,17 +109,30 @@ namespace BWP.B3Butchery.Web
 				}.GetData();
 			});
 
-			ChoiceBoxSettings.Register(B3ButcheryDataSource.生产环节模板, (argu) =>
-			{
-				return new DomainChoiceBoxQueryHelper<ProductLinkTemplate>(argu)
-				{
-					OnlyAvailable = true
-				}.GetData();
-      });
-       
+			ChoiceBoxSettings.Register(B3ButcheryDataSource.生产环节模板, SelectProductLinkTemplate);
     }
 
-		private static IEnumerable<WordPair> SelectGoodsWithSpec(ChoiceBoxArgument argu, bool OnlyAvailable)
+    private static IEnumerable<WordPair> SelectProductLinkTemplate(ChoiceBoxArgument argu)
+    {
+      var query = new DQueryDom(new JoinAlias(typeof (ProductLinkTemplate)));
+      query.Columns.Add(DQSelectColumn.Field("ID"));
+      query.Columns.Add(DQSelectColumn.Field("Name"));
+      if (!string.IsNullOrEmpty(argu.CodeArgument))
+      {
+        var accDep = argu.CodeArgument.Split(new[] {'|'}).ToArray();
+        query.Where.Conditions.Add(DQCondition.And(DQCondition.EQ("AccountingUnit_ID",accDep[0]),DQCondition.EQ("Department_ID",accDep[1])));
+      }
+      if (!string.IsNullOrEmpty(argu.InputArgument))
+      {
+        IList<IDQExpression> conditions = new List<IDQExpression>();
+        conditions.Add(DQCondition.Like("Name", argu.InputArgument));
+        conditions.Add(DQCondition.Like("Spell", argu.InputArgument));
+        query.Where.Conditions.Add(DQCondition.Or(conditions));
+      }
+      return query.EExecuteList<long, string>().Select(x => new WordPair(x.Item2, x.Item1.ToString(CultureInfo.InvariantCulture)));
+    }
+
+	  private static IEnumerable<WordPair> SelectGoodsWithSpec(ChoiceBoxArgument argu, bool OnlyAvailable)
 		{
 			var query = new DQueryDom(new JoinAlias(typeof(Goods)));
 			query.Range = SelectRange.Top(30);
