@@ -1,24 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BWP.B3Butchery.BL;
+﻿using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BO;
 using TSingSoft.WebControls2;
 using BWP.Web.Utils;
 using DataKind = BWP.B3Frameworks.B3FrameworksConsts.DataSources;
 using TSingSoft.WebPluginFramework;
 using BWP.B3Butchery.Utils;
-using System.Web.UI.WebControls;
-using Forks.EnterpriseServices.DomainObjects2.DQuery;
-using Forks.EnterpriseServices.DomainObjects2;
-using Forks.EnterpriseServices.SqlDoms;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.ProduceOutput_
 {
   class ProduceOutputList : DomainBillListPage<ProduceOutput, IProduceOutputBL>
   {
-    
+
     protected override void AddQueryControls(VLayoutPanel vPanel)
     {
       vPanel.Add(CreateDefaultBillQueryControls((panel, config) =>
@@ -47,15 +39,27 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceOutput_
         AddDFBrowseGridColumn(grid, "Time");
       }
     }
-		protected override void InitToolBar(HLayoutPanel toolbar)
-		{
-			base.InitToolBar(toolbar);
-			if (User.IsInRole("B3Butchery.报表.产出单分析"))
-			{
-				var dataAnysBtn = new TSButton() { Text = "数据分析", UseSubmitBehavior = false };
-				dataAnysBtn.OnClientClick = string.Format("OpenUrlInTopTab('{0}','产出单分析');return false;", WpfPageUrl.ToGlobal(AspUtil.AddTimeStampToUrl("~/B3Butchery/Reports/ProduceOutputReport_/ProduceOutputReport.aspx")));
-				toolbar.Add(dataAnysBtn);
-			}
-		}
+    protected override void InitToolBar(HLayoutPanel toolbar)
+    {
+      base.InitToolBar(toolbar);
+      if (User.IsInRole("B3Butchery.报表.产出单分析"))
+      {
+        var dataAnysBtn = new TSButton
+        {
+          Text = "数据分析",
+          UseSubmitBehavior = false,
+          OnClientClick = string.Format("OpenUrlInTopTab('{0}','产出单分析');return false;", WpfPageUrl.ToGlobal(AspUtil.AddTimeStampToUrl("~/B3Butchery/Reports/ProduceOutputReport_/ProduceOutputReport.aspx")))
+        };
+        toolbar.Add(dataAnysBtn);
+      }
+    }
+
+    public override bool EnableBatchCheck
+    {
+      get
+      {
+        return true;
+      }
+    }
   }
 }
