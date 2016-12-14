@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using BWP.B3Frameworks.BO;
 using TSingSoft.WebControls2;
 using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks.Utils;
@@ -108,19 +109,30 @@ namespace BWP.B3Butchery.Web
 					OnlyAvailable = true
 				}.GetData();
 			});
-
-			ChoiceBoxSettings.Register(B3ButcheryDataSource.生产环节模板, SelectProductLinkTemplate);
+      ChoiceBoxSettings.Register(B3ButcheryDataSource.生产环节模板, (argu) =>
+      {
+        return new DomainChoiceBoxQueryHelper<ProductLinkTemplate>(argu)
+        {
+          OnlyAvailable = true
+        }.GetData();
+      });
+			ChoiceBoxSettings.Register(B3ButcheryDataSource.生产环节模板会计单位部门条件, SelectProductLinkTemplate);
     }
 
     private static IEnumerable<WordPair> SelectProductLinkTemplate(ChoiceBoxArgument argu)
     {
-      var query = new DQueryDom(new JoinAlias(typeof (ProductLinkTemplate)));
+      var main = new JoinAlias(typeof (ProductLinkTemplate));
+      var query = new DQueryDom(main);
       query.Columns.Add(DQSelectColumn.Field("ID"));
       query.Columns.Add(DQSelectColumn.Field("Name"));
       if (!string.IsNullOrEmpty(argu.CodeArgument))
       {
         var accDep = argu.CodeArgument.Split(new[] {'|'}).ToArray();
-        query.Where.Conditions.Add(DQCondition.And(DQCondition.EQ("AccountingUnit_ID",accDep[0]),DQCondition.EQ("Department_ID",accDep[1])));
+        query.Where.Conditions.Add(DQCondition.EQ("AccountingUnit_ID",accDep[0]));
+        var id = GetDepartment(Convert.ToInt64(accDep[1]));
+        var field = string.Format("Department_TreeDeep{0}ID", id);
+        var deptCondition = B3ButcheryUtil.部门或上级部门条件(Convert.ToInt64(accDep[1]));
+        query.Where.Conditions.Add(DQCondition.Or(DQCondition.EQ(main, field, accDep[1]), deptCondition));
       }
       if (!string.IsNullOrEmpty(argu.InputArgument))
       {
@@ -131,6 +143,14 @@ namespace BWP.B3Butchery.Web
       }
       return query.EExecuteList<long, string>().Select(x => new WordPair(x.Item2, x.Item1.ToString(CultureInfo.InvariantCulture)));
     }
+
+	  private static int? GetDepartment(long? id)
+	  {
+	    var query = new DQueryDom(new JoinAlias(typeof (Department)));
+      query.Columns.Add(DQSelectColumn.Field("Depth"));
+	    query.Where.Conditions.Add(DQCondition.EQ("ID", id));
+	    return query.EExecuteScalar<int?>();
+	  }
 
 	  private static IEnumerable<WordPair> SelectGoodsWithSpec(ChoiceBoxArgument argu, bool OnlyAvailable)
 		{

@@ -15,5 +15,6 @@
 		public const string 生产环节模板 = "生产环节模板";
     public const string 客户 = "B3Butchery_客户";
     public const string 存货品牌 = "B3Butchery_存货品牌";
+    public const string 生产环节模板会计单位部门条件 = "生产环节模板会计单位部门条件";
   }
 }
