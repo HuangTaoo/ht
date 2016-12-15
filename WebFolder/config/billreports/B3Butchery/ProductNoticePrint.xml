@@ -17,6 +17,7 @@
         </HtmlBand>
         <DFListBand collection="$Details" itemType="$DetailType" enablePaging="true" >
           <Field name="Goods_Name"/>
+          <Field name="Goods_PrintShortName"/>
           <Field name="Goods_Spec"/>
           <Field name="Goods_Code"/> 
           <Field name="Number" sum="true"/>
