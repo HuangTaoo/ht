@@ -19,6 +19,7 @@ namespace BWP.B3Butchery.BO
 	[DmoTypeID(B3FrameworksConsts.DmoTypeIDBases.B3Butchery, DmoTypeIDOffsets.ProductInStore)]
 	[UnitedInOutStoreBill]
   [BusinessCaseSlaveBO]
+  [BusinessCaseMasterBO]
   [EditUrl("~/B3Butchery/Bills/ProductInStore_/ProductInStoreEdit.aspx")]
   [ListUrl("~/B3Butchery/Bills/ProductInStore_/ProductInStoreList.aspx")]
   [BillTimeField("InStoreDate")]

@@ -16,6 +16,7 @@ using Forks.EnterpriseServices.DataForm;
 using Forks.Utils.Collections;
 using TSingSoft.WebControls2;
 using TSingSoft.WebPluginFramework;
+using BWP.B3UnitedInfos.Utils;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
   class ProductNoticeEdit : DepartmentWorkFlowBillEditPage<ProductNotice, IProductNoticeBL> {
@@ -47,9 +48,14 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
 
     private void AddDetails(TitlePanel titlePanel) {
       var vPanel = titlePanel.EAdd(new VLayoutPanel());
+      var toobar = new HLayoutPanel();
+      vPanel.Add(toobar, new VLayoutOption(HorizontalAlign.Left));
+      
       if (CanSave) {
-        AddToolsPanel(vPanel);
+        AddToolsPanel(toobar);
       }
+
+      AddCopyAndPaste(toobar);      
 
       var editor = new DFCollectionEditor<ProductNotice_Detail>(() => Dmo.Details);
       editor.AllowDeletionFunc = () => CanSave;
@@ -95,6 +101,29 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
 
     }
 
+    private void AddCopyAndPaste(HLayoutPanel toobar)
+    {
+      toobar.Add(new TSButton("复制", delegate
+      {
+        GoodsDetailSummaryClipboardUtil.Copy(Dmo.Details.Select(item => (GoodsDetailSummaryBase)item).ToList());
+        AspUtil.Alert(this, "复制成功！");
+      }));
+
+      if (CanSave)
+      {
+        toobar.Add(new TSButton("粘贴", delegate
+        {
+          var list = GoodsDetailSummaryClipboardUtil.Paste<ProductNotice_Detail>();
+          foreach (var detail in list)
+          {
+            DmoUtil.RefreshDependency(detail, "Goods_ID");
+            Dmo.Details.Add(detail);
+          }
+          _detailGrid.DataBind();
+        }));
+      }
+    }
+
     public override void AppToUI() {
       base.AppToUI();
       _detailGrid.DataBind();
@@ -105,11 +134,8 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       _detailGrid.GetFromUI();
     }
 
-    private void AddToolsPanel(VLayoutPanel vPanel)
-    {
-      var toobar = new HLayoutPanel();
-      vPanel.Add(toobar, new VLayoutOption(HorizontalAlign.Left));
-
+    private void AddToolsPanel(HLayoutPanel toobar)
+    {      
       toobar.Add(new SimpleLabel("选择存货"));
       var goodsSelect = new ChoiceBox(B3UnitedInfosConsts.DataSources.存货) {
         Width = Unit.Pixel(120),

@@ -16,12 +16,13 @@ namespace BWP.B3Butchery.BO {
   [LogicName("生产通知单")] 
   [DmoTypeID(B3FrameworksConsts.DmoTypeIDBases.B3Butchery, DmoTypeIDOffsets.ProductNotice)]
   [EditUrl("~/B3Butchery/Bills/ProductNotice_/ProductNoticeEdit.aspx")]
+  [BusinessCaseSlaveBO]
   [DFCPrompt("业务员", Property = "Employee_ID")]
   [DFCPrompt("业务员", Property = "Employee_Name")]
   [DFCPrompt("销售部门", Property = "Department_ID")]
   [DFCPrompt("销售部门", Property = "Department_Name")]
   [DFCPrompt("地址", Property = "CustomerAddress")]
-    public class ProductNotice : DepartmentWorkFlowBill
+  public class ProductNotice : DepartmentWorkFlowBill
     {
   
     private DateTime? _date = DateTime.Today;
