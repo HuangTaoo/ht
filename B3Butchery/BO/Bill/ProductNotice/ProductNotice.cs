@@ -16,6 +16,7 @@ namespace BWP.B3Butchery.BO {
   [LogicName("生产通知单")] 
   [DmoTypeID(B3FrameworksConsts.DmoTypeIDBases.B3Butchery, DmoTypeIDOffsets.ProductNotice)]
   [EditUrl("~/B3Butchery/Bills/ProductNotice_/ProductNoticeEdit.aspx")]
+  [ListUrl("~/B3Butchery/Bills/ProductNotice_/ProductNoticeList.aspx")]
   [BusinessCaseSlaveBO]
   [DFCPrompt("业务员", Property = "Employee_ID")]
   [DFCPrompt("业务员", Property = "Employee_Name")]
