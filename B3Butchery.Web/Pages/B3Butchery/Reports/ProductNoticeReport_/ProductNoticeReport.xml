@@ -4,7 +4,7 @@
   </Columns>
   <From>
     <Join type="Left">
-      <DmoClass class="BWP.B3Butchery.BO.ProductNotice, B3Butchery"/>
+      <DmoClass class="BWP.B3Butchery.BO.ProductNotice, B3Butchery" alias="main"/>
       <DmoClass class="BWP.B3Butchery.BO.ProductNotice_Detail, B3Butchery"  alias="detail"/>
       <Condition>
         <And>
@@ -54,6 +54,14 @@
         <Field name="Date"/>
         <QBE paramName="MaxDate"/>
       </LessThanOrEqual>
+      <!--  <Contains>
+        <Field name="Remark" alias="main"/>
+        <QBE paramName="Remark"/>
+      </Contains>
+      <Contains>
+        <Field name="Remark" alias="detail"/>
+        <QBE paramName="Remark"/>
+      </Contains>-->
       <QBEIn>
         <Field name="Goods_ID" alias="detail"/>
         <QBE paramName="Goods_ID"/>

@@ -16,6 +16,7 @@ using Forks.EnterpriseServices.DomainObjects2;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.EnterpriseServices.SqlDoms;
 using TSingSoft.WebControls2;
+using System.Collections.Generic;
 
 namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
 {
@@ -23,6 +24,11 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
     {
         readonly DFInfo _mainInfo = DFInfo.Get(typeof(ProductNotice));
         readonly DFInfo _detailInfo = DFInfo.Get(typeof(ProductNotice_Detail));
+        readonly Dictionary<string, DFInfo> _fileInfo = new Dictionary<string, DFInfo>();
+        readonly Dictionary<string, DFInfo> _fileInfo1 = new Dictionary<string, DFInfo>();
+        //DFTextBox 摘要 = new DFTextBox();
+        //DFTextBox 备注 = new DFTextBox();
+        private DFTextBox 摘要, 备注;
         protected override string AccessRoleName
         {
             get { return "B3Butchery.报表.生产通知分析"; }
@@ -36,6 +42,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
         CheckBoxListWithReverseSelect _checkbox;
         protected override void InitQueryPanel(QueryPanel queryPanel)
         {
+            
             base.InitQueryPanel(queryPanel);
             var panel = queryPanel.CreateTab("显示字段");
             _checkbox = new CheckBoxListWithReverseSelect { RepeatColumns = 6, RepeatDirection = RepeatDirection.Horizontal };
@@ -56,6 +63,9 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
             _checkbox.Items.Add(new ListItem("主单位", "Goods_MainUnit"));
             _checkbox.Items.Add(new ListItem("辅数量", "SecondNumber"));
             _checkbox.Items.Add(new ListItem("辅单位", "Goods_SecondUnit"));
+            _checkbox.Items.Add(new ListItem("摘要", "摘要"));
+            _checkbox.Items.Add(new ListItem("备注", "Remark"));
+        
             panel.EAdd(_checkbox);
             var hPanel = new HLayoutPanel();
             CreateDataRangePanel(hPanel);
@@ -91,6 +101,12 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
             customPanel.Add("Goods_ID", new SimpleLabel("存货"), QueryCreator.DFChoiceBoxEnableMultiSelection(_detailInfo.Fields["Goods_ID"], mQueryContainer, "Goods_ID", B3UnitedInfosConsts.DataSources.存货));
             customPanel["Goods_ID"].NotAutoAddToContainer = true;
 
+
+            摘要 = new DFTextBox(_mainInfo.Fields["Remark"]);
+            备注=new DFTextBox(_detailInfo.Fields["Remark"]);
+            customPanel.Add("摘要", new SimpleLabel("摘要"), 摘要);
+            customPanel.Add("备注", new SimpleLabel("备注"), 备注);
+      
             customPanel.CreateDefaultConfig(2).Expand = false;
             vPanel.Add(customPanel.CreateLayout());
         }
@@ -121,6 +137,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
                         query.Columns.Add(DQSelectColumn.Field(field.Value, goodsAlias));
                         query.GroupBy.Expressions.Add(DQExpression.Field(goodsAlias, field.Value));
                     }
+                        
                     else if (mainFields.Contains(field.Value))
                     {
                         query.Columns.Add(DQSelectColumn.Field(field.Value));
@@ -131,14 +148,33 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
                         query.Columns.Add(DQSelectColumn.Field(field.Value,detail));
                         query.GroupBy.Expressions.Add(DQExpression.Field(detail,field.Value));
                     }
+                    else if (field.Value == "摘要")
+                    {
+                        query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(alias, "Remark"), "摘要"));
+                        query.GroupBy.Expressions.Add(DQExpression.Field(alias, "Remark"));
+                    }
+                   
                     else
                     {
                         query.Columns.Add(DQSelectColumn.Field(field.Value, detail));
                         query.GroupBy.Expressions.Add(DQExpression.Field(detail, field.Value));
                     }
+
+                  
+
                 }
             }
             query.Where.Conditions.Add(DQCondition.EQ("Domain_ID", DomainContext.Current.ID));
+            if (!摘要.IsEmpty)
+            {
+                query.Where.Conditions.Add(DQCondition.And(DQCondition.Like(alias,"Remark",摘要.Text)));
+            }
+
+            if (!备注.IsEmpty)
+            {
+                query.Where.Conditions.Add(DQCondition.And(DQCondition.Like(detail, "Remark", 备注.Text)));
+            }
+         
             if (query.Columns.Count == 0)
                 throw new Exception("至少选择一条显示列");
             return query;

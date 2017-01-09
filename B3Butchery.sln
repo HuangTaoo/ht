@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B3Butchery", "B3Butchery\B3Butchery.csproj", "{63A9DD54-BAA1-4448-A575-72C8DA16FAA9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B3Butchery.Web", "B3Butchery.Web\B3Butchery.Web.csproj", "{EB36D5D9-F5D9-4F14-8C22-40929ACCBF35}"
@@ -25,7 +23,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebFolder", "WebFolder\", "
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "2833"
-		SlnRelativePath = "WebFolder\"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
