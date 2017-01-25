@@ -18,9 +18,7 @@ namespace BWP.B3Butchery.BO
   [Serializable, DFClass]
   public abstract class GoodsDetail : GoodsDetailSummaryBase
   {
-    [LogicName("单价")]
-    public Money<decimal>? Price { get; set; }
-
+ 
     [LogicName("金额")]
     public Money<金额>? Money { get; set; }
 
