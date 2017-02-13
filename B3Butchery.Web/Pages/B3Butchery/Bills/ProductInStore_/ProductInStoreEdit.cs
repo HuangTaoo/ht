@@ -27,6 +27,8 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
 {
   public class ProductInStoreEdit : DepartmentWorkFlowBillEditPage<ProductInStore, IProductInStoreBL>
   {
+
+
     protected override void BuildBody(Control container)
     {
       var mainInfo = container.EAdd(new TitlePanel("基本信息"));
@@ -50,6 +52,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
       mainInfo.Controls.Add(layoutManager.CreateLayout());
       mainInfo.SetPageLayoutSetting(mPageLayoutManager, section.Name);
       CreateDetailPanel(container.EAdd(new TitlePanel("明细信息")));
+ 
     }
     protected virtual void AddProductionUnit(AutoLayoutConfig config)
     {
@@ -323,60 +326,11 @@ function(result,dfContainer){
     private void AddModelAction(ButtonGroup buttonGroup)
     {
       buttonGroup.Actions.Add(new SimpleServerAction("模板", () => true, delegate
-      {
-        //Dmo.Details.Clear();
-        //var list = GetProductInstoreTemp();
-        //if (list.Count > 0)
-        //{
-        //  var temp = list[0] as ProductInStore_Temp;
-        //  var productInStoreBL = BIFactory.Create<IProductInStoreBL>(); ;
-        //  //ProductInStore dmo = new ProductInStore();
-        //  //productInStoreBL.InitNewDmo(Dmo);
-        //  Dmo.AccountingUnit_ID = temp.AccountingUnit_ID;
-        //  Dmo.AccountingUnit_Name = temp.AccountingUnit_Name;
-        //  Dmo.Department_ID = temp.Department_ID;
-        //  Dmo.Department_Name = temp.Department_Name;
-        //  Dmo.Employee_ID = temp.Employee_ID;
-        //  Dmo.Employee_Name = temp.Employee_Name;
-        //  Dmo.Store_ID = temp.Store_ID;
-        //  Dmo.Store_Name = temp.Store_Name;
-        //  Dmo.InStoreType_ID = temp.InStoreType_ID;
-        //  Dmo.InStoreType_Name = temp.InStoreType_Name;
-        //  Dmo.InStoreDate = temp.InStoreDate;
-        //  Dmo.CheckEmployee_ID = temp.CheckEmployee_ID;
-        //  Dmo.CheckEmployee_Name = temp.CheckEmployee_Name;
-        //  Dmo.CheckDate = temp.CheckDate;
-        //  //Dmo.ProductPlan_ID = temp.ProductPlan_ID;
-        //  //Dmo.ProductPlan_Name = temp.ProductPlan_Name;
-
-        //  foreach (var detail in temp.Details)
-        //  {
-        //    ProductInStore_Detail d = new ProductInStore_Detail();
-        //    DmoUtil.CopyDmoFields(detail, d, "ProductInStore_ID", "ID");
-        //    Dmo.Details.Add(d);
-        //  }
-        //  productInStoreBL.Insert(Dmo);
-        //  AppToUI();
-        //  DataBind();
-        //}
-        //else
-        //{
+      { 
         string url = "~/B3Butchery/Bills/ProductInStore_Temp_/ProductInStore_TempEdit.aspx";
-        AspUtil.Redirect(url);
-        //}
+        AspUtil.Redirect(url); 
       }));
     }
-    private List<ProductInStore_Temp> GetProductInstoreTemp()
-    {
-      var query = new DmoQuery(typeof(ProductInStore_Temp));
-      var id = CurrentUser.ID;
-      var n = CurrentUser.Name;
-      var userID = DomainContext.Current.DomainUser.User_ID;
-      var userName = DomainContext.Current.DomainUser.User_Name;
-      query.Where.Conditions.Add(DQCondition.EQ("CreateUser_ID", userID));
-      query.OrderBy.Expressions.Add(DQOrderByExpression.Create("ID", true));
-      query.Range = SelectRange.Top(1);
-      return query.EExecuteList().Cast<ProductInStore_Temp>().ToList();
-    }
+ 
   }
 }

@@ -19,10 +19,18 @@ namespace BWP.B3Butchery.BL
 
   public class ProductInStoreBL : DepartmentWorkFlowBillBL<ProductInStore>, IProductInStoreBL
   {
+    protected override void beforeSave(ProductInStore dmo) {
+      foreach (var detail in dmo.Details)
+      {
+        detail.Money = detail.Number*detail.Price;
+      }
+      base.beforeSave(dmo);
+    }
+
     protected override void doCheck(ProductInStore dmo)
     {
       base.doCheck(dmo);
-      UnitedInfoUtil.InsertInOutStoreBill(Session, CreateInOutStoreBill(dmo));
+      UnitedInfoUtil.InsertInOutStoreBill(Session, CreateInOutStoreBill(dmo)); 
     }
 
     protected override void doUnCheck(ProductInStore dmo)
