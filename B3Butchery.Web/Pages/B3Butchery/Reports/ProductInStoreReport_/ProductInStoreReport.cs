@@ -66,6 +66,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
 			checkbox.Items.Add(new ListItem("生产计划号", "ProductPlan_Name"));
       checkbox.Items.Add(new ListItem("摘要", "Remark"));
       checkbox.Items.Add(new ListItem("存货名称", "Name"));
+      checkbox.Items.Add(new ListItem("打印简称", "PrintShortName"));
       checkbox.Items.Add(new ListItem("存货属性", "GoodsProperty_Name"));
 			checkbox.Items.Add(new ListItem("存货编码", "Code"));
 			checkbox.Items.Add(new ListItem("规格", "Spec"));
@@ -145,7 +146,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
 
     string[] mainFields = new string[] { "ID", "AccountingUnit_Name", "Department_Name", "Store_Name", "InStoreType_Name", "InStoreDate", "CheckDate", "CreateUser_Name", "Remark", "BillState" };
 		string[] sumFileds = new string[] { "Number", "SecondNumber", "Money" };
-        string[] goodsFields = new string[] { "Name", "GoodsProperty_Name", "Code", "Spec", "MainUnit", "SecondUnit", "Origin", "Brand" };
+    string[] goodsFields = new string[] { "Name", "GoodsProperty_Name", "Code", "Spec", "MainUnit", "SecondUnit", "Origin", "Brand", "PrintShortName" };
 	  private CheckBoxList _showTypeList;
 
 	  protected override DQueryDom GetQueryDom() {
