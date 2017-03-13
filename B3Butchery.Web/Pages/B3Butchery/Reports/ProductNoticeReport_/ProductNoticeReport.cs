@@ -16,7 +16,6 @@ using Forks.EnterpriseServices.DomainObjects2;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.EnterpriseServices.SqlDoms;
 using TSingSoft.WebControls2;
-using System.Collections.Generic;
 
 namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
 {
@@ -24,10 +23,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
     {
         readonly DFInfo _mainInfo = DFInfo.Get(typeof(ProductNotice));
         readonly DFInfo _detailInfo = DFInfo.Get(typeof(ProductNotice_Detail));
-        readonly Dictionary<string, DFInfo> _fileInfo = new Dictionary<string, DFInfo>();
-        readonly Dictionary<string, DFInfo> _fileInfo1 = new Dictionary<string, DFInfo>();
-        //DFTextBox 摘要 = new DFTextBox();
-        //DFTextBox 备注 = new DFTextBox();
+ 
         private DFTextBox 摘要, 备注;
         protected override string AccessRoleName
         {
@@ -59,6 +55,8 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
             _checkbox.Items.Add(new ListItem("交货日期", "DeliveryDate"));
             _checkbox.Items.Add(new ListItem("源单据号", "DmoID"));
             _checkbox.Items.Add(new ListItem("存货名称", "Goods_Name"));
+            _checkbox.Items.Add(new ListItem("存货属性", "GoodsProperty_Name"));
+            _checkbox.Items.Add(new ListItem("属性分类", "GoodsPropertyCatalog_Name"));
             _checkbox.Items.Add(new ListItem("主数量", "Number"));
             _checkbox.Items.Add(new ListItem("主单位", "Goods_MainUnit"));
             _checkbox.Items.Add(new ListItem("辅数量", "SecondNumber"));
@@ -121,8 +119,12 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
             OrganizationUtil.AddOrganizationLimit<Department>(query, "Department_ID");
             var detail = JoinAlias.Create("detail");
             var goodsAlias = new JoinAlias(typeof(Goods));
-            var alias = query.From.RootSource.Alias;
-            query.From.AddJoin(JoinType.Left, new DQDmoSource(goodsAlias), DQCondition.EQ(detail, "Goods_ID", goodsAlias, "ID"));
+            var alias = query.From.RootSource.Alias; 
+            var goodsPropertyCatalog = new JoinAlias(typeof(GoodsPropertyCatalog));
+            var goodsProperty = new JoinAlias(typeof(GoodsProperty));
+            query.From.AddJoin(JoinType.Left, new DQDmoSource(goodsAlias), DQCondition.EQ(detail, "Goods_ID", goodsAlias, "ID")); 
+            query.From.AddJoin(JoinType.Left, new DQDmoSource(goodsProperty), DQCondition.EQ(goodsProperty, "ID", goodsAlias, "GoodsProperty_ID"));
+            query.From.AddJoin(JoinType.Left, new DQDmoSource(goodsPropertyCatalog), DQCondition.EQ(goodsProperty, "GoodsPropertyCatalog_ID", goodsPropertyCatalog, "ID"));
             foreach (ListItem field in _checkbox.Items)
             {
                 if (field.Selected)
@@ -153,6 +155,13 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
                         query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(alias, "Remark"), "摘要"));
                         query.GroupBy.Expressions.Add(DQExpression.Field(alias, "Remark"));
                     }
+                   else if (field.Value == "GoodsPropertyCatalog_Name") {
+                      query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(goodsPropertyCatalog, "Name"), "属性分类")); 
+                      query.GroupBy.Expressions.Add(DQExpression.Field(goodsPropertyCatalog, "Name"));
+                    } else if (field.Value == "GoodsProperty_Name") {
+                      query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(goodsProperty , "Name"), "存货属性"));
+                      query.GroupBy.Expressions.Add(DQExpression.Field(goodsProperty, "Name"));
+                    } 
                    
                     else
                     {
