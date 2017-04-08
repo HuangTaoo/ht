@@ -220,7 +220,7 @@
     <Menu id="0008"  features="B3Butchery.0003" name="/屠宰分割/业务单据/产出单/列表" roles="B3Butchery.产出单.访问" url="B3Butchery/Bills/ProduceOutput_/ProduceOutputList.aspx"/>
     <Menu id="0009"  features="B3Butchery.0013" name="/屠宰分割/业务单据/投入单/新建" roles="B3Butchery.投入单.新建" url="B3Butchery/Bills/ProduceInput_/ProduceInputEdit.aspx"/>
     <Menu id="0010"  features="B3Butchery.0013" name="/屠宰分割/业务单据/投入单/列表" roles="B3Butchery.投入单.访问" url="B3Butchery/Bills/ProduceInput_/ProduceInputList.aspx"/>
-    <Menu id="0011"  features="B3Butchery.0007" ame="/屠宰分割/信息设置/档案/入库类型/列表" roles="B3Butchery.入库类型.访问" url="B3Butchery/BaseInfos/InStoreType_/InStoreTypeList.aspx"/>
+    <Menu id="0011"  features="B3Butchery.0007" name="/屠宰分割/信息设置/档案/入库类型/列表" roles="B3Butchery.入库类型.访问" url="B3Butchery/BaseInfos/InStoreType_/InStoreTypeList.aspx"/>
     <Menu id="0012"  features="B3Butchery.0008" name="/屠宰分割/业务单据/成品入库/列表" roles="B3Butchery.成品入库.访问" url="B3Butchery/Bills/ProductInStore_/ProductInStoreList.aspx"/>
     <Menu id="0013"  features="B3Butchery.0011" name="/屠宰分割/信息设置/档案/成品入库模板/列表" roles="B3Butchery.成品入库模板.访问" url="B3Butchery/BaseInfos/ProductInStoreTemplate_/ProductInStoreTemplateList.aspx"/>
     <Menu id="0014"  features="B3Butchery.0012" name="/屠宰分割/信息设置/档案/生产环节模板/列表" roles="B3Butchery.生产环节模板.访问" url="B3Butchery/BaseInfos/ProductLinkTemplate_/ProductLinkTemplateList.aspx"/>
