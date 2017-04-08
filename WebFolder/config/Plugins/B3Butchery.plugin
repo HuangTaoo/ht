@@ -252,8 +252,8 @@
     <Feature id="0008" name="生产计划"/>
     <Feature id="0009" name="生产日报"/>
     <Feature id="0010" name="生产通知"/>
-    <Feature id="0011" name="手持机接口（成品入库）"/>
-    <Feature id="0012" name="手持机接口（生产环节）"/>
+    <Feature id="0011" name="手持机接口成品入库"/>
+    <Feature id="0012" name="手持机接口生产环节"/>
     <Feature id="0013" name="投入单"/>
     <Feature id="0014" name="暂存单"/>
   </Features>
