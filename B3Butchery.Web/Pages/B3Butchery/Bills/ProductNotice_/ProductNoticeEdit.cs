@@ -17,6 +17,8 @@ using Forks.Utils.Collections;
 using TSingSoft.WebControls2;
 using TSingSoft.WebPluginFramework;
 using BWP.B3UnitedInfos.Utils;
+using BWP.B3Frameworks;
+using BWP.Web.Pages.TypeIocs;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
   class ProductNoticeEdit : DepartmentWorkFlowBillEditPage<ProductNotice, IProductNoticeBL> {
@@ -70,8 +72,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       _detailGrid.ShowLineNo = true;
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
-      _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Spec"));
-       
+      _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Spec"));      
       _detailGrid.Columns.EAdd(new DFEditGridColumn<DFTextBox>("Number")).SumMode = SumMode.Sum; 
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_MainUnit"));
       _detailGrid.Columns.EAdd(new DFEditGridColumn<DFTextBox>("SecondNumber")).SumMode = SumMode.Sum;
@@ -80,14 +81,21 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       _detailGrid.Columns.EAdd(new DFEditGridColumn<DFDateInput>("ProduceDate"));
       _detailGrid.Columns.EAdd(new DFEditGridColumn<DFDateInput>("DeliveryDate"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("DmoTypeID"));
-        _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("DmoID"));
+      _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("DmoID"));      
       _detailGrid.Columns.Add(new DFEditGridColumn("Remark"));
+
+      foreach (var ioc in TypeIOCCenter.GetIOCList<ProductNoticeEditIoc.BuildDetail>(GetType()))
+      {
+        ioc.Invoke(_detailGrid);
+      }
+
+
       _detailGrid.ValueColumns.Add("Goods_ID");
       _detailGrid.ValueColumns.Add("Goods_UnitConvertDirection");
       _detailGrid.ValueColumns.Add("Goods_MainUnitRatio");
       _detailGrid.ValueColumns.Add("Goods_SecondUnitRatio");
       mDFContainer.AddNonDFControl(_detailGrid, "$detailGrid");
-
+      
 
       var section = mPageLayoutManager.AddSection("DetaiColumns", "明细列");
       titlePanel.SetPageLayoutSetting(mPageLayoutManager, section.Name);
