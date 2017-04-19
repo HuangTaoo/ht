@@ -195,12 +195,17 @@
     <Compile Include="Hippo\QueryObjs\ProduceOutputQueryObj.cs" />
     <Compile Include="Hippo\QueryObjs\ProductNoticeQueryObj.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rpcs\BaseInfoRpc.cs" />
+    <Compile Include="Rpcs\ClientRpc.cs" />
     <Compile Include="Rpcs\GoodsInfo.cs" />
     <Compile Include="Rpcs\GoodsBatchRpc.cs" />
     <Compile Include="Rpcs\ProductInStoreRpc.cs" />
     <Compile Include="Rpcs\ProductLinkRpc.cs" />
     <Compile Include="Rpcs\ProductPlanRpc.cs" />
     <Compile Include="Rpcs\GoodsInfoRpc.cs" />
+    <Compile Include="Rpcs\RpcObject\BaseInfoDto.cs" />
+    <Compile Include="Rpcs\RpcObject\DepartmentDto.cs" />
+    <Compile Include="Rpcs\RpcObject\GoodsInfoDto.cs" />
     <Compile Include="Tasks\NullifyProductNoticeTask.cs" />
     <Compile Include="Utils\B3ButcheryDataSource.cs" />
     <Compile Include="Utils\B3ButcheryUtil.cs" />
