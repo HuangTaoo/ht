@@ -11,12 +11,56 @@ using Forks.EnterpriseServices.DomainObjects2;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.EnterpriseServices.JsonRpc;
 using TSingSoft.WebPluginFramework;
+using Forks.EnterpriseServices.SqlDoms;
+using BWP.B3Frameworks.Utils;
 
 namespace BWP.B3Butchery.Rpcs
 {
 	[Rpc]
 	public static class ProductInStoreRpc
 	{
+    /// <summary>
+    /// 审核成品入库单
+    /// </summary>
+    /// <param name="id"></param>
+    [Rpc]
+    public static void ProductInStoreCheck(long id) {
+      var bl = BIFactory.Create<IProductInStoreBL>();
+      var bo = bl.Load(id); 
+      bl.Check(bo);
+    }
+    /// <summary>
+    /// 获取成品入库单单号和入库时间
+    /// </summary>
+    /// <returns></returns>
+    [Rpc]
+    public static List<RpcEasyProductInStore> GetProductInStoreList() {
+
+      var query = new DQueryDom(new JoinAlias(typeof(ProductInStore)));
+      query.Columns.Add(DQSelectColumn.Field("ID"));
+      query.Columns.Add(DQSelectColumn.Field("InStoreDate"));
+      //query.Where.Conditions.Add(DQCondition.EQ("BillState",单据状态.未审核));
+      OrganizationUtil.AddOrganizationLimit(query, typeof(ProductInStore));
+      return query.EExecuteList<long, DateTime>().Select(x => new RpcEasyProductInStore(x.Item1, x.Item2)).ToList();
+    }
+    /// <summary>
+    /// 根据成品入库单号获取存货名称和数量
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns></returns>
+    [Rpc]
+    public static List<RpcEasyProductInStore_Detail> GetRpcEasyProductInStoreDetailById(long ID) {
+      
+      var ris = new JoinAlias(typeof(ProductInStore));
+      var risDetail=new JoinAlias(typeof(ProductInStore_Detail));
+      DQueryDom query = new DQueryDom(ris);
+      query.From.AddJoin(JoinType.Left, new DQDmoSource(risDetail), DQCondition.EQ(ris, "ID", risDetail, "ProductInStore_ID"));
+      query.Columns.Add(DQSelectColumn.Field("Goods_Name", risDetail));
+      query.Columns.Add(DQSelectColumn.Field("Number", risDetail));
+      query.Where.Conditions.Add(DQCondition.EQ("ID",ID));
+      return query.EExecuteList<string, object>().Select(x => new RpcEasyProductInStore_Detail(x.Item1, x.Item2)).ToList();
+    }
+
 		[Rpc]
 		public static IList<EntityRowVersion> GetRowVersion(long? accountingUnit)
 		{
@@ -105,4 +149,36 @@ namespace BWP.B3Butchery.Rpcs
 			RowVersion = rowVersion;
 		}
 	}
+   /// <summary>
+  /// 成品入库存货单单号与入库时间，只要字段类型一致可用这个类传值
+  /// </summary>
+  [RpcObject]
+  public class RpcEasyProductInStore
+  {
+    public long ID { get; set; }
+    public DateTime InStoreDate { get; set; }
+
+    public RpcEasyProductInStore()
+    {
+    }
+    public RpcEasyProductInStore(long id, DateTime inStoreDate) {
+      ID = id;
+      InStoreDate = inStoreDate;
+    }
+  }
+  /// <summary>
+  /// 成品入库存货名称与数量，只要字段类型一致可用这个类传值
+  /// </summary>
+  [RpcObject]
+  public class RpcEasyProductInStore_Detail
+  {
+    public string Goods_Name { get; set; }
+    public object Number { get; set; }
+
+    public RpcEasyProductInStore_Detail(){}
+    public RpcEasyProductInStore_Detail(string name, object number) {
+      Goods_Name = name;
+      Number=number;
+    }
+  }
 }

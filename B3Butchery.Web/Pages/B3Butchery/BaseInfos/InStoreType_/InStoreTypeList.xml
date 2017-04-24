@@ -12,6 +12,10 @@
 				<Field name="ID"/>
 				<QBE paramName="ID"/>
 			</EQ>
+      <EQ>
+        <Field name="Code"/>
+        <QBE paramName="Code"/>
+      </EQ>
 			<Or>
 				<Contains>
 					<Field name="Name"/>

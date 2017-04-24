@@ -118,6 +118,12 @@
     <Compile Include="..\..\..\version\tsapp_version.cs">
       <Link>tsapp_version.cs</Link>
     </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\FrozenStore_\FrozenStoreEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\FrozenStore_\FrozenStoreList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\BaseInfos\InStoreType_\InStoreTypeEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -158,6 +164,12 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\B3Butchery\Bills\DailyProductReport_\DailyProductReportList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\FrozenInStore_\FrozenInStoreEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\FrozenInStore_\FrozenInStoreList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\B3Butchery\Bills\ProduceInput_\ProduceInputEdit.cs">
@@ -252,6 +264,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ChoiceBoxProvider.cs" />
     <Compile Include="Utils\MainToSecondConvertRowManger.cs" />
+    <Compile Include="Utils\NumberSecondNumberConvertRowMangerWithMoneyChanged.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\ProductLinkTemplate_\ProductLinkTemplateList.xml" />
@@ -324,9 +337,11 @@
     <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductNotice_\ProductNoticeList.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\FrozenStore_\FrozenStoreList.xml" />
     <Content Include="Pages\B3Butchery\BaseInfos\ProductInStore_Temp_\ProductInStore_TempList.xml">
       <SubType>Designer</SubType>
     </Content>
+    <EmbeddedResource Include="Pages\B3Butchery\Bills\FrozenInStore_\FrozenInStoreList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\TemporaryStorage_\TemporaryStorageList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductPackaging_\ProductPackagingList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\ProductNoticeReport_\ProductNoticeReport.xml" />
