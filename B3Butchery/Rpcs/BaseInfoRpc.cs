@@ -19,6 +19,30 @@ namespace BWP.B3Butchery.Rpcs
   [Rpc]
   public static class BaseInfoRpc
   {
+
+    [Rpc]
+    public static List<Store> SyncStores()
+    {
+      var list=new List<Store>();
+      var query=new DQueryDom(new JoinAlias(typeof(Store)));
+      query.Columns.Add(DQSelectColumn.Field("ID"));
+      query.Columns.Add(DQSelectColumn.Field("Name"));
+      query.Columns.Add(DQSelectColumn.Field("Code"));
+      query.Where.Conditions.Add(DQCondition.EQ("Stopped",false));
+      query.Where.Conditions.Add(DQCondition.EQ("Domain_ID",DomainContext.Current.ID));
+      using (var session=Dmo.NewSession())
+      {
+        using (var reader=session.ExecuteReader(query))
+        {
+          while (reader.Read())
+          {
+            list.Add(new Store(){ID = (long)reader[0],Name=(string)reader[1],Code = (string)reader[2]});
+          }
+        }
+      }
+      return list;
+    }
+
     [Rpc]
     public static string GetAccountUnitNameById(long id=0)
     {

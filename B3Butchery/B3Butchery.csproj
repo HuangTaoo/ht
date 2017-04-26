@@ -204,6 +204,7 @@
     <Compile Include="Rpcs\ClientRpc.cs" />
     <Compile Include="Rpcs\GoodsInfo.cs" />
     <Compile Include="Rpcs\GoodsBatchRpc.cs" />
+    <Compile Include="Rpcs\ProduceOutputRpc.cs" />
     <Compile Include="Rpcs\ProductInStoreRpc.cs" />
     <Compile Include="Rpcs\ProductLinkRpc.cs" />
     <Compile Include="Rpcs\ProductPlanRpc.cs" />

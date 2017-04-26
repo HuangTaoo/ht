@@ -40,6 +40,8 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("Goods_UnitConvertDirection", detail));
       query.Columns.Add(DQSelectColumn.Field("Goods_MainUnitRatio", detail));
       query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitRatio", detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_Code", detail));
+
       using (var session=Dmo.NewSession())
       {
         using (var reader=session.ExecuteReader(query))
@@ -54,6 +56,7 @@ namespace BWP.B3Butchery.Rpcs
             dto.Goods_UnitConvertDirection = (NamedValue<主辅转换方向>?) reader[4];
             dto.Goods_MainUnitRatio = (Money<decimal>?) reader[5];
             dto.Goods_SecondUnitRatio = (Money<decimal>?) reader[6];
+            dto.Goods_Code = (string) reader[7];
             if (dto.Goods_MainUnitRatio == null)
             {
               dto.Goods_MainUnitRatio = 1;

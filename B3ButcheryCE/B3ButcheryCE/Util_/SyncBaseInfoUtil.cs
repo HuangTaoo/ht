@@ -11,11 +11,40 @@ using B3HRCE.Rpc_.ClientPersonalPiece_;
 using B3HRCE.Rpc_.ClientProductInStore_;
 using B3HRCE.Rpc_.ClientProductLink_;
 using B3ButcheryCE.Rpc_;
+using B3ButcheryCE.Rpc_.BaseInfo_;
 
 namespace B3HRCE
 {
     public static class SyncBaseInfoUtil
     {
+
+        public static void SyncStore()
+        {
+            var folder = Path.Combine(Util.DataFolder, typeof(ClientStore).Name);
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
+            var files = Directory.GetFiles(folder, "*.xml");
+            foreach (var file in files)
+            {
+                File.Delete(file);
+            }
+
+            var list = RpcFacade.Call<List<RpcObject>>("/MainSystem/B3Butchery/Rpcs/BaseInfoRpc/SyncStores");
+
+            List<ClientStore> clientList = list.Select(x => (new ClientStore { ID = x.Get<long>("ID"), Name = x.Get<string>("Name"), BarCode =x.Get<string>("Code")})).ToList<ClientStore>();
+
+            XmlSerializer serializer = new XmlSerializer(typeof(List<ClientStore>));
+            using (var stream = File.Open(Path.Combine(folder, DateTime.Now.ToString("yyyy-MM-dd") + ".xml"), FileMode.Create))
+            {
+                serializer.Serialize(stream, clientList);
+            }
+
+ 
+        }
+
         /// <summary>
         /// 根据部门生产计划同步存货 每次都删除重新创建
         /// </summary>

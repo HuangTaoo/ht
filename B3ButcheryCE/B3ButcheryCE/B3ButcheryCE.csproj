@@ -13,7 +13,7 @@
     <PlatformFamilyName>WindowsCE</PlatformFamilyName>
     <PlatformID>E2BECB1F-8C8C-41ba-B736-9BE7D946A398</PlatformID>
     <OSVersion>5.0</OSVersion>
-    <DeployDirSuffix>B3HRCE</DeployDirSuffix>
+    <DeployDirSuffix>B3ButcheryCE</DeployDirSuffix>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <NativePlatformName>Windows CE</NativePlatformName>
     <FormFactorID>
@@ -31,7 +31,7 @@
     <ErrorReport>prompt</ErrorReport>
     <FileAlignment>512</FileAlignment>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -71,6 +71,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\SCAN.Scanner1D.dll</HintPath>
     </Reference>
+    <Reference Include="SCAN.Scanner2D, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\SCAN.Scanner2D.dll</HintPath>
+    </Reference>
     <Reference Include="Symbol, Version=2.5.0.3, Culture=neutral, PublicKeyToken=68ec8db391f150ca, processorArchitecture=MSIL">
       <HintPath>.\Symbol.dll</HintPath>
     </Reference>
@@ -97,6 +101,7 @@
     <Compile Include="Device_\DevicePC.cs" />
     <Compile Include="Device_\DeviceWinCE.cs" />
     <Compile Include="Device_\Device_MC3190.cs" />
+    <Compile Include="Device_\Device_Seuic6L2D.cs" />
     <Compile Include="Device_\Device_SeuicD300.cs" />
     <Compile Include="ErrorInfoDialog.cs">
       <SubType>Form</SubType>
@@ -133,6 +138,12 @@
     </Compile>
     <Compile Include="FrozenInStore_\FrozenInStoreForm.Designer.cs">
       <DependentUpon>FrozenInStoreForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrozenInStore_\FrozenInStoreInputNumber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrozenInStore_\FrozenInStoreInputNumber.Designer.cs">
+      <DependentUpon>FrozenInStoreInputNumber.cs</DependentUpon>
     </Compile>
     <Compile Include="FrozenInStore_\FrozenInStoreSelectGoodsForm.cs">
       <SubType>Form</SubType>
@@ -264,6 +275,9 @@
     <EmbeddedResource Include="FrozenInStore_\FrozenInStoreForm.resx">
       <DependentUpon>FrozenInStoreForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrozenInStore_\FrozenInStoreInputNumber.resx">
+      <DependentUpon>FrozenInStoreInputNumber.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrozenInStore_\FrozenInStoreSelectGoodsForm.resx">
       <DependentUpon>FrozenInStoreSelectGoodsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -340,6 +354,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Rpc_\BaseInfo_\BaseInfo.cs" />
+    <Compile Include="Rpc_\BaseInfo_\ClientStore.cs" />
     <Compile Include="Rpc_\ClientBase.cs" />
     <Compile Include="Rpc_\ClientFileGroupValuation.cs" />
     <Compile Include="Rpc_\ClientFileGroupValuationBillSave.cs" />
@@ -351,6 +367,7 @@
     <Compile Include="Rpc_\ClientPersonalPiece_\ClientPersonalPiece_PieceItemDetail.cs" />
     <Compile Include="Rpc_\ClientPersonalPiece_\ClientPersonalPieceBillSave.cs" />
     <Compile Include="Rpc_\ClientPersonalPiece_\ClientPersonalPieceDetail.cs" />
+    <Compile Include="Rpc_\ClientProduceOutput_\ClientProduceOutputBillSave.cs" />
     <Compile Include="Rpc_\ClientProductInStore_\ClientProductInStore.cs" />
     <Compile Include="Rpc_\ClientProductInStore_\ClientProductInStoreBillSave.cs" />
     <Compile Include="Rpc_\ClientProductInStore_\ClientProductInStoreDetail.cs" />
@@ -368,7 +385,8 @@
     <Compile Include="ScanTest.Designer.cs">
       <DependentUpon>ScanTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="SyncBaseInfoUtil.cs" />
+    <Compile Include="Util_\SyncBaseInfoUtil.cs" />
+    <Compile Include="Util_\SyncBillUtil.cs" />
     <Compile Include="SysConfig.cs" />
     <Compile Include="SysInfoDialog.cs">
       <SubType>Form</SubType>
@@ -389,13 +407,15 @@
       <DependentUpon>UpdateDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="UsageMode.cs" />
-    <Compile Include="Util.cs" />
+    <Compile Include="Util_\Util.cs" />
+    <Compile Include="Util_\XmlSerializerUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.ico" />
     <Content Include="D300SysUI.dll" />
     <Content Include="ONeilSDK_CS_WM.dll" />
     <Content Include="SCAN.Scanner1D.dll" />
+    <Content Include="SCAN.Scanner2D.dll" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\" />

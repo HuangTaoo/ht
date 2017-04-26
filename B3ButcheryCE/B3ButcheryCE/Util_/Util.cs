@@ -8,11 +8,14 @@ using BWP.Compact;
 using System.IO;
 using System.Reflection;
 using Microsoft.Win32;
+using System.Xml.Serialization;
 
 namespace B3HRCE
 {
     internal static class Util
     {
+           
+
         public static bool OnceLogined { get; set; }
 
         public delegate void NoArgumentDelegate();
@@ -120,7 +123,7 @@ namespace B3HRCE
                     {
                         throw new Exception("存储卡目录不存在");
                     }
-                    folder = Path.Combine(HardwareUtil.DataRootDirectory, "B3HRCEData");
+                    folder = Path.Combine(HardwareUtil.DataRootDirectory, "B3ButcheryCEData");
                 }
 
                 if (!Directory.Exists(folder))
@@ -139,6 +142,8 @@ namespace B3HRCE
             }
             form.Width = Screen.PrimaryScreen.Bounds.Width;
             form.Height = Screen.PrimaryScreen.Bounds.Height;
+            form.MaximizeBox = false;
+            form.MinimizeBox = false;
         }
     }
 }

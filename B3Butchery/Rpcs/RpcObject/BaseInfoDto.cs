@@ -10,7 +10,7 @@ namespace BWP.B3Butchery.Rpcs.RpcObject
   public class BaseInfoDto
   {
     public long ID { get; set; }
-
     public string Name { get; set; }
+    public string Code { get; set; }
   }
 }

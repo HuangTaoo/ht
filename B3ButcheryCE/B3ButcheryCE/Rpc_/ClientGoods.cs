@@ -3,13 +3,17 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using Forks.JsonRpc.Client.Data;
+using System.Xml.Serialization;
 
 namespace B3HRCE.Rpc_
 {
     public class ClientGoods
     {
         public long Goods_ID { get; set; }
+
         public string Goods_Name { get; set; }
+
+        public string Goods_BarCode { get; set; }
 
         public string Goods_MainUnit { get; set; }
 
@@ -20,7 +24,14 @@ namespace B3HRCE.Rpc_
         public decimal? Goods_MainUnitRatio { get; set; }
 
         public decimal? Goods_SecondUnitRatio { get; set; }
-       
+
+        public decimal? Goods_Number { get; set; }
+
+        public decimal? Goods_SecondNumber { get; set; }
+
+
+        //[XmlIgnore]
+        //public bool ListViewChecked { get; set; }
 
     }
 

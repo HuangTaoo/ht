@@ -46,15 +46,16 @@
             this.button2.Location = new System.Drawing.Point(67, 133);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(133, 54);
-            this.button2.TabIndex = 0;
+            this.button2.TabIndex = 1;
             this.button2.Text = "速冻统计";
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // OutputStatisticsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(273, 316);
+            this.ClientSize = new System.Drawing.Size(262, 316);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "OutputStatisticsForm";

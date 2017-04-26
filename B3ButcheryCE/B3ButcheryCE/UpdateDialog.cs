@@ -74,7 +74,7 @@ namespace B3HRCE
             var responseStream = response.GetResponseStream();
 
             var setupFile = Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "B3HRCESetup.CAB");
+                "B3ButcheryCESetup.CAB");
 
 
             int bufferLength = 4096;

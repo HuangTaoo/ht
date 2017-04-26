@@ -6,7 +6,6 @@
         /// 必需的设计器变量。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.MainMenu mainMenu1;
 
         /// <summary>
         /// 清理所有正在使用的资源。
@@ -29,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -51,7 +49,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(87, 142);
+            this.button1.Location = new System.Drawing.Point(87, 152);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(72, 29);
             this.button1.TabIndex = 2;
@@ -63,13 +61,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(255, 330);
+            this.ClientSize = new System.Drawing.Size(255, 310);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
-            this.Menu = this.mainMenu1;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrozenInStoreForm";
             this.Text = "速冻入库";
+            this.Deactivate += new System.EventHandler(this.FrozenInStoreForm_Deactivate);
+            this.Load += new System.EventHandler(this.FrozenInStoreForm_Load);
+            this.Activated += new System.EventHandler(this.FrozenInStoreForm_Activated);
             this.ResumeLayout(false);
 
         }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using Microsoft.WindowsCE.Forms;
-
+using B3ButcheryCE.Device_;
 namespace B3HRCE.Device_
 {
     public abstract class DeviceWinCE : Device
@@ -193,14 +193,18 @@ namespace B3HRCE.Device_
             {
                 return new Device_MC3190();
             }
-            if (Util.DeviceIdentName.StartsWith("SeuicScan"))
+            else if (Util.DeviceIdentName.StartsWith("SeuicScan"))
             {
                 return new Device_SeuicD300WithScan();
             }
-            if (Util.DeviceIdentName.StartsWith("Seuic"))
+            else if (Util.DeviceIdentName.StartsWith("Seuic"))
             {
                 return new Device_SeuicD300();
             }
+            else if (Util.DeviceIdentName.StartsWith("Seuic6L2D"))
+            {
+                return new Device_Seuic6L2D();
+            }           
 
 
             return new DevicePC();

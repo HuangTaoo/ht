@@ -23,6 +23,8 @@ using B3HRCE.Rpc_.ClientProductInStore_;
 using B3HRCE.Rpc_.ClientProductLink_;
 using B3HRCE.ProductLink_;
 using B3HRCE.OutputStatistics_;
+using B3ButcheryCE.Rpc_.ClientProduceOutput_;
+using B3ButcheryCE;
 
 namespace B3HRCE
 {
@@ -59,6 +61,8 @@ namespace B3HRCE
 
             DeleteYesTerDay<ClientProductInStoreBillSave>();
             DeleteYesTerDay<ClientProductLinkBillSave>();
+            DeleteYesTerDay<ClientProduceOutputBillSave>();
+
 
             sendBillThread = new Thread(new ThreadStart(SendBillSync));
             sendBillThread.Start();
@@ -72,6 +76,7 @@ namespace B3HRCE
             btn_ProductInStore.Enabled = (usageMode & UsageMode.成品入库新增) > 0;
             productLink_Btn.Enabled = (usageMode & UsageMode.生产环节新增) > 0;
         }
+        //todo 
 
         /// <summary>
         /// 删除昨天单据数据
@@ -172,8 +177,12 @@ namespace B3HRCE
 
 
                 //SyncBaseInfoUtil.SyncProductInStoreTemplate
+
+                SyncBaseInfoUtil.SyncStore();
+                Invoke(this.myIncrease, new object[] { 50 });
+
                 SyncBaseInfoUtil.SyncGoodsByDepartPlan();
-                Invoke(this.myIncrease, new object[] { 100 });
+                Invoke(this.myIncrease, new object[] { 50 });
 
                 Invoke(this.myIncrease, new object[] { 100 });
 
@@ -184,7 +193,7 @@ namespace B3HRCE
 
                 MessageBox.Show(ex.Message);
             }
-           
+
         }
 
         private void SendBillSync()
@@ -194,11 +203,12 @@ namespace B3HRCE
                 while (true)
                 {
                     doBillSync();
-                    Thread.Sleep(10000);
+                    Thread.Sleep(60000);
                 }
             }
-            catch (Exception )
+            catch (Exception ex)
             {
+                LogUtil.Error(ex.ToString());
             }
         }
 
@@ -206,209 +216,213 @@ namespace B3HRCE
         {
             #region 案组计件
             //案组计件  
-            string foder = Path.Combine(Util.DataFolder, typeof(ClientFileGroupValuationBillSave).Name);
+            //string foder = Path.Combine(Util.DataFolder, typeof(ClientFileGroupValuationBillSave).Name);
 
-            if (!Directory.Exists(foder))
-            {
-                Directory.CreateDirectory(foder);
-            }
+            //if (!Directory.Exists(foder))
+            //{
+            //    Directory.CreateDirectory(foder);
+            //}
 
-            string[] files = Directory.GetFiles(foder, "*.xml");
+            //string[] files = Directory.GetFiles(foder, "*.xml");
 
-            if (files.Count() != 0 && Util.OnceLogined)
-            {
-                foreach (var file in files)
-                {
-                    XmlSerializer fileGroupValuationSer = new XmlSerializer(typeof(ClientFileGroupValuationBillSave));
-                    using (var stream = File.Open(file, FileMode.Open))
-                    {
-                        var fileGroupValuation = fileGroupValuationSer.Deserialize(stream) as ClientFileGroupValuationBillSave;
-                        var obj = new RpcObject("/MainSystem/B3HR/BO/FileGroupValuation");
-                        obj.Set("AccountingUnit_ID", fileGroupValuation.AccountingUnit_ID);
-                        obj.Set("Department_ID", fileGroupValuation.Department_ID);
-                        obj.Set("FileGroup_ID", fileGroupValuation.FileGroup_ID);
-                        obj.Set("PieceItem_ID", fileGroupValuation.PieceItem_ID);
-                        obj.Set("Number", fileGroupValuation.Number);
-                        obj.Set("Domain_ID", fileGroupValuation.Domain_ID);
-                        obj.Set("IsHandsetSend", fileGroupValuation.IsHandsetSend);
-                        obj.Set("CreateUser_ID", fileGroupValuation.User_ID);
-                        var pieceItemInsertResult = RpcFacade.Call<RpcObject>("/MainSystem/B3HR/Rpcs/FileGroupValuationRpc/InsertFileGroupValuation", obj);
-                    }
-                    File.Delete(file);
-                }
-            }
+            //if (files.Count() != 0 && Util.OnceLogined)
+            //{
+            //    foreach (var file in files)
+            //    {
+            //        XmlSerializer fileGroupValuationSer = new XmlSerializer(typeof(ClientFileGroupValuationBillSave));
+            //        using (var stream = File.Open(file, FileMode.Open))
+            //        {
+            //            var fileGroupValuation = fileGroupValuationSer.Deserialize(stream) as ClientFileGroupValuationBillSave;
+            //            var obj = new RpcObject("/MainSystem/B3HR/BO/FileGroupValuation");
+            //            obj.Set("AccountingUnit_ID", fileGroupValuation.AccountingUnit_ID);
+            //            obj.Set("Department_ID", fileGroupValuation.Department_ID);
+            //            obj.Set("FileGroup_ID", fileGroupValuation.FileGroup_ID);
+            //            obj.Set("PieceItem_ID", fileGroupValuation.PieceItem_ID);
+            //            obj.Set("Number", fileGroupValuation.Number);
+            //            obj.Set("Domain_ID", fileGroupValuation.Domain_ID);
+            //            obj.Set("IsHandsetSend", fileGroupValuation.IsHandsetSend);
+            //            obj.Set("CreateUser_ID", fileGroupValuation.User_ID);
+            //            var pieceItemInsertResult = RpcFacade.Call<RpcObject>("/MainSystem/B3HR/Rpcs/FileGroupValuationRpc/InsertFileGroupValuation", obj);
+            //        }
+            //        File.Delete(file);
+            //    }
+            //}
             #endregion
 
             #region 个人计件
             //个人计件
-            string personalPiecefoder = Path.Combine(Util.DataFolder, typeof(ClientPersonalPieceBillSave).Name);
+            //string personalPiecefoder = Path.Combine(Util.DataFolder, typeof(ClientPersonalPieceBillSave).Name);
 
-            if (!Directory.Exists(personalPiecefoder))
-            {
-                Directory.CreateDirectory(personalPiecefoder);
-            }
+            //if (!Directory.Exists(personalPiecefoder))
+            //{
+            //    Directory.CreateDirectory(personalPiecefoder);
+            //}
 
-            string[] personalPiecefiles = Directory.GetFiles(personalPiecefoder, "*.xml");
+            //string[] personalPiecefiles = Directory.GetFiles(personalPiecefoder, "*.xml");
 
-            if (personalPiecefiles.Count() != 0 && Util.OnceLogined)
-            {
-                foreach (var file in personalPiecefiles)
-                {
+            //if (personalPiecefiles.Count() != 0 && Util.OnceLogined)
+            //{
+            //    foreach (var file in personalPiecefiles)
+            //    {
 
-                    XmlSerializer serializer = new XmlSerializer(typeof(ClientPersonalPieceBillSave));
-                    using (var stream = File.Open(file, FileMode.Open))
-                    {
-                        var personalPiece = serializer.Deserialize(stream) as ClientPersonalPieceBillSave;
-                        var obj = new RpcObject("/MainSystem/B3HR/BO/PersonalPiece");
-                        obj.Set("AccountingUnit_ID", personalPiece.AccountingUnit_ID);
-                        obj.Set("Department_ID", personalPiece.Department_ID);
-                        obj.Set("CreateTime", personalPiece.CreateTime);
-                        obj.Set("Domain_ID", personalPiece.Domain_ID);
-                        obj.Set("CreateUser_ID", personalPiece.User_ID);
+            //        XmlSerializer serializer = new XmlSerializer(typeof(ClientPersonalPieceBillSave));
+            //        using (var stream = File.Open(file, FileMode.Open))
+            //        {
+            //            var personalPiece = serializer.Deserialize(stream) as ClientPersonalPieceBillSave;
+            //            var obj = new RpcObject("/MainSystem/B3HR/BO/PersonalPiece");
+            //            obj.Set("AccountingUnit_ID", personalPiece.AccountingUnit_ID);
+            //            obj.Set("Department_ID", personalPiece.Department_ID);
+            //            obj.Set("CreateTime", personalPiece.CreateTime);
+            //            obj.Set("Domain_ID", personalPiece.Domain_ID);
+            //            obj.Set("CreateUser_ID", personalPiece.User_ID);
 
-                        ManyList Details = new ManyList("/MainSystem/B3HR/BO/PersonalPiece_Detail");
-                        foreach (var detail in personalPiece.Details)
-                        {
-                            var objDetail = new RpcObject("/MainSystem/B3HR/BO/PersonalPiece_Detail");
-                            objDetail.Set("HREmployee_ID", detail.Employee_ID);
-                            objDetail.Set("Job_ID", detail.Job_ID);
-                            objDetail.Set("PieceItem_ID", detail.PieceItem_ID);
-                            objDetail.Set("Number", detail.Number);
-                            Details.Add(objDetail);
-                        }
-                        obj.Set("Details", Details);
+            //            ManyList Details = new ManyList("/MainSystem/B3HR/BO/PersonalPiece_Detail");
+            //            foreach (var detail in personalPiece.Details)
+            //            {
+            //                var objDetail = new RpcObject("/MainSystem/B3HR/BO/PersonalPiece_Detail");
+            //                objDetail.Set("HREmployee_ID", detail.Employee_ID);
+            //                objDetail.Set("Job_ID", detail.Job_ID);
+            //                objDetail.Set("PieceItem_ID", detail.PieceItem_ID);
+            //                objDetail.Set("Number", detail.Number);
+            //                Details.Add(objDetail);
+            //            }
+            //            obj.Set("Details", Details);
 
-                        var pieceItemInsertResult = RpcFacade.Call<RpcObject>("/MainSystem/B3HR/Rpcs/PersonalPieceRpc/InsertPersonalPiece", obj);
-                    }
-                    File.Delete(file);
-                }
-            }
+            //            var pieceItemInsertResult = RpcFacade.Call<RpcObject>("/MainSystem/B3HR/Rpcs/PersonalPieceRpc/InsertPersonalPiece", obj);
+            //        }
+            //        File.Delete(file);
+            //    }
+            //}
 
             #endregion
 
             #region 成品入库
 
-            string productInStorefoder = Path.Combine(Util.DataFolder, typeof(ClientProductInStoreBillSave).Name);
-            ClientProductInStoreBillSave productInStore;
-            if (!Directory.Exists(productInStorefoder))
-            {
-                Directory.CreateDirectory(productInStorefoder);
-            }
+            //string productInStorefoder = Path.Combine(Util.DataFolder, typeof(ClientProductInStoreBillSave).Name);
+            //ClientProductInStoreBillSave productInStore;
+            //if (!Directory.Exists(productInStorefoder))
+            //{
+            //    Directory.CreateDirectory(productInStorefoder);
+            //}
 
-            string[] productInStorefiles = Directory.GetFiles(productInStorefoder, "*.xml");
+            //string[] productInStorefiles = Directory.GetFiles(productInStorefoder, "*.xml");
 
-            if (productInStorefiles.Count() != 0 && Util.OnceLogined)
-            {
-                foreach (var file in productInStorefiles)
-                {
+            //if (productInStorefiles.Count() != 0 && Util.OnceLogined)
+            //{
+            //    foreach (var file in productInStorefiles)
+            //    {
 
-                    XmlSerializer serializer = new XmlSerializer(typeof(ClientProductInStoreBillSave));
-                    using (var stream = File.Open(file, FileMode.Open))
-                    {
-                        productInStore = serializer.Deserialize(stream) as ClientProductInStoreBillSave;
-                        if (productInStore.IsSend)
-                            continue;
-                        foreach (var storeGroupBy in productInStore.Details.GroupBy(x => x.Store_ID))
-                        {
-                            var obj = new RpcObject("/MainSystem/B3Butchery/BO/ProductInStore");
-                            obj.Set("AccountingUnit_ID", productInStore.AccountingUnit_ID);
-                            obj.Set("Department_ID", productInStore.Department_ID);
-                            obj.Set("InStoreDate", productInStore.CreateTime);
-                            obj.Set("Domain_ID", productInStore.Domain_ID);
-                            obj.Set("CreateUser_ID", productInStore.User_ID);
-                            obj.Set("InStoreType_ID", productInStore.InStoreType_ID);
-                            obj.Set("Store_ID", storeGroupBy.Key);
-                            obj.Set("DeviceId", productInStore.DeviceId);
-                            ManyList Details = new ManyList("/MainSystem/B3Butchery/BO/ProductInStore_Detail");
-                            foreach (var detail in storeGroupBy)
-                            {
-                                var objDetail = new RpcObject("/MainSystem/B3Butchery/BO/ProductInStore_Detail");
-                                objDetail.Set("ProductPlan_ID", detail.ProductPlanID);
-                                objDetail.Set("Goods_ID", detail.Goods_ID);
-                                objDetail.Set("Number", detail.MainNumber);
-                                objDetail.Set("SecondNumber", detail.SecondNumber);
-                                objDetail.Set("ProductionDate", DateTime.Today);
-                                Details.Add(objDetail);
-                            }
-                            obj.Set("Details", Details);
+            //        XmlSerializer serializer = new XmlSerializer(typeof(ClientProductInStoreBillSave));
+            //        using (var stream = File.Open(file, FileMode.Open))
+            //        {
+            //            productInStore = serializer.Deserialize(stream) as ClientProductInStoreBillSave;
+            //            if (productInStore.IsSend)
+            //                continue;
+            //            foreach (var storeGroupBy in productInStore.Details.GroupBy(x => x.Store_ID))
+            //            {
+            //                var obj = new RpcObject("/MainSystem/B3Butchery/BO/ProductInStore");
+            //                obj.Set("AccountingUnit_ID", productInStore.AccountingUnit_ID);
+            //                obj.Set("Department_ID", productInStore.Department_ID);
+            //                obj.Set("InStoreDate", productInStore.CreateTime);
+            //                obj.Set("Domain_ID", productInStore.Domain_ID);
+            //                obj.Set("CreateUser_ID", productInStore.User_ID);
+            //                obj.Set("InStoreType_ID", productInStore.InStoreType_ID);
+            //                obj.Set("Store_ID", storeGroupBy.Key);
+            //                obj.Set("DeviceId", productInStore.DeviceId);
+            //                ManyList Details = new ManyList("/MainSystem/B3Butchery/BO/ProductInStore_Detail");
+            //                foreach (var detail in storeGroupBy)
+            //                {
+            //                    var objDetail = new RpcObject("/MainSystem/B3Butchery/BO/ProductInStore_Detail");
+            //                    objDetail.Set("ProductPlan_ID", detail.ProductPlanID);
+            //                    objDetail.Set("Goods_ID", detail.Goods_ID);
+            //                    objDetail.Set("Number", detail.MainNumber);
+            //                    objDetail.Set("SecondNumber", detail.SecondNumber);
+            //                    objDetail.Set("ProductionDate", DateTime.Today);
+            //                    Details.Add(objDetail);
+            //                }
+            //                obj.Set("Details", Details);
 
-                            var pieceItemInsertResult = RpcFacade.Call<RpcObject>("/MainSystem/B3Butchery/Rpcs/ProductInStoreRpc/InsertProductInStore", obj);
-                        }
-                    }
-                    productInStore.IsSend = true;
-                    using (var stream = File.Create(file))
-                    {
-                        serializer.Serialize(stream,productInStore);
-                    }
-                }
-            }
+            //                var pieceItemInsertResult = RpcFacade.Call<RpcObject>("/MainSystem/B3Butchery/Rpcs/ProductInStoreRpc/InsertProductInStore", obj);
+            //            }
+            //        }
+            //        productInStore.IsSend = true;
+            //        using (var stream = File.Create(file))
+            //        {
+            //            serializer.Serialize(stream,productInStore);
+            //        }
+            //    }
+            //}
+            #endregion
+
+            #region 产出单
+            SyncBillUtil.SyncProductOut();
             #endregion
 
             #region 生产环节
 
-            string productLinkFoder = Path.Combine(Util.DataFolder, typeof(ClientProductLinkBillSave).Name);
-            ClientProductLinkBillSave productLink;
-            if (!Directory.Exists(productLinkFoder))
-            {
-                Directory.CreateDirectory(productLinkFoder);
-            }
+            //string productLinkFoder = Path.Combine(Util.DataFolder, typeof(ClientProductLinkBillSave).Name);
+            //ClientProductLinkBillSave productLink;
+            //if (!Directory.Exists(productLinkFoder))
+            //{
+            //    Directory.CreateDirectory(productLinkFoder);
+            //}
 
-            string[] productLinkFiles = Directory.GetFiles(productLinkFoder, "*.xml");
-            if (productLinkFiles.Count() != 0 && Util.OnceLogined)
-            {
-                foreach (var file in productLinkFiles)
-                {
-                    XmlSerializer serializer = new XmlSerializer(typeof(ClientProductLinkBillSave));
-                    using (var stream = File.Open(file, FileMode.Open))
-                    {
-                        productLink = serializer.Deserialize(stream) as ClientProductLinkBillSave;
-                        if (productLink.IsSend)
-                            continue;
-                        var objType = "";
-                        switch (productLink.CollectType)
-                        {
-                            case "投入":
-                                objType = "ProduceInput";
-                                break;
-                            case "产出":
-                                objType = "ProduceOutput";
-                                break;
-                            default:
-                                break;
-                        }
-                        var mainObj = "/MainSystem/B3Butchery/BO/" + objType;
-                        var detailObj = string.Format("/MainSystem/B3Butchery/BO/{0}_Detail", objType);
-                        var saveRpc = "/MainSystem/B3Butchery/Rpcs/ProductLinkRpc/Insert" + objType;
-                        foreach (var productPlanGroupBy in productLink.Details.GroupBy(x => x.ProductPlanID))
-                        {
-                            var obj = new RpcObject(mainObj);
-                            obj.Set("AccountingUnit_ID", productLink.AccountingUnit_ID);
-                            obj.Set("Department_ID", productLink.Department_ID);
-                            obj.Set("CreateTime", productLink.CreateTime);
-                            obj.Set("Domain_ID", productLink.Domain_ID);
-                            obj.Set("CreateUser_ID", productLink.User_ID);
-                            obj.Set("PlanNumber_ID", productPlanGroupBy.Key);
-                            obj.Set("ProductLinks_ID", productLink.ProductLinks_ID);
-                            ManyList Details = new ManyList(detailObj);
-                            foreach (var detail in productPlanGroupBy)
-                            {
-                                var objDetail = new RpcObject(detailObj);
-                                objDetail.Set("Goods_ID", detail.Goods_ID);
-                                objDetail.Set("Number", detail.MainNumber);
-                                objDetail.Set("SecondNumber", detail.SecondNumber);
-                                Details.Add(objDetail);
-                            }
-                            obj.Set("Details", Details);
-                            RpcFacade.Call<RpcObject>(saveRpc, obj);
-                        }
-                    }
-                    productLink.IsSend = true;
-                    using (var stream = File.Create(file))
-                    {
-                        serializer.Serialize(stream, productLink);
-                    }
-                }
-            }
+            //string[] productLinkFiles = Directory.GetFiles(productLinkFoder, "*.xml");
+            //if (productLinkFiles.Count() != 0 && Util.OnceLogined)
+            //{
+            //    foreach (var file in productLinkFiles)
+            //    {
+            //        XmlSerializer serializer = new XmlSerializer(typeof(ClientProductLinkBillSave));
+            //        using (var stream = File.Open(file, FileMode.Open))
+            //        {
+            //            productLink = serializer.Deserialize(stream) as ClientProductLinkBillSave;
+            //            if (productLink.IsSend)
+            //                continue;
+            //            var objType = "";
+            //            switch (productLink.CollectType)
+            //            {
+            //                case "投入":
+            //                    objType = "ProduceInput";
+            //                    break;
+            //                case "产出":
+            //                    objType = "ProduceOutput";
+            //                    break;
+            //                default:
+            //                    break;
+            //            }
+            //            var mainObj = "/MainSystem/B3Butchery/BO/" + objType;
+            //            var detailObj = string.Format("/MainSystem/B3Butchery/BO/{0}_Detail", objType);
+            //            var saveRpc = "/MainSystem/B3Butchery/Rpcs/ProductLinkRpc/Insert" + objType;
+            //            foreach (var productPlanGroupBy in productLink.Details.GroupBy(x => x.ProductPlanID))
+            //            {
+            //                var obj = new RpcObject(mainObj);
+            //                obj.Set("AccountingUnit_ID", productLink.AccountingUnit_ID);
+            //                obj.Set("Department_ID", productLink.Department_ID);
+            //                obj.Set("CreateTime", productLink.CreateTime);
+            //                obj.Set("Domain_ID", productLink.Domain_ID);
+            //                obj.Set("CreateUser_ID", productLink.User_ID);
+            //                obj.Set("PlanNumber_ID", productPlanGroupBy.Key);
+            //                obj.Set("ProductLinks_ID", productLink.ProductLinks_ID);
+            //                ManyList Details = new ManyList(detailObj);
+            //                foreach (var detail in productPlanGroupBy)
+            //                {
+            //                    var objDetail = new RpcObject(detailObj);
+            //                    objDetail.Set("Goods_ID", detail.Goods_ID);
+            //                    objDetail.Set("Number", detail.MainNumber);
+            //                    objDetail.Set("SecondNumber", detail.SecondNumber);
+            //                    Details.Add(objDetail);
+            //                }
+            //                obj.Set("Details", Details);
+            //                RpcFacade.Call<RpcObject>(saveRpc, obj);
+            //            }
+            //        }
+            //        productLink.IsSend = true;
+            //        using (var stream = File.Create(file))
+            //        {
+            //            serializer.Serialize(stream, productLink);
+            //        }
+            //    }
+            //}
             #endregion
         }
 
@@ -425,6 +439,11 @@ namespace B3HRCE
         private void button2_Click(object sender, EventArgs e)
         {
             new OutputStatisticsForm().ShowDialog();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

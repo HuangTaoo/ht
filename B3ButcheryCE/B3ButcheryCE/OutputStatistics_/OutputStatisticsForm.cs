@@ -14,11 +14,17 @@ namespace B3HRCE.OutputStatistics_
         public OutputStatisticsForm()
         {
             InitializeComponent();
+            Util.SetSceen(this);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             new MaterialStatisticsForm().ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new FrozenInStore_.FrozenInStoreForm().ShowDialog();
         }
     }
 }
