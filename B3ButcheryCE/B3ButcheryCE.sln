@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B3ButcheryCE", "B3ButcheryCE\B3ButcheryCE.csproj", "{E5D43615-A797-4FE5-BA52-EC9936D9A004}"
 EndProject
-Project("{B900F1C2-3D47-4FEC-85B3-04AAF18C3634}") = "B3ButcheryCESetup", "B3ButcheryCESetup\B3ButcheryCESetup.vddproj", "{4C38FA0C-6679-4CD5-A8F0-46EB1F60F6C6}"
+Project("{B900F1C2-3D47-4FEC-85B3-04AAF18C3634}") = "Setup", "Setup\Setup.vddproj", "{5357CF60-6FFA-4B7A-BAF9-7D169D3C4488}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,8 +17,8 @@ Global
 		{E5D43615-A797-4FE5-BA52-EC9936D9A004}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5D43615-A797-4FE5-BA52-EC9936D9A004}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E5D43615-A797-4FE5-BA52-EC9936D9A004}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{4C38FA0C-6679-4CD5-A8F0-46EB1F60F6C6}.Debug|Any CPU.ActiveCfg = Debug
-		{4C38FA0C-6679-4CD5-A8F0-46EB1F60F6C6}.Release|Any CPU.ActiveCfg = Release
+		{5357CF60-6FFA-4B7A-BAF9-7D169D3C4488}.Debug|Any CPU.ActiveCfg = Debug
+		{5357CF60-6FFA-4B7A-BAF9-7D169D3C4488}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
