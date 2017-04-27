@@ -124,6 +124,10 @@ namespace B3HRCE.Device_
                 {
                     return "\\User_Storage";
                 }
+                else if (Directory.Exists("\\User Storage"))
+                {
+                    return "\\User Storage";
+                }
                 else if (Directory.Exists("\\Storage Card"))
                 {
                     return "\\Storage Card";
@@ -147,7 +151,7 @@ namespace B3HRCE.Device_
 
         public override void ScanClose()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public override void ReaderInitiated()

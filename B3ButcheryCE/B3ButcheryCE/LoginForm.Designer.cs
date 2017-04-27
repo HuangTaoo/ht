@@ -142,7 +142,7 @@
             this.Menu = this.mainMenu1;
             this.MinimizeBox = false;
             this.Name = "LoginForm";
-            this.Text = "人力资源系统在线版-登录";
+            this.Text = "青花瓷手持机系统";
             this.Closed += new System.EventHandler(this.LoginForm_Closed);
             this.Closing += new System.ComponentModel.CancelEventHandler(this.LoginForm_Closing);
             this.ResumeLayout(false);

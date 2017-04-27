@@ -6,7 +6,6 @@
         /// 必需的设计器变量。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.MainMenu mainMenu1;
 
         /// <summary>
         /// 清理所有正在使用的资源。
@@ -29,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.panel1 = new System.Windows.Forms.Panel();
             this.listView1 = new System.Windows.Forms.ListView();
             this.名称 = new System.Windows.Forms.ColumnHeader();
@@ -41,13 +39,10 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.listView1);
             this.panel1.Location = new System.Drawing.Point(0, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(254, 308);
+            this.panel1.Size = new System.Drawing.Size(244, 243);
             // 
             // listView1
             // 
@@ -60,7 +55,7 @@
             this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(254, 308);
+            this.listView1.Size = new System.Drawing.Size(244, 243);
             this.listView1.TabIndex = 1;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
@@ -74,7 +69,7 @@
             // 生产数量
             // 
             this.生产数量.Text = "生产数量";
-            this.生产数量.Width = 80;
+            this.生产数量.Width = 70;
             // 
             // 主数量
             // 
@@ -83,9 +78,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(85, 317);
+            this.button1.Location = new System.Drawing.Point(85, 252);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(72, 33);
+            this.button1.Size = new System.Drawing.Size(72, 23);
             this.button1.TabIndex = 1;
             this.button1.Text = "确定";
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -95,10 +90,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(257, 353);
+            this.ClientSize = new System.Drawing.Size(247, 285);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
-            this.Menu = this.mainMenu1;
             this.Name = "FrozenInStoreSelectGoodsForm";
             this.Text = "选择存货";
             this.Load += new System.EventHandler(this.FrozenInStoreSelectGoodsForm_Load);

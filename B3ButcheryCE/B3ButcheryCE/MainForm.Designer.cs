@@ -113,7 +113,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";
-            this.Text = "青花瓷手持机在线管理系统";
+            this.Text = "青花瓷手持机系统";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 

@@ -17,24 +17,25 @@ namespace B3HRCE.FrozenInStore_
         public FrozenInStoreForm()
         {
             InitializeComponent();
+            Util.SetSceen(this);
         }
 
         List<ClientStore> list = XmlSerializerUtil.GetClientListXmlDeserialize<ClientStore>();
         private void button1_Click(object sender, EventArgs e)
         {
-            OpenSelectGoodsFrom();
+            OpenSelectGoodsFrom(textBox1.Text);
+            textBox1.Text = "";
         }
 
-        void OpenSelectGoodsFrom()
+        void OpenSelectGoodsFrom(string code)
         {
-            var store = list.FirstOrDefault(x => x.BarCode == textBox1.Text);
+            var store = list.FirstOrDefault(x => x.BarCode == code);
             if (store == null)
             {
-                MessageBox.Show("没找到对应的仓库，确认编码是否正确或者同步数据");
+                MessageBox.Show("没找到" + code + "对应的仓库，确认编码是否正确或者同步数据");
                 return;
             }
-
-            textBox1.Text = "";
+           
             var f = new FrozenInStoreSelectGoodsForm(store.ID);
             f.ShowDialog();
         }
@@ -52,16 +53,27 @@ namespace B3HRCE.FrozenInStore_
             HardwareUtil.Device.ScannerReader += new EventHandler<ScanEventArgs>(BarCodeRead);
         }
 
+        
+
         void BarCodeRead(object sender, ScanEventArgs e)
         {
-            MessageBox.Show(e.BarCode);
+            var result = e.BarCode.Trim();
+            OpenSelectGoodsFrom(result);
+            //this.Invoke(new Action(() =>
+            //{
+            //    textBox1.Text = result;
+            //    OpenSelectGoodsFrom();
+            //}));
+               
+           
+            //MessageBox.Show(e.BarCode);
         }
 
         private void FrozenInStoreForm_Deactivate(object sender, EventArgs e)
         {
             HardwareUtil.ScanPowerOff();
             HardwareUtil.Device.ScannerReader -= new EventHandler<ScanEventArgs>(BarCodeRead);
-            HardwareUtil.ScanClose();
+            //HardwareUtil.ScanClose();
         }
     }
 }

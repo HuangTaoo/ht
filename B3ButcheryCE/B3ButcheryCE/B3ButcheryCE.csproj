@@ -69,7 +69,7 @@
     </Reference>
     <Reference Include="SCAN.Scanner1D, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\SCAN.Scanner1D.dll</HintPath>
+      <HintPath>bin\Debug\SCAN.Scanner1D.dll</HintPath>
     </Reference>
     <Reference Include="SCAN.Scanner2D, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -416,6 +416,7 @@
     <Content Include="ONeilSDK_CS_WM.dll" />
     <Content Include="SCAN.Scanner1D.dll" />
     <Content Include="SCAN.Scanner2D.dll" />
+    <Content Include="Scanner2DV.dll" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\" />

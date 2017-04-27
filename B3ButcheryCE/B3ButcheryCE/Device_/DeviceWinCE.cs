@@ -193,6 +193,10 @@ namespace B3HRCE.Device_
             {
                 return new Device_MC3190();
             }
+            else if (Util.DeviceIdentName.StartsWith("Seuic6L2D"))
+            {
+                return new Device_Seuic6L2D();
+            }   
             else if (Util.DeviceIdentName.StartsWith("SeuicScan"))
             {
                 return new Device_SeuicD300WithScan();
@@ -201,10 +205,7 @@ namespace B3HRCE.Device_
             {
                 return new Device_SeuicD300();
             }
-            else if (Util.DeviceIdentName.StartsWith("Seuic6L2D"))
-            {
-                return new Device_Seuic6L2D();
-            }           
+                    
 
 
             return new DevicePC();

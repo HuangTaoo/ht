@@ -35,6 +35,12 @@ namespace B3ButcheryCE.Util_
             var list = new List<T>();
             var folder = Path.Combine(Util.DataFolder, typeof(T).Name);
 
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+
+            }
+
             var files = Directory.GetFiles(folder, "*.xml");
             foreach (var file in files)
             {

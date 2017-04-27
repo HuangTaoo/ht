@@ -35,21 +35,21 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(59, 57);
+            this.label1.Location = new System.Drawing.Point(45, 57);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 20);
             this.label1.Text = "速冻库号";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(59, 91);
+            this.textBox1.Location = new System.Drawing.Point(45, 91);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(139, 23);
             this.textBox1.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(87, 152);
+            this.button1.Location = new System.Drawing.Point(73, 152);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(72, 29);
             this.button1.TabIndex = 2;
@@ -61,7 +61,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(255, 310);
+            this.ClientSize = new System.Drawing.Size(226, 264);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);

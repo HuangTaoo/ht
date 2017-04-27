@@ -15,6 +15,7 @@ using System.IO;
 using System.Xml.Serialization;
 using B3ButcheryCE;
 using B3ButcheryCE.Util_;
+using B3HRCE.Device_;
 
 namespace B3HRCE.OutputStatistics_
 {
@@ -44,7 +45,11 @@ namespace B3HRCE.OutputStatistics_
             cbxGoods.DataSource = mGoodsList;
             cbxGoods.DisplayMember = "Goods_Name";
             cbxGoods.ValueMember = "Goods_ID";
-            mClientGoods = mGoodsList[0];
+            if (mGoodsList.Count > 0)
+            {
+                mClientGoods = mGoodsList[0];
+            }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -98,15 +103,26 @@ namespace B3HRCE.OutputStatistics_
 
         private void cbxGoods_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var goodsId = cbxGoods.SelectedValue as long?;
-            if (goodsId.HasValue)
+            SelectIndexChanged();
+           
+        }
+
+        void SelectIndexChanged()
+        {
+            if (mGoodsList.Count > 0)
             {
-                mClientGoods = mGoodsList.FirstOrDefault(x => x.Goods_ID == goodsId);
+                var goodsId = cbxGoods.SelectedValue as long?;
+                if (goodsId.HasValue)
+                {
+                    mClientGoods = mGoodsList.FirstOrDefault(x => x.Goods_ID == goodsId);
+                }
+                else
+                {
+                    mClientGoods = mGoodsList.FirstOrDefault();
+                }
             }
-            else
-            {
-                mClientGoods = mGoodsList.FirstOrDefault();
-            }
+            txtNumber.Text = "0";
+            textBox1.Focus();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -136,6 +152,55 @@ namespace B3HRCE.OutputStatistics_
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        int GetSelectIndexByCode(string code)
+        {
+            int index = -1;
+            foreach (var item in mGoodsList)
+            {
+                index++;
+                if (item.Goods_BarCode == code)
+                {
+                    return index;
+                }
+            }
+            return index;
+        }
+
+        void BarCodeRead(object sender, ScanEventArgs e)
+        {
+            var result = e.BarCode.Trim();
+           var index=GetSelectIndexByCode(result);
+            if(index==-1)
+            {
+                MessageBox.Show("没有找到编码： "+result+" 对应的存货");
+            }
+            
+       
+            this.Invoke(new Action(() =>
+            {
+                cbxGoods.SelectedIndex = index;
+                SelectIndexChanged();
+
+            }));
+
+
+            //MessageBox.Show(e.BarCode);
+        }
+
+        private void MaterialStatisticsForm_Activated(object sender, EventArgs e)
+        {
+            HardwareUtil.HardWareInit();
+            HardwareUtil.ScanPowerOn();
+            HardwareUtil.Device.ScannerReader += new EventHandler<ScanEventArgs>(BarCodeRead);
+        }
+
+        private void MaterialStatisticsForm_Deactivate(object sender, EventArgs e)
+        {
+            HardwareUtil.ScanPowerOff();
+            HardwareUtil.Device.ScannerReader -= new EventHandler<ScanEventArgs>(BarCodeRead);
+            //HardwareUtil.ScanClose();
         }
     }
 }

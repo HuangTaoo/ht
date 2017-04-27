@@ -20,6 +20,7 @@ namespace B3HRCE.FrozenInStore_
         public FrozenInStoreSelectGoodsForm(long storeId)
         {
             InitializeComponent();
+            Util.SetSceen(this);
             mStoreId = storeId;
         }
 
