@@ -5,6 +5,7 @@ using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BO;
 using BWP.B3Butchery.Rpcs.RpcObject;
 using BWP.B3Butchery.Utils;
+using BWP.B3Frameworks;
 using BWP.B3Frameworks.BO.NamedValueTemplate;
 using BWP.B3UnitedInfos.BO;
 using BWP.Web.Utils;
@@ -18,6 +19,54 @@ namespace BWP.B3Butchery.Rpcs
 {
   [Rpc]
   public static class GoodsInfoRpc {
+
+    [Rpc]
+    public static List<GoodsInfoDto> GetAllGoods()
+    {
+      var list = new List<GoodsInfoDto>();
+      var query=new DQueryDom(new JoinAlias(typeof(Goods)));
+      query.Where.Conditions.Add(DQCondition.EQ("Stopped",false));
+      query.Where.Conditions.Add(DQCondition.EQ("Domain_ID", DomainContext.Current.ID));
+
+      query.Columns.Add(DQSelectColumn.Field("ID"));
+      query.Columns.Add(DQSelectColumn.Field("Name"));
+      query.Columns.Add(DQSelectColumn.Field("MainUnit"));
+      query.Columns.Add(DQSelectColumn.Field("SecondUnit"));
+      query.Columns.Add(DQSelectColumn.Field("UnitConvertDirection"));
+      query.Columns.Add(DQSelectColumn.Field("MainUnitRatio"));
+      query.Columns.Add(DQSelectColumn.Field("SecondUnitRatio"));
+      query.Columns.Add(DQSelectColumn.Field("Code"));
+
+      using (var session = Dmo.NewSession())
+      {
+        using (var reader = session.ExecuteReader(query))
+        {
+          while (reader.Read())
+          {
+            var dto = new GoodsInfoDto();
+            dto.Goods_ID = (long)reader[0];
+            dto.Goods_Name = (string)reader[1];
+            dto.Goods_MainUnit = (string)reader[2];
+            dto.Goods_SecondUnit = (string)reader[3];
+            dto.Goods_UnitConvertDirection = (NamedValue<主辅转换方向>?)reader[4];
+            dto.Goods_MainUnitRatio = (Money<decimal>?)reader[5];
+            dto.Goods_SecondUnitRatio = (Money<decimal>?)reader[6];
+            dto.Goods_Code = (string)reader[7];
+            if (dto.Goods_MainUnitRatio == null)
+            {
+              dto.Goods_MainUnitRatio = 1;
+            }
+            if (dto.Goods_SecondUnitRatio == null)
+            {
+              dto.Goods_SecondUnitRatio = 1;
+            }
+            list.Add(dto);
+          }
+        }
+      }
+      return list;
+
+    }
 
     [Rpc]
     public static List<GoodsInfoDto> GetByDepartPlan(long? departId)
