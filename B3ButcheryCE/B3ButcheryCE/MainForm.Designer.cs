@@ -35,6 +35,7 @@
             this.statusBar1 = new System.Windows.Forms.StatusBar();
             this.productLink_Btn = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.btn_ProductInStoreOK = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonFileGroupValuation
@@ -97,12 +98,22 @@
             this.button2.Text = "产量统计";
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // btn_ProductInStoreOK
+            // 
+            this.btn_ProductInStoreOK.Location = new System.Drawing.Point(128, 134);
+            this.btn_ProductInStoreOK.Name = "btn_ProductInStoreOK";
+            this.btn_ProductInStoreOK.Size = new System.Drawing.Size(99, 29);
+            this.btn_ProductInStoreOK.TabIndex = 25;
+            this.btn_ProductInStoreOK.Text = "成品入库确认";
+            this.btn_ProductInStoreOK.Click += new System.EventHandler(this.btn_ProductInStoreOK_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(238, 295);
+            this.Controls.Add(this.btn_ProductInStoreOK);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.productLink_Btn);
             this.Controls.Add(this.btn_ProductInStore);
@@ -128,5 +139,6 @@
         private System.Windows.Forms.StatusBar statusBar1;
         private System.Windows.Forms.Button productLink_Btn;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btn_ProductInStoreOK;
     }
 }
