@@ -25,6 +25,7 @@ using B3HRCE.ProductLink_;
 using B3HRCE.OutputStatistics_;
 using B3ButcheryCE.Rpc_.ClientProduceOutput_;
 using B3ButcheryCE;
+using B3HRCE.ProductInStoreConfirm_;
 
 namespace B3HRCE
 {
@@ -449,5 +450,11 @@ namespace B3HRCE
         {
 
         }
+
+        private void btn_ProductInStoreOK_Click(object sender, EventArgs e)
+        {
+            new ProductInStoreConfirmList().ShowDialog();
+        }
+
     }
 }
