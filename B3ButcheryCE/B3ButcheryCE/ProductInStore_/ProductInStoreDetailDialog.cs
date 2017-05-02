@@ -93,5 +93,10 @@ namespace B3HRCE.ProductInStore_
                 btn_OK_Click(new object(), EventArgs.Empty);
             }
         }
+
+        private void ProductInStoreDetailDialog_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

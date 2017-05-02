@@ -17,6 +17,39 @@ namespace B3HRCE
 {
     public static class SyncBaseInfoUtil
     {
+        
+
+            
+        /// <summary>
+        /// 同步所有存货 每次都删除重新创建
+        /// </summary>
+        public static void SyncAllGoods()
+        {
+            var folder = Path.Combine(Util.DataFolder, typeof(ClientAllGoods).Name);
+            if (!Directory.Exists(folder))
+            { 
+                Directory.CreateDirectory(folder);
+            }
+
+            var files= Directory.GetFiles(folder, "*.xml");
+            foreach (var file in files)
+            {
+                File.Delete(file);
+            }
+
+            var list = RpcFacade.Call<IList<RpcObject>>("/MainSystem/B3Butchery/Rpcs/GoodsInfoRpc/GetAllGoods");
+
+            List<ClientAllGoods> clientList = list.Select(x => (ClientUtil.CreateClientAllGoods(x))).ToList<ClientAllGoods>();
+
+            XmlSerializer serializer = new XmlSerializer(typeof(List<ClientAllGoods>));
+            using (var stream = File.Open(Path.Combine(folder, DateTime.Now.ToString("yyyy-MM-dd") + ".xml"), FileMode.Create))
+            {
+                serializer.Serialize(stream, clientList);
+            }
+
+
+        }
+
 
         public static void SyncStore()
         {

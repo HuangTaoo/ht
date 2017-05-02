@@ -100,6 +100,7 @@
             this.MinimizeBox = false;
             this.Name = "ProductInStoreDetailDialog";
             this.Text = "成品入库录入详情";
+            this.Load += new System.EventHandler(this.ProductInStoreDetailDialog_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ProductInStoreDetailDialog_KeyPress);
             this.ResumeLayout(false);
 

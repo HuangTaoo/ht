@@ -179,10 +179,14 @@ namespace B3HRCE
                 //SyncBaseInfoUtil.SyncProductInStoreTemplate
 
                 SyncBaseInfoUtil.SyncStore();
-                Invoke(this.myIncrease, new object[] { 50 });
+                Invoke(this.myIncrease, new object[] { 30 });
 
                 SyncBaseInfoUtil.SyncGoodsByDepartPlan();
-                Invoke(this.myIncrease, new object[] { 50 });
+                Invoke(this.myIncrease, new object[] { 30 });
+
+                SyncBaseInfoUtil.SyncAllGoods();
+                Invoke(this.myIncrease, new object[] { 40 });
+                
 
                 Invoke(this.myIncrease, new object[] { 100 });
 
