@@ -11,7 +11,8 @@ using TSingSoft.WebPluginFramework;
 
 namespace BWP.B3Butchery.Rpcs
 {
-  class FrozenInStoreRpc
+  [Rpc]
+ public static class FrozenInStoreRpc
   {
     /// <summary>
     /// 根据速冻入库单号获取存货名称和数量
@@ -28,7 +29,14 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("Goods_Name", risDetail));
       query.Columns.Add(DQSelectColumn.Field("Number", risDetail));
       query.Where.Conditions.Add(DQCondition.EQ("ID", ID));
-      return query.EExecuteList<string, object>().Select(x => new RpcEasyProductInStore_Detail(x.Item1, x.Item2)).ToList();
+      try
+      {
+        return query.EExecuteList<string, object>().Select(x => new RpcEasyProductInStore_Detail(x.Item1, x.Item2)).ToList();
+      }
+      catch (Exception)
+      {
+        return new List<RpcEasyProductInStore_Detail>(); 
+      }
     }
     
   }

@@ -133,6 +133,24 @@
     <Compile Include="FormProcessBar.Designer.cs">
       <DependentUpon>FormProcessBar.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrozenInStoreConfirm_\FrozenInStoreConfirmList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrozenInStoreConfirm_\FrozenInStoreConfirmList.designer.cs">
+      <DependentUpon>FrozenInStoreConfirmList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrozenInStoreConfirm_\FrozenInStoreConfirmOK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrozenInStoreConfirm_\FrozenInStoreConfirmOK.designer.cs">
+      <DependentUpon>FrozenInStoreConfirmOK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrozenInStoreConfirm_\FrozenInStoreConfirmScan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrozenInStoreConfirm_\FrozenInStoreConfirmScan.designer.cs">
+      <DependentUpon>FrozenInStoreConfirmScan.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrozenInStore_\FrozenInStoreForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -271,54 +289,83 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ErrorInfoDialog.resx">
       <DependentUpon>ErrorInfoDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FileGroupValuation_\FileGroupValuationDialog.resx">
       <DependentUpon>FileGroupValuationDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FileGroupValuation_\FileGroupValuationListDialog.resx">
       <DependentUpon>FileGroupValuationListDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FileGroupValuation_\SelectFileGroupValuationTemplateDialog.resx">
       <DependentUpon>SelectFileGroupValuationTemplateDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormProcessBar.resx">
       <DependentUpon>FormProcessBar.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrozenInStoreConfirm_\FrozenInStoreConfirmList.resx">
+      <DependentUpon>FrozenInStoreConfirmList.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrozenInStoreConfirm_\FrozenInStoreConfirmOK.resx">
+      <DependentUpon>FrozenInStoreConfirmOK.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrozenInStoreConfirm_\FrozenInStoreConfirmScan.resx">
+      <DependentUpon>FrozenInStoreConfirmScan.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FrozenInStore_\FrozenInStoreForm.resx">
       <DependentUpon>FrozenInStoreForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FrozenInStore_\FrozenInStoreInputNumber.resx">
       <DependentUpon>FrozenInStoreInputNumber.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FrozenInStore_\FrozenInStoreSelectGoodsForm.resx">
       <DependentUpon>FrozenInStoreSelectGoodsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="OutputStatistics_\MaterialStatisticsForm.resx">
       <DependentUpon>MaterialStatisticsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="OutputStatistics_\MaterialStatisticsInputNumberForm.resx">
       <DependentUpon>MaterialStatisticsInputNumberForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="OutputStatistics_\OutputStatisticsForm.resx">
       <DependentUpon>OutputStatisticsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PersonalPiece_\PersonalPieceDetailDialog.resx">
       <DependentUpon>PersonalPieceDetailDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PersonalPiece_\PersonalPieceDialog.resx">
       <DependentUpon>PersonalPieceDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PersonalPiece_\PersonalPieceListDialog.resx">
       <DependentUpon>PersonalPieceListDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PersonalPiece_\SelectPersonalPieceTemplateDialog.resx">
       <DependentUpon>SelectPersonalPieceTemplateDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductInStoreConfirm_\ProductInStoreConfirmList.resx">
       <DependentUpon>ProductInStoreConfirmList.cs</DependentUpon>
@@ -330,27 +377,35 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProductInStore_\ProductInStoreDetailDialog.resx">
       <DependentUpon>ProductInStoreDetailDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductInStore_\ProductInStoreDialog.resx">
       <DependentUpon>ProductInStoreDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductInStore_\ProductInStoreListDialog.resx">
       <DependentUpon>ProductInStoreListDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductInStore_\SelectProductInStoreTemplateDialog.resx">
       <DependentUpon>SelectProductInStoreTemplateDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductLink_\ProductLinkDetailDialog.resx">
       <DependentUpon>ProductLinkDetailDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductLink_\ProductLinkDialog.resx">
       <DependentUpon>ProductLinkDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductLink_\ProductLinkListDialog.resx">
       <DependentUpon>ProductLinkListDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductLink_\SelectProductLinkTemplateDialog.resx">
       <DependentUpon>SelectProductLinkTemplateDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -359,15 +414,19 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ScanTest.resx">
       <DependentUpon>ScanTest.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SysInfoDialog.resx">
       <DependentUpon>SysInfoDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SysSettingDialog.resx">
       <DependentUpon>SysSettingDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UpdateDialog.resx">
       <DependentUpon>UpdateDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

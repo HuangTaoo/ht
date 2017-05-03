@@ -31,7 +31,6 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.存货名称 = new System.Windows.Forms.ColumnHeader();
             this.主数量 = new System.Windows.Forms.ColumnHeader();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnOk = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -55,13 +54,6 @@
             this.主数量.Text = "主数量";
             this.主数量.Width = 60;
             // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(212, 273);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(10, 10);
-            this.label1.Visible = false;
-            // 
             // btnOk
             // 
             this.btnOk.Location = new System.Drawing.Point(64, 236);
@@ -78,13 +70,14 @@
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(238, 295);
             this.Controls.Add(this.btnOk);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.listView1);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ProductInStoreConfirmOK";
             this.Text = "确认库存";
             this.Load += new System.EventHandler(this.ProductInStoreConfirmOK_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ProductInStoreConfirmOK_KeyDown);
             this.ResumeLayout(false);
 
         }
@@ -94,7 +87,6 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader 存货名称;
         private System.Windows.Forms.ColumnHeader 主数量;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnOk;
     }
 }

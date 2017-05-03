@@ -41,5 +41,13 @@ namespace B3HRCE.ProductInStoreConfirm_
                 new ProductInStoreConfirmOK(ID).ShowDialog();
             }
         }
+
+        private void ProductInStoreConfirmList_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == 27)
+            {
+                this.Close();
+            }
+        }
     }
 }
