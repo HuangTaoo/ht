@@ -39,9 +39,18 @@ namespace BWP.B3Butchery.Rpcs
       var query = new DQueryDom(new JoinAlias(typeof(ProductInStore)));
       query.Columns.Add(DQSelectColumn.Field("ID"));
       query.Columns.Add(DQSelectColumn.Field("InStoreDate"));
-      //query.Where.Conditions.Add(DQCondition.EQ("BillState",单据状态.未审核));
+      query.Where.Conditions.Add(DQCondition.EQ("BillState", 单据状态.未审核));
       OrganizationUtil.AddOrganizationLimit(query, typeof(ProductInStore));
-      return query.EExecuteList<long, DateTime>().Select(x => new RpcEasyProductInStore(x.Item1, x.Item2)).ToList();
+      query.Where.Conditions.Add(DQCondition.IsNotNull(DQExpression.Field("InStoreDate")));
+      try
+      {
+       return  query.EExecuteList<long, DateTime>().Select(x => new RpcEasyProductInStore(x.Item1, x.Item2)).ToList();
+      }
+      catch (Exception)
+      {
+        return new List<RpcEasyProductInStore>(); 
+      }
+      
     }
     /// <summary>
     /// 根据成品入库单号获取存货名称和数量
@@ -58,7 +67,15 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("Goods_Name", risDetail));
       query.Columns.Add(DQSelectColumn.Field("Number", risDetail));
       query.Where.Conditions.Add(DQCondition.EQ("ID",ID));
-      return query.EExecuteList<string, object>().Select(x => new RpcEasyProductInStore_Detail(x.Item1, x.Item2)).ToList();
+      try
+      {
+        return query.EExecuteList<string, object>().Select(x => new RpcEasyProductInStore_Detail(x.Item1, x.Item2)).ToList();
+      }
+      catch (Exception)
+      {
+
+        return new List<RpcEasyProductInStore_Detail>();
+      }
     }
 
 		[Rpc]

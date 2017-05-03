@@ -13,19 +13,27 @@ namespace B3HRCE.ProductInStoreConfirm_
 {
     public partial class ProductInStoreConfirmOK : Form
     {
+        string pID;
         public ProductInStoreConfirmOK(string ID)
         {
             InitializeComponent();
-            label1.Text = ID;
+            pID = ID;
         }
         private void ProductInStoreConfirmOK_Load(object sender, EventArgs e)
         {
-            var list = RpcFacade.Call<List<RpcObject>>("/MainSystem/B3Butchery/Rpcs/ProductInStoreRpc/GetRpcEasyProductInStoreDetailById",long.Parse(label1.Text));
+            var list = RpcFacade.Call<List<RpcObject>>("/MainSystem/B3Butchery/Rpcs/ProductInStoreRpc/GetRpcEasyProductInStoreDetailById", pID);
             listView1.BeginUpdate();
             foreach (RpcObject item in list)
             {
                 var lvItem = new ListViewItem(item.Get<string>("Goods_Name"));
-                lvItem.SubItems.Add(item.Get<decimal>("Number").ToString());
+                try
+                {
+                    lvItem.SubItems.Add(item.Get<decimal>("Number").ToString());
+                }
+                catch (Exception)
+                {
+                    lvItem.SubItems.Add("");
+                }
                 listView1.Items.Add(lvItem);
             }
             listView1.EndUpdate();
@@ -35,7 +43,7 @@ namespace B3HRCE.ProductInStoreConfirm_
         {
             try
             {
-                RpcFacade.Call<List<RpcObject>>("/MainSystem/B3Butchery/Rpcs/ProductInStoreRpc/ProductInStoreCheck", long.Parse(label1.Text));
+                RpcFacade.Call<List<RpcObject>>("/MainSystem/B3Butchery/Rpcs/ProductInStoreRpc/ProductInStoreCheck", pID);
                 MessageBox.Show("审核成功");
             }
             catch (Exception ex)
@@ -48,5 +56,14 @@ namespace B3HRCE.ProductInStoreConfirm_
                 this.Close();
             }
         }
+
+        private void ProductInStoreConfirmOK_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyValue==13)
+            {
+                btnOk_Click(sender,e);
+            }
+        }
+
     }
 }

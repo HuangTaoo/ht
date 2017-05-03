@@ -14,6 +14,7 @@ namespace B3HRCE.FrozenInStore_
 {
     public partial class FrozenInStoreForm : Form
     {
+
         public FrozenInStoreForm()
         {
             InitializeComponent();
