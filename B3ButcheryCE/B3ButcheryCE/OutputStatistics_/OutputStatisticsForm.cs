@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using B3ButcheryCE.ProductInStore_;
 
 namespace B3HRCE.OutputStatistics_
 {
@@ -25,6 +26,11 @@ namespace B3HRCE.OutputStatistics_
         private void button2_Click(object sender, EventArgs e)
         {
             new FrozenInStore_.FrozenInStoreForm().ShowDialog();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            new ProductInStoreForm().ShowDialog();
         }
     }
 }

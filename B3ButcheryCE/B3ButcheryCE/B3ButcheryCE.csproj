@@ -249,11 +249,23 @@
     <Compile Include="ProductInStore_\ProductInStoreDialog.Designer.cs">
       <DependentUpon>ProductInStoreDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProductInStore_\ProductInStoreForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductInStore_\ProductInStoreForm.Designer.cs">
+      <DependentUpon>ProductInStoreForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProductInStore_\ProductInStoreListDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ProductInStore_\ProductInStoreListDialog.Designer.cs">
       <DependentUpon>ProductInStoreListDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductInStore_\ProductInStoreSelectStore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductInStore_\ProductInStoreSelectStore.Designer.cs">
+      <DependentUpon>ProductInStoreSelectStore.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductInStore_\SelectProductInStoreTemplateDialog.cs">
       <SubType>Form</SubType>
@@ -381,6 +393,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProductInStore_\ProductInStoreDialog.resx">
       <DependentUpon>ProductInStoreDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductInStore_\ProductInStoreForm.resx">
+      <DependentUpon>ProductInStoreForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductInStore_\ProductInStoreListDialog.resx">
