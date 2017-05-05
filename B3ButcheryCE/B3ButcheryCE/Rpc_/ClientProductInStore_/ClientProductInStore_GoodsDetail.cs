@@ -13,6 +13,8 @@ namespace B3HRCE.Rpc_.ClientProductInStore_
 
         public string Goods_Code { get; set; }
 
+        public decimal Goods_Number { get; set; }
+
         public string Goods_UnitConvertDirection { get; set; }
 
         public decimal? Goods_MainUnitRatio { get; set; }
