@@ -15,6 +15,7 @@ using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TSingSoft.WebControls2;
+using Forks.Utils.Collections;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.FrozenInStore_
 {
@@ -99,21 +100,17 @@ namespace BWP.Web.Pages.B3Butchery.Bills.FrozenInStore_
 
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
-      _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Spec"));
+      _detailGrid.Columns.EAdd(new DFEditGridColumn<DFTextBox>("Number")).HeaderText = "主数量";
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_MainUnit"));
-      _detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Number"));
-      _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_SecondUnit"));
-      _detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("SecondNumber"));
-      _detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Price"));
-      _detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Money"));
+      _detailGrid.Columns.EAdd(new DFEditGridColumn<DFTextBox>("SecondNumber2")).HeaderText="生产数量";
+      _detailGrid.Columns.EAdd(new DFEditGridColumn<DFValueLabel>("Goods_SecondUnit")).HeaderText="生产单位(辅单位II)";
       _detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Remark"));
-
+      
       _detailGrid.ValueColumns.Add("Goods_ID");
       _detailGrid.ValueColumns.Add("Goods_UnitConvertDirection");
       _detailGrid.ValueColumns.Add("Goods_MainUnitRatio");
       _detailGrid.ValueColumns.Add("Goods_SecondUnitRatio");
-      new NumberSecondNumberConvertRowMangerWithMoneyChanged(_detailGrid);
-
+      new Main_Second_ConvertRatioRowManager(_detailGrid, "Number", "SecondNumber", "SecondNumber2");
       mDFContainer.AddNonDFControl(_detailGrid, "$DetailGrid");
 
       var section = mPageLayoutManager.AddSection("DetaiColumns", "明细列");
