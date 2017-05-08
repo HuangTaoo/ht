@@ -21,7 +21,7 @@ using BWP.B3Frameworks;
 using BWP.Web.Pages.TypeIocs;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
-  class ProductNoticeEdit : DepartmentWorkFlowBillEditPage<ProductNotice, IProductNoticeBL> {
+  public class ProductNoticeEdit : DepartmentWorkFlowBillEditPage<ProductNotice, IProductNoticeBL> {
     private DFEditGrid _detailGrid;
     protected override void BuildBody(Control control) {
       base.BuildBody(control);
@@ -84,11 +84,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("DmoID"));      
       _detailGrid.Columns.Add(new DFEditGridColumn("Remark"));
 
-      foreach (var ioc in TypeIOCCenter.GetIOCList<ProductNoticeEditIoc.BuildDetail>(GetType()))
-      {
-        ioc.Invoke(_detailGrid);
-      }
-
+      AddProductNoticeDetailGrid(_detailGrid);
 
       _detailGrid.ValueColumns.Add("Goods_ID");
       _detailGrid.ValueColumns.Add("Goods_UnitConvertDirection");
@@ -107,6 +103,10 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       var scriptManager = new GoodsEditGridScriptManager(_detailGrid, "Number" );
       titlePanel.Controls.Add(scriptManager);
 
+    }
+
+    protected virtual void AddProductNoticeDetailGrid(DFEditGrid _detailGrid)
+    {
     }
 
     private void AddCopyAndPaste(HLayoutPanel toobar)
