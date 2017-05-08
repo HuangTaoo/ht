@@ -37,11 +37,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnSubmit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_OK
             // 
-            this.btn_OK.Location = new System.Drawing.Point(66, 234);
+            this.btn_OK.Location = new System.Drawing.Point(43, 234);
             this.btn_OK.Name = "btn_OK";
             this.btn_OK.Size = new System.Drawing.Size(72, 29);
             this.btn_OK.TabIndex = 4;
@@ -110,12 +111,22 @@
             this.label2.Size = new System.Drawing.Size(100, 20);
             this.label2.Text = "存货名称:";
             // 
+            // btnSubmit
+            // 
+            this.btnSubmit.Location = new System.Drawing.Point(133, 234);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(77, 29);
+            this.btnSubmit.TabIndex = 18;
+            this.btnSubmit.Text = "提交";
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            // 
             // ProductInStoreForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(238, 295);
+            this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtNumber);
@@ -145,5 +156,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnSubmit;
     }
 }

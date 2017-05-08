@@ -5,7 +5,7 @@ using System.Text;
 
 namespace B3HRCE.Rpc_.ClientProductInStore_
 {
-    public class ClientProductInStore
+    public class ClientProductInStore : ClientBase
     {
         public long ID { get; set; }
 

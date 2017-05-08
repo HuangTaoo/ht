@@ -60,7 +60,7 @@ namespace B3HRCE
                 //程序主入口初始化扫描头
                 HardwareUtil.HardWareInit();
 
-                HardwareUtil.ScanPowerOn();
+                //HardwareUtil.ScanPowerOn();
 
                 HardwareUtil.HiddenTask();
 

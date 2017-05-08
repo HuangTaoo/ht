@@ -24,17 +24,18 @@ namespace B3ButcheryCE.ProductInStore_
         {
             InitializeComponent();
             Util.SetSceen(this);
-        }
+        } 
         ClientAllGoods mClientGoods;
         Dictionary<string, decimal> dClienGoods=new Dictionary<string,decimal>();
         List<ClientAllGoods> mGoodsList = XmlSerializerUtil.GetClientListXmlDeserialize<ClientAllGoods>();
+        List<ClientAllGoods> mSelectList = new List<ClientAllGoods>();
         decimal mSumNumber = 0;
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
             try
             {
-
+                #region 
                 //ClientProduceOutputBillSave clientDmo = new ClientProduceOutputBillSave
                 //{
                 //    AccountingUnit_ID = SysConfig.Current.AccountingUnit_ID.Value,
@@ -43,19 +44,19 @@ namespace B3ButcheryCE.ProductInStore_
                 //    User_ID = SysConfig.Current.User_ID,
                 //    CreateTime = DateTime.Now
                 //};
-                //ClientProductInStore productInStore = new ClientProductInStore
-                //{
-                //    Department_ID = SysConfig.Current.Department_ID ?? 0,
-                //    InStoreType_ID = 01,
-                //};
+                #endregion
+
+                ClientProductInStore productInStore = new ClientProductInStore
+                {
+                    Department_ID = SysConfig.Current.Department_ID ?? 0,
+                    InStoreType_ID = 01,
+                };
                 var clientDetail = new ClientAllGoods();
                 clientDetail.Goods_ID = mClientGoods.Goods_ID;
+                clientDetail.Goods_Name = mClientGoods.Goods_Name;
                 clientDetail.Goods_Number = decimal.Parse(txtNumber.Text);
-                //productInStore.GoodsDetails.Add(clientDetail);
-                mGoodsList.Add(clientDetail);
-                //XmlSerializerUtil.ClientXmlSerializer(clientDetail);
+                mSelectList.Add(clientDetail);
 
-                //SyncBillUtil.SyncProductOut();
 
 
                 MessageBox.Show("操作成功");
@@ -105,17 +106,14 @@ namespace B3ButcheryCE.ProductInStore_
 
                 if (dClienGoods.ContainsKey(productId))
                 {
-                    number = dClienGoods[productId];
-                 // number= ( dClienGoods[nub] = dClienGoods[nub] + ClientUtil.GetNumberBySecondNumber(mClientGoods, secondNumber));
+                   number= dClienGoods[productId] = dClienGoods[productId] + (ClientUtil.GetNumberBySecondNumber(mClientGoods, secondNumber) ?? 0);
                 }
                 else
                 {
-                    dClienGoods.Add(cbxGoods.SelectedValue.ToString(), number = ClientUtil.GetNumberBySecondNumber(mClientGoods, secondNumber) ?? 0);
+                    dClienGoods.Add(cbxGoods.SelectedValue.ToString(), number = (ClientUtil.GetNumberBySecondNumber(mClientGoods, secondNumber) ?? 0));
                 }
 
-                
-                //mSumNumber += number ?? 0;
-                txtNumber.Text = number.ToString() ;// mSumNumber.ToString();
+                txtNumber.Text = number.ToString() ;
                 textBox1.Text = "";
             }
             catch (Exception ex)
@@ -214,6 +212,11 @@ namespace B3ButcheryCE.ProductInStore_
         private void cbxGoods_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             SelectIndexChanged();
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            new ProductInStoreSelectStore(mSelectList).ShowDialog();
         }
     }
 }

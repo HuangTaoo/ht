@@ -145,7 +145,7 @@ namespace B3HRCE.FrozenInStore_
             }
             XmlSerializerUtil.ClientXmlSerializer(dmo);
 
-            SyncBillUtil.SyncProductOut();
+            SyncBillUtil.SyncProductInStore();
 
             MessageBox.Show("操作成功");
             Close();
