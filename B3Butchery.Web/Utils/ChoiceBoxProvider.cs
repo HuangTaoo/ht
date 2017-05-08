@@ -28,7 +28,12 @@ namespace BWP.B3Butchery.Web
 					OnlyAvailable = true
 				}.GetData();
 			});
-
+      ChoiceBoxSettings.Register(B3ButcheryDataSource.速冻库, (argu) =>
+      {
+        return new DomainChoiceBoxQueryHelper<FrozenStore>(argu)
+        {
+        }.GetData();
+      });
 			ChoiceBoxSettings.Register(B3ButcheryDataSource.生产线全部, (argu) =>
 			{
 				return new DomainChoiceBoxQueryHelper<ProductLine>(argu)
@@ -86,7 +91,7 @@ namespace BWP.B3Butchery.Web
 					OnlyAvailable = false
 				}.GetData();
 			});
-
+     
 			ChoiceBoxSettings.Register(B3ButcheryDataSource.存货带编号, (argu) =>
 			{
 				return SelectGoodsWithSpec(argu, true);
