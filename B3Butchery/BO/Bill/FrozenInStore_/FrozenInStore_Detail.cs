@@ -4,9 +4,6 @@ using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
 using Forks.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace BWP.B3Butchery.BO
 {
@@ -20,7 +17,7 @@ namespace BWP.B3Butchery.BO
     public Money<decimal>? SecondNumber2 { get; set; }
 
     [LogicName("辅单位Ⅱ")]
-    [ReferenceTo(typeof(Goods), "SecondUnit")]
+    [ReferenceTo(typeof(Goods), "SecondUnitII")]
     [Join("Goods_ID", "ID")]
     public string Goods_SecondUnit2 { get; set; }
 
