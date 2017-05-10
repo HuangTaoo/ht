@@ -6,7 +6,6 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using B3HRCE.Rpc_;
 using B3ButcheryCE.Rpc_;
 using Forks.JsonRpc.Client;
 using Forks.JsonRpc.Client.Data;
@@ -15,9 +14,10 @@ using System.IO;
 using System.Xml.Serialization;
 using B3ButcheryCE;
 using B3ButcheryCE.Util_;
-using B3HRCE.Device_;
+using BWP.Compact.Devices;
 
-namespace B3HRCE.OutputStatistics_
+
+namespace B3ButcheryCE.OutputStatistics_
 {
     public partial class MaterialStatisticsForm : Form
     {

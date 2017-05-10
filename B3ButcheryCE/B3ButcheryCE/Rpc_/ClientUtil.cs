@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
-using B3HRCE.Rpc_;
+using B3ButcheryCE.Rpc_;
 using Forks.JsonRpc.Client.Data;
 using System.IO;
-using B3HRCE;
+using B3ButcheryCE;
 using System.Xml.Serialization;
 
 namespace B3ButcheryCE.Rpc_

@@ -13,7 +13,7 @@ using BWP.Compact;
 using BWP.Compact.Devices;
 using Forks.JsonRpc.Client.Data;
 
-namespace B3HRCE
+namespace B3ButcheryCE
 {
     public partial class LoginForm : Form
     {

@@ -11,12 +11,13 @@ using Forks.JsonRpc.Client.Data;
 using System.Threading;
 using BWP.Compact.UI;
 using System.IO;
-using B3HRCE.Rpc_;
+using B3ButcheryCE.Rpc_;
 using System.Xml;
 using System.Xml.Serialization;
+using BWP.Compact.Devices;
 
 
-namespace B3HRCE.FileGroupValuation_
+namespace B3ButcheryCE.FileGroupValuation_
 {
     public partial class FileGroupValuationDialog : Form
     {
@@ -25,7 +26,7 @@ namespace B3HRCE.FileGroupValuation_
             InitializeComponent();
             Util.SetSceen(this);
 
-            HardwareUtil.Device.ScannerReader += new EventHandler<B3HRCE.Device_.ScanEventArgs>(Device_ScannerReaders);
+            HardwareUtil.Device.ScannerReader += new EventHandler<ScanEventArgs>(Device_ScannerReaders);
         }
 
         ClientFileGroupValuation fileGroupValuationTemplate;
@@ -68,10 +69,10 @@ namespace B3HRCE.FileGroupValuation_
             }
 
             comboBoxFileGroup.Focus();
-            HardwareUtil.Device.ScannerReader += new EventHandler<B3HRCE.Device_.ScanEventArgs>(Device_ScannerReaders);
+            HardwareUtil.Device.ScannerReader += new EventHandler<ScanEventArgs>(Device_ScannerReaders);
         }
 
-        public void Device_ScannerReaders(object sender, B3HRCE.Device_.ScanEventArgs e)
+        public void Device_ScannerReaders(object sender, ScanEventArgs e)
         {
             bool hasFileGroupCode = false;
             bool hasPieceItemCode = false;
@@ -183,7 +184,7 @@ namespace B3HRCE.FileGroupValuation_
 
         private void FileGroupValuationDialog_Closing(object sender, CancelEventArgs e)
         {
-            HardwareUtil.Device.ScannerReader -= new EventHandler<B3HRCE.Device_.ScanEventArgs>(Device_ScannerReaders);
+            HardwareUtil.Device.ScannerReader -= new EventHandler<ScanEventArgs>(Device_ScannerReaders);
         }
 
         private void FileGroupValuationDialog_KeyPress(object sender, KeyPressEventArgs e)

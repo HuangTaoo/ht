@@ -7,10 +7,10 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
-using B3HRCE.Rpc_.ClientProductLink_;
+using B3ButcheryCE.Rpc_.ClientProductLink_;
 using System.Xml.Serialization;
 
-namespace B3HRCE.ProductLink_
+namespace B3ButcheryCE.ProductLink_
 {
     public partial class ProductLinkListDialog : Form
     {

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
-namespace B3HRCE.Rpc_.ClientProductLink_
+namespace B3ButcheryCE.Rpc_.ClientProductLink_
 {
     public class ClientProductLink_GoodsDetail
     {

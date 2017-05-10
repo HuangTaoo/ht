@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E5D43615-A797-4FE5-BA52-EC9936D9A004}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -48,10 +48,7 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BWP.Compact, Version=1.0.5536.21191, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\tsref\Debug\Compact\BWP.Compact.dll</HintPath>
-    </Reference>
+    <Reference Include="BWP.Compact, Version=2.0.6339.18836, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Forks.Json.cf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7254430f49d10aae, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\tsref\Debug\Compact\Forks.Json.cf.dll</HintPath>
     </Reference>
@@ -97,12 +94,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Device_\Device.cs" />
-    <Compile Include="Device_\DevicePC.cs" />
-    <Compile Include="Device_\DeviceWinCE.cs" />
-    <Compile Include="Device_\Device_MC3190.cs" />
-    <Compile Include="Device_\Device_Seuic6L2D.cs" />
-    <Compile Include="Device_\Device_SeuicD300.cs" />
     <Compile Include="ErrorInfoDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +191,12 @@
     </Compile>
     <Compile Include="OutputStatistics_\OutputStatisticsForm.Designer.cs">
       <DependentUpon>OutputStatisticsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PersonalPiece_\IndividualPieceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonalPiece_\IndividualPieceForm.Designer.cs">
+      <DependentUpon>IndividualPieceForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PersonalPiece_\PersonalPieceDetailDialog.cs">
       <SubType>Form</SubType>
@@ -362,6 +359,9 @@
     <EmbeddedResource Include="OutputStatistics_\OutputStatisticsForm.resx">
       <DependentUpon>OutputStatisticsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PersonalPiece_\IndividualPieceForm.resx">
+      <DependentUpon>IndividualPieceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PersonalPiece_\PersonalPieceDetailDialog.resx">
       <DependentUpon>PersonalPieceDetailDialog.cs</DependentUpon>

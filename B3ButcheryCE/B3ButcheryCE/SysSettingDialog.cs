@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Forks.JsonRpc.Client;
 
-namespace B3HRCE
+namespace B3ButcheryCE
 {
     public partial class SysSettingDialog : Form
     {

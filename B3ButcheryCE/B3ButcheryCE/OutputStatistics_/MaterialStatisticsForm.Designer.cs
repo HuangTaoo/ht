@@ -1,4 +1,4 @@
-﻿namespace B3HRCE.OutputStatistics_
+﻿namespace B3ButcheryCE.OutputStatistics_
 {
     partial class MaterialStatisticsForm
     {

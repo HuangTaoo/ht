@@ -6,12 +6,13 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using B3HRCE.Rpc_.ClientProductLink_;
+using B3ButcheryCE.Rpc_.ClientProductLink_;
 using System.IO;
 using System.Xml.Serialization;
-using B3HRCE.Rpc_;
+using B3ButcheryCE.Rpc_;
+using BWP.Compact.Devices;
 
-namespace B3HRCE.ProductLink_
+namespace B3ButcheryCE.ProductLink_
 {
     public partial class ProductLinkDialog : Form
     {
@@ -80,10 +81,10 @@ namespace B3HRCE.ProductLink_
                     comboBoxProductPlan.SelectedIndex = 1;
             }
             comboBoxProductPlan.Focus();
-            HardwareUtil.Device.ScannerReader += new EventHandler<B3HRCE.Device_.ScanEventArgs>(Device_ScannerReaders);
+            HardwareUtil.Device.ScannerReader += new EventHandler<ScanEventArgs>(Device_ScannerReaders);
         }
 
-        public void Device_ScannerReaders(object sender, B3HRCE.Device_.ScanEventArgs e)
+        public void Device_ScannerReaders(object sender, ScanEventArgs e)
         {
             bool hasGoodsCode = false;
 
@@ -120,7 +121,7 @@ namespace B3HRCE.ProductLink_
 
         private void ProductLinkDialog_Closing(object sender, CancelEventArgs e)
         {
-            HardwareUtil.Device.ScannerReader -= new EventHandler<B3HRCE.Device_.ScanEventArgs>(Device_ScannerReaders);
+            HardwareUtil.Device.ScannerReader -= new EventHandler<ScanEventArgs>(Device_ScannerReaders);
         }
 
         private void ProductLinkDialog_KeyPress(object sender, KeyPressEventArgs e)

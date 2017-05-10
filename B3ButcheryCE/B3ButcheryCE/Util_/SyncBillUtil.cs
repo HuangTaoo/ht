@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using B3ButcheryCE.Rpc_.ClientProduceOutput_;
-using B3HRCE;
+using B3ButcheryCE;
 using System.Xml.Serialization;
 using Forks.JsonRpc.Client.Data;
 using Forks.JsonRpc.Client;
 using BWP.Compact;
-using B3HRCE.Rpc_.ClientProductInStore_;
+using B3ButcheryCE.Rpc_.ClientProductInStore_;
 
 namespace B3ButcheryCE
 {

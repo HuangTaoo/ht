@@ -10,7 +10,7 @@ using System.Reflection;
 using Microsoft.Win32;
 using System.Xml.Serialization;
 
-namespace B3HRCE
+namespace B3ButcheryCE
 {
     internal static class Util
     {

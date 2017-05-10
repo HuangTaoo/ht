@@ -7,7 +7,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace B3HRCE
+namespace B3ButcheryCE
 {
     public partial class FormProcessBar : Form
     {

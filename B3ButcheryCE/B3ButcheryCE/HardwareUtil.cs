@@ -2,16 +2,17 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
-using B3HRCE.Device_;
-using System.Windows.Forms;
 
-namespace B3HRCE
+using System.Windows.Forms;
+using BWP.Compact.Devices;
+
+namespace B3ButcheryCE
 {
     public static class HardwareUtil
     {
         static HardwareUtil()
         {
-            Device = !Util.IsWinCE ? new DevicePC() : DeviceWinCE.CreateService();
+            Device = !Util.IsWinCE ? new DevicePC() : DeviceContext.Current;
         }
 
         internal static Device Device { get; private set; }

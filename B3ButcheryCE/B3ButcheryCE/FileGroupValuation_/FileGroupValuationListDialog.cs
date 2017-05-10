@@ -9,11 +9,11 @@ using System.Windows.Forms;
 using Forks.JsonRpc.Client;
 using Forks.JsonRpc.Client.Data;
 using System.IO;
-using B3HRCE.Rpc_;
+using B3ButcheryCE.Rpc_;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace B3HRCE.FileGroupValuation_
+namespace B3ButcheryCE.FileGroupValuation_
 {
     public partial class FileGroupValuationListDialog : Form
     {

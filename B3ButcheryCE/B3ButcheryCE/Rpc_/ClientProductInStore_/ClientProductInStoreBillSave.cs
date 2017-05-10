@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
-namespace B3HRCE.Rpc_.ClientProductInStore_
+namespace B3ButcheryCE.Rpc_.ClientProductInStore_
 {
     public class ClientProductInStoreBillSave : ClientBase
     {

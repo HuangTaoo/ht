@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using BWP.Compact;
 
-namespace B3HRCE
+namespace B3ButcheryCE
 {
     public class SysConfig : BaseConfig<SysConfig>
     {

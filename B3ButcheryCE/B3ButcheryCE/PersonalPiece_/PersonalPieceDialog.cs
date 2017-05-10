@@ -6,12 +6,13 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using B3HRCE.Rpc_.ClientPersonalPiece_;
+using B3ButcheryCE.Rpc_.ClientPersonalPiece_;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+using BWP.Compact.Devices;
 
-namespace B3HRCE.PersonalPiece_
+namespace B3ButcheryCE.PersonalPiece_
 {
     public partial class PersonalPieceDialog : Form
     {
@@ -19,7 +20,7 @@ namespace B3HRCE.PersonalPiece_
         {
             InitializeComponent();
             Util.SetSceen(this);
-            HardwareUtil.Device.ScannerReader += new EventHandler<B3HRCE.Device_.ScanEventArgs>(Device_ScannerReaders);
+            HardwareUtil.Device.ScannerReader += new EventHandler<ScanEventArgs>(Device_ScannerReaders);
         }
 
         ClientPersonalPiece personalPieceTemplate;
@@ -65,10 +66,10 @@ namespace B3HRCE.PersonalPiece_
             }
 
             comboBoxEmployee.Focus();
-            HardwareUtil.Device.ScannerReader += new EventHandler<B3HRCE.Device_.ScanEventArgs>(Device_ScannerReaders);
+            HardwareUtil.Device.ScannerReader += new EventHandler<ScanEventArgs>(Device_ScannerReaders);
         }
 
-        public void Device_ScannerReaders(object sender, B3HRCE.Device_.ScanEventArgs e)
+        public void Device_ScannerReaders(object sender, ScanEventArgs e)
         {
             bool hasEmployeeCode = false;
             bool hasPieceItemCode = false;
@@ -168,7 +169,7 @@ namespace B3HRCE.PersonalPiece_
 
         private void PersonalPieceDialog_Closing(object sender, CancelEventArgs e)
         {
-            HardwareUtil.Device.ScannerReader -= new EventHandler<B3HRCE.Device_.ScanEventArgs>(Device_ScannerReaders);
+            HardwareUtil.Device.ScannerReader -= new EventHandler<ScanEventArgs>(Device_ScannerReaders);
         }
 
         private void PersonalPieceDialog_KeyPress(object sender, KeyPressEventArgs e)

@@ -1,4 +1,4 @@
-﻿namespace B3HRCE.FileGroupValuation_
+﻿namespace B3ButcheryCE.FileGroupValuation_
 {
     partial class FileGroupValuationListDialog
     {

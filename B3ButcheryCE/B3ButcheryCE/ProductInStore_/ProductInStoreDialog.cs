@@ -6,14 +6,15 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using B3HRCE.Rpc_.ClientProductInStore_;
+using B3ButcheryCE.Rpc_.ClientProductInStore_;
 using System.IO;
 using System.Xml.Serialization;
 using Forks.JsonRpc.Client;
 using Forks.JsonRpc.Client.Data;
-using B3HRCE.Rpc_;
+using B3ButcheryCE.Rpc_;
+using BWP.Compact.Devices;
 
-namespace B3HRCE.ProductInStore_
+namespace B3ButcheryCE.ProductInStore_
 {
     public partial class ProductInStoreDialog : Form
     {
@@ -21,7 +22,7 @@ namespace B3HRCE.ProductInStore_
         {
             InitializeComponent();
             Util.SetSceen(this);
-            HardwareUtil.Device.ScannerReader += new EventHandler<B3HRCE.Device_.ScanEventArgs>(Device_ScannerReaders);
+            HardwareUtil.Device.ScannerReader += new EventHandler<ScanEventArgs>(Device_ScannerReaders);
         }
 
         ClientProductInStore productInStoreTemplate;
@@ -83,10 +84,10 @@ namespace B3HRCE.ProductInStore_
             }
             comboBoxProductPlan.Focus();
 
-            HardwareUtil.Device.ScannerReader += new EventHandler<B3HRCE.Device_.ScanEventArgs>(Device_ScannerReaders);
+            DeviceContext.Current.ScannerReader += new EventHandler<ScanEventArgs>(Device_ScannerReaders);
         }
 
-        public void Device_ScannerReaders(object sender, B3HRCE.Device_.ScanEventArgs e)
+        public void Device_ScannerReaders(object sender, ScanEventArgs e)
         {
             bool hasStoreCode = false;
             bool hasGoodsCode = false;
@@ -208,7 +209,7 @@ namespace B3HRCE.ProductInStore_
 
         private void ProductInStoreDialog_Closing(object sender, CancelEventArgs e)
         {
-            HardwareUtil.Device.ScannerReader -= new EventHandler<B3HRCE.Device_.ScanEventArgs>(Device_ScannerReaders);
+            HardwareUtil.Device.ScannerReader -= new EventHandler<ScanEventArgs>(Device_ScannerReaders);
         }
 
         private void ProductInStoreDialog_KeyPress(object sender, KeyPressEventArgs e)

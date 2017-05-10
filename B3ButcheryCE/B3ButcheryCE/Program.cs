@@ -5,10 +5,9 @@ using System.Windows.Forms;
 using BWP.Compact;
 using System.IO;
 using System.Diagnostics;
-using B3HRCE.Device_;
 
 
-namespace B3HRCE
+namespace B3ButcheryCE
 {
     static class Program
     {
@@ -17,8 +16,7 @@ namespace B3HRCE
         /// </summary>
         [MTAThread]
         static void Main()
-        {
-                                
+        {                               
 
             AppUtil.Init("B3ButcheryCE");
             var lockFile = Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.Personal), AppUtil.AppName + ".lock");

@@ -6,8 +6,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using BWP.Compact.Devices;
 
-namespace B3HRCE
+namespace B3ButcheryCE
 {
     public partial class ScanTest : Form
     {
@@ -15,11 +16,11 @@ namespace B3HRCE
         {
             InitializeComponent();
             Util.SetSceen(this);
-            HardwareUtil.Device.ScannerReader += new EventHandler<B3HRCE.Device_.ScanEventArgs>(Device_ScannerReader);
+            HardwareUtil.Device.ScannerReader += new EventHandler<ScanEventArgs>(Device_ScannerReader);
 
         }
 
-        public void Device_ScannerReader(object sender, B3HRCE.Device_.ScanEventArgs e)
+        public void Device_ScannerReader(object sender, ScanEventArgs e)
         {
             textBox1.Text = e.BarCode;
         }

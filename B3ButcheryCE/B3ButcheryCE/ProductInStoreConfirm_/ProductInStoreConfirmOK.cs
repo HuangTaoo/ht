@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using Forks.JsonRpc.Client;
 using Forks.JsonRpc.Client.Data;
 
-namespace B3HRCE.ProductInStoreConfirm_
+namespace B3ButcheryCE.ProductInStoreConfirm_
 {
     public partial class ProductInStoreConfirmOK : Form
     {

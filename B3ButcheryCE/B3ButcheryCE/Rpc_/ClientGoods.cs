@@ -5,7 +5,7 @@ using System.Text;
 using Forks.JsonRpc.Client.Data;
 using System.Xml.Serialization;
 
-namespace B3HRCE.Rpc_
+namespace B3ButcheryCE.Rpc_
 {
     public class ClientGoods
     {

@@ -1,4 +1,4 @@
-﻿namespace B3HRCE.ProductLink_
+﻿namespace B3ButcheryCE.ProductLink_
 {
     partial class ProductLinkDialog
     {

@@ -6,11 +6,11 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using B3HRCE.Rpc_.ClientPersonalPiece_;
+using B3ButcheryCE.Rpc_.ClientPersonalPiece_;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace B3HRCE.PersonalPiece_
+namespace B3ButcheryCE.PersonalPiece_
 {
     public partial class PersonalPieceDetailDialog : Form
     {

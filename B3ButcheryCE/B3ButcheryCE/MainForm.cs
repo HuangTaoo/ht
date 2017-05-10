@@ -9,26 +9,26 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Threading;
 using BWP.Compact;
-using B3HRCE.FileGroupValuation_;
+using B3ButcheryCE.FileGroupValuation_;
 using Forks.JsonRpc.Client;
 using Forks.JsonRpc.Client.Data;
-using B3HRCE.Rpc_;
+using B3ButcheryCE.Rpc_;
 using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
-using B3HRCE.Rpc_.ClientPersonalPiece_;
-using B3HRCE.PersonalPiece_;
-using B3HRCE.ProductInStore_;
-using B3HRCE.Rpc_.ClientProductInStore_;
-using B3HRCE.Rpc_.ClientProductLink_;
-using B3HRCE.ProductLink_;
-using B3HRCE.OutputStatistics_;
+using B3ButcheryCE.Rpc_.ClientPersonalPiece_;
+using B3ButcheryCE.PersonalPiece_;
+using B3ButcheryCE.ProductInStore_;
+using B3ButcheryCE.Rpc_.ClientProductInStore_;
+using B3ButcheryCE.Rpc_.ClientProductLink_;
+using B3ButcheryCE.ProductLink_;
+using B3ButcheryCE.OutputStatistics_;
 using B3ButcheryCE.Rpc_.ClientProduceOutput_;
 using B3ButcheryCE;
-using B3HRCE.ProductInStoreConfirm_;
-using B3HRCE.FrozenInStoreConfirm_;
+using B3ButcheryCE.ProductInStoreConfirm_;
+using B3ButcheryCE.FrozenInStoreConfirm_;
 
-namespace B3HRCE
+namespace B3ButcheryCE
 {
     public partial class MainForm : Form
     {

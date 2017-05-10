@@ -1,4 +1,4 @@
-﻿namespace B3HRCE.ProductInStoreConfirm_
+﻿namespace B3ButcheryCE.ProductInStoreConfirm_
 {
     partial class ProductInStoreConfirmList
     {

@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using B3ButcheryCE.ProductInStore_;
 
-namespace B3HRCE.OutputStatistics_
+namespace B3ButcheryCE.OutputStatistics_
 {
     public partial class OutputStatisticsForm : Form
     {

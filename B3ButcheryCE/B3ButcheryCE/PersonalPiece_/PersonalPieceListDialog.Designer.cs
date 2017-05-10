@@ -1,4 +1,4 @@
-﻿namespace B3HRCE.PersonalPiece_
+﻿namespace B3ButcheryCE.PersonalPiece_
 {
     partial class PersonalPieceListDialog
     {

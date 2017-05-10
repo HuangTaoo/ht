@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using Forks.JsonRpc.Client;
 using Forks.JsonRpc.Client.Data;
 
-namespace B3HRCE.FrozenInStoreConfirm_
+namespace B3ButcheryCE.FrozenInStoreConfirm_
 {
     public partial class FrozenInStoreConfirmList : Form
     {

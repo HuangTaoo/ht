@@ -7,7 +7,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace B3HRCE.OutputStatistics_
+namespace B3ButcheryCE.OutputStatistics_
 {
     public partial class MaterialStatisticsInputNumberForm : Form
     {

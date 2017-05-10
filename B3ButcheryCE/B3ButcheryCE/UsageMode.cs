@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
-namespace B3HRCE
+namespace B3ButcheryCE
 {
     [Flags]
     public enum UsageMode

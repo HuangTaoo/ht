@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Xml.Serialization;
-using B3HRCE;
-using B3HRCE.Rpc_;
+using B3ButcheryCE;
+using B3ButcheryCE.Rpc_;
 
 namespace B3ButcheryCE.Util_
 {

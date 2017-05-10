@@ -6,9 +6,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using B3HRCE.Rpc_;
 using B3ButcheryCE.Rpc_;
-using B3HRCE.OutputStatistics_;
+using B3ButcheryCE.OutputStatistics_;
 
 namespace B3ButcheryCE.FrozenInStore_
 {

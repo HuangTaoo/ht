@@ -6,13 +6,13 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using B3HRCE.Rpc_;
+using B3ButcheryCE.Rpc_;
 using B3ButcheryCE.Util_;
 using B3ButcheryCE.FrozenInStore_;
 using B3ButcheryCE.Rpc_.ClientProduceOutput_;
 using B3ButcheryCE;
 
-namespace B3HRCE.FrozenInStore_
+namespace B3ButcheryCE.FrozenInStore_
 {
     public partial class FrozenInStoreSelectGoodsForm : Form
     {

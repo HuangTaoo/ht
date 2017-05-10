@@ -122,6 +122,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_34B877EC44AA4FC6BA26624560F1A064"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_424B2C3C0EFA426CDA13F97C9D6AE616"
         "OwnerKey" = "8:_6C1CEA86AF00CAD4EB5184F0FD686832"
         "MsmSig" = "8:_UNDEFINED"
@@ -242,12 +248,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A81B6ED18D7047D3BD379E6EA91E5079"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_B6E73D28D27A1A3DCD9EF17CEC7B5307"
         "OwnerKey" = "8:_C2CD92A076124BF89F57008690217CFF"
         "MsmSig" = "8:_UNDEFINED"
@@ -292,6 +292,12 @@
         {
         "MsmKey" = "8:_BCAC5A98E833A8DC48DBB0B58C32105D"
         "OwnerKey" = "8:_C2CD92A076124BF89F57008690217CFF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BF04E9363AC74264B1A7C2F91C51C809"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -434,7 +440,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:..\\..\\B3HR\\Downloads\\B3HRCESetup.CAB"
+        "OutputFilename" = "8:Release\\B3ButcheryCESetup.cab"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
         "SignOutput" = "11:FALSE"
@@ -612,6 +618,24 @@
             "Register" = "3:0"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_34B877EC44AA4FC6BA26624560F1A064"
+            {
+            "SourcePath" = "8:..\\B3ButcheryCE\\D300SysUI.dll"
+            "TargetName" = "8:D300SysUI.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_B5E1DAD32DC04529AEB7F3E6C267BD88"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{E4F2F62A-3940-4BF5-A031-F7FA98CAAFFA}:_424B2C3C0EFA426CDA13F97C9D6AE616"
@@ -810,24 +834,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{BA458234-9B71-4F46-8107-E91156377184}:_A81B6ED18D7047D3BD379E6EA91E5079"
-            {
-            "SourcePath" = "8:..\\B3HRCE\\D300SysUI.dll"
-            "TargetName" = "8:D300SysUI.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_08A24ACE96C54F3D8BC4F5C2B300179F"
-            "Condition" = "8:"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "Register" = "3:0"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{E4F2F62A-3940-4BF5-A031-F7FA98CAAFFA}:_B6E73D28D27A1A3DCD9EF17CEC7B5307"
             {
             "AssemblyIsInGAC" = "11:FALSE"
@@ -938,6 +944,24 @@
             "Register" = "3:0"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_BF04E9363AC74264B1A7C2F91C51C809"
+            {
+            "SourcePath" = "8:C:\\Users\\luanhui\\Desktop\\Scanner2DV.dll"
+            "TargetName" = "8:Scanner2DV.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_B5E1DAD32DC04529AEB7F3E6C267BD88"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{E4F2F62A-3940-4BF5-A031-F7FA98CAAFFA}:_BF2B42D4111BE71EFB48DF56305BFBBE"
@@ -1108,7 +1132,7 @@
         {
             "{605BE39E-5046-48BD-AEC0-63C3A46626D5}:_C2CD92A076124BF89F57008690217CFF"
             {
-            "SourcePath" = "8:..\\B3ButcheryCE\\obj\\Debug\\B3ButcheryCE.exe"
+            "SourcePath" = "8:..\\B3ButcheryCE\\obj\\Release\\B3ButcheryCE.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_08A24ACE96C54F3D8BC4F5C2B300179F"

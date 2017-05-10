@@ -1,4 +1,4 @@
-﻿namespace B3HRCE.ProductInStore_
+﻿namespace B3ButcheryCE.ProductInStore_
 {
     partial class ProductInStoreDetailDialog
     {

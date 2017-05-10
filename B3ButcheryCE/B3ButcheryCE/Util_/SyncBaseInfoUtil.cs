@@ -5,15 +5,14 @@ using System.Text;
 using Forks.JsonRpc.Client;
 using Forks.JsonRpc.Client.Data;
 using System.IO;
-using B3HRCE.Rpc_;
-using System.Xml.Serialization;
-using B3HRCE.Rpc_.ClientPersonalPiece_;
-using B3HRCE.Rpc_.ClientProductInStore_;
-using B3HRCE.Rpc_.ClientProductLink_;
 using B3ButcheryCE.Rpc_;
+using System.Xml.Serialization;
+using B3ButcheryCE.Rpc_.ClientPersonalPiece_;
+using B3ButcheryCE.Rpc_.ClientProductInStore_;
+using B3ButcheryCE.Rpc_.ClientProductLink_;
 using B3ButcheryCE.Rpc_.BaseInfo_;
 
-namespace B3HRCE
+namespace B3ButcheryCE
 {
     public static class SyncBaseInfoUtil
     {

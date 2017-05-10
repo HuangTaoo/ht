@@ -6,10 +6,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using B3HRCE.Device_;
 
 
-namespace B3HRCE
+namespace B3ButcheryCE
 {
     public partial class SysInfoDialog : Form
     {

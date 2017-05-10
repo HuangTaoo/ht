@@ -1,4 +1,4 @@
-﻿namespace B3HRCE.FrozenInStoreConfirm_
+﻿namespace B3ButcheryCE.FrozenInStoreConfirm_
 {
     partial class FrozenInStoreConfirmOK
     {

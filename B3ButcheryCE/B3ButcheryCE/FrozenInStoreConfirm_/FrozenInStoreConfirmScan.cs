@@ -7,10 +7,10 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using B3ButcheryCE.Rpc_.BaseInfo_;
-using B3HRCE.Device_;
 using B3ButcheryCE.Util_;
+using BWP.Compact.Devices;
 
-namespace B3HRCE.FrozenInStoreConfirm_
+namespace B3ButcheryCE.FrozenInStoreConfirm_
 {
     public partial class FrozenInStoreConfirmScan : Form
     {

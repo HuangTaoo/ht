@@ -13,7 +13,7 @@ using System.IO;
 using System.Threading;
 using BWP.Compact.Devices;
 
-namespace B3HRCE
+namespace B3ButcheryCE
 {
     public partial class UpdateDialog : Form
     {
@@ -102,7 +102,7 @@ namespace B3HRCE
             Thread.Sleep(1000);
             withProgreeLabel1.HiddenProgressBar();
 
-            Device.Current.SetupCab(setupFile);
+            DeviceContext.Current.SetupCab(setupFile);
             Application.Exit();
         }
 

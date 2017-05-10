@@ -116,26 +116,50 @@ namespace B3HRCE.Device_
             }
         }
 
+        private static string GetStorageCard()
+        {
+
+            string firstCard = "";
+
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo("\\");
+
+            System.IO.FileSystemInfo[] fsi = di.GetFileSystemInfos();
+
+            for (int x = 0; x < fsi.Length; x++)
+            {
+
+                if ((fsi[x].Attributes & System.IO.FileAttributes.Temporary) == System.IO.FileAttributes.Temporary)
+                {
+                    //if so, return the path
+                    firstCard = fsi[x].FullName;
+                }
+            }
+
+            return firstCard;
+        }
+
         public override string LogRootDirection
         {
             get
             {
-                if (Directory.Exists("\\User_Storage"))
-                {
-                    return "\\User_Storage";
-                }
-                else if (Directory.Exists("\\User Storage"))
-                {
-                    return "\\User Storage";
-                }
-                else if (Directory.Exists("\\Storage Card"))
-                {
-                    return "\\Storage Card";
-                }
-                else
-                {
-                    throw new Exception("内存卡不存在");
-                }
+                return GetStorageCard();
+                //if (Directory.Exists("\\User_Storage"))
+                //{
+                //    return "\\User_Storage";
+                //}
+                //else if (Directory.Exists("\\User Storage"))
+                //{
+                //    return "\\User Storage";
+                //}
+                //else if (Directory.Exists("\\Storage Card"))
+                //{
+                //    return "\\Storage Card";
+                //}
+                //else
+                //{
+                  
+                //    throw new Exception("内存卡不存在");
+                //}
             }
         }
 

@@ -1,4 +1,4 @@
-﻿namespace B3HRCE.FrozenInStore_
+﻿namespace B3ButcheryCE.FrozenInStore_
 {
     partial class FrozenInStoreSelectGoodsForm
     {

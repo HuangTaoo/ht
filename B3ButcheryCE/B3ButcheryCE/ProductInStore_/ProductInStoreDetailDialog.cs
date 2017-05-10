@@ -6,11 +6,11 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using B3HRCE.Rpc_.ClientProductInStore_;
+using B3ButcheryCE.Rpc_.ClientProductInStore_;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace B3HRCE.ProductInStore_
+namespace B3ButcheryCE.ProductInStore_
 {
     public partial class ProductInStoreDetailDialog : Form
     {

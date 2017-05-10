@@ -1,4 +1,4 @@
-﻿namespace B3HRCE
+﻿namespace B3ButcheryCE
 {
     partial class FormProcessBar
     {

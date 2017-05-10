@@ -7,7 +7,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace B3HRCE.FrozenInStoreConfirm_
+namespace B3ButcheryCE.FrozenInStoreConfirm_
 {
     public partial class FrozenInStoreConfirmOK : Form
     {
