@@ -26,7 +26,7 @@ namespace BWP.B3Butchery.Rpcs
       var list = new List<GoodsInfoDto>();
       var query=new DQueryDom(new JoinAlias(typeof(Goods)));
       query.Where.Conditions.Add(DQCondition.EQ("Stopped",false));
-      query.Where.Conditions.Add(DQCondition.EQ("Domain_ID", DomainContext.Current.ID));
+      //query.Where.Conditions.Add(DQCondition.EQ("Domain_ID", DomainContext.Current.ID));
 
       query.Columns.Add(DQSelectColumn.Field("ID"));
       query.Columns.Add(DQSelectColumn.Field("Name"));

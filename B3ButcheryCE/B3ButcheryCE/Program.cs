@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using BWP.Compact;
 using System.IO;
 using System.Diagnostics;
+using BWP.Compact.Devices;
 
 
 namespace B3ButcheryCE
@@ -72,6 +73,8 @@ namespace B3ButcheryCE
             }
             finally
             {
+                DeviceContext.Current.ShowTask();
+
                 HardwareUtil.ScanPowerOff();
                 HardwareUtil.HardWareDeInit();
                 HardwareUtil.ShowTask();
