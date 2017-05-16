@@ -9,6 +9,7 @@ namespace BWP.B3Butchery.BO {
     public long ProductNotice_ID { get; set; }
 
     [LogicName("加工要求")]
+    [DbColumn(Length = 1000)]
     public string ProduceRequest { get; set; }
 
     [LogicName("生产日期")]
