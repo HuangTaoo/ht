@@ -203,4 +203,100 @@ namespace BWP.B3Butchery.Utils
       };
     }
   }
+
+  public class Main_Second2_ConvertRatioRowManager
+  {
+    readonly DFEditGridColumn<DFTextBox> _numberInput, _secondNumber2Input;
+    readonly string _numberField, _secondNumber2Field;
+    public Main_Second2_ConvertRatioRowManager(DFEditGrid grid, string mNumberfield, string sNumber2Field)
+    {
+      _numberField = mNumberfield;
+      _secondNumber2Field = sNumber2Field;
+
+      foreach (DFGridColumn column in grid.Columns)
+      {
+        if (column is DFEditGridColumn<DFTextBox>)
+        {
+          var c = (DFEditGridColumn<DFTextBox>)column;
+          if (c.Name == mNumberfield)
+            _numberInput = c;
+          else if (c.Name == sNumber2Field)
+            _secondNumber2Input = c;
+        }
+        SetClientScript();
+      }
+    }
+
+    private void SetClientScript()
+    {
+      SetNumberChanged();
+      SetSecondNumberChanged();
+    }
+
+    static string ConvertDirection
+    {
+      get { return "dfContainer.getValue('Goods_UnitConvertDirection')"; }
+    }
+
+    static string RatioLeft
+    {
+      get { return "dfContainer.getValue('Goods_SecondUnitII_MainUnitRatio')"; }
+    }
+
+    static string RatioRight
+    {
+      get { return "dfContainer.getValue('Goods_SecondUnitII_SecondUnitRatio')"; }
+    }
+
+    string SetSecondNumber2
+    {
+      get
+      {
+        return "dfContainer.setValue('" + _secondNumber2Field + "', dfContainer.getValue('" + _numberField + "') * " + RatioLeft + "/" + RatioRight + ");";
+      }
+    }
+
+    string SetSecondNumber2ToMainNumber
+    {
+      get
+      {
+        return "dfContainer.setValue('" + _numberField + "', dfContainer.getValue('" + _secondNumber2Field + "') * " + RatioRight + " / " + RatioLeft + ");";
+      }
+    }
+
+    private void SetNumberChanged()
+    {
+      if (_numberInput == null)
+        return;
+      var builder = new StringBuilder();
+      builder.Append(@"if({convertDirection}=='双向转换'||{convertDirection}=='由主至辅'){ if({ratioLeft}>0)
+				{setSecondNumber2}}"
+        .Replace("{convertDirection}", ConvertDirection)
+        .Replace("{ratioLeft}", RatioLeft)
+        .Replace("{setSecondNumber2}", SetSecondNumber2));
+      _numberInput.InitEditControl += delegate(object sender, InitEditControlEventArgs<DFTextBox> e)
+      {
+        e.Control.Attributes["onchange"] = builder.ToString();
+      };
+    }
+
+    private void SetSecondNumberChanged()
+    {
+      if (_secondNumber2Input == null)
+        return;
+
+      var builder = new StringBuilder();
+
+      builder.Append(@"if({convertDirection}=='双向转换'||{convertDirection}=='由辅至主'){ if({ratioRight}>0)
+				{setMainNumber}}"
+        .Replace("{convertDirection}", ConvertDirection)
+        .Replace("{ratioRight}", RatioRight)
+        .Replace("{setMainNumber}", SetSecondNumber2ToMainNumber));
+
+      _secondNumber2Input.InitEditControl += delegate(object sender, InitEditControlEventArgs<DFTextBox> e)
+      {
+        e.Control.Attributes["onchange"] = builder.ToString();
+      };
+    }
+  }
 }

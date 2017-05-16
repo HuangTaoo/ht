@@ -2,6 +2,7 @@
 using BWP.B3Butchery.BO;
 using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks.Utils;
+using BWP.B3UnitedInfos.BO;
 using BWP.Web.CustomPageLayout;
 using BWP.Web.Layout;
 using BWP.Web.Pages.B3Butchery.Dialogs;
@@ -60,6 +61,9 @@ namespace BWP.Web.Pages.B3Butchery.Bills.FrozenInStore_
             {
               var d = new FrozenInStore_Detail { Goods_ID = long.Parse(item) };
               DmoUtil.RefreshDependency(d, "Goods_ID");
+              var goods = WebBLUtil.GetSingleDmo<Goods>("ID", long.Parse(item));
+              d.Goods_SecondUnitII_MainUnitRatio = goods.SecondUnitII_MainUnitRatio;
+              d.Goods_SecondUnitII_MainUnitRatio = goods.SecondUnitII_SecondUnitRatio;
               Dmo.Details.Add(d);
             }
           }
@@ -80,6 +84,9 @@ namespace BWP.Web.Pages.B3Butchery.Bills.FrozenInStore_
           {
             var detail = new FrozenInStore_Detail { Goods_ID = temGoodsDetail.Goods_ID };
             DmoUtil.RefreshDependency(detail, "Goods_ID");
+            var goods = WebBLUtil.GetSingleDmo<Goods>("ID", temGoodsDetail.Goods_ID);
+            detail.Goods_SecondUnitII_MainUnitRatio = goods.SecondUnitII_MainUnitRatio;
+            detail.Goods_SecondUnitII_MainUnitRatio = goods.SecondUnitII_SecondUnitRatio;
             Dmo.Details.Add(detail);
           }
           _detailGrid.DataBind();
@@ -99,15 +106,19 @@ namespace BWP.Web.Pages.B3Butchery.Bills.FrozenInStore_
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
       _detailGrid.Columns.EAdd(new DFEditGridColumn<DFTextBox>("Number")).HeaderText = "主数量";
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_MainUnit"));
-      _detailGrid.Columns.EAdd(new DFEditGridColumn<DFTextBox>("SecondNumber2")).HeaderText = "生产数量";
+
+      var secondNumber2Input = new DFEditGridColumn<DFTextBox>("SecondNumber2");
+      _detailGrid.Columns.EAdd(secondNumber2Input).HeaderText = "生产数量";
+
       _detailGrid.Columns.EAdd(new DFEditGridColumn<DFValueLabel>("Goods_SecondUnit2")).HeaderText = "生产单位(辅单位II)";
       _detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Remark"));
 
       _detailGrid.ValueColumns.Add("Goods_ID");
       _detailGrid.ValueColumns.Add("Goods_UnitConvertDirection");
-      _detailGrid.ValueColumns.Add("Goods_MainUnitRatio");
-      _detailGrid.ValueColumns.Add("Goods_SecondUnitRatio");
-      new Main_Second_ConvertRatioRowManager(_detailGrid, "Number", "SecondNumber", "SecondNumber2");
+      _detailGrid.ValueColumns.Add("Goods_SecondUnitII_MainUnitRatio");
+      _detailGrid.ValueColumns.Add("Goods_SecondUnitII_SecondUnitRatio");
+
+      new Main_Second2_ConvertRatioRowManager(_detailGrid, "Number", "SecondNumber2");
       mDFContainer.AddNonDFControl(_detailGrid, "$DetailGrid");
 
       var section = mPageLayoutManager.AddSection("DetaiColumns", "明细列");
