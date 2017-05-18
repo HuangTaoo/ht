@@ -290,14 +290,17 @@ namespace BWP.B3Butchery.Hippo
 					new FieldDesc{Name="Date", Title = "日期"},
 							 },
                 ActionRpc = CUSASK + "/Actions_/ProductNoticeAction/FormActions",
-                ActionBar = "Save Prev Next LoadDetail Predict ReferToCreate"
+                ActionBar = "Save Prev Next LoadDetail Predict ReferToCreate Check"
             };
             var loadDetail = new ActionDesc { Flags = FormModel.ActionFlags.Save, Name = "LoadDetail", Title = "加载明细" };
             var referToCreate = new ActionDesc { Flags = "", Name = "ReferToCreate", Title = "参照新建" };
             var predict = new ActionDesc { Flags = "", Name = "Predict", Title = "载入预报" };
+            var check = new ActionDesc { Flags = "", Name = FormActionNames.Check, Title = "审核" };
             model.Actions.Add(loadDetail);
             model.Actions.Add(referToCreate);
             model.Actions.Add(predict);
+            model.Actions.Add(check);
+      
             var detail = new CollectionModel
             {
                 Title = "单据明细",
