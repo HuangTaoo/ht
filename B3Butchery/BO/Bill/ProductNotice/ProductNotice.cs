@@ -23,6 +23,8 @@ namespace BWP.B3Butchery.BO {
   [DFCPrompt("销售部门", Property = "Department_ID")]
   [DFCPrompt("销售部门", Property = "Department_Name")]
   [DFCPrompt("地址", Property = "CustomerAddress")]
+  [OrganizationLimitedDmo("Customer_ID", typeof(ICustomer))]
+  [OrganizationLimitedDmo("Department_ID", typeof(Department))]
   public class ProductNotice : DepartmentWorkFlowBill
     {
   
