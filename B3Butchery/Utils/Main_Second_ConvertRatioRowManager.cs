@@ -252,7 +252,7 @@ namespace BWP.B3Butchery.Utils
     {
       get
       {
-        return "dfContainer.setValue('" + _secondNumber2Field + "', dfContainer.getValue('" + _numberField + "') * " + RatioLeft + "/" + RatioRight + ");";
+        return "dfContainer.setValue('" + _secondNumber2Field + "', dfContainer.getValue('" + _numberField + "') * " + RatioRight + "/" + RatioLeft + ");";
       }
     }
 
@@ -260,7 +260,7 @@ namespace BWP.B3Butchery.Utils
     {
       get
       {
-        return "dfContainer.setValue('" + _numberField + "', dfContainer.getValue('" + _secondNumber2Field + "') * " + RatioRight + " / " + RatioLeft + ");";
+        return "dfContainer.setValue('" + _numberField + "', dfContainer.getValue('" + _secondNumber2Field + "') * " + RatioLeft + " / " + RatioRight + ");";
       }
     }
 
