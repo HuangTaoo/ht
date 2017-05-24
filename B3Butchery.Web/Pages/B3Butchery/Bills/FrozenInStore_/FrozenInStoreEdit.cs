@@ -60,10 +60,13 @@ namespace BWP.Web.Pages.B3Butchery.Bills.FrozenInStore_
             foreach (var item in selectGoods.GetValues())
             {
               var d = new FrozenInStore_Detail { Goods_ID = long.Parse(item) };
-              DmoUtil.RefreshDependency(d, "Goods_ID");
               var goods = WebBLUtil.GetSingleDmo<Goods>("ID", long.Parse(item));
+              d.Goods_MainUnit = goods.MainUnit;
+              d.Goods_Name = goods.Name;
+              d.Goods_Code = goods.Code;
+              d.Goods_UnitConvertDirection = goods.UnitConvertDirection;
               d.Goods_SecondUnitII_MainUnitRatio = goods.SecondUnitII_MainUnitRatio;
-              d.Goods_SecondUnitII_MainUnitRatio = goods.SecondUnitII_SecondUnitRatio;
+              d.Goods_SecondUnitII_SecondUnitRatio = goods.SecondUnitII_SecondUnitRatio;
               Dmo.Details.Add(d);
             }
           }
@@ -83,10 +86,14 @@ namespace BWP.Web.Pages.B3Butchery.Bills.FrozenInStore_
           foreach (var temGoodsDetail in details)
           {
             var detail = new FrozenInStore_Detail { Goods_ID = temGoodsDetail.Goods_ID };
-            DmoUtil.RefreshDependency(detail, "Goods_ID");
+            //DmoUtil.RefreshDependency(detail, "Goods_ID");
             var goods = WebBLUtil.GetSingleDmo<Goods>("ID", temGoodsDetail.Goods_ID);
+            detail.Goods_MainUnit = goods.MainUnit;
+            detail.Goods_Name = goods.Name;
+            detail.Goods_Code = goods.Code;
+            detail.Goods_UnitConvertDirection = goods.UnitConvertDirection;
             detail.Goods_SecondUnitII_MainUnitRatio = goods.SecondUnitII_MainUnitRatio;
-            detail.Goods_SecondUnitII_MainUnitRatio = goods.SecondUnitII_SecondUnitRatio;
+            detail.Goods_SecondUnitII_SecondUnitRatio = goods.SecondUnitII_SecondUnitRatio;
             Dmo.Details.Add(detail);
           }
           _detailGrid.DataBind();
