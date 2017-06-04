@@ -38,7 +38,7 @@ namespace BWP.B3Butchery.BO
 
 
     [LogicName("仓库")]
-    [ReferenceTo(typeof(Store), "Name")]
+    [ReferenceTo(typeof(FrozenStore), "Name")]
     [Join("Store_ID", "ID")]
     public string Store_Name { get; set; }
 

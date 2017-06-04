@@ -65,6 +65,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.FrozenInStore_
               d.Goods_Name = goods.Name;
               d.Goods_Code = goods.Code;
               d.Goods_UnitConvertDirection = goods.UnitConvertDirection;
+              d.Goods_SecondUnit2 = goods.SecondUnitII;
               d.Goods_SecondUnitII_MainUnitRatio = goods.SecondUnitII_MainUnitRatio;
               d.Goods_SecondUnitII_SecondUnitRatio = goods.SecondUnitII_SecondUnitRatio;
               Dmo.Details.Add(d);
