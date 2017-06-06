@@ -15,7 +15,20 @@ namespace BWP.B3Butchery.BO
 
 	public class ProduceOutput : DepartmentWorkFlowBill
 	{
-		[LogicName("时间")]
+    [DFDataKind(B3ButcheryDataSource.速冻库)]
+    [DFExtProperty("DisplayField", "FrozenStore_Name")]
+    [DFExtProperty(B3ButcheryDataSource.速冻库, B3ButcheryDataSource.速冻库)]
+    [DFPrompt("速冻库")]
+    [DFNotEmpty]
+    public long? FrozenStore_ID { get; set; }
+
+
+    [LogicName("速冻库")]
+    [ReferenceTo(typeof(FrozenStore), "Name")]
+    [Join("FrozenStore_ID", "ID")]
+    public string FrozenStore_Name { get; set; }
+
+    [LogicName("时间")]
 		[DFNotEmpty]
 		public DateTime? Time { get; set; }
 

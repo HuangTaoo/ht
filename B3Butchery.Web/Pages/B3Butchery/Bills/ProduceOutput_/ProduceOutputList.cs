@@ -37,6 +37,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceOutput_
         AddDFBrowseGridColumn(grid, "Department_Name");
         AddDFBrowseGridColumn(grid, "Employee_Name");
         AddDFBrowseGridColumn(grid, "Time");
+        AddDFBrowseGridColumn(grid, "FrozenStore_Name");
       }
     }
     protected override void InitToolBar(HLayoutPanel toolbar)
