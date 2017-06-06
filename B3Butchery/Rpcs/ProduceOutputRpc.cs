@@ -18,6 +18,25 @@ namespace BWP.B3Butchery.Rpcs
   public static class ProduceOutputRpc
   {
 
+
+    [Rpc]
+    public static long PdaInsertAndCheck(ProduceOutput dmo)
+    {
+      using (var context = new TransactionContext())
+      {
+        var bl = BIFactory.Create<IProduceOutputBL>(context.Session);
+        dmo.Time = dmo.Time ?? DateTime.Today;
+
+        dmo.Employee_ID = GetCurrentBindingEmployeeID(context.Session);
+        bl.InitNewDmo(dmo); 
+        bl.Insert(dmo);
+        bl.Check(dmo);
+        context.Commit();
+      }
+
+      return dmo.ID;
+    }
+
     [Rpc]
     public static long PdaInsert(ProduceOutput dmo)
     {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BWP.B3Butchery.BO;
 using BWP.B3Butchery.Rpcs.RpcObject;
 using BWP.B3Frameworks;
 using BWP.B3Frameworks.BL;
@@ -19,6 +20,29 @@ namespace BWP.B3Butchery.Rpcs
   [Rpc]
   public static class BaseInfoRpc
   {
+    
+   [Rpc]
+    public static List<FrozenStore> SyncFrozenStore()
+    {
+      var list = new List<FrozenStore>();
+      var query = new DQueryDom(new JoinAlias(typeof(FrozenStore)));
+      query.Columns.Add(DQSelectColumn.Field("ID"));
+      query.Columns.Add(DQSelectColumn.Field("Name"));
+      query.Columns.Add(DQSelectColumn.Field("Code"));
+      query.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
+      query.Where.Conditions.Add(DQCondition.EQ("Domain_ID", DomainContext.Current.ID));
+      using (var session = Dmo.NewSession())
+      {
+        using (var reader = session.ExecuteReader(query))
+        {
+          while (reader.Read())
+          {
+            list.Add(new FrozenStore() { ID = (long)reader[0], Name = (string)reader[1], Code = (string)reader[2] });
+          }
+        }
+      }
+      return list;
+    }
 
     [Rpc]
     public static List<Store> SyncStores()

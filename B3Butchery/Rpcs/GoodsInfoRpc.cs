@@ -21,11 +21,21 @@ namespace BWP.B3Butchery.Rpcs
   public static class GoodsInfoRpc {
 
     [Rpc]
-    public static List<GoodsInfoDto> GetAllGoods()
+    public static List<GoodsInfoDto> GetAllGoods(string input="")
     {
       var list = new List<GoodsInfoDto>();
-      var query=new DQueryDom(new JoinAlias(typeof(Goods)));
+      var joinGoods = new JoinAlias(typeof(Goods));
+//      var goodsProperty = new JoinAlias(typeof(GoodsProperty));
+//      var goodsPropertyCatalog = new JoinAlias(typeof(GoodsPropertyCatalog));
+      var query=new DQueryDom(joinGoods);
+     
       query.Where.Conditions.Add(DQCondition.EQ("Stopped",false));
+      if (!string.IsNullOrWhiteSpace(input))
+      {
+        query.Where.Conditions.Add(DQCondition.Or(DQCondition.Like("Name",input),DQCondition.Like("Code", input),DQCondition.Like("Spell", input)));
+      }
+      query.OrderBy.Expressions.Add(DQOrderByExpression.Create("Name"));
+      query.OrderBy.Expressions.Add(DQOrderByExpression.Create("Code"));
       //query.Where.Conditions.Add(DQCondition.EQ("Domain_ID", DomainContext.Current.ID));
 
       query.Columns.Add(DQSelectColumn.Field("ID"));
@@ -36,6 +46,13 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("MainUnitRatio"));
       query.Columns.Add(DQSelectColumn.Field("SecondUnitRatio"));
       query.Columns.Add(DQSelectColumn.Field("Code"));
+      query.Columns.Add(DQSelectColumn.Field("GoodsProperty_ID"));
+      query.Columns.Add(DQSelectColumn.Field("GoodsProperty_Name"));
+      query.Columns.Add(DQSelectColumn.Field("GoodsPropertyCatalog_Name"));
+      query.Columns.Add(DQSelectColumn.Field("SecondUnitII"));
+      query.Columns.Add(DQSelectColumn.Field("SecondUnitII_MainUnitRatio"));
+      query.Columns.Add(DQSelectColumn.Field("SecondUnitII_SecondUnitRatio"));
+
 
       using (var session = Dmo.NewSession())
       {
@@ -60,6 +77,13 @@ namespace BWP.B3Butchery.Rpcs
             {
               dto.Goods_SecondUnitRatio = 1;
             }
+            dto.GoodsProperty_ID = (long?) reader[8];
+            dto.GoodsProperty_Name = (string) reader[9];
+            dto.GoodsPropertyCatalog_Name = (string) reader[10];
+            dto.SecondUnitII = (string) reader[11];
+            dto.SecondUnitII_MainUnitRatio = Convert.ToDecimal(reader[12]);
+            dto.SecondUnitII_SecondUnitRatio = Convert.ToDecimal(reader[13]);
+
             list.Add(dto);
           }
         }
@@ -68,6 +92,8 @@ namespace BWP.B3Butchery.Rpcs
 
     }
 
+
+    //根据部门取当天的生产计划存货
     [Rpc]
     public static List<GoodsInfoDto> GetByDepartPlan(long? departId)
     {
@@ -90,6 +116,10 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("Goods_MainUnitRatio", detail));
       query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitRatio", detail));
       query.Columns.Add(DQSelectColumn.Field("Goods_Code", detail));
+
+      query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitII", detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitII_MainUnitRatio", detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitII_SecondUnitRatio", detail));
 
       using (var session=Dmo.NewSession())
       {
@@ -114,6 +144,12 @@ namespace BWP.B3Butchery.Rpcs
             {
               dto.Goods_SecondUnitRatio = 1;
             }
+
+            dto.SecondUnitII = (string)reader[8];
+            dto.SecondUnitII_MainUnitRatio = Convert.ToDecimal(reader[9]);
+            dto.SecondUnitII_SecondUnitRatio = Convert.ToDecimal(reader[10]);
+
+            
             list.Add(dto);
           }
         }
