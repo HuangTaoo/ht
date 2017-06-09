@@ -104,8 +104,10 @@ namespace BWP.B3Butchery.Rpcs
       var list=new List<GoodsInfoDto>();
       var bill=new JoinAlias(typeof(ProductPlan));
       var detail=new JoinAlias(typeof(ProductPlan_OutputDetail));
+      var goods=new JoinAlias(typeof(Goods));
       var query=new DQueryDom(bill);
       query.From.AddJoin(JoinType.Inner, new DQDmoSource(detail),DQCondition.EQ(bill,"ID",detail, "ProductPlan_ID") );
+      query.From.AddJoin(JoinType.Left, new DQDmoSource(goods),DQCondition.EQ(goods, "ID",detail, "Goods_ID") );
 
       query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(bill, "Date", DateTime.Today));
       query.Where.Conditions.Add(DQCondition.LessThan(bill,"Date", DateTime.Today.AddDays(1)));
@@ -124,10 +126,10 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitII", detail));
       query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitII_MainUnitRatio", detail));
       query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitII_SecondUnitRatio", detail));
-
-      query.Columns.Add(DQSelectColumn.Field("GoodsProperty_ID",detail));
-      query.Columns.Add(DQSelectColumn.Field("GoodsProperty_Name", detail));
-      query.Columns.Add(DQSelectColumn.Field("GoodsPropertyCatalog_Name", detail));
+ 
+      query.Columns.Add(DQSelectColumn.Field("GoodsProperty_ID", goods));
+      query.Columns.Add(DQSelectColumn.Field("GoodsProperty_Name", goods));
+      query.Columns.Add(DQSelectColumn.Field("GoodsPropertyCatalog_Name", goods));
 
       using (var session=Dmo.NewSession())
       {
