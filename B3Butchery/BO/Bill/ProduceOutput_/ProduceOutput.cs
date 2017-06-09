@@ -19,7 +19,6 @@ namespace BWP.B3Butchery.BO
     [DFExtProperty("DisplayField", "FrozenStore_Name")]
     [DFExtProperty(B3ButcheryDataSource.速冻库, B3ButcheryDataSource.速冻库)]
     [DFPrompt("速冻库")]
-    [DFNotEmpty]
     public long? FrozenStore_ID { get; set; }
 
 

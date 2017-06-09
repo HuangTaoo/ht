@@ -97,6 +97,10 @@ namespace BWP.B3Butchery.Rpcs
     [Rpc]
     public static List<GoodsInfoDto> GetByDepartPlan(long? departId)
     {
+      if (departId == null || departId == 0)
+      {
+        throw new Exception("员工档案上没有配置部门");
+      }
       var list=new List<GoodsInfoDto>();
       var bill=new JoinAlias(typeof(ProductPlan));
       var detail=new JoinAlias(typeof(ProductPlan_OutputDetail));
