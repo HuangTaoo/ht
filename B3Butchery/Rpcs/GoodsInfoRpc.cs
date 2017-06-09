@@ -125,6 +125,10 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitII_MainUnitRatio", detail));
       query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitII_SecondUnitRatio", detail));
 
+      query.Columns.Add(DQSelectColumn.Field("GoodsProperty_ID",detail));
+      query.Columns.Add(DQSelectColumn.Field("GoodsProperty_Name", detail));
+      query.Columns.Add(DQSelectColumn.Field("GoodsPropertyCatalog_Name", detail));
+
       using (var session=Dmo.NewSession())
       {
         using (var reader=session.ExecuteReader(query))
@@ -153,7 +157,10 @@ namespace BWP.B3Butchery.Rpcs
             dto.SecondUnitII_MainUnitRatio = Convert.ToDecimal(reader[9]);
             dto.SecondUnitII_SecondUnitRatio = Convert.ToDecimal(reader[10]);
 
-            
+            dto.GoodsProperty_ID = (long?)reader[11];
+            dto.GoodsProperty_Name = (string)reader[12];
+            dto.GoodsPropertyCatalog_Name = (string)reader[13];
+
             list.Add(dto);
           }
         }
