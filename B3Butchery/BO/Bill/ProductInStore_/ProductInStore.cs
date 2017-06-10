@@ -145,7 +145,12 @@ namespace BWP.B3Butchery.BO
 			get { return mDetails; }
 			set { mDetails = value; }
 		}
-     
+
+    //仙坛用到，明细生产日期必须一致，放到表头为了导U8界面做查询用
+    [LogicName("生产日期")]
+    public  DateTime? ProductionDate { get; set; }
+
+
     [NonDmoProperty]
     public List<string> K3Bills { get; set; }
 	}
