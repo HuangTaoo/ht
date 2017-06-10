@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BO;
+using BWP.B3Butchery.Rpcs.RpcObject;
+using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks;
 using BWP.B3Frameworks.BO;
 using BWP.B3Frameworks.BO.NamedValueTemplate;
@@ -12,6 +14,8 @@ using Forks.EnterpriseServices.BusinessInterfaces;
 using Forks.EnterpriseServices.DomainObjects2;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.EnterpriseServices.JsonRpc;
+using Forks.EnterpriseServices.SqlDoms;
+using Forks.Utils;
 using TSingSoft.WebPluginFramework;
 
 namespace BWP.B3Butchery.Rpcs
@@ -19,7 +23,74 @@ namespace BWP.B3Butchery.Rpcs
   [Rpc]
   public static class ProduceOutputRpc
   {
+    [Rpc]
+    public static List<GoodsInfoDto> GetTodayGoodsByStore(long accountUnitId,long departId,long  storeId)
+    {
+      var list=new List<GoodsInfoDto>();
+      var bill=new JoinAlias(typeof(ProduceOutput));
+      var detail=new JoinAlias(typeof(ProduceOutput_Detail));
+      var query=new DQueryDom(bill);
+      query.From.AddJoin(JoinType.Inner, new DQDmoSource(detail),DQCondition.EQ(bill,"ID",detail, "ProduceOutput_ID"));
+      query.Where.Conditions.Add(DQCondition.EQ("AccountingUnit_ID",accountUnitId));
+      query.Where.Conditions.Add(DQCondition.EQ("Department_ID", departId));
+      //DQCondition.EQ(string.Format("Department_TreeDeep{0}ID", context.Department_Depth), context.Department_ID)
+      query.Where.Conditions.Add(DQCondition.EQ(bill, "Domain_ID", DomainContext.Current.ID));
+      query.Where.Conditions.Add(DQCondition.EQ("BillState", 单据状态.已审核));
+      query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(bill, "Time", DateTime.Today));
+      query.Where.Conditions.Add(DQCondition.LessThan(bill, "Time", DateTime.Today.AddDays(1)));
+      query.Where.Conditions.Add(DQCondition.EQ("FrozenStore_ID",storeId));
+      query.Where.Conditions.Add(DQCondition.NotInSubQuery(DQExpression.Field(detail,"Goods_ID"),GetTodayGoodsByStoreSubQuery(accountUnitId,departId,storeId)));
 
+      query.Columns.Add(DQSelectColumn.Field("Goods_ID",detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_Name", detail));
+//      query.Columns.Add(DQSelectColumn.Field("Goods_InnerPackingPer", detail));
+      query.Columns.Add(DQSelectColumn.Sum(detail, "Number"));
+      query.Columns.Add(DQSelectColumn.Create(DQExpression.Divide( DQExpression.Sum(DQExpression.Field(detail,"Number")), DQExpression.Field(detail, "Goods_InnerPackingPer")), "InnerPackingPer"));
+      query.Columns.Add(DQSelectColumn.Field("Goods_InnerPackingPer", detail));
+      //query.Columns.Add(DQSelectColumn.Create(DQExpression.Divide(DQExpression.Field(detail,"Number"),DQExpression.Field(detail, "Goods_InnerPackingPer")),"包装数"));
+
+
+      query.GroupBy.Expressions.Add(DQExpression.Field(detail, "Goods_ID"));
+      query.GroupBy.Expressions.Add(DQExpression.Field(detail, "Goods_Name"));
+      query.GroupBy.Expressions.Add(DQExpression.Field(detail, "Goods_InnerPackingPer"));
+
+      using (var session=Dmo.NewSession())
+      {
+        using (var reader=session.ExecuteReader(query))
+        {
+          while (reader.Read())
+          {
+            var goods=new GoodsInfoDto();
+            goods.Goods_ID = (long) reader[0];
+            goods.Goods_Name = (string) reader[1];
+            goods.Number = (decimal?)((Money<decimal>?) reader[2]);
+            goods.InnerPackingPer = (decimal?) reader[3];
+            goods.Goods_InnerPackingPer = (decimal?) reader[4];
+            list.Add(goods);
+          }
+        }
+      }
+      return list;
+    }
+
+    private static DQueryDom GetTodayGoodsByStoreSubQuery(long accountUnitId, long departId, long storeId)
+    {
+      var bill=new JoinAlias("instore",typeof(FrozenInStore));
+      var detail=new JoinAlias("instoredetail",typeof(FrozenInStore_Detail));
+      var query = new DQueryDom(bill);
+      query.From.AddJoin(JoinType.Inner, new DQDmoSource(detail), DQCondition.EQ(bill, "ID", detail, "FrozenInStore_ID"));
+      query.Where.Conditions.Add(DQCondition.EQ("AccountingUnit_ID", accountUnitId));
+      query.Where.Conditions.Add(DQCondition.EQ("Department_ID", departId));
+      //DQCondition.EQ(string.Format("Department_TreeDeep{0}ID", context.Department_Depth), context.Department_ID)
+      query.Where.Conditions.Add(DQCondition.EQ(bill, "Domain_ID", DomainContext.Current.ID));
+      query.Where.Conditions.Add(DQCondition.EQ("BillState",单据状态.已审核));
+      query.Where.Conditions.Add(DQCondition.EQ("Store_ID", storeId));
+      query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(bill, "Date", DateTime.Today));
+      query.Where.Conditions.Add(DQCondition.LessThan(bill, "Date", DateTime.Today.AddDays(1)));
+      query.Distinct = true;
+      query.Columns.Add(DQSelectColumn.Field("Goods_ID",detail));
+      return query;
+    }
 
     [Rpc]
     public static long PdaInsertAndCheck(ProduceOutput dmo)
@@ -30,7 +101,7 @@ namespace BWP.B3Butchery.Rpcs
         var bl = BIFactory.Create<IProduceOutputBL>(context.Session);
         dmo.Time = dmo.Time ?? DateTime.Today;
 
-        dmo.Employee_ID = GetCurrentBindingEmployeeID(context.Session);
+        dmo.Employee_ID = B3ButcheryUtil.GetCurrentBindingEmployeeID(context.Session);
         bl.InitNewDmo(dmo); 
         bl.Insert(dmo);
         bl.Check(dmo);
@@ -74,7 +145,7 @@ namespace BWP.B3Butchery.Rpcs
         var bl= BIFactory.Create<IProduceOutputBL>(context.Session);
         dmo.Time = DateTime.Today;
         dmo.IsHandsetSend = true;
-        dmo.Employee_ID = GetCurrentBindingEmployeeID(context.Session);
+        dmo.Employee_ID = B3ButcheryUtil.GetCurrentBindingEmployeeID(context.Session);
         //        bl.InitNewDmo(dmo); 板块信息由手持机传入
         bl.Insert(dmo);
         bl.Check(dmo);
@@ -94,19 +165,6 @@ namespace BWP.B3Butchery.Rpcs
       return dmo.ID;
     }
 
-    private static long? GetCurrentBindingEmployeeID(IDmoSession session)
-    {
-      if (BLContext.User.RoleSchema != B3FrameworksConsts.RoleSchemas.employee)
-      {
-        throw new Exception("当前用户不是员工类型");
-      }
-      var query = new DQueryDom(new JoinAlias(typeof(User_Employee)));
-      query.Where.Conditions.Add(DQCondition.EQ("User_ID", BLContext.User.ID));
-      query.Columns.Add(DQSelectColumn.Field("Employee_ID"));
-
-      var result = (long?)query.EExecuteScalar(session);
-      return result;
-    }
 
 
   }

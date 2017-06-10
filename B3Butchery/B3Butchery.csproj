@@ -203,7 +203,6 @@
     <Compile Include="Rpcs\BaseInfoRpc.cs" />
     <Compile Include="Rpcs\ClientRpc.cs" />
     <Compile Include="Rpcs\FrozenInStoreRpc.cs" />
-    <Compile Include="Rpcs\GoodsInfo.cs" />
     <Compile Include="Rpcs\GoodsBatchRpc.cs" />
     <Compile Include="Rpcs\ProduceOutputRpc.cs" />
     <Compile Include="Rpcs\ProductInStoreRpc.cs" />
@@ -213,6 +212,7 @@
     <Compile Include="Rpcs\RpcObject\BaseInfoDto.cs" />
     <Compile Include="Rpcs\RpcObject\DepartmentDto.cs" />
     <Compile Include="Rpcs\RpcObject\GoodsInfoDto.cs" />
+    <Compile Include="Rpcs\RpcObject\ProduceOutputQueryDto.cs" />
     <Compile Include="Tasks\NullifyProductNoticeTask.cs" />
     <Compile Include="Utils\B3ButcheryDataSource.cs" />
     <Compile Include="Utils\B3ButcheryUtil.cs" />

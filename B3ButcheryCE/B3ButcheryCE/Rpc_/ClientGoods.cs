@@ -30,6 +30,11 @@ namespace B3ButcheryCE.Rpc_
         public decimal? Goods_SecondNumber { get; set; }
 
 
+        public decimal? Goods_InnerPackingPer { get; set; }//内包装比例
+
+        
+
+
         //[XmlIgnore]
         //public bool ListViewChecked { get; set; }
 

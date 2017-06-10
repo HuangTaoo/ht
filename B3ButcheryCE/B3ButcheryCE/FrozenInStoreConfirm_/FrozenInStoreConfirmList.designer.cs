@@ -30,36 +30,60 @@
         {
             this.listView1 = new System.Windows.Forms.ListView();
             this.存货名称 = new System.Windows.Forms.ColumnHeader();
-            this.存货重量 = new System.Windows.Forms.ColumnHeader();
-            this.确认重量 = new System.Windows.Forms.ColumnHeader();
+            this.数量 = new System.Windows.Forms.ColumnHeader();
+            this.确认数量 = new System.Windows.Forms.ColumnHeader();
+            this.包装数 = new System.Windows.Forms.ColumnHeader();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listView1
             // 
+            this.listView1.Activation = System.Windows.Forms.ItemActivation.TwoClick;
+            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listView1.CheckBoxes = true;
             this.listView1.Columns.Add(this.存货名称);
-            this.listView1.Columns.Add(this.存货重量);
-            this.listView1.Columns.Add(this.确认重量);
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.Columns.Add(this.数量);
+            this.listView1.Columns.Add(this.确认数量);
+            this.listView1.Columns.Add(this.包装数);
+            this.listView1.FullRowSelect = true;
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(238, 295);
+            this.listView1.Size = new System.Drawing.Size(238, 267);
             this.listView1.TabIndex = 0;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.ItemActivate += new System.EventHandler(this.listView1_ItemActivate);
+            this.listView1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.listView1_ItemCheck);
             // 
             // 存货名称
             // 
             this.存货名称.Text = "存货名称";
             this.存货名称.Width = 75;
             // 
-            // 存货重量
+            // 数量
             // 
-            this.存货重量.Text = "存货重量";
-            this.存货重量.Width = 90;
+            this.数量.Text = "数量";
+            this.数量.Width = 50;
             // 
-            // 确认重量
+            // 确认数量
             // 
-            this.确认重量.Text = "确认重量";
-            this.确认重量.Width = 109;
+            this.确认数量.Text = "确认数量";
+            this.确认数量.Width = 70;
+            // 
+            // 包装数
+            // 
+            this.包装数.Text = "包装数";
+            this.包装数.Width = 60;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(67, 268);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(111, 25);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "生成速冻入库";
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FrozenInStoreConfirmList
             // 
@@ -67,6 +91,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(238, 295);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.listView1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -81,7 +106,9 @@
 
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader 存货名称;
-        private System.Windows.Forms.ColumnHeader 存货重量;
-        private System.Windows.Forms.ColumnHeader 确认重量;
+        private System.Windows.Forms.ColumnHeader 数量;
+        private System.Windows.Forms.ColumnHeader 确认数量;
+        private System.Windows.Forms.ColumnHeader 包装数;
+        private System.Windows.Forms.Button button1;
     }
 }

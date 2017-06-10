@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.txtFrozenInStoreID = new System.Windows.Forms.TextBox();
             this.btnOK = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -38,23 +38,23 @@
             this.label1.Location = new System.Drawing.Point(55, 55);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 20);
-            this.label1.Text = "速冻库号:";
-            // 
-            // txtFrozenInStoreID
-            // 
-            this.txtFrozenInStoreID.Location = new System.Drawing.Point(55, 98);
-            this.txtFrozenInStoreID.Name = "txtFrozenInStoreID";
-            this.txtFrozenInStoreID.Size = new System.Drawing.Size(139, 23);
-            this.txtFrozenInStoreID.TabIndex = 1;
+            this.label1.Text = "选择速冻库:";
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(83, 144);
+            this.btnOK.Location = new System.Drawing.Point(83, 181);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(72, 29);
             this.btnOK.TabIndex = 3;
             this.btnOK.Text = "确  定";
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Location = new System.Drawing.Point(43, 102);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(145, 23);
+            this.comboBox1.TabIndex = 5;
             // 
             // FrozenInStoreConfirmScan
             // 
@@ -62,8 +62,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(238, 295);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.txtFrozenInStoreID);
             this.Controls.Add(this.label1);
             this.KeyPreview = true;
             this.MaximizeBox = false;
@@ -71,6 +71,7 @@
             this.Name = "FrozenInStoreConfirmScan";
             this.Text = "扫描速冻库号";
             this.Deactivate += new System.EventHandler(this.FrozenInStoreConfirmScan_Deactivate);
+            this.Load += new System.EventHandler(this.FrozenInStoreConfirmScan_Load);
             this.Activated += new System.EventHandler(this.FrozenInStoreConfirmScan_Activated);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrozenInStoreConfirmScan_KeyDown);
             this.ResumeLayout(false);
@@ -80,7 +81,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtFrozenInStoreID;
         private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

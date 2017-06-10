@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using B3ButcheryCE.Rpc_.BaseInfo_;
 using B3ButcheryCE.Util_;
 using BWP.Compact.Devices;
+using Forks.JsonRpc.Client;
+using Forks.JsonRpc.Client.Data;
 
 namespace B3ButcheryCE.FrozenInStoreConfirm_
 {
@@ -20,18 +22,42 @@ namespace B3ButcheryCE.FrozenInStoreConfirm_
             Util.SetSceen(this);
         }
 
-        List<ClientStore> list = XmlSerializerUtil.GetClientListXmlDeserialize<ClientStore>();
+        //List<ClientStore> list = XmlSerializerUtil.GetClientListXmlDeserialize<ClientStore>();
+
+        private List<ClientStore> _storeList;
+        public List<ClientStore> StoreList{get{return _storeList;}set{_storeList=value;}}
+
+        private void FrozenInStoreConfirmScan_Load(object sender, EventArgs e)
+        {
+            //不做离线，直接从接口取
+            var listObj = RpcFacade.Call<List<RpcObject>>("/MainSystem/B3Butchery/Rpcs/BaseInfoRpc/SyncFrozenStore");
+            var list = new List<ClientStore>();
+            foreach (RpcObject obj in listObj)
+            {
+                var store = new ClientStore();
+                store.ID = obj.Get<long>("ID");
+                store.Name = obj.Get<string>("Name");
+                list.Add(store);
+            }
+            _storeList = list;
+            comboBox1.DataSource = _storeList;
+            comboBox1.DisplayMember = "Name";
+            comboBox1.ValueMember = "ID";
+            
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
-            OpenSelectGoodsFrom(txtFrozenInStoreID.Text);
-            txtFrozenInStoreID.Text = "";
+            //MessageBox.Show(comboBox1.SelectedValue.ToString());
+            OpenSelectGoodsFrom(long.Parse(comboBox1.SelectedValue.ToString()));
+            //txtFrozenInStoreID.Text = "";
         }
-        void OpenSelectGoodsFrom(string code)
+        void OpenSelectGoodsFrom(long goodsId)
         {
-            var store = list.FirstOrDefault(x => x.BarCode == code);
+            var store = _storeList.FirstOrDefault(x => x.ID == goodsId);
             if (store == null)
             {
-                MessageBox.Show("没找到" + code + "对应的速冻入库单号，确认编码是否正确或者同步数据");
+                MessageBox.Show("没找到" + goodsId + "速冻库");
                 return;
             }
 
@@ -40,21 +66,22 @@ namespace B3ButcheryCE.FrozenInStoreConfirm_
         }
         private void FrozenInStoreConfirmScan_Deactivate(object sender, EventArgs e)
         {
-            HardwareUtil.ScanPowerOff();
-            HardwareUtil.Device.ScannerReader -= new EventHandler<ScanEventArgs>(BarCodeRead);
+            //HardwareUtil.ScanPowerOff();
+            //HardwareUtil.Device.ScannerReader -= new EventHandler<ScanEventArgs>(BarCodeRead);
         }
 
         private void FrozenInStoreConfirmScan_Activated(object sender, EventArgs e)
         {
-            HardwareUtil.HardWareInit();
-            HardwareUtil.ScanPowerOn();
-            HardwareUtil.Device.ScannerReader += new EventHandler<ScanEventArgs>(BarCodeRead);
+            //HardwareUtil.HardWareInit();
+            //HardwareUtil.ScanPowerOn();
+            //HardwareUtil.Device.ScannerReader += new EventHandler<ScanEventArgs>(BarCodeRead);
         }
-        void BarCodeRead(object sender, ScanEventArgs e)
-        {
-            var result = e.BarCode.Trim();
-            OpenSelectGoodsFrom(result);
-        }
+
+        //void BarCodeRead(object sender, ScanEventArgs e)
+        //{
+        //    var result = e.BarCode.Trim();
+        //    OpenSelectGoodsFrom(result);
+        //}
 
         private void FrozenInStoreConfirmScan_KeyDown(object sender, KeyEventArgs e)
         {
@@ -63,5 +90,6 @@ namespace B3ButcheryCE.FrozenInStoreConfirm_
                 btnOK_Click(sender, e);
             }
         }
+
     }
 }

@@ -11,9 +11,23 @@ namespace B3ButcheryCE.FrozenInStoreConfirm_
 {
     public partial class FrozenInStoreConfirmOK : Form
     {
+        public decimal Number = 0;
         public FrozenInStoreConfirmOK()
         {
             InitializeComponent();
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Number = decimal.Parse(textBox1.Text);
+                DialogResult = DialogResult.OK;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }

@@ -35,10 +35,10 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(42, 76);
+            this.label1.Location = new System.Drawing.Point(42, 56);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 20);
-            this.label1.Text = "确认重量:";
+            this.label1.Text = "确认数量:";
             // 
             // textBox1
             // 
@@ -49,11 +49,12 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(42, 155);
+            this.btnOk.Location = new System.Drawing.Point(42, 153);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(142, 29);
+            this.btnOk.Size = new System.Drawing.Size(105, 29);
             this.btnOk.TabIndex = 2;
             this.btnOk.Text = "确定";
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // FrozenInStoreConfirmOK
             // 

@@ -131,6 +131,7 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("GoodsProperty_Name", goods));
       query.Columns.Add(DQSelectColumn.Field("GoodsPropertyCatalog_Name", goods));
 
+      query.Where.Conditions.Add(DQCondition.EQ(bill,"Domain_ID",DomainContext.Current.ID));
       using (var session=Dmo.NewSession())
       {
         using (var reader=session.ExecuteReader(query))
@@ -171,11 +172,11 @@ namespace BWP.B3Butchery.Rpcs
     }
 
     [Rpc]
-    public static GoodsInfo Get(long? id ) {
+    public static GoodsInfoDto Get(long? id ) {
  
       if(id==null)
         return null;
-      var goodsInfo = new GoodsInfo();
+      var goodsInfo = new GoodsInfoDto();
 
       var goods = WebBLUtil.GetSingleDmo<Goods>("ID", id, "SecondUnit", "UnitConvertDirection", "MainUnit", "MainUnitRatio", "SecondUnitRatio");
       goodsInfo.Goods_SecondUnit = goods.SecondUnit;
