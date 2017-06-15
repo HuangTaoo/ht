@@ -15,7 +15,7 @@ namespace BWP.B3Butchery.BO
     [LogicName("内包装比例")]
     [ReferenceTo(typeof(Goods), "InnerPackingPer")]
     [Join("Goods_ID", "ID")]
-    public decimal? Goods_InnerPackingPer { get; set; }
+    public Money<decimal>? Goods_InnerPackingPer { get; set; }
 
     public long ProduceOutput_ID { get; set; }
 
