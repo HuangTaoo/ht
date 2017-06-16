@@ -56,6 +56,7 @@
             this.buttonSyncBaseInfo.Size = new System.Drawing.Size(99, 29);
             this.buttonSyncBaseInfo.TabIndex = 16;
             this.buttonSyncBaseInfo.Text = "同步基础信息";
+            this.buttonSyncBaseInfo.Visible = false;
             this.buttonSyncBaseInfo.Click += new System.EventHandler(this.buttonSyncBaseInfo_Click);
             // 
             // button1
@@ -101,6 +102,7 @@
             this.button2.Size = new System.Drawing.Size(99, 29);
             this.button2.TabIndex = 23;
             this.button2.Text = "产量统计";
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // btn_ProductInStoreOK
@@ -110,6 +112,7 @@
             this.btn_ProductInStoreOK.Size = new System.Drawing.Size(99, 29);
             this.btn_ProductInStoreOK.TabIndex = 25;
             this.btn_ProductInStoreOK.Text = "成品入库确认";
+            this.btn_ProductInStoreOK.Visible = false;
             this.btn_ProductInStoreOK.Click += new System.EventHandler(this.btn_ProductInStoreOK_Click);
             // 
             // btnFrozenInStoreOk

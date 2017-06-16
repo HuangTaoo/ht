@@ -69,7 +69,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrozenInStoreConfirmScan";
-            this.Text = "扫描速冻库号";
+            this.Text = "选择速冻库";
             this.Deactivate += new System.EventHandler(this.FrozenInStoreConfirmScan_Deactivate);
             this.Load += new System.EventHandler(this.FrozenInStoreConfirmScan_Load);
             this.Activated += new System.EventHandler(this.FrozenInStoreConfirmScan_Activated);
