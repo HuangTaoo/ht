@@ -2,6 +2,8 @@
 using BWP.B3Butchery.BO;
 using BWP.B3Frameworks;
 using BWP.B3Frameworks.BL;
+using BWP.B3Frameworks.BO.NamedValueTemplate;
+using BWP.B3Frameworks.Utils;
 using BWP.B3UnitedInfos.BL;
 using Forks.EnterpriseServices.BusinessInterfaces;
 using BWP.B3UnitedInfos;
@@ -20,8 +22,10 @@ namespace BWP.B3Butchery.BL
   public class ProductInStoreBL : DepartmentWorkFlowBillBL<ProductInStore>, IProductInStoreBL
   {
     protected override void beforeSave(ProductInStore dmo) {
-      foreach (var detail in dmo.Details)
-      {
+      foreach (var detail in dmo.Details) { 
+        if (detail.Goods_UnitConvertDirection == 主辅转换方向.双向转换 || detail.Goods_UnitConvertDirection == 主辅转换方向.由主至辅) {
+          detail.SecondNumber = detail.Number / (detail.Goods_MainUnitRatio ?? 1) * (detail.Goods_SecondUnitRatio ?? 1);
+        } 
         detail.Money = detail.Number*detail.Price;
       }
       base.beforeSave(dmo);
