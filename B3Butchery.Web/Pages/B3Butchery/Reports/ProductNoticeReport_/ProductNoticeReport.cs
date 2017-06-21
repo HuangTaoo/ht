@@ -61,6 +61,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
             _checkbox.Items.Add(new ListItem("主单位", "Goods_MainUnit"));
             _checkbox.Items.Add(new ListItem("辅数量", "SecondNumber"));
             _checkbox.Items.Add(new ListItem("辅单位", "Goods_SecondUnit"));
+            _checkbox.Items.Add(new ListItem("单价", "Price"));
             _checkbox.Items.Add(new ListItem("摘要", "摘要"));
             _checkbox.Items.Add(new ListItem("备注", "Remark"));
         
