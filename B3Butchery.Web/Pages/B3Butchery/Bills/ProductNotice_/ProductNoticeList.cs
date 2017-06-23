@@ -24,7 +24,11 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       }
     }
 
-      protected override DQueryDom GetQueryDom()
+    public override bool EnableBatchCheck {
+      get { return true; }
+    }
+
+    protected override DQueryDom GetQueryDom()
       {
           var query= base.GetQueryDom();
           if (!BLContext.User.IsInRole("B3Butchery.生产通知单.管理"))
