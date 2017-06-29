@@ -90,10 +90,13 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
       var detailGridEditor = new DFCollectionEditor<ProductInStore_Detail>(() => Dmo.Details);
       detailGridEditor.AllowDeletionFunc = () => CanSave;
       detailGridEditor.CanDeleteFunc = (detail) => CanSave;
-      detailGridEditor.IsEditableFunc = (field, detail) =>
-      {
-        if (field.Name == "Money")
-          return false;
+      detailGridEditor.IsEditableFunc = (field, detail) => {
+        switch (field.Name) {
+          case "GoodsBatch_ID":
+            return GoodsUtil.EnableBatch(detail.Goods_ID, detail.GoodsProperty_ID) && CanSave;
+          case "Money":
+            return false;
+        }
         return CanSave;
       };
       detailGrid = titlePanel.EAdd(new DFEditGrid(detailGridEditor) { Width = Unit.Percentage(100), ShowLineNo = true });
