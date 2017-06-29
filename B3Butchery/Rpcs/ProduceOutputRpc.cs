@@ -32,14 +32,21 @@ namespace BWP.B3Butchery.Rpcs
       var query=new DQueryDom(bill);
       query.From.AddJoin(JoinType.Inner, new DQDmoSource(detail),DQCondition.EQ(bill,"ID",detail, "ProduceOutput_ID"));
       query.Where.Conditions.Add(DQCondition.EQ("AccountingUnit_ID",accountUnitId));
-      query.Where.Conditions.Add(DQCondition.EQ("Department_ID", departId));
+
+//      query.Where.Conditions.Add(DQCondition.EQ("Department_ID", departId));
+
       //DQCondition.EQ(string.Format("Department_TreeDeep{0}ID", context.Department_Depth), context.Department_ID)
+
       query.Where.Conditions.Add(DQCondition.EQ(bill, "Domain_ID", DomainContext.Current.ID));
       query.Where.Conditions.Add(DQCondition.EQ("BillState", 单据状态.已审核));
       query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(bill, "Time", DateTime.Today));
       query.Where.Conditions.Add(DQCondition.LessThan(bill, "Time", DateTime.Today.AddDays(1)));
       query.Where.Conditions.Add(DQCondition.EQ("FrozenStore_ID",storeId));
       query.Where.Conditions.Add(DQCondition.NotInSubQuery(DQExpression.Field(detail,"Goods_ID"),GetTodayGoodsByStoreSubQuery(accountUnitId,departId,storeId)));
+
+
+      OrganizationUtil.AddOrganizationLimit(query, typeof(ProduceOutput));
+
 
       query.Columns.Add(DQSelectColumn.Field("Goods_ID",detail));
       query.Columns.Add(DQSelectColumn.Field("Goods_Name", detail));

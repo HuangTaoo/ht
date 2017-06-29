@@ -7,6 +7,7 @@ using BWP.B3Butchery.Rpcs.RpcObject;
 using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks;
 using BWP.B3Frameworks.BO.NamedValueTemplate;
+using BWP.B3Frameworks.Utils;
 using BWP.B3UnitedInfos.BO;
 using BWP.Web.Utils;
 using Forks.EnterpriseServices.DomainObjects2;
@@ -112,7 +113,9 @@ namespace BWP.B3Butchery.Rpcs
       query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(bill, "Date", DateTime.Today));
       query.Where.Conditions.Add(DQCondition.LessThan(bill,"Date", DateTime.Today.AddDays(1)));
       query.Where.Conditions.Add(DQCondition.EQ(bill,"BillState",单据状态.已审核));
-      query.Where.Conditions.Add(B3ButcheryUtil.部门或上级部门条件(departId??0, bill));
+
+      //      query.Where.Conditions.Add(B3ButcheryUtil.部门或上级部门条件(departId??0, bill));
+      OrganizationUtil.AddOrganizationLimit(query, typeof(ProductPlan));
 
       query.Columns.Add(DQSelectColumn.Field("Goods_ID", detail));
       query.Columns.Add(DQSelectColumn.Field("Goods_Name", detail));
