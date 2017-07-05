@@ -19,7 +19,29 @@ namespace BWP.B3Butchery.Rpcs
 	[Rpc]
 	public static class ProductInStoreRpc
 	{
-    /// <summary>
+
+    [Rpc]
+    public static long AppInsert(ProductInStore dmo)
+	  {
+	    if (!BLContext.User.IsInRole("B3Butchery.成品入库.新建"))
+	    {
+        throw new Exception("没有新建权限");
+	    }
+	    var bl = BIFactory.Create<IProductInStoreBL>();
+	    foreach (ProductInStore_Detail detail in dmo.Details)
+	    {
+        DmoUtil.RefreshDependency(detail,"Goods_ID");
+	      if (detail.Number == null && detail.SecondNumber.HasValue)
+	      {
+	        detail.Number = detail.SecondNumber * detail.Goods_MainUnitRatio / detail.Goods_SecondUnitRatio;
+	      }
+	    }
+      bl.InitNewDmo(dmo);
+      bl.Insert(dmo);
+	    return dmo.ID;
+	  }
+
+	  /// <summary>
     /// 审核成品入库单
     /// </summary>
     /// <param name="id"></param>
