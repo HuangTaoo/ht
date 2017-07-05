@@ -210,8 +210,10 @@
     <Compile Include="Rpcs\ProductPlanRpc.cs" />
     <Compile Include="Rpcs\GoodsInfoRpc.cs" />
     <Compile Include="Rpcs\RpcObject\BaseInfoDto.cs" />
+    <Compile Include="Rpcs\RpcObject\BaseInfoQueryDto.cs" />
     <Compile Include="Rpcs\RpcObject\DepartmentDto.cs" />
     <Compile Include="Rpcs\RpcObject\GoodsInfoDto.cs" />
+    <Compile Include="Rpcs\RpcObject\PageInfoDto.cs" />
     <Compile Include="Rpcs\RpcObject\ProduceOutputQueryDto.cs" />
     <Compile Include="Tasks\NullifyProductNoticeTask.cs" />
     <Compile Include="Utils\B3ButcheryDataSource.cs" />

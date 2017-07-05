@@ -7,8 +7,9 @@ using Forks.EnterpriseServices.JsonRpc;
 namespace BWP.B3Butchery.Rpcs.RpcObject
 {
   [RpcObject]
-  public class DepartmentDto:BaseInfoDto
+  public class BaseInfoQueryDto:PageInfoDto
   {
-    public int Department_Depth { get; set; }
+    public string Input { get; set; }
+
   }
 }

@@ -93,8 +93,30 @@ namespace BWP.B3Butchery.Rpcs
 
     }
 
+    [Rpc]
+    public static List<GoodsInfoDto> GetFromProductPlan()
+    {
+      JoinAlias mainJoinAlias;
+      var query = GetPlanDquery(out mainJoinAlias);
+      return GetListByDquery(query);
+    }
 
-    //根据部门取当天的生产计划存货
+    [Rpc]
+    public static List<GoodsInfoDto> GetFromProductPlanByDept(long departId)
+    {
+      if (departId == 0)
+      {
+        throw new Exception("员工档案上没有配置部门");
+      }
+   
+      JoinAlias mainJoinAlias;
+      var query = GetPlanDquery(out mainJoinAlias);
+       query.Where.Conditions.Add(B3ButcheryUtil.部门或上级部门条件(departId, mainJoinAlias));
+
+      return GetListByDquery(query);
+    }
+
+    //根据部门取当天的生产计划存货   为了兼容旧的接口保留了，新的接口不调用此方法
     [Rpc]
     public static List<GoodsInfoDto> GetByDepartPlan(long? departId)
     {
@@ -109,12 +131,12 @@ namespace BWP.B3Butchery.Rpcs
       var query=new DQueryDom(bill);
       query.From.AddJoin(JoinType.Inner, new DQDmoSource(detail),DQCondition.EQ(bill,"ID",detail, "ProductPlan_ID") );
       query.From.AddJoin(JoinType.Left, new DQDmoSource(goods),DQCondition.EQ(goods, "ID",detail, "Goods_ID") );
-
+      
       query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(bill, "Date", DateTime.Today));
       query.Where.Conditions.Add(DQCondition.LessThan(bill,"Date", DateTime.Today.AddDays(1)));
       query.Where.Conditions.Add(DQCondition.EQ(bill,"BillState",单据状态.已审核));
 
-      //      query.Where.Conditions.Add(B3ButcheryUtil.部门或上级部门条件(departId??0, bill));
+//      query.Where.Conditions.Add(B3ButcheryUtil.部门或上级部门条件(departId??0, bill));
       OrganizationUtil.AddOrganizationLimit(query, typeof(ProductPlan));
 
       query.Columns.Add(DQSelectColumn.Field("Goods_ID", detail));
@@ -173,6 +195,87 @@ namespace BWP.B3Butchery.Rpcs
       }
       return list;
     }
+
+    static DQueryDom GetPlanDquery(out JoinAlias billAlias)
+    {
+      var bill = new JoinAlias(typeof(ProductPlan));
+      billAlias = bill;
+      var detail = new JoinAlias(typeof(ProductPlan_OutputDetail));
+      var goods = new JoinAlias(typeof(Goods));
+      var query = new DQueryDom(bill);
+      query.From.AddJoin(JoinType.Inner, new DQDmoSource(detail), DQCondition.EQ(bill, "ID", detail, "ProductPlan_ID"));
+      query.From.AddJoin(JoinType.Left, new DQDmoSource(goods), DQCondition.EQ(goods, "ID", detail, "Goods_ID"));
+
+      query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(bill, "Date", DateTime.Today));
+      query.Where.Conditions.Add(DQCondition.LessThan(bill, "Date", DateTime.Today.AddDays(1)));
+      query.Where.Conditions.Add(DQCondition.EQ(bill, "BillState", 单据状态.已审核));
+
+      OrganizationUtil.AddOrganizationLimit(query, typeof(ProductPlan));
+
+      query.Columns.Add(DQSelectColumn.Field("Goods_ID", detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_Name", detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_MainUnit", detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnit", detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_UnitConvertDirection", detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_MainUnitRatio", detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitRatio", detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_Code", detail));
+
+      query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitII", detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitII_MainUnitRatio", detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitII_SecondUnitRatio", detail));
+
+      query.Columns.Add(DQSelectColumn.Field("GoodsProperty_ID", goods));
+      query.Columns.Add(DQSelectColumn.Field("GoodsProperty_Name", goods));
+      query.Columns.Add(DQSelectColumn.Field("GoodsPropertyCatalog_Name", goods));
+
+      query.Where.Conditions.Add(DQCondition.EQ(bill, "Domain_ID", DomainContext.Current.ID));
+
+      return query;
+    }
+
+    static List<GoodsInfoDto> GetListByDquery(DQueryDom query)
+    {
+      var list = new List<GoodsInfoDto>();
+      using (var session = Dmo.NewSession())
+      {
+        using (var reader = session.ExecuteReader(query))
+        {
+          while (reader.Read())
+          {
+            var dto = new GoodsInfoDto();
+            dto.Goods_ID = (long)reader[0];
+            dto.Goods_Name = (string)reader[1];
+            dto.Goods_MainUnit = (string)reader[2];
+            dto.Goods_SecondUnit = (string)reader[3];
+            dto.Goods_UnitConvertDirection = (NamedValue<主辅转换方向>?)reader[4];
+            dto.Goods_MainUnitRatio = (Money<decimal>?)reader[5];
+            dto.Goods_SecondUnitRatio = (Money<decimal>?)reader[6];
+            dto.Goods_Code = (string)reader[7];
+            if (dto.Goods_MainUnitRatio == null)
+            {
+              dto.Goods_MainUnitRatio = 1;
+            }
+            if (dto.Goods_SecondUnitRatio == null)
+            {
+              dto.Goods_SecondUnitRatio = 1;
+            }
+
+            dto.SecondUnitII = (string)reader[8];
+            dto.SecondUnitII_MainUnitRatio = Convert.ToDecimal(reader[9]);
+            dto.SecondUnitII_SecondUnitRatio = Convert.ToDecimal(reader[10]);
+
+            dto.GoodsProperty_ID = (long?)reader[11];
+            dto.GoodsProperty_Name = (string)reader[12];
+            dto.GoodsPropertyCatalog_Name = (string)reader[13];
+
+            list.Add(dto);
+          }
+        }
+      }
+      return list;
+    }
+
 
     [Rpc]
     public static GoodsInfoDto Get(long? id ) {
