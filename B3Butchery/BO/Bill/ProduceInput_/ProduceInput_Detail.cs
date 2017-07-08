@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices;
 using Forks.EnterpriseServices.DomainObjects2;
-using BWP.B3UnitedInfos.BO;
-using Forks.Utils;
-using BWP.B3Frameworks.BO.NamedValueTemplate;
-using BWP.B3Frameworks.BO.MoneyTemplate;
 
 namespace BWP.B3Butchery.BO
 {
@@ -18,6 +11,14 @@ namespace BWP.B3Butchery.BO
   public class ProduceInput_Detail : GoodsDetail
   {
     public long ProduceInput_ID { get; set; }
+
+    #region 客户模块字段
+    [LogicName("重量")]
+    public decimal? Weight { get; set; }
+
+    [LogicName("均重")]
+    public decimal? AverageWeight { get; set; }
+    #endregion
   }
 
   [Serializable]

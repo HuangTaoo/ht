@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Web.UI;
 using BWP.B3Butchery.BO;
 using BWP.B3Butchery.BL;
@@ -53,7 +51,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceInput_
           Dmo.Details.Clear();
           AddLoadDetailQy();
           outputDetailGrid.DataBind();
-          AspUtil.Alert(this,"载入投入明细成功");
+          AspUtil.Alert(this, "载入投入明细成功");
         };
 
         hPanel.Add(new SimpleLabel("选择存货"));
@@ -75,19 +73,26 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceInput_
           outputDetailGrid.DataBind();
         };
       }
-      var detailEditor = new DFCollectionEditor<ProduceInput_Detail>(() => Dmo.Details);
-      detailEditor.AllowDeletionFunc = () => CanSave;
-      detailEditor.CanDeleteFunc = (detail) => CanSave;
-      detailEditor.IsEditableFunc = (field, detail) => CanSave;
+      var detailEditor = new DFCollectionEditor<ProduceInput_Detail>(() => Dmo.Details)
+      {
+        AllowDeletionFunc = () => CanSave,
+        CanDeleteFunc = detail => CanSave,
+        IsEditableFunc = (field, detail) => CanSave
+      };
       outputDetailGrid = vPanel.Add(new DFEditGrid(detailEditor) { Width = Unit.Percentage(100) });
       outputDetailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
       outputDetailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
-      outputDetailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Spec"));
-      outputDetailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Number"));
-      outputDetailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_MainUnit"));
-      outputDetailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("SecondNumber"));
-      outputDetailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_SecondUnit"));
-      outputDetailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Remark"));    
+      AddDetailColumn(outputDetailGrid);
+    }
+
+    protected virtual void AddDetailColumn(DFEditGrid grid)
+    {
+      grid.Add(new DFEditGridColumn<DFValueLabel>("Goods_Spec"));
+      grid.Add(new DFEditGridColumn<DFTextBox>("Number"));
+      grid.Add(new DFEditGridColumn<DFValueLabel>("Goods_MainUnit"));
+      grid.Add(new DFEditGridColumn<DFTextBox>("SecondNumber"));
+      grid.Add(new DFEditGridColumn<DFValueLabel>("Goods_SecondUnit"));
+      outputDetailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Remark"));
       outputDetailGrid.ValueColumns.Add("Goods_UnitConvertDirection");
       outputDetailGrid.ValueColumns.Add("Goods_MainUnitRatio");
       outputDetailGrid.ValueColumns.Add("Goods_SecondUnitRatio");
