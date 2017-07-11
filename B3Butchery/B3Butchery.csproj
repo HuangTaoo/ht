@@ -215,6 +215,7 @@
     <Compile Include="Rpcs\RpcObject\GoodsInfoDto.cs" />
     <Compile Include="Rpcs\RpcObject\PageInfoDto.cs" />
     <Compile Include="Rpcs\RpcObject\ProduceOutputQueryDto.cs" />
+    <Compile Include="Rpcs\RpcObject\ProductInStoreWithDetailDto.cs" />
     <Compile Include="Tasks\NullifyProductNoticeTask.cs" />
     <Compile Include="Utils\B3ButcheryDataSource.cs" />
     <Compile Include="Utils\B3ButcheryUtil.cs" />

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BO;
+using BWP.B3Butchery.Rpcs.RpcObject;
+using BWP.B3Frameworks;
 using BWP.B3Frameworks.BO.NamedValueTemplate;
 using Forks.EnterpriseServices.BusinessInterfaces;
 using Forks.EnterpriseServices.DataForm;
@@ -20,7 +22,34 @@ namespace BWP.B3Butchery.Rpcs
 	public static class ProductInStoreRpc
 	{
 
-    [Rpc]
+    //只返回第一条明细
+	  [Rpc]
+	  public static List<ProductInStoreWithDetailDto> GetListOnlyOneDetail(int pageIndex,int pageSize)
+      {
+	    var list =new List<ProductInStoreWithDetailDto>();
+      var dmoQuery=new DmoQuery(typeof(ProductInStore));
+      dmoQuery.Range=new SelectRange(pageSize * pageIndex, pageSize);
+      dmoQuery.OrderBy.Expressions.Add(DQOrderByExpression.Create("ID",true));
+      dmoQuery.Where.Conditions.Add(DQCondition.EQ("Domain_ID",DomainContext.Current.ID));
+	    var dmoList=dmoQuery.EExecuteList().Cast<ProductInStore>();
+	    foreach (ProductInStore inStore in dmoList)
+	    {
+	      var dto = new ProductInStoreWithDetailDto();
+	      dto.ID = inStore.ID;
+	      dto.Date = inStore.InStoreDate;
+	      var detail = inStore.Details.FirstOrDefault();
+	      if (detail != null)
+	      {
+          dto.Goods_Name = detail.Goods_Name;
+          dto.Number = detail.Number;
+          dto.SecondNumber = detail.SecondNumber;
+          list.Add(dto);
+        }
+	    }
+	    return list;
+	  }
+
+	  [Rpc]
     public static long AppInsert(ProductInStore dmo)
 	  {
 	    if (!BLContext.User.IsInRole("B3Butchery.成品入库.新建"))
