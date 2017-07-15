@@ -185,6 +185,7 @@
     <Compile Include="BO\Bill\ProductPlan_\ProductPlan_OutputDetail.cs" />
     <Compile Include="BO\Bill\TemporaryStorage_\TemporaryStorage.cs" />
     <Compile Include="BO\Bill\TemporaryStorage_\TemporaryStorage_Detail.cs" />
+    <Compile Include="BO\Goods_Accounting_Store.cs" />
     <Compile Include="BO\Ref\ChengPinToBanChengPinConfig.cs" />
     <Compile Include="BO\Ref\GoodsReferencePrice.cs" />
     <Compile Include="BO\Views\DailyProductReportView.cs" />
