@@ -1,23 +1,22 @@
-﻿using BWP.B3Butchery.BO;
+﻿using System.Collections.Generic;
+using BWP.B3Butchery.BO;
+using BWP.B3Frameworks;
 using Forks.EnterpriseServices.DomainObjects2;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.EnterpriseServices.JsonRpc;
-using Forks.EnterpriseServices.SqlDoms;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using BWP.B3Butchery.BL;
 using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks.BO.NamedValueTemplate;
 using BWP.B3Frameworks.Utils;
 using Forks.EnterpriseServices.BusinessInterfaces;
-using TSingSoft.WebPluginFramework;
+using Forks.EnterpriseServices.SqlDoms;
+using Forks.Utils;
 
 namespace BWP.B3Butchery.Rpcs
 {
   [Rpc]
- public static class FrozenInStoreRpc
+  public static class FrozenInStoreRpc
   {
 
     [Rpc]
@@ -64,5 +63,50 @@ namespace BWP.B3Butchery.Rpcs
       }
     }
 
+    [Rpc]
+    public static List<FrozenInStoreObj> GetProduceOutput()
+    {
+      var bill = new JoinAlias(typeof(FrozenInStore));
+      var detail = new JoinAlias(typeof(FrozenInStore_Detail));
+      var query = new DQueryDom(bill);
+      query.From.AddJoin(JoinType.Left, new DQDmoSource(detail), DQCondition.EQ(bill, "ID", detail, "FrozenInStore_ID"));
+      query.Columns.Add(DQSelectColumn.Field("ID", bill));
+      query.Columns.Add(DQSelectColumn.Field("Date", bill));
+      query.Columns.Add(DQSelectColumn.Field("Goods_ID", detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_Name", detail));
+      query.Columns.Add(DQSelectColumn.Field("Number", detail));
+      query.Where.Conditions.Add(DQCondition.EQ(bill, "Domain_ID", DomainContext.Current.ID));
+      query.Where.Conditions.Add(DQCondition.EQ("BillState", 单据状态.已审核));
+      query.OrderBy.Expressions.Add(DQOrderByExpression.Create(bill, "ID", true));
+      var list = new List<FrozenInStoreObj>();
+      using (var session = Dmo.NewSession())
+      {
+        using (var reader = session.ExecuteReader(query))
+        {
+          while (reader.Read())
+          {
+            list.Add(new FrozenInStoreObj
+            {
+              ID = (long)reader[0],
+              Date = (DateTime?)reader[1],
+              Goods_ID = (long?)reader[2],
+              Goods_Name = (string)reader[3],
+              Number = (Money<decimal>?)reader[4]
+            });
+          }
+        }
+      }
+      return list;
+    }
+  }
+
+  [RpcObject]
+  public class FrozenInStoreObj
+  {
+    public long? ID { get; set; }
+    public DateTime? Date { get; set; }
+    public long? Goods_ID { get; set; }
+    public string Goods_Name { get; set; }
+    public Money<decimal>? Number { get; set; }
   }
 }
