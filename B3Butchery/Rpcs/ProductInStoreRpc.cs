@@ -53,10 +53,6 @@ namespace BWP.B3Butchery.Rpcs
 	  [Rpc]
     public static long AppInsert(ProductInStore dmo)
 	  {
-	    if (!BLContext.User.IsInRole("B3Butchery.成品入库.新建"))
-	    {
-        throw new Exception("没有新建权限");
-	    }
 	    var bl = BIFactory.Create<IProductInStoreBL>();
 	    foreach (ProductInStore_Detail detail in dmo.Details)
 	    {

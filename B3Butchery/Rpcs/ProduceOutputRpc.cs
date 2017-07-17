@@ -13,6 +13,7 @@ using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.EnterpriseServices.JsonRpc;
 using Forks.EnterpriseServices.SqlDoms;
 using Forks.Utils;
+using TSingSoft.WebPluginFramework;
 
 namespace BWP.B3Butchery.Rpcs
 {
@@ -169,6 +170,40 @@ namespace BWP.B3Butchery.Rpcs
     }
 
     [Rpc]
+    public static long? UnCheck(long id)
+    {
+      if (!BLContext.User.IsInRole("B3Butchery.产出单.撤销"))
+      {
+        return 0;
+      }
+      using (var context = new TransactionContext())
+      {
+        var bl = BIFactory.Create<IProduceOutputBL>(context.Session);
+        var dmo = bl.Load(id);
+        bl.UnCheck(dmo);
+        context.Commit();
+        return dmo.ID;
+      }
+    }
+
+    [Rpc]
+    public static long? Nullify(long id)
+    {
+      if (!BLContext.User.IsInRole("B3Butchery.产出单.作废"))
+      {
+        return 0;
+      }
+      using (var context = new TransactionContext())
+      {
+        var bl = BIFactory.Create<IProduceOutputBL>(context.Session);
+        var dmo = bl.Load(id);
+        bl.Nullify(dmo);
+        context.Commit();
+        return dmo.ID;
+      }
+    }
+
+    [Rpc]
     public static List<ProduceOutputObj> GetProduceOutput()
     {
       var bill = new JoinAlias(typeof(ProduceOutput));
@@ -181,8 +216,9 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("Goods_Name", detail));
       query.Columns.Add(DQSelectColumn.Field("Number", detail));
       query.Where.Conditions.Add(DQCondition.EQ(bill, "Domain_ID", DomainContext.Current.ID));
-      query.Where.Conditions.Add(DQCondition.EQ("BillState", 单据状态.已审核));
+      query.Where.Conditions.Add(DQCondition.Or(DQCondition.EQ(bill, "BillState", 单据状态.已审核), DQCondition.EQ(bill, "BillState", 单据状态.未审核)));
       query.OrderBy.Expressions.Add(DQOrderByExpression.Create(bill, "ID", true));
+      OrganizationUtil.AddOrganizationLimit(query, typeof(ProduceOutput));
       var list = new List<ProduceOutputObj>();
       using (var session = Dmo.NewSession())
       {

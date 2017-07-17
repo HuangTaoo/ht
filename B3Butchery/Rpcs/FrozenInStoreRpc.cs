@@ -12,6 +12,7 @@ using BWP.B3Frameworks.Utils;
 using Forks.EnterpriseServices.BusinessInterfaces;
 using Forks.EnterpriseServices.SqlDoms;
 using Forks.Utils;
+using TSingSoft.WebPluginFramework;
 
 namespace BWP.B3Butchery.Rpcs
 {
@@ -64,7 +65,41 @@ namespace BWP.B3Butchery.Rpcs
     }
 
     [Rpc]
-    public static List<FrozenInStoreObj> GetProduceOutput()
+    public static long? UnCheck(long id)
+    {
+      if (!BLContext.User.IsInRole("B3Butchery.速冻入库.撤销"))
+      {
+        return 0;
+      }
+      using (var context = new TransactionContext())
+      {
+        var bl = BIFactory.Create<IFrozenInStoreBL>(context.Session);
+        var dmo = bl.Load(id);
+        bl.UnCheck(dmo);
+        context.Commit();
+        return dmo.ID;
+      }
+    }
+
+    [Rpc]
+    public static long? Nullify(long id)
+    {
+      if (!BLContext.User.IsInRole("B3Butchery.速冻入库.作废"))
+      {
+        return 0;
+      }
+      using (var context = new TransactionContext())
+      {
+        var bl = BIFactory.Create<IFrozenInStoreBL>(context.Session);
+        var dmo = bl.Load(id);
+        bl.Nullify(dmo);
+        context.Commit();
+        return dmo.ID;
+      }
+    }
+
+    [Rpc]
+    public static List<FrozenInStoreObj> GetFrozenInStore(bool? positiveNumber)
     {
       var bill = new JoinAlias(typeof(FrozenInStore));
       var detail = new JoinAlias(typeof(FrozenInStore_Detail));
@@ -76,8 +111,9 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("Goods_Name", detail));
       query.Columns.Add(DQSelectColumn.Field("Number", detail));
       query.Where.Conditions.Add(DQCondition.EQ(bill, "Domain_ID", DomainContext.Current.ID));
-      query.Where.Conditions.Add(DQCondition.EQ("BillState", 单据状态.已审核));
+      query.Where.Conditions.Add(DQCondition.Or(DQCondition.EQ(bill, "BillState", 单据状态.已审核), DQCondition.EQ(bill, "BillState", 单据状态.未审核)));
       query.OrderBy.Expressions.Add(DQOrderByExpression.Create(bill, "ID", true));
+      OrganizationUtil.AddOrganizationLimit(query, typeof(FrozenInStore));
       var list = new List<FrozenInStoreObj>();
       using (var session = Dmo.NewSession())
       {
@@ -85,6 +121,16 @@ namespace BWP.B3Butchery.Rpcs
         {
           while (reader.Read())
           {
+            if (positiveNumber == true)
+            {
+              if ((Money<decimal>?)reader[4] < 0)
+                continue;
+            }
+            else
+            {
+              if ((Money<decimal>?)reader[4] >= 0)
+                continue;
+            }
             list.Add(new FrozenInStoreObj
             {
               ID = (long)reader[0],
