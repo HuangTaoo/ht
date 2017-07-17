@@ -32,11 +32,13 @@
             this.存货名称 = new System.Windows.Forms.ColumnHeader();
             this.主数量 = new System.Windows.Forms.ColumnHeader();
             this.btnOk = new System.Windows.Forms.Button();
+            this.辅数量 = new System.Windows.Forms.ColumnHeader();
             this.SuspendLayout();
             // 
             // listView1
             // 
             this.listView1.Columns.Add(this.存货名称);
+            this.listView1.Columns.Add(this.辅数量);
             this.listView1.Columns.Add(this.主数量);
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
@@ -63,6 +65,11 @@
             this.btnOk.Text = "确认";
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
+            // 辅数量
+            // 
+            this.辅数量.Text = "辅数量";
+            this.辅数量.Width = 60;
+            // 
             // ProductInStoreConfirmOK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -88,5 +95,6 @@
         private System.Windows.Forms.ColumnHeader 存货名称;
         private System.Windows.Forms.ColumnHeader 主数量;
         private System.Windows.Forms.Button btnOk;
+        private System.Windows.Forms.ColumnHeader 辅数量;
     }
 }

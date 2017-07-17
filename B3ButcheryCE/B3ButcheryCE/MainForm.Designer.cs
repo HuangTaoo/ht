@@ -112,7 +112,6 @@
             this.btn_ProductInStoreOK.Size = new System.Drawing.Size(99, 29);
             this.btn_ProductInStoreOK.TabIndex = 25;
             this.btn_ProductInStoreOK.Text = "成品入库确认";
-            this.btn_ProductInStoreOK.Visible = false;
             this.btn_ProductInStoreOK.Click += new System.EventHandler(this.btn_ProductInStoreOK_Click);
             // 
             // btnFrozenInStoreOk

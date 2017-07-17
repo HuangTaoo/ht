@@ -13,21 +13,22 @@ namespace B3ButcheryCE.ProductInStoreConfirm_
 {
     public partial class ProductInStoreConfirmOK : Form
     {
-        string pID;
-        public ProductInStoreConfirmOK(string ID)
+        string pId;
+        public ProductInStoreConfirmOK(string id)
         {
             InitializeComponent();
-            pID = ID;
+            pId = id;
         }
         private void ProductInStoreConfirmOK_Load(object sender, EventArgs e)
         {
-            var list = RpcFacade.Call<List<RpcObject>>("/MainSystem/B3Butchery/Rpcs/ProductInStoreRpc/GetRpcEasyProductInStoreDetailById", pID);
+            var list = RpcFacade.Call<List<RpcObject>>("/MainSystem/B3Butchery/Rpcs/ProductInStoreRpc/GetRpcEasyProductInStoreDetailById", long.Parse(pId));
             listView1.BeginUpdate();
             foreach (RpcObject item in list)
             {
                 var lvItem = new ListViewItem(item.Get<string>("Goods_Name"));
                 try
                 {
+                    lvItem.SubItems.Add(item.Get<decimal>("SecondNumber").ToString());
                     lvItem.SubItems.Add(item.Get<decimal>("Number").ToString());
                 }
                 catch (Exception)
@@ -43,7 +44,7 @@ namespace B3ButcheryCE.ProductInStoreConfirm_
         {
             try
             {
-                RpcFacade.Call<List<RpcObject>>("/MainSystem/B3Butchery/Rpcs/ProductInStoreRpc/ProductInStoreCheck", pID);
+                RpcFacade.Call<List<RpcObject>>("/MainSystem/B3Butchery/Rpcs/ProductInStoreRpc/ProductInStoreCheck", long.Parse(pId));
                 MessageBox.Show("审核成功");
             }
             catch (Exception ex)

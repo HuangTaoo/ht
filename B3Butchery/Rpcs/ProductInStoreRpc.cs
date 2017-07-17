@@ -12,6 +12,7 @@ using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.EnterpriseServices.JsonRpc;
+using Forks.Utils;
 using TSingSoft.WebPluginFramework;
 using Forks.EnterpriseServices.SqlDoms;
 using BWP.B3Frameworks.Utils;
@@ -106,25 +107,25 @@ namespace BWP.B3Butchery.Rpcs
     /// <summary>
     /// 根据成品入库单号获取存货名称和数量
     /// </summary>
-    /// <param name="ID"></param>
+    /// <param name="id"></param>
     /// <returns></returns>
     [Rpc]
-    public static List<RpcEasyProductInStore_Detail> GetRpcEasyProductInStoreDetailById(long ID) {
-      
+    public static List<RpcEasyProductInStore_Detail> GetRpcEasyProductInStoreDetailById(long id)
+    {
       var ris = new JoinAlias(typeof(ProductInStore));
-      var risDetail=new JoinAlias(typeof(ProductInStore_Detail));
-      DQueryDom query = new DQueryDom(ris);
+      var risDetail = new JoinAlias(typeof(ProductInStore_Detail));
+      var query = new DQueryDom(ris);
       query.From.AddJoin(JoinType.Left, new DQDmoSource(risDetail), DQCondition.EQ(ris, "ID", risDetail, "ProductInStore_ID"));
       query.Columns.Add(DQSelectColumn.Field("Goods_Name", risDetail));
       query.Columns.Add(DQSelectColumn.Field("Number", risDetail));
-      query.Where.Conditions.Add(DQCondition.EQ("ID",ID));
+      query.Columns.Add(DQSelectColumn.Field("SecondNumber", risDetail));
+      query.Where.Conditions.Add(DQCondition.EQ("ID", id));
       try
       {
-        return query.EExecuteList<string, object>().Select(x => new RpcEasyProductInStore_Detail(x.Item1, x.Item2)).ToList();
+        return query.EExecuteList<string, object, Money<decimal>?>().Select(x => new RpcEasyProductInStore_Detail(x.Item1, x.Item2, x.Item3)).ToList();
       }
       catch (Exception)
       {
-
         return new List<RpcEasyProductInStore_Detail>();
       }
     }
@@ -242,11 +243,14 @@ namespace BWP.B3Butchery.Rpcs
   {
     public string Goods_Name { get; set; }
     public object Number { get; set; }
+    public Money<decimal>? SecondNumber { get; set; }
 
     public RpcEasyProductInStore_Detail(){}
-    public RpcEasyProductInStore_Detail(string name, object number) {
+    public RpcEasyProductInStore_Detail(string name, object number, Money<decimal>? secondNumber)
+    {
       Goods_Name = name;
       Number=number;
+      SecondNumber = secondNumber;
     }
   }
 }
