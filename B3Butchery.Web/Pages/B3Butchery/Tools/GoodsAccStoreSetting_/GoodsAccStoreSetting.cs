@@ -32,7 +32,7 @@ namespace BWP.Web.Pages.B3Butchery.Tools.GoodsAccStoreSetting_
 
     protected override void InitForm(HtmlForm form)
     {
-      if (!User.IsInRole("B3FoodDeepProcess.功能.存货仓库设置"))
+      if (!User.IsInRole("B3Butchery.功能.存货仓库设置"))
         throw new AppSecurityException();
       form.Controls.Add(new PageTitle("存货仓库设置"));
       var vPanel = form.EAdd(new VLayoutPanel());
