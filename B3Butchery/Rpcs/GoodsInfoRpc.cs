@@ -229,6 +229,8 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("GoodsProperty_Name", goods));
       query.Columns.Add(DQSelectColumn.Field("GoodsPropertyCatalog_Name", goods));
 
+      query.Columns.Add(DQSelectColumn.Field("Spell", goods));
+
       query.Where.Conditions.Add(DQCondition.EQ(bill, "Domain_ID", DomainContext.Current.ID));
 
       return query;
@@ -268,6 +270,9 @@ namespace BWP.B3Butchery.Rpcs
             dto.GoodsProperty_ID = (long?)reader[11];
             dto.GoodsProperty_Name = (string)reader[12];
             dto.GoodsPropertyCatalog_Name = (string)reader[13];
+            dto.Goods_Spell=(string)reader[14];
+
+
 
             list.Add(dto);
           }
