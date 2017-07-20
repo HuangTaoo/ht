@@ -23,6 +23,10 @@ namespace BWP.B3Butchery.Rpcs
     [Rpc]
     public static long PdaInsertAndCheck(FrozenInStore dmo)
     {
+      if (!BLContext.User.IsInRole("B3Butchery.产出单.新建"))
+      {
+        return 0;
+      }
       SetSecondNumberByNumber(dmo);
       using (var context = new TransactionContext())
       {
