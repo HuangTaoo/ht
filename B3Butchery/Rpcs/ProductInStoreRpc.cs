@@ -23,7 +23,48 @@ namespace BWP.B3Butchery.Rpcs
 	public static class ProductInStoreRpc
 	{
 
-    //只返回第一条明细
+    [Rpc]
+    public static ProductInStore Load(long id)
+    {
+      var bl = BIFactory.Create<IProductInStoreBL>();
+      var dmo = bl.Load(id);
+      return dmo;
+    }
+
+	  [Rpc]
+    public static List<ProductInStoreSimpleDto> GetSimpleList(int pageIndex,int pageSize)
+    {
+      var list = new List<ProductInStoreSimpleDto>();
+      var query=new DQueryDom(new JoinAlias(typeof(ProductInStore)));
+      query.Where.Conditions.Add(DQCondition.EQ("BillState",单据状态.未审核));
+      query.Where.Conditions.Add(DQCondition.EQ("Domain_ID",DomainContext.Current.ID));
+      query.OrderBy.Expressions.Add(DQOrderByExpression.Create("ID",true));
+      
+
+      query.Columns.Add(DQSelectColumn.Field("ID"));
+      query.Columns.Add(DQSelectColumn.Field("InStoreDate"));
+      query.Columns.Add(DQSelectColumn.Field("Store_Name"));
+
+      query.Range=new SelectRange(pageSize*pageIndex,pageSize);
+	    using (var session=Dmo.NewSession())
+	    {
+	      using (var reader=session.ExecuteReader(query))
+	      {
+	        while (reader.Read())
+	        {
+	          var dto=new ProductInStoreSimpleDto();
+	          dto.ID = (long) reader[0];
+	          dto.InStoreDate = (DateTime) reader[1];
+	          dto.Store_Name = (string) reader[2];
+            list.Add(dto);
+	        }
+	      }
+	    }
+      return list;
+
+    }
+
+	  //只返回第一条明细
 	  [Rpc]
 	  public static List<ProductInStoreWithDetailDto> GetListOnlyOneDetail(int pageIndex,int pageSize)
       {
