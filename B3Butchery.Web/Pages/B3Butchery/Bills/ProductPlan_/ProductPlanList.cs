@@ -7,6 +7,7 @@ using BWP.B3Butchery.BO;
 using BWP.B3Butchery.BL;
 using TSingSoft.WebControls2;
 using BWP.Web.Utils;
+using TSingSoft.WebPluginFramework;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.ProductPlan_
 {
@@ -37,6 +38,19 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductPlan_
         AddDFBrowseGridColumn(grid, "Department_Name");
         AddDFBrowseGridColumn(grid, "Employee_Name");
         AddDFBrowseGridColumn(grid, "Date");
+        AddDFBrowseGridColumn(grid, "EndDate");
+        AddDFBrowseGridColumn(grid, "ProductType");
+      }
+    }
+
+    protected override void InitToolBar(HLayoutPanel toolbar)
+    {
+      base.InitToolBar(toolbar);
+      if (User.IsInRole("B3Butchery.生产计划.访问"))
+      {
+        var dataAnysBtn = new TSButton() { Text = "数据分析", UseSubmitBehavior = false };
+        dataAnysBtn.OnClientClick = string.Format("OpenUrlInTopTab('{0}','生产计划产出分析');return false;", WpfPageUrl.ToGlobal(AspUtil.AddTimeStampToUrl("~/B3Butchery/Reports/ProductPlanReport_/ProductPlanReport.aspx")));
+        toolbar.Add(dataAnysBtn);
       }
     }
   }

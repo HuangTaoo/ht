@@ -253,6 +253,9 @@
     <Compile Include="Pages\B3Butchery\Reports\ProductNoticeReport_\ProductNoticeReport.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\B3Butchery\Reports\ProductPlanReport_\ProductPlanReport.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\Tools\ChengPinToBanChengPinConfigPage_\ChengPinToBanChengPinConfigPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -343,6 +346,7 @@
     <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductNotice_\ProductNoticeList.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Reports\ProductPlanReport_\ProductPlanReport.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Tools\GoodsAccStoreSetting_\AddSettingDialog.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Tools\GoodsAccStoreSetting_\GoodsAccStoreSetting.xml">
       <SubType>Designer</SubType>

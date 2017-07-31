@@ -191,6 +191,7 @@
     <Compile Include="BO\Views\DailyProductReportView.cs" />
     <Compile Include="DataPatch\P20150831UpdateInOutStoreBillFromTo.cs" />
     <Compile Include="DataPatch\ConvertDateTimeToDate.cs" />
+    <Compile Include="DataPatch\P20170731ProductPlanAddNewFieldEndDate.cs" />
     <Compile Include="Hippo\Actions_\ProduceInputAction.cs" />
     <Compile Include="Hippo\Actions_\ProduceInStoreAction.cs" />
     <Compile Include="Hippo\Actions_\ProduceOutputAction.cs" />

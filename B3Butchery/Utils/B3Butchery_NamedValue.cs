@@ -14,6 +14,12 @@ namespace BWP.B3Butchery.Utils
     public static readonly NamedValue<投入类型> 非当日屠宰 = new NamedValue<投入类型>(1);
   }
 
+  public sealed class 生产类型
+  {
+    public static readonly NamedValue<生产类型> 日计划 = new NamedValue<生产类型>(0);
+    public static readonly NamedValue<生产类型> 周计划 = new NamedValue<生产类型>(1);
+  }
+
   public sealed class 暂存类型
   {
     public static readonly NamedValue<暂存类型> 零箱 = new NamedValue<暂存类型>(0);

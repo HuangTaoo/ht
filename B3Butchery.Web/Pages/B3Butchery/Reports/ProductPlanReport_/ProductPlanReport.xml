@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Select xmlns="urn:XDQuery">
+  <Columns>
+  </Columns>
+  <From>
+    <Join>
+      <DmoClass class="BWP.B3Butchery.BO.ProductPlan, B3Butchery" alias="bill"/>
+      <DmoClass class="BWP.B3Butchery.BO.ProductPlan_OutputDetail, B3Butchery" alias="detail"/>
+      <Condition>
+        <EQ>
+          <Field name="ID"/>
+          <Field name="ProductPlan_ID" alias="detail"/>
+        </EQ>
+      </Condition>
+    </Join>
+  </From>
+  <Where>
+    <And>
+      <EQ>
+        <Field name="ID"/>
+        <QBE paramName="ID"/>
+      </EQ>
+      <QBEIn>
+        <Field name="AccountingUnit_ID"/>
+        <QBE paramName="AccountingUnit_ID"/>
+      </QBEIn>
+      <QBEIn>
+        <Field name="Department_ID"/>
+        <QBE paramName="Department_ID"/>
+      </QBEIn>
+      <EQ>
+        <Field name="ProductType"/>
+        <QBE paramName="ProductType"/>
+      </EQ>
+      <EQ>
+        <Field name="PlanNumber"/>
+        <QBE paramName="PlanNumber"/>
+      </EQ>
+      
+      <GreaterThanOrEqual>
+        <Field name="CheckDate"/>
+        <QBE paramName="MinCheckDate" />
+      </GreaterThanOrEqual>
+      <LessThanOrEqual>
+        <Field name="CheckDate"/>
+        <QBE paramName="MaxCheckDate"/>
+      </LessThanOrEqual>
+      
+      <GreaterThanOrEqual>
+        <Field name="Date" alias="detail"/>
+        <QBE paramName="MinDate" />
+      </GreaterThanOrEqual>
+      
+      <LessThanOrEqual>
+        <Field name="Date" alias="detail"/>
+        <QBE paramName="MaxDate"/>
+      </LessThanOrEqual>
+     
+      <Like>
+        <Field name="Remark"/>
+        <QBE paramName="Remark"/>
+      </Like>
+      <EQ>
+        <Field name="BillState"/>
+        <QBE paramName="BillState"/>
+      </EQ>
+      
+      <QBEIn>
+        <Field name="Goods_ID" alias="detail"/>
+        <QBE paramName="Goods_ID"/>
+      </QBEIn>
+
+      <Like>
+        <Field name="Remark" alias="detail"/>
+        <QBE paramName="DRemark"/>
+      </Like>
+    </And>
+  </Where>
+</Select>

@@ -8,6 +8,7 @@ using BWP.B3Frameworks.BO;
 using Forks.EnterpriseServices.DomainObjects2;
 using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks;
+using Forks.Utils;
 
 namespace BWP.B3Butchery.BO
 {
@@ -17,9 +18,20 @@ namespace BWP.B3Butchery.BO
 
   public class ProductPlan : DepartmentWorkFlowBill
   {
-    [LogicName("日期")]
+    [LogicName("开始日期")]
     [DFNotEmpty]
     public DateTime? Date { get; set; }
+
+    [LogicName("结束日期")]
+    [DFNotEmpty]
+    public DateTime? EndDate { get; set; }
+
+    private NamedValue<生产类型>? mProductType = 生产类型.日计划;
+    [LogicName("生产类型")]
+    public NamedValue<生产类型>? ProductType {
+      get { return mProductType; }
+      set { mProductType = value; }
+  }
 
     [LogicName("计划号")]
     public string PlanNumber { get; set; }

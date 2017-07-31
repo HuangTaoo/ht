@@ -8,6 +8,11 @@
     <Word name="当日屠宰" value="0" />
     <Word name="非当日屠宰" value="1" />
   </NamedValue>
+  
+  <NamedValue type="BWP.B3Butchery.Utils.生产类型,B3Butchery">
+    <Word name="日计划" value="0" />
+    <Word name="周计划" value="1" />
+  </NamedValue>
   <NamedValue type="BWP.B3Butchery.Utils.暂存类型,B3Butchery">
     <Word name="零箱" value="0" />
     <Word name="未冻好" value="1" />

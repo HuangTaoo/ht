@@ -29,10 +29,12 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductPlan_
       var layoutManager = new LayoutManager("main", mDFInfo, mDFContainer);
       var config = new AutoLayoutConfig();
       config.Add("Date");
+      config.Add("EndDate");
       config.Add("AccountingUnit_ID");
       config.Add("Department_ID");
       config.Add("Employee_ID");
       config.Add("PlanNumber");
+      config.Add("ProductType");
       layoutManager.Config = config;
       container.Controls.Add(layoutManager.CreateLayout());
 
