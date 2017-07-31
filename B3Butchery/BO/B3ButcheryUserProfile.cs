@@ -7,6 +7,7 @@ using BWP.B3Frameworks.BO;
 using Forks.EnterpriseServices;
 using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
+using TSingSoft.WebControls2;
 
 namespace BWP.B3Butchery.BO
 {
@@ -28,6 +29,19 @@ namespace BWP.B3Butchery.BO
     [Join("AccountingUnit_ID", "ID")]
     [DFPrompt("会计单位")]
     public string AccountingUnit_Name { get; set; }
+
+
+    [LogicName("成品入库默认仓库")]
+    [DFExtProperty("WebControlType", DFEditControl.ChoiceBox)]
+    [DFDataKind(B3FrameworksConsts.DataSources.授权仓库)]
+    [DFExtProperty(B3FrameworksConsts.DFExtProperties.QueryDataKind, B3FrameworksConsts.DataSources.授权仓库全部)]
+    [DFExtProperty("DisplayField", "ProductInStore_Store_Name")]
+    public long? ProductInStore_Store_ID { get; set; }
+
+    [ReferenceTo(typeof(Store), "Name")]
+    [Join("ProductInStore_Store_ID", "ID")]
+    [LogicName("成品入库默认仓库")]
+    public string ProductInStore_Store_Name { get; set; }
 
   }
 }

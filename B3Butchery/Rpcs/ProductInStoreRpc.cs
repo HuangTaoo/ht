@@ -108,6 +108,26 @@ namespace BWP.B3Butchery.Rpcs
 	    return dmo.ID;
 	  }
 
+    //华都 只更新一条明细
+    [Rpc]
+	  public static void AppUpdateByDetail(ProductInStoreSimpleDto dto)
+	  {
+      var bl = BIFactory.Create<IProductInStoreBL>();
+	    var dmo = bl.Load(dto.ID);
+	    dmo.Store_ID = dto.Store_ID;
+	    dmo.InStoreDate = dto.Date;
+
+	    var fd = dmo.Details.FirstOrDefault(x => x.Goods_ID == dto.Goods_ID);
+	    if (fd != null)
+	    {
+	      fd.SecondNumber = dto.SecondNumber;
+        fd.Number = fd.SecondNumber * fd.Goods_MainUnitRatio / fd.Goods_SecondUnitRatio;
+        
+      }
+      bl.Update(dmo);
+
+	  }
+
 	  /// <summary>
     /// 审核成品入库单
     /// </summary>

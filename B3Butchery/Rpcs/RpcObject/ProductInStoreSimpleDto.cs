@@ -12,5 +12,11 @@ namespace BWP.B3Butchery.Rpcs.RpcObject
     public long ID { get; set; }
     public DateTime InStoreDate { get; set; }
     public string Store_Name { get; set; }
+
+
+    public long? Store_ID { get; set; }
+    public DateTime? Date { get; set; }
+    public long? Goods_ID { get; set; }
+    public decimal? SecondNumber { get; set; }
   }
 }

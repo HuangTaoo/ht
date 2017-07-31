@@ -21,6 +21,12 @@ namespace BWP.B3Butchery.Rpcs
   [Rpc]
   public static class BaseInfoRpc
   {
+    [Rpc]
+    public static B3ButcheryUserProfile GetUserProfile()
+    {
+      var profile = DomainUserProfileUtil.Load<B3ButcheryUserProfile>();
+      return profile;
+    }
 
     [Rpc]
     public static List<BaseInfoDto> GetAllDepartmentList()
