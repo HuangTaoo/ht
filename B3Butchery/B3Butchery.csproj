@@ -142,6 +142,7 @@
     <Compile Include="BL\BaseInfo\ProductLinkTemplateBL_\ProductLinkTemplateBL.cs" />
     <Compile Include="BL\Bill\DailyProductReportBL_\DailyProductReportBL.cs" />
     <Compile Include="BL\Bill\FrozenInStore_\FrozenInStoreBL.cs" />
+    <Compile Include="BL\Bill\PackingRecipients_\PackingRecipientsBL.cs" />
     <Compile Include="BL\Bill\ProduceInputBL_\ProduceInputBL.cs" />
     <Compile Include="BL\Bill\ProduceOutputBL_\ProduceOutputBL.cs" />
     <Compile Include="BL\Bill\ProductInStoreBL_\ProductInStoreBL.cs" />
@@ -168,6 +169,8 @@
     <Compile Include="BO\Bill\DailyProductReport_\DailyProductReport_OutputDetail.cs" />
     <Compile Include="BO\Bill\FrozenInStore_\FrozenInStore.cs" />
     <Compile Include="BO\Bill\FrozenInStore_\FrozenInStore_Detail.cs" />
+    <Compile Include="BO\Bill\PackingRecipients_\PackingRecipients.cs" />
+    <Compile Include="BO\Bill\PackingRecipients_\PackingRecipients_Detail.cs" />
     <Compile Include="BO\Bill\ProduceInput_\ProduceInput.cs" />
     <Compile Include="BO\Bill\ProduceInput_\ProduceInput_Detail.cs" />
     <Compile Include="BO\Bill\ProduceOutput_\ProduceOutput.cs" />
