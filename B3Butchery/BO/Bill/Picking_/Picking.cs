@@ -16,9 +16,9 @@ namespace BWP.B3Butchery.BO
   [DmoTypeID(B3FrameworksConsts.DmoTypeIDBases.B3Butchery, DmoTypeIDOffsets.Picking)]
   public class Picking : DepartmentWorkFlowBill
   {
-    DateTime mDate = DateTime.Today;
+    DateTime? mDate = DateTime.Today;
     [LogicName("日期")]
-    public DateTime Date
+    public DateTime? Date
     {
       get { return mDate; }
       set { mDate = value; }

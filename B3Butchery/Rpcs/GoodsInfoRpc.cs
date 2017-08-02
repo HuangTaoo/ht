@@ -231,7 +231,7 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("GoodsPropertyCatalog_Sort", goods));
       query.Columns.Add(DQSelectColumn.Field("Spell", goods));
 
-      query.OrderBy.Expressions.Add(DQOrderByExpression.Create(goods,"GoodsPropertyCatalog_Sort",true));
+      query.OrderBy.Expressions.Add(DQOrderByExpression.Create(goods,"GoodsPropertyCatalog_Sort"));
 
       query.Where.Conditions.Add(DQCondition.EQ(bill, "Domain_ID", DomainContext.Current.ID));
 
