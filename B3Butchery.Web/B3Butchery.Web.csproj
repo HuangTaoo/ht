@@ -178,6 +178,12 @@
     <Compile Include="Pages\B3Butchery\Bills\PackingRecipients_\PackingRecipientsList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\Picking_\PickingEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\Picking_\PickingList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\Bills\ProduceInput_\ProduceInputEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -352,6 +358,7 @@
     <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductNotice_\ProductNoticeList.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Bills\Picking_\PickingList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\PackingRecipients_\PackingRecipientsList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\ProductPlanReport_\ProductPlanReport.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Tools\GoodsAccStoreSetting_\AddSettingDialog.xml" />

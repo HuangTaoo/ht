@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Select xmlns="urn:XDQuery">
+  <Columns>
+    <Field name="ID"/>
+  </Columns>
+  <From>
+    <DmoClass class="BWP.B3Butchery.BO.Picking, B3Butchery"/>
+  </From>
+  <Where>
+    <And>
+      <EQ>
+        <Field name="ID"/>
+        <QBE paramName="ID"/>
+      </EQ>
+      <EQ>
+        <Field name="AccountingUnit_ID"/>
+        <QBE paramName="AccountingUnit_ID"/>
+      </EQ>
+      <EQ>
+        <Field name="Department_ID"/>
+        <QBE paramName="Department_ID"/>
+      </EQ>
+      <EQ>
+        <Field name="Employee_ID"/>
+        <QBE paramName="Employee_ID"/>
+      </EQ>
+      <EQ>
+        <Field name="IsLocked"/>
+        <QBE paramName="IsLocked"/>
+      </EQ>
+      <EQ>
+        <Field name="ProductLine_ID"/>
+        <QBE paramName="ProductLine_ID"/>
+      </EQ>
+      <Contains>
+        <Field name="CreateUser_Name"/>
+        <QBE paramName="CreateUser_Name"/>
+      </Contains>
+      <Contains>
+        <Field name="CheckUser_Name"/>
+        <QBE paramName="CheckUser_Name"/>
+      </Contains>
+      <GreaterThanOrEqual>
+        <Field name="Date"/>
+        <QBE paramName="MinDate" />
+      </GreaterThanOrEqual>
+      <LessThanOrEqual>
+        <Field name="Date"/>
+        <QBE paramName="MaxDate"/>
+      </LessThanOrEqual>
+      <GreaterThanOrEqual>
+        <Field name="CreateTime"/>
+        <QBE paramName="MinCreateTime" />
+      </GreaterThanOrEqual>
+      <LessThanOrEqual>
+        <Field name="CreateTime"/>
+        <QBE paramName="MaxCreateTime"/>
+      </LessThanOrEqual>
+      <EQ>
+        <Field name="BillState"/>
+        <QBE paramName ="BillState"/>
+      </EQ>
+      <Contains>
+        <Field name="Remark"/>
+        <QBE paramName ="Remark"/>
+      </Contains>
+    </And>
+  </Where>
+</Select>

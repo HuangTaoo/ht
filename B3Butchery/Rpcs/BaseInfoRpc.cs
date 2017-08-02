@@ -30,6 +30,16 @@ namespace BWP.B3Butchery.Rpcs
       queryDto.PageSize = pageSize;
       return GetBaseInfoDQueryDom(typeof(Department), true, queryDto);
     }
+
+    [Rpc]
+    public static List<BaseInfoDto> SyncProductLinesWithQuery(string input, int pageIndex, int pageSize)
+    {
+      var queryDto = new BaseInfoQueryDto();
+      queryDto.Input = input;
+      queryDto.PageIndex = pageIndex;
+      queryDto.PageSize = pageSize;
+      return GetBaseInfoDQueryDom(typeof(ProductLine), true, queryDto);
+    }
     
 
 

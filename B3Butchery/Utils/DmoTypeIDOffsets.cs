@@ -18,5 +18,6 @@ namespace BWP.B3Butchery.Utils
     public const byte TemporaryStorage = 9;
     public const byte FrozenInStore = 10;
     public const byte PackingRecipients = 11;
+    public const byte Picking = 12;
   }
 }
