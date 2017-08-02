@@ -15,8 +15,10 @@ namespace BWP.B3Butchery.Rpcs.RpcObject
 
 
     public long? Store_ID { get; set; }
+    public long? Department_ID { get; set; }
     public DateTime? Date { get; set; }
     public long? Goods_ID { get; set; }
     public decimal? SecondNumber { get; set; }
+    public string Remark { get; set; }
   }
 }

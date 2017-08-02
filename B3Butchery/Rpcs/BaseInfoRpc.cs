@@ -22,6 +22,19 @@ namespace BWP.B3Butchery.Rpcs
   public static class BaseInfoRpc
   {
     [Rpc]
+    public static List<BaseInfoDto> SyncDepartmentsWithQuery(string input, int pageIndex, int pageSize)
+    {
+      var queryDto = new BaseInfoQueryDto();
+      queryDto.Input = input;
+      queryDto.PageIndex = pageIndex;
+      queryDto.PageSize = pageSize;
+      return GetBaseInfoDQueryDom(typeof(Department), true, queryDto);
+    }
+    
+
+
+
+    [Rpc]
     public static B3ButcheryUserProfile GetUserProfile()
     {
       var profile = DomainUserProfileUtil.Load<B3ButcheryUserProfile>();
@@ -105,6 +118,12 @@ namespace BWP.B3Butchery.Rpcs
           query.Where.Conditions.Add(DQCondition.Like("Name", queryDto.Input));
         }
       }
+
+      if (type == typeof(Department))
+      {
+        OrganizationUtil.AddOrganizationLimit(query, typeof(Department));
+      }
+
       using (var session = Dmo.NewSession())
       {
         using (var reader = session.ExecuteReader(query))

@@ -16,5 +16,8 @@ namespace BWP.B3Butchery.Rpcs.RpcObject
     public Money<decimal>? Number{ get; set; }
     public Money<decimal>? SecondNumber { get; set; }
 
+    public int BillState { get; set; }
+    public string BillStateStr { get; set; }
+
   }
 }

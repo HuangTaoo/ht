@@ -30,6 +30,7 @@ namespace BWP.B3Butchery.Rpcs.RpcObject
     public long? GoodsProperty_ID { get; set; }
     public string GoodsProperty_Name { get; set; }
     public string GoodsPropertyCatalog_Name { get; set; }
+    public int? GoodsPropertyCatalog_Sort { get; set; }
 
     [LogicName("辅单位II")]
     public string SecondUnitII { get; set; }

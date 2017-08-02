@@ -79,6 +79,8 @@ namespace BWP.B3Butchery.Rpcs
 	      var dto = new ProductInStoreWithDetailDto();
 	      dto.ID = inStore.ID;
 	      dto.Date = inStore.InStoreDate;
+	      dto.BillState = inStore.BillState.Value;
+	      dto.BillStateStr = inStore.BillState.Name;
 	      var detail = inStore.Details.FirstOrDefault();
 	      if (detail != null)
 	      {
@@ -103,7 +105,8 @@ namespace BWP.B3Butchery.Rpcs
 	        detail.Number = detail.SecondNumber * detail.Goods_MainUnitRatio / detail.Goods_SecondUnitRatio;
 	      }
 	    }
-      bl.InitNewDmo(dmo);
+//      bl.InitNewDmo(dmo);
+	    dmo.Domain_ID = DomainContext.Current.ID;
       bl.Insert(dmo);
 	    return dmo.ID;
 	  }
@@ -115,7 +118,9 @@ namespace BWP.B3Butchery.Rpcs
       var bl = BIFactory.Create<IProductInStoreBL>();
 	    var dmo = bl.Load(dto.ID);
 	    dmo.Store_ID = dto.Store_ID;
+	    dmo.Department_ID = dto.Department_ID;
 	    dmo.InStoreDate = dto.Date;
+	    dmo.Remark = dto.Remark;
 
 	    var fd = dmo.Details.FirstOrDefault(x => x.Goods_ID == dto.Goods_ID);
 	    if (fd != null)
