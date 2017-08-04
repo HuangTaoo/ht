@@ -22,6 +22,7 @@ using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using BWP.B3Frameworks;
 using Forks.EnterpriseServices.SqlDoms;
 using BWP.B3UnitedInfos.Utils;
+using BWP.B3Butchery;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
 {
@@ -183,12 +184,17 @@ function(result,dfContainer){
         detailGrid.GetFromUI();
         if (!selectGoods.IsEmpty)
         {
+          var config = new B3ButcheryConfig();
+          DateTime? productionDate = null;
+          //判断当前配置 否为当天时间，是 为入库时间 默认是 否
+          if (config.ProductInStoreChooseDate.Value) { productionDate = Dmo.InStoreDate; } else { productionDate = DateTime.Today; }
+ 
           foreach (var item in selectGoods.GetValues())
           {
             var d = new ProductInStore_Detail()
             {
               Goods_ID = long.Parse(item),
-              ProductionDate = DateTime.Today,
+              ProductionDate = productionDate,
               Price = 0
             };
             DmoUtil.RefreshDependency(d, "Goods_ID");

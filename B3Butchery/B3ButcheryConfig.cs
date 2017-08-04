@@ -16,8 +16,21 @@ namespace BWP.B3Butchery
     {
       ConfigurationUtil.Fill(this);
     }
+    private BoolConfigRef mProductInStoreChooseDate = new BoolConfigRef(false);
+    [DomainConfigurationItem]
+    [LogicName("成品入库选择存货生产日期")]
+    [ConfigurationItemGroup("屠宰分割")]
+    [ConfigurationItemDescription("成品入库选择存货{生产日期}取{入库时间}还是当天时间；{描述}=默认否默认为“否”取当天时间")]
+    public BoolConfigRef ProductInStoreChooseDate
+    {
+      get { return mProductInStoreChooseDate; }
+      set { mProductInStoreChooseDate = value; }
+    }
 
-		private BoolConfigRef mDoCheckCreatedInStore = new BoolConfigRef(false);
+
+
+
+    private BoolConfigRef mDoCheckCreatedInStore = new BoolConfigRef(false);
 		[DomainConfigurationItem]
 		[LogicName("生成已审核成品入库")]
 		[ConfigurationItemGroup("屠宰分割")]
