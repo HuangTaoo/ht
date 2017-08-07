@@ -230,7 +230,26 @@ function(result,dfContainer){
         }
         detailGrid.DataBind();
       };
+      hPanel.Add(new SimpleLabel("生产日期"));
+      var selectDate = new DateInput();
 
+      hPanel.Add(selectDate);
+      var summary = new TSButton() { Text = "统一生产日期" };
+      summary.Click += (sender, e) =>
+      {
+        if (!selectDate.IsEmpty)
+        {
+          detailGrid.GetFromUI();
+          var date = selectDate.Value;
+          foreach (var r in Dmo.Details)
+          {
+            r.ProductionDate = date;
+          }
+          detailGrid.DataBind();
+        }
+
+      };
+      hPanel.Add(summary);
       var quickSelctButton = new DialogButton() { Url = "~/B3UnitedInfos/Dialogs/QucicklySelectGoodsDetailsDialog.aspx", Text = "快速选择" };
       quickSelctButton.Click += delegate
       {
@@ -268,7 +287,8 @@ function(result,dfContainer){
         Dmo.CheckEmployee_ID = temp.CheckEmployee_ID;
         Dmo.CheckEmployee_Name = temp.CheckEmployee_Name;
         Dmo.CheckDate = temp.CheckDate;
-        Dmo.InStoreDate = temp.InStoreDate;
+        if (Dmo.InStoreDate != null) { Dmo.InStoreDate = temp.InStoreDate; }
+
         foreach (var de in temp.Details)
         {
           var detail = new ProductInStore_Detail();
