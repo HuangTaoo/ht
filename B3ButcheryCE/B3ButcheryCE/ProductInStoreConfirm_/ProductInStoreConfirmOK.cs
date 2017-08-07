@@ -60,11 +60,25 @@ namespace B3ButcheryCE.ProductInStoreConfirm_
 
         private void ProductInStoreConfirmOK_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyValue==13)
+            if (e.KeyValue == 13)
             {
-                btnOk_Click(sender,e);
+                btnOk_Click(sender, e);
             }
         }
 
+        private void listView1_ItemActivate(object sender, EventArgs e)
+        {
+            var item = listView1.Items[listView1.FocusedItem.Index];
+            if (listView1.FocusedItem == null)
+            {
+                return;
+            }
+            var inputNumber = new ProductInStoreConfirmInputNumberForm();
+            if (inputNumber.ShowDialog() == DialogResult.OK)
+            {
+                var number = inputNumber.Number;
+                item.SubItems[2].Text = number.ToString();
+            }
+        }
     }
 }

@@ -145,5 +145,10 @@ namespace B3ButcheryCE
             }
 
         }
+
+        public static void ProductInStoreSaveAndCheck()
+        {
+
+        }
     }
 }

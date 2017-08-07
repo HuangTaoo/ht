@@ -250,6 +250,9 @@
     <Compile Include="Pages\B3Butchery\Reports\DailyProductReportAnys_\DailyProductReportAnys.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\B3Butchery\Reports\FrozenInStoreReport_\FrozenInStoreReport.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\Reports\OutPutInStoreDiffReport_\OutPutInStoreDiffReport.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -358,6 +361,7 @@
     <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductNotice_\ProductNoticeList.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Reports\FrozenInStoreReport_\FrozenInStoreReport.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\Picking_\PickingList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\PackingRecipients_\PackingRecipientsList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\ProductPlanReport_\ProductPlanReport.xml" />

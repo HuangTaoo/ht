@@ -1,10 +1,7 @@
 ﻿using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using TSingSoft.WebControls2;
+using TSingSoft.WebPluginFramework;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.FrozenInStore_
 {
@@ -37,6 +34,17 @@ namespace BWP.Web.Pages.B3Butchery.Bills.FrozenInStore_
         AddDFBrowseGridColumn(grid, "ProductionPlan_PlanNumber");
         AddDFBrowseGridColumn(grid, "CheckUser_Name");
         AddDFBrowseGridColumn(grid, "Remark");
+      }
+    }
+
+    protected override void InitToolBar(HLayoutPanel toolbar)
+    {
+      base.InitToolBar(toolbar);
+      if (User.IsInRole("B3Butchery.报表.速冻入库分析"))
+      {
+        var dataAnysBtn = new TSButton() { Text = "数据分析", UseSubmitBehavior = false };
+        dataAnysBtn.OnClientClick = string.Format("OpenUrlInTopTab('{0}','速冻入库分析');return false;", WpfPageUrl.ToGlobal(AspUtil.AddTimeStampToUrl("~/B3Butchery/Reports/FrozenInStoreReport_/FrozenInStoreReport.aspx")));
+        toolbar.Add(dataAnysBtn);
       }
     }
   }
