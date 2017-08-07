@@ -97,7 +97,11 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
             return GoodsUtil.EnableBatch(detail.Goods_ID, detail.GoodsProperty_ID) && CanSave;
           case "Money":
             return false;
+          case "SecondNumber":
+            var hasSecondUnit = !string.IsNullOrEmpty(detail.Goods_SecondUnit);
+            return CanSave && hasSecondUnit;
         }
+
         return CanSave;
       };
       detailGrid = titlePanel.EAdd(new DFEditGrid(detailGridEditor) { Width = Unit.Percentage(100), ShowLineNo = true });
