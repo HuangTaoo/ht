@@ -8,6 +8,8 @@ namespace B3ButcheryCE.Rpc_.ClientProduceOutput_
 {
     public class ClientProduceOutputBillSave : ClientBase
     {
+        public long ID { get; set; }
+
         public long AccountingUnit_ID { get; set; }
 
         public long Department_ID { get; set; }

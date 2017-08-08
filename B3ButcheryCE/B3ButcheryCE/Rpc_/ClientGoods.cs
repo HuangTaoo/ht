@@ -9,6 +9,10 @@ namespace B3ButcheryCE.Rpc_
 {
     public class ClientGoods
     {
+        public long ID { get; set; }
+
+        public long Bill_ID { get; set; }
+
         public long Goods_ID { get; set; }
 
         public string Goods_Name { get; set; }
