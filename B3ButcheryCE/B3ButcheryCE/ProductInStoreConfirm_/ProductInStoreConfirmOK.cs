@@ -10,6 +10,7 @@ using Forks.JsonRpc.Client;
 using Forks.JsonRpc.Client.Data;
 using B3ButcheryCE.Rpc_.ClientProduceOutput_;
 using B3ButcheryCE.Rpc_;
+using B3ButcheryCE.Util_;
 
 namespace B3ButcheryCE.ProductInStoreConfirm_
 {
@@ -68,10 +69,19 @@ namespace B3ButcheryCE.ProductInStoreConfirm_
                 }
                 SyncBillUtil.ProductInStoreSaveAndCheck(dmo);
 
-                MessageBox.Show("操作成功");
+                MessageBox.Show("审核成功");
 
+                try
+                {
+                    //九联业务，如果九联模块用户个性设置中，{默认其他出库会计单位}{默认其他出库仓库}和单据相同，生成【其他出库单】
+                    var id = RpcFacade.Call<long>("/MainSystem/B3_JiuLian/Rpcs/ButcherTouchScreenRpc/OtherOutStoreRpc/OtherOutStoreInsertAndCheck", long.Parse(pId));
+                    MessageBox.Show("生成已审核其他出库No." + id);
+                }
+                catch (Exception)
+                {
+                }
                 //RpcFacade.Call<List<RpcObject>>("/MainSystem/B3Butchery/Rpcs/ProductInStoreRpc/ProductInStoreCheck", long.Parse(pId));
-                //MessageBox.Show("审核成功");
+                //MessageBox.Show("审核成功");                
             }
             catch (Exception ex)
             {
