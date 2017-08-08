@@ -151,6 +151,7 @@
       <Function index="3" name="差异表"/>
       <Function index="4" name="生产日报数据分析"/>
       <Function index="5" name="生产通知分析"/>
+      <Function index="6" name="速冻入库分析" />
     </FunctionGroup>
     <FunctionGroup name="生产环节模板" roleSchemas="employee" >
       <Function index="0" name="访问"/>

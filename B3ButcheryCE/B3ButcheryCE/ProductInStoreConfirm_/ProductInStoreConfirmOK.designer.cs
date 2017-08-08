@@ -30,9 +30,9 @@
         {
             this.listView1 = new System.Windows.Forms.ListView();
             this.存货名称 = new System.Windows.Forms.ColumnHeader();
+            this.辅数量 = new System.Windows.Forms.ColumnHeader();
             this.主数量 = new System.Windows.Forms.ColumnHeader();
             this.btnOk = new System.Windows.Forms.Button();
-            this.辅数量 = new System.Windows.Forms.ColumnHeader();
             this.SuspendLayout();
             // 
             // listView1
@@ -40,16 +40,23 @@
             this.listView1.Columns.Add(this.存货名称);
             this.listView1.Columns.Add(this.辅数量);
             this.listView1.Columns.Add(this.主数量);
+            this.listView1.FullRowSelect = true;
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(238, 230);
             this.listView1.TabIndex = 0;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.ItemActivate += new System.EventHandler(this.listView1_ItemActivate);
             // 
             // 存货名称
             // 
             this.存货名称.Text = "存货名称";
             this.存货名称.Width = 162;
+            // 
+            // 辅数量
+            // 
+            this.辅数量.Text = "辅数量";
+            this.辅数量.Width = 60;
             // 
             // 主数量
             // 
@@ -64,11 +71,6 @@
             this.btnOk.TabIndex = 2;
             this.btnOk.Text = "确认";
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
-            // 
-            // 辅数量
-            // 
-            this.辅数量.Text = "辅数量";
-            this.辅数量.Width = 60;
             // 
             // ProductInStoreConfirmOK
             // 

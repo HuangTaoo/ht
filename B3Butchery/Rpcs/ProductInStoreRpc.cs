@@ -143,6 +143,35 @@ namespace BWP.B3Butchery.Rpcs
       var bo = bl.Load(id); 
       bl.Check(bo);
     }
+
+    /// <summary>
+    /// 保存成品入库单
+    /// </summary>
+    /// <param name="dto"></param>
+    [Rpc]
+    public static long? ProductInStoreSaveAndCheck(ProductInStore dto)
+    {
+      using (var context = new TransactionContext())
+      {
+        var bl = BIFactory.Create<IProductInStoreBL>(context.Session);
+        var dmo = bl.Load(dto.ID);
+        foreach (var detail in dmo.Details)
+        {
+          var fd = dto.Details.FirstOrDefault(x => x.ID == detail.ID);
+          if (fd != null)
+          {
+            detail.Number = fd.Number;
+            detail.SecondNumber = fd.Number*fd.Goods_SecondUnitRatio/fd.Goods_MainUnitRatio;
+          }
+        }
+        bl.Update(dmo);
+        var dmoLoad = bl.Load(dmo.ID);
+        bl.Check(dmoLoad);
+        context.Commit();
+        return dmoLoad.ID;
+      }
+    }
+
     /// <summary>
     /// 获取成品入库单单号和入库时间
     /// </summary>
