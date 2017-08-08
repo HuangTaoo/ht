@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Select xmlns="urn:XDQuery">
+  <Columns>
+
+  </Columns>
+  <From>
+    <Join>
+      <DmoClass class="BWP.B3Butchery.BO.Picking, B3Butchery" alias="bill"/>
+      <DmoClass class="BWP.B3Butchery.BO.Picking_Detail, B3Butchery" alias="detail"/>
+      <Condition>
+        <EQ>
+          <Field name="ID" alias="bill"/>
+          <Field name="Picking_ID" alias="detail"/>
+        </EQ>
+      </Condition>
+    </Join>
+  </From>
+  <Where>
+    <And>
+
+      <EQ>
+        <Field name="ID"/>
+        <QBE paramName="ID"/>
+      </EQ>
+
+      <QBEIn>
+        <Field name="BillState"/>
+        <QBE paramName ="BillState"/>
+      </QBEIn>
+
+      <QBEIn>
+        <Field name="AccountingUnit_ID"/>
+        <QBE paramName="AccountingUnit_ID"/>
+      </QBEIn>
+      
+      <QBEIn>
+        <Field name="Department_ID"/>
+        <QBE paramName="Department_ID"/>
+      </QBEIn>
+
+      <QBEIn>
+        <Field name="Store_ID"/>
+        <QBE paramName="Store_ID"/>
+      </QBEIn>
+      
+      <QBEIn>
+        <Field name="ProductLine_ID"/>
+        <QBE paramName="ProductLine_ID"/>
+      </QBEIn>
+
+      <QBEIn>
+        <Field name="Goods_ID" alias="detail"/>
+        <QBE paramName="Goods_ID"/>
+      </QBEIn>
+
+      <Contains>
+        <Field name="Remark"/>
+        <QBE paramName="Remark"/>
+      </Contains>
+      <GreaterThanOrEqual>
+        <Field name="Date"/>
+        <QBE paramName="MinDate" />
+      </GreaterThanOrEqual>
+      <LessThanOrEqual>
+        <Field name="Date"/>
+        <QBE paramName="MaxDate"/>
+      </LessThanOrEqual>
+    </And>
+  </Where>
+</Select>

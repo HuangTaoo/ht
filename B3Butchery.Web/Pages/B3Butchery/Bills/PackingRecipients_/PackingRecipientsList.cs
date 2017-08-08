@@ -8,6 +8,7 @@ using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks;
 using BWP.Web.Layout;
 using TSingSoft.WebControls2;
+using TSingSoft.WebPluginFramework;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.PackingRecipients_
 {
@@ -42,7 +43,16 @@ namespace BWP.Web.Pages.B3Butchery.Bills.PackingRecipients_
       }
     }
 
-
+    protected override void InitToolBar(HLayoutPanel toolbar)
+    {
+      base.InitToolBar(toolbar);
+      if (User.IsInRole("B3Butchery.包装领用.访问"))
+      {
+        var dataAnysBtn = new TSButton() { Text = "数据分析", UseSubmitBehavior = false };
+        dataAnysBtn.OnClientClick = string.Format("OpenUrlInTopTab('{0}','包装领用分析');return false;", WpfPageUrl.ToGlobal(AspUtil.AddTimeStampToUrl("~/B3Butchery/Reports/PackingRecipientsAnalyse_/PackingRecipientsAnalyse.aspx")));
+        toolbar.Add(dataAnysBtn);
+      }
+    }
 
   }
 }

@@ -101,6 +101,32 @@ namespace BWP.B3Butchery.Rpcs
       return list;
     }
 
+
+    [Rpc]
+    public static List<BaseInfoDto> GetAllProductLineList()
+    {
+      var list=new List<BaseInfoDto>();
+      var query=new DQueryDom(new JoinAlias(typeof(ProductLine)));
+      query.Columns.Add(DQSelectColumn.Field("ID"));
+      query.Columns.Add(DQSelectColumn.Field("Name"));
+  
+      query.Where.Conditions.Add(DQCondition.EQ("Stopped",false));
+      using (var session=Dmo.NewSession())
+      {
+        using (var reader=session.ExecuteReader(query))
+        {
+          while (reader.Read())
+          {
+            var dto=new BaseInfoDto();
+            dto.ID = (long) reader[0];
+            dto.Name = (string) reader[1];
+            list.Add(dto);
+          }
+        }
+      }
+      return list;
+    }
+
     private static List<BaseInfoDto>  GetBaseInfoDQueryDom(Type type,bool hasCode, BaseInfoQueryDto queryDto)
     {
       var list = new List<BaseInfoDto>();

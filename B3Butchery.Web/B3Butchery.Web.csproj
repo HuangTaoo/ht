@@ -253,6 +253,12 @@
     <Compile Include="Pages\B3Butchery\Reports\OutPutInStoreDiffReport_\OutPutInStoreDiffReport.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\B3Butchery\Reports\PackingRecipientsAnalyse_\PackingRecipientsAnalyse.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Reports\PickingAnalyse_\PickingAnalyse.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\Reports\ProduceInputReport_\ProduceInputReport.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -284,6 +290,7 @@
     <Compile Include="PluginClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ChoiceBoxProvider.cs" />
+    <Compile Include="Utils\CustomInputCreator.cs" />
     <Compile Include="Utils\MainToSecondConvertRowManger.cs" />
     <Compile Include="Utils\NumberSecondNumberConvertRowMangerWithMoneyChanged.cs" />
   </ItemGroup>
@@ -358,6 +365,8 @@
     <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductNotice_\ProductNoticeList.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Reports\PickingAnalyse_\PickingAnalyse.xml" />
+    <EmbeddedResource Include="Pages\B3Butchery\Reports\PackingRecipientsAnalyse_\PackingRecipientsAnalyse.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\Picking_\PickingList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\PackingRecipients_\PackingRecipientsList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\ProductPlanReport_\ProductPlanReport.xml" />
