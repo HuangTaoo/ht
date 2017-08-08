@@ -8,6 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using Forks.JsonRpc.Client;
 using Forks.JsonRpc.Client.Data;
+using B3ButcheryCE.Rpc_.ClientProduceOutput_;
+using B3ButcheryCE.Rpc_;
+using B3ButcheryCE.Util_;
 
 namespace B3ButcheryCE.ProductInStoreConfirm_
 {
@@ -30,6 +33,13 @@ namespace B3ButcheryCE.ProductInStoreConfirm_
                 {
                     lvItem.SubItems.Add(item.Get<decimal>("SecondNumber").ToString());
                     lvItem.SubItems.Add(item.Get<decimal>("Number").ToString());
+
+                    var goods = new ClientGoods();
+                    goods.Bill_ID = long.Parse(pId);
+                    goods.ID = item.Get<long>("ID");
+                    goods.Goods_Name = item.Get<string>("Goods_Name");
+                    goods.Goods_Number = item.Get<decimal>("Number");
+                    lvItem.Tag = goods;
                 }
                 catch (Exception)
                 {
@@ -44,8 +54,34 @@ namespace B3ButcheryCE.ProductInStoreConfirm_
         {
             try
             {
-                RpcFacade.Call<List<RpcObject>>("/MainSystem/B3Butchery/Rpcs/ProductInStoreRpc/ProductInStoreCheck", long.Parse(pId));
+                var dmo = new ClientProduceOutputBillSave();
+                dmo.ID = long.Parse(pId);
+
+                foreach (ListViewItem item in listView1.Items)
+                {
+                    var goods = item.Tag as ClientGoods;
+                    var detail = new ClientGoods();
+                    detail.Bill_ID = goods.Bill_ID;
+                    detail.ID = goods.ID;
+                    detail.Goods_ID = goods.Goods_ID;
+                    detail.Goods_Number = goods.Goods_Number;
+                    dmo.Details.Add(detail);
+                }
+                SyncBillUtil.ProductInStoreSaveAndCheck(dmo);
+
                 MessageBox.Show("审核成功");
+
+                try
+                {
+                    //九联业务，如果九联模块用户个性设置中，{默认其他出库会计单位}{默认其他出库仓库}和单据相同，生成【其他出库单】
+                    var id = RpcFacade.Call<long>("/MainSystem/B3_JiuLian/Rpcs/ButcherTouchScreenRpc/OtherOutStoreRpc/OtherOutStoreInsertAndCheck", long.Parse(pId));
+                    MessageBox.Show("生成已审核其他出库No." + id);
+                }
+                catch (Exception)
+                {
+                }
+                //RpcFacade.Call<List<RpcObject>>("/MainSystem/B3Butchery/Rpcs/ProductInStoreRpc/ProductInStoreCheck", long.Parse(pId));
+                //MessageBox.Show("审核成功");                
             }
             catch (Exception ex)
             {
@@ -78,6 +114,8 @@ namespace B3ButcheryCE.ProductInStoreConfirm_
             {
                 var number = inputNumber.Number;
                 item.SubItems[2].Text = number.ToString();
+                var goods = item.Tag as ClientGoods;
+                goods.Goods_Number = number;
             }
         }
     }

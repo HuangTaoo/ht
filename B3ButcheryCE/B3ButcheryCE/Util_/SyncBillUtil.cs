@@ -78,7 +78,7 @@ namespace B3ButcheryCE
             {
                 LogUtil.Error(ex.ToString());
             }
-           
+
         }
 
         public static void SyncProductInStore()
@@ -146,9 +146,36 @@ namespace B3ButcheryCE
 
         }
 
-        public static void ProductInStoreSaveAndCheck()
+        public static void ProductInStoreSaveAndCheck(ClientProduceOutputBillSave dmo)
         {
+            try
+            {
+                #region 产出单
+                var mainObj = "/MainSystem/B3Butchery/BO/ProductInStore";
+                var detailObj = "/MainSystem/B3Butchery/BO/ProductInStore_Detail";
 
+                var obj = new RpcObject(mainObj);
+                obj.Set("ID", dmo.ID);
+                ManyList Details = new ManyList(detailObj);
+
+                foreach (var detail in dmo.Details)
+                {
+                    var objDetail = new RpcObject(detailObj);
+                    objDetail.Set("ProductInStore_ID", detail.Bill_ID);
+                    objDetail.Set("ID", detail.ID);
+                    objDetail.Set("Goods_ID", detail.Goods_ID);
+                    objDetail.Set("Number", detail.Goods_Number);
+                    Details.Add(objDetail);
+                }
+                obj.Set("Details", Details);
+                RpcFacade.Call<long>("/MainSystem/B3Butchery/Rpcs/ProductInStoreRpc/ProductInStoreSaveAndCheck", obj);
+                
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                LogUtil.Error(ex.ToString());
+            }
         }
     }
 }
