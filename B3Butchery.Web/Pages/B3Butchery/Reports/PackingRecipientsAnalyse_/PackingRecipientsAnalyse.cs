@@ -62,7 +62,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingRecipientsAnalyse_
         QueryCreator.DFChoiceBoxEnableMultiSelection(mDFInfo.Fields["ID"], mQueryContainer, "Goods_ID", B3UnitedInfosConsts.DataSources.存货));
       layout["Goods_ID"].NotAutoAddToContainer = true;
 
-      var state = mQueryContainer.Add(CustomInputCreator.一般单据状态(mDFInfo.Fields["BillState"], true, false, true, true), "BillState");
+      var state = mQueryContainer.Add(B3ButcheryCustomInputCreator.一般单据状态(mDFInfo.Fields["BillState"], true, false, true, true), "BillState");
       ((ChoiceBox)state).Value = 单据状态.已审核.Value.ToString() + "|";
       state.DisplayValue = "已审核;";
       state.EnableInputArgument = true;
