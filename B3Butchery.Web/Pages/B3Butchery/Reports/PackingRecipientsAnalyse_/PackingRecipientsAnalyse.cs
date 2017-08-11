@@ -54,6 +54,10 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingRecipientsAnalyse_
         QueryCreator.DFChoiceBoxEnableMultiSelection(mDFInfo.Fields["Department_ID"], mQueryContainer, "Department_ID", B3FrameworksConsts.DataSources.部门全部));
       layout["Department_ID"].NotAutoAddToContainer = true;
 
+      layout.Add("Employee_ID", new SimpleLabel("经办人"),
+  QueryCreator.DFChoiceBoxEnableMultiSelection(mDFInfo.Fields["Employee_ID"], mQueryContainer, "Employee_ID", B3FrameworksConsts.DataSources.员工全部));
+      layout["Employee_ID"].NotAutoAddToContainer = true;
+
       layout.Add("Store_ID", new SimpleLabel("仓库"),
         QueryCreator.DFChoiceBoxEnableMultiSelection(mDFInfo.Fields["Store_ID"], mQueryContainer, "Store_ID", B3FrameworksConsts.DataSources.可用仓库全部));
       layout["Store_ID"].NotAutoAddToContainer = true;
@@ -75,6 +79,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingRecipientsAnalyse_
       config.Add("AccountingUnit_ID");
       config.Add("Date");
       config.Add("Department_ID");
+      config.Add("Employee_ID");
       config.Add("Store_ID");
       config.Add("Goods_ID");
       config.Add("BillState");
@@ -89,6 +94,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingRecipientsAnalyse_
       mDisplayHelper.AddOptionItem("会计单位", "bill", "AccountingUnit_Name", false);
       mDisplayHelper.AddOptionItem("日期", "bill", "Date", false);
       mDisplayHelper.AddOptionItem("部门", "bill", "Department_Name", false);
+      mDisplayHelper.AddOptionItem("经办人", "bill", "Employee_Name", false);
       mDisplayHelper.AddOptionItem("仓库", "bill", "Store_Name", false);
       mDisplayHelper.AddOptionItem("摘要", "bill", "Remark", false);
 
