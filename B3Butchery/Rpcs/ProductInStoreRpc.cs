@@ -85,6 +85,7 @@ namespace BWP.B3Butchery.Rpcs
         if (detail != null)
         {
           dto.Goods_Name = detail.Goods_Name;
+          dto.Goods_Spec = detail.Goods_Spec;
           dto.Number = detail.Number;
           dto.SecondNumber = detail.SecondNumber;
           list.Add(dto);

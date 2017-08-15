@@ -36,6 +36,10 @@
         <Field name="Department_ID"/>
         <QBE paramName="Department_ID"/>
       </QBEIn>
+      <QBEIn>
+        <Field name="Employee_ID"/>
+        <QBE paramName="Employee_ID"/>
+      </QBEIn>
 
       <QBEIn>
         <Field name="Store_ID"/>

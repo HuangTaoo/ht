@@ -53,6 +53,7 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("SecondUnitII"));
       query.Columns.Add(DQSelectColumn.Field("SecondUnitII_MainUnitRatio"));
       query.Columns.Add(DQSelectColumn.Field("SecondUnitII_SecondUnitRatio"));
+      query.Columns.Add(DQSelectColumn.Field("Spec"));
 
 
       using (var session = Dmo.NewSession())
@@ -84,6 +85,7 @@ namespace BWP.B3Butchery.Rpcs
             dto.SecondUnitII = (string) reader[11];
             dto.SecondUnitII_MainUnitRatio = Convert.ToDecimal(reader[12]);
             dto.SecondUnitII_SecondUnitRatio = Convert.ToDecimal(reader[13]);
+            dto.Goods_Spec = (string)(reader[14]);
 
             list.Add(dto);
           }
@@ -230,6 +232,7 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("GoodsPropertyCatalog_Name", goods));
       query.Columns.Add(DQSelectColumn.Field("GoodsPropertyCatalog_Sort", goods));
       query.Columns.Add(DQSelectColumn.Field("Spell", goods));
+      query.Columns.Add(DQSelectColumn.Field("Spec", goods));
 
       query.OrderBy.Expressions.Add(DQOrderByExpression.Create(goods,"GoodsPropertyCatalog_Sort"));
 
@@ -274,6 +277,7 @@ namespace BWP.B3Butchery.Rpcs
             dto.GoodsPropertyCatalog_Name = (string)reader[13];
             dto.GoodsPropertyCatalog_Sort = (int?)reader[14];
             dto.Goods_Spell=(string)reader[15];
+            dto.Goods_Spec=(string)reader[16];
 
 
 

@@ -10,12 +10,12 @@ using TSingSoft.WebControls2;
 
 namespace BWP.Web.Utils
 {
-  public class CustomInputCreator
+  public class B3ButcheryCustomInputCreator
   {
     private static Unit _width = 180;
     private static readonly Unit HalfWidth;
 
-    static CustomInputCreator()
+    static B3ButcheryCustomInputCreator()
     {
       double num = (_width.Value / 2.0) - 7.0;
       HalfWidth = Unit.Pixel(int.Parse(num.ToString()));

@@ -515,6 +515,7 @@
       <DependentUpon>UpdateDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="UsageMode.cs" />
+    <Compile Include="Util_\UserProfileSetUtil.cs" />
     <Compile Include="Util_\Util.cs" />
     <Compile Include="Util_\XmlSerializerUtil.cs" />
   </ItemGroup>

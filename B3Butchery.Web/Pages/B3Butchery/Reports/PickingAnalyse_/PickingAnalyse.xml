@@ -22,6 +22,10 @@
         <Field name="ID"/>
         <QBE paramName="ID"/>
       </EQ>
+      <EQ>
+        <Field name="ReceiveBill_ID"/>
+        <QBE paramName="ReceiveBill_ID"/>
+      </EQ>
 
       <QBEIn>
         <Field name="BillState"/>
@@ -32,6 +36,12 @@
         <Field name="AccountingUnit_ID"/>
         <QBE paramName="AccountingUnit_ID"/>
       </QBEIn>
+      
+      <QBEIn>
+        <Field name="Employee_ID"/>
+        <QBE paramName="Employee_ID"/>
+      </QBEIn>
+      
       
       <QBEIn>
         <Field name="Department_ID"/>

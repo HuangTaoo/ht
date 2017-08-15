@@ -13,6 +13,7 @@ namespace BWP.B3Butchery.Rpcs.RpcObject
     public long ID { get; set; }
     public DateTime? Date { get; set; }
     public string Goods_Name { get; set; }
+    public string Goods_Spec { get; set; }
     public Money<decimal>? Number{ get; set; }
     public Money<decimal>? SecondNumber { get; set; }
 

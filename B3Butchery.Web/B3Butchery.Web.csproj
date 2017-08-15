@@ -368,7 +368,7 @@
     <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductNotice_\ProductNoticeList.xml" />
   </ItemGroup>
   <ItemGroup>
- <EmbeddedResource Include="Pages\B3Butchery\Reports\FrozenInStoreReport_\FrozenInStoreReport.xml" />
+    <EmbeddedResource Include="Pages\B3Butchery\Reports\FrozenInStoreReport_\FrozenInStoreReport.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\PickingAnalyse_\PickingAnalyse.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\PackingRecipientsAnalyse_\PackingRecipientsAnalyse.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\Picking_\PickingList.xml" />
