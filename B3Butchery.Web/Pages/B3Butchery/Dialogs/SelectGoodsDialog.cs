@@ -36,13 +36,15 @@ namespace BWP.Web.Pages.B3Butchery.Dialogs
 		{
 			var layoutManager = new LayoutManager("", mDFInfo, mQueryContainer);
 			layoutManager.Add("存货属性分类", new SimpleLabel("属性分类"), QueryCreator.DFChoiceBox(mDFInfo.Fields["ID"], B3UnitedInfosConsts.DataSources.存货属性分类));
-
-			var config = new AutoLayoutConfig { Cols = 8, DefaultLabelWidth = 4 };
+      layoutManager.Add("ProductLine_ID", mQueryContainer.Add(QueryCreator.DFChoiceBox(mDFInfo.Fields["ProductLine_ID"], B3UnitedInfosConsts.DataSources.产品线全部), "ProductLine_ID"));
+      layoutManager["ProductLine_ID"].NotAutoAddToContainer = true;
+      var config = new AutoLayoutConfig { Cols = 8, DefaultLabelWidth = 4 };
 			config.Add("Name");
 			config.Add("Spec");
 			config.Add("Code");
 			config.Add("GoodsProperty_ID");
 			config.Add("存货属性分类");
+      config.Add("ProductLine_ID");
 			layoutManager.Config = config;
 
 			var section = mPageLayoutManager.AddSection(B3FrameworksConsts.PageLayouts.QueryConditions, B3FrameworksConsts.PageLayouts.QueryConditions_DisplayName);

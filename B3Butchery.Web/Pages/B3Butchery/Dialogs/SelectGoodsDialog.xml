@@ -29,6 +29,11 @@
 				<Field name="GoodsProperty_ID"/>
 				<QBE paramName="GoodsProperty_ID"/>
 			</EQ>
+
+      <EQ>
+        <Field name="ProductLine_ID" />
+        <QBE paramName="ProductLine_ID"/>
+      </EQ>
 		</And>
 	</Where>
 </Select>

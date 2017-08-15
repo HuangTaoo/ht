@@ -23,7 +23,7 @@ namespace BWP.B3Butchery.Web
 		{
 			ChoiceBoxSettings.Register(B3ButcheryDataSource.生产线, (argu) =>
 			{
-				return new DomainChoiceBoxQueryHelper<ProductLine>(argu)
+				return new DomainChoiceBoxQueryHelper<BO.ProductLine>(argu)
 				{
 					OnlyAvailable = true
 				}.GetData();
@@ -36,7 +36,7 @@ namespace BWP.B3Butchery.Web
       });
 			ChoiceBoxSettings.Register(B3ButcheryDataSource.生产线全部, (argu) =>
 			{
-				return new DomainChoiceBoxQueryHelper<ProductLine>(argu)
+				return new DomainChoiceBoxQueryHelper<BO.ProductLine>(argu)
 				{
 					OnlyAvailable = false
 				}.GetData();
