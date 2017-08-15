@@ -22,6 +22,10 @@
         <Field name="ID"/>
         <QBE paramName="ID"/>
       </EQ>
+      <EQ>
+        <Field name="ReceiveBill_ID"/>
+        <QBE paramName="ReceiveBill_ID"/>
+      </EQ>
 
       <QBEIn>
         <Field name="BillState"/>

@@ -12,6 +12,7 @@ using BWP.Web.Utils;
 using Forks.EnterpriseServices.DomainObjects2;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using TSingSoft.WebControls2;
+using TSingSoft.WebPluginFramework;
 
 namespace BWP.Web.Pages.B3Butchery.Reports.PickingAnalyse_
 {
@@ -36,12 +37,21 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PickingAnalyse_
     }
     ReportDisplayOptionHelper mDisplayHelper = new ReportDisplayOptionHelper();
 
+
+    bool DisplayReceiveBill()
+    {
+      return GlobalFlags.get(B3ButcheryFlags.B3Butchery_DisplayReceiveBill);
+    }
+
+
     protected override void AddQueryControls(VLayoutPanel vPanel)
     {
       var layout = new LayoutManager("Main", mDFInfo, mQueryContainer);
 
       layout.Add("ID", mQueryContainer.Add(new DFTextBox(mDFInfo.Fields["ID"]), "ID"));
       layout["ID"].NotAutoAddToContainer = true;
+
+
 
       layout.Add("Date", new SimpleLabel("日期"), QueryCreator.DateRange(mDFInfo.Fields["Date"], mQueryContainer, "MinDate", "MaxDate"));
       layout["Date"].NotAutoAddToContainer = true;
@@ -68,6 +78,14 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PickingAnalyse_
         QueryCreator.DFChoiceBoxEnableMultiSelection(mDFInfo.Fields["ProductLine_ID"], mQueryContainer, "ProductLine_ID", B3ButcheryDataSource.生产线));
       layout["ProductLine_ID"].NotAutoAddToContainer = true;
 
+      if (DisplayReceiveBill())
+      {
+        layout.Add("ReceiveBill_ID", mQueryContainer.Add(new DFTextBox(mDFInfo.Fields["ReceiveBill_ID"]), "ReceiveBill_ID"));
+        layout["ReceiveBill_ID"].NotAutoAddToContainer = true;
+
+      }
+
+
       layout.Add("Goods_ID", new SimpleLabel("存货"),
         QueryCreator.DFChoiceBoxEnableMultiSelection(mDFInfo.Fields["ID"], mQueryContainer, "Goods_ID", B3UnitedInfosConsts.DataSources.存货));
       layout["Goods_ID"].NotAutoAddToContainer = true;
@@ -88,6 +106,10 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PickingAnalyse_
       config.Add("Employee_ID");
       config.Add("Store_ID");
       config.Add("ProductLine_ID");
+      if (DisplayReceiveBill())
+      {
+        config.Add("ReceiveBill_ID");
+      }
       config.Add("Goods_ID");
       config.Add("BillState");
       layout.Config = config;
@@ -104,6 +126,10 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PickingAnalyse_
       mDisplayHelper.AddOptionItem("经办人", "bill", "Employee_Name", false);
       mDisplayHelper.AddOptionItem("仓库", "bill", "Store_Name", false);
       mDisplayHelper.AddOptionItem("生产线", "bill", "ProductLine_Name", false);
+      if (DisplayReceiveBill())
+      {
+        mDisplayHelper.AddOptionItem("接收单号", "bill", "ReceiveBill_ID", false);
+      }
       mDisplayHelper.AddOptionItem("摘要", "bill", "Remark", false);
 
       mDisplayHelper.AddOptionItem("存货编码", "detail", "Goods_Code", false);
