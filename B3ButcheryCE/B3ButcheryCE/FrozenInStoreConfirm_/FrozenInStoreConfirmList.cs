@@ -143,21 +143,29 @@ namespace B3ButcheryCE.FrozenInStoreConfirm_
                         long id = RpcFacade.Call<long>("/MainSystem/B3Butchery/Rpcs/FrozenInStoreRpc/PdaInsertAndCheck", dmo);
                         ids.Add(id.ToString());
 
-
                     }
                 }
+                if (ids.Any(x => x == "0"))
+                {
+                    MessageBox.Show("没有速冻入库新建权限");
+                    return;
+                }
+                if (ids.Any(x => x == "-1"))
+                {
+                    MessageBox.Show("没有速冻入库审核权限");
+                    return;
+                }
+                MessageBox.Show("生成速冻入库单：" + string.Join(",", ids.ToArray()));
             }
             catch (Exception ex)
             {
 
                 throw new Exception(ex.ToString());
             }
-            finally {
-                MessageBox.Show("生成速冻入库单："+string.Join(",",ids.ToArray()));
+            finally
+            {
                 LoadGoodsFromRpc();
             }
-           
         }
-
     }
 }

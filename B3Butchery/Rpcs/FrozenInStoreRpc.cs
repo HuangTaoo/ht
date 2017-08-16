@@ -27,6 +27,10 @@ namespace BWP.B3Butchery.Rpcs
       {
         return 0;
       }
+      if (!BLContext.User.IsInRole("B3Butchery.产出单.审核"))
+      {
+        return -1;
+      }
       SetSecondNumberByNumber(dmo);
       using (var context = new TransactionContext())
       {
@@ -114,6 +118,7 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("Goods_ID", detail));
       query.Columns.Add(DQSelectColumn.Field("Goods_Name", detail));
       query.Columns.Add(DQSelectColumn.Field("Number", detail));
+      query.Columns.Add(DQSelectColumn.Field("Client", bill));
       query.Where.Conditions.Add(DQCondition.EQ(bill, "Domain_ID", DomainContext.Current.ID));
       query.Where.Conditions.Add(DQCondition.Or(DQCondition.EQ(bill, "BillState", 单据状态.已审核), DQCondition.EQ(bill, "BillState", 单据状态.未审核)));
       query.OrderBy.Expressions.Add(DQOrderByExpression.Create(bill, "ID", true));
@@ -141,7 +146,8 @@ namespace BWP.B3Butchery.Rpcs
               Date = (DateTime?)reader[1],
               Goods_ID = (long?)reader[2],
               Goods_Name = (string)reader[3],
-              Number = (Money<decimal>?)reader[4]
+              Number = (Money<decimal>?)reader[4],
+              Client = (string)reader[5]
             });
           }
         }
@@ -158,5 +164,6 @@ namespace BWP.B3Butchery.Rpcs
     public long? Goods_ID { get; set; }
     public string Goods_Name { get; set; }
     public Money<decimal>? Number { get; set; }
+    public string Client { get; set; }
   }
 }

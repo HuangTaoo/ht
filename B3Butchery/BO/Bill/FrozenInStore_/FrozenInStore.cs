@@ -64,6 +64,8 @@ namespace BWP.B3Butchery.BO
     [Join("ProductionPlan_ID", "ID")]
     public string ProductionPlan_PlanNumber { get; set; }
 
+    [LogicName("客户端生成标识字段")]
+    public string Client { get; set; }
 
     private readonly FrozenInStore_DetailCollection _details = new FrozenInStore_DetailCollection();
 

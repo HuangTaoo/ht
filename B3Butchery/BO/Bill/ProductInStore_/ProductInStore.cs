@@ -105,6 +105,9 @@ namespace BWP.B3Butchery.BO
 
     #endregion
 
+    [LogicName("客户端生成标识字段")]
+    public string Client { get; set; }
+
 		[ReferenceTo(typeof(Department), "TreeDeep1ID")]
 		[Join("Department_ID", "ID")]
 		public long? Department_TreeDeep1ID { get; set; }

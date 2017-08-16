@@ -67,14 +67,33 @@ namespace B3ButcheryCE.ProductInStoreConfirm_
                     detail.Goods_Number = goods.Goods_Number;
                     dmo.Details.Add(detail);
                 }
-                SyncBillUtil.ProductInStoreSaveAndCheck(dmo);
-
+                var cprkId = SyncBillUtil.ProductInStoreSaveAndCheck(dmo);
+                if (cprkId == 0)
+                {
+                    MessageBox.Show("没有成品入库新建权限");
+                    return;
+                }
+                else if (cprkId == -1)
+                {
+                    MessageBox.Show("没有成品入库审核权限");
+                    return;
+                }
                 MessageBox.Show("审核成功");
 
                 try
                 {
                     //九联业务，如果九联模块用户个性设置中，{默认其他出库会计单位}{默认其他出库仓库}和单据相同，生成【其他出库单】
                     var id = RpcFacade.Call<long>("/MainSystem/B3_JiuLian/Rpcs/ButcherTouchScreenRpc/OtherOutStoreRpc/OtherOutStoreInsertAndCheck", long.Parse(pId));
+                    if (id == 0)
+                    {
+                        MessageBox.Show("没有其他出库新建权限");
+                        return;
+                    }
+                    else if (id == -1)
+                    {
+                        MessageBox.Show("没有其他出库审核权限");
+                        return;
+                    }
                     MessageBox.Show("生成已审核其他出库No." + id);
                 }
                 catch (Exception)

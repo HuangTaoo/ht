@@ -153,6 +153,14 @@ namespace BWP.B3Butchery.Rpcs
     [Rpc]
     public static long? ProductInStoreSaveAndCheck(ProductInStore dto)
     {
+      if (!BLContext.User.IsInRole("B3Butchery.成品入库.新建"))
+      {
+        return 0;
+      }
+      if (!BLContext.User.IsInRole("B3Butchery.成品入库.审核"))
+      {
+        return -1;
+      }
       using (var context = new TransactionContext())
       {
         var bl = BIFactory.Create<IProductInStoreBL>(context.Session);
@@ -290,10 +298,41 @@ namespace BWP.B3Butchery.Rpcs
     {
       if (productPlanID == null)
         return null;
-      var query = new DQueryDom(new JoinAlias(typeof(ProductPlan)));
+      var query = new DQueryDom(new JoinAlias(typeof(ProductInStore)));
       query.Columns.Add(DQSelectColumn.Field("Date"));
       query.Where.Conditions.Add(DQCondition.EQ("ID", productPlanID));
       return query.EExecuteScalar<DateTime?>();
+    }
+
+    [Rpc]
+    public static long? DeleteByFrozenInStore(long? frozenInStoreId)
+    {
+      if (!BLContext.User.IsInRole("B3Butchery.成品入库.删除"))
+      {
+        return -3;
+      }
+      long? id = null;
+      using (var context = new TransactionContext())
+      {
+        var frozenInStoreBl = BIFactory.Create<IFrozenInStoreBL>(context.Session);
+        var frozenInStoreDmo = frozenInStoreBl.Load(Convert.ToInt64(frozenInStoreId));
+
+
+        var query = new DQueryDom(new JoinAlias(typeof(ProductInStore)));
+        query.Columns.Add(DQSelectColumn.Field("ID"));
+        query.Where.Conditions.Add(DQCondition.EQ("BillState", 单据状态.未审核));
+        query.Where.Conditions.Add(DQCondition.EQ("Client", frozenInStoreDmo.Client));
+        var result = query.EExecuteList<long?>();
+        foreach (var l in result)
+        {
+          var bl = BIFactory.Create<IProductInStoreBL>(context);
+          var obj = bl.Load(Convert.ToInt64(l));
+          id = (int)obj.ID;
+          bl.Delete(obj);
+        }
+        context.Commit();
+      }
+      return id;
     }
   }
 
