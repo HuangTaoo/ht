@@ -47,7 +47,7 @@ namespace BWP.B3Butchery.Rpcs
     }
 
     [Rpc]
-    public static List<GoodsInfoDto> GetAllSettingedGoods()
+    public static List<GoodsInfoDto> GetAllSettingedGoods(int pageIndex,int pageSize)
     {
       var list = new List<GoodsInfoDto>();
       var joinGoods = new JoinAlias(typeof(Goods));
@@ -77,6 +77,8 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("Spec"));
 
       query.Where.Conditions.Add(DQCondition.InSubQuery(DQExpression.Field("ID"), GetAllSettingedGoodsSubQuery()));
+
+      query.Range=new SelectRange(pageIndex*pageSize,pageSize);
 
       using (var session = Dmo.NewSession())
       {
@@ -118,7 +120,7 @@ namespace BWP.B3Butchery.Rpcs
     }
 
     [Rpc]
-    public static List<GoodsInfoDto> GetAllUnSettingedGoods()
+    public static List<GoodsInfoDto> GetAllUnSettingedGoods(int pageIndex, int pageSize)
     {
       var list = new List<GoodsInfoDto>();
       var joinGoods = new JoinAlias(typeof(Goods));
@@ -148,6 +150,7 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("Spec"));
 
       query.Where.Conditions.Add(DQCondition.NotInSubQuery(DQExpression.Field("ID"), GetAllSettingedGoodsSubQuery()));
+      query.Range = new SelectRange(pageIndex * pageSize, pageSize);
 
       using (var session = Dmo.NewSession())
       {
@@ -282,6 +285,23 @@ namespace BWP.B3Butchery.Rpcs
     }
 
     [Rpc]
+    public static List<GoodsInfoDto> GetFromProductPlanByDeptWithSetedGoods(long departId)
+    {
+      if (departId == 0)
+      {
+        throw new Exception("员工档案上没有配置部门");
+      }
+
+      JoinAlias mainJoinAlias;
+      var query = GetPlanDquery(out mainJoinAlias,true);
+      query.Where.Conditions.Add(B3ButcheryUtil.部门或上级部门条件(departId, mainJoinAlias));
+
+     
+
+      return GetListByDquery(query);
+    }
+
+    [Rpc]
     public static List<GoodsInfoDto> GetFromProductPlanByDept(long departId)
     {
       if (departId == 0)
@@ -376,7 +396,7 @@ namespace BWP.B3Butchery.Rpcs
       return list;
     }
 
-    static DQueryDom GetPlanDquery(out JoinAlias billAlias)
+    static DQueryDom GetPlanDquery(out JoinAlias billAlias,bool isAndSetedGoods=false)
     {
       var bill = new JoinAlias(typeof(ProductPlan));
       billAlias = bill;
@@ -408,14 +428,20 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("GoodsProperty_ID", goods));
       query.Columns.Add(DQSelectColumn.Field("GoodsProperty_Name", goods));
       query.Columns.Add(DQSelectColumn.Field("GoodsPropertyCatalog_Name", goods));
-      query.Columns.Add(DQSelectColumn.Field("GoodsPropertyCatalog_Sort", goods));
+
+//      query.Columns.Add(DQSelectColumn.Field("GoodsPropertyCatalog_Sort", goods));
+
       query.Columns.Add(DQSelectColumn.Field("Spell", goods));
       query.Columns.Add(DQSelectColumn.Field("Spec", goods));
 
-      query.OrderBy.Expressions.Add(DQOrderByExpression.Create(goods, "GoodsPropertyCatalog_Sort"));
+//      query.OrderBy.Expressions.Add(DQOrderByExpression.Create(goods, "GoodsPropertyCatalog_Sort"));
 
       query.Where.Conditions.Add(DQCondition.EQ(bill, "Domain_ID", DomainContext.Current.ID));
+      if (isAndSetedGoods)
+      {
+        query.Where.Conditions.Add(DQCondition.InSubQuery(DQExpression.Field(goods,"ID"), GetAllSettingedGoodsSubQuery()));
 
+      }
       return query;
     }
 
@@ -453,9 +479,9 @@ namespace BWP.B3Butchery.Rpcs
             dto.GoodsProperty_ID = (long?)reader[11];
             dto.GoodsProperty_Name = (string)reader[12];
             dto.GoodsPropertyCatalog_Name = (string)reader[13];
-            dto.GoodsPropertyCatalog_Sort = (int?)reader[14];
-            dto.Goods_Spell = (string)reader[15];
-            dto.Goods_Spec = (string)reader[16];
+//            dto.GoodsPropertyCatalog_Sort = (int?)reader[14];
+            dto.Goods_Spell = (string)reader[14];
+            dto.Goods_Spec = (string)reader[15];
 
 
 
