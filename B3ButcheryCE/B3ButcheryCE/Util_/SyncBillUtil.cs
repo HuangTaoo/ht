@@ -146,7 +146,7 @@ namespace B3ButcheryCE
 
         }
 
-        public static void ProductInStoreSaveAndCheck(ClientProduceOutputBillSave dmo)
+        public static long ProductInStoreSaveAndCheck(ClientProduceOutputBillSave dmo)
         {
             try
             {
@@ -168,13 +168,14 @@ namespace B3ButcheryCE
                     Details.Add(objDetail);
                 }
                 obj.Set("Details", Details);
-                RpcFacade.Call<long>("/MainSystem/B3Butchery/Rpcs/ProductInStoreRpc/ProductInStoreSaveAndCheck", obj);
-                
+                var id = RpcFacade.Call<long>("/MainSystem/B3Butchery/Rpcs/ProductInStoreRpc/ProductInStoreSaveAndCheck", obj);
+                return id;
                 #endregion
             }
             catch (Exception ex)
             {
                 LogUtil.Error(ex.ToString());
+                return -2;
             }
         }
     }
