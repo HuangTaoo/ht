@@ -318,5 +318,6 @@
     <Feature id="0012" name="手持机接口生产环节"/>
     <Feature id="0013" name="投入单"/>
     <Feature id="0014" name="暂存单"/>
+    <Feature id="0015" name="微信审批生产通知单"/>
   </Features>
 </Plugin>

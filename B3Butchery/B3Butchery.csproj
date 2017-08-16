@@ -165,6 +165,7 @@
     <Compile Include="BO\BaseInfo\ProductLink_\ProductLinks_InputDetail.cs" />
     <Compile Include="BO\BaseInfo\ProductLink_\ProductLinks_OutputDetail.cs" />
     <Compile Include="BO\Base\GoodsDetail.cs" />
+    <Compile Include="BO\Base\HandsetSelectedGoods.cs" />
     <Compile Include="BO\Bill\DailyProductReport_\DailyProductReport.cs" />
     <Compile Include="BO\Bill\DailyProductReport_\DailyProductReport_InputDetail.cs" />
     <Compile Include="BO\Bill\DailyProductReport_\DailyProductReport_OutputDetail.cs" />

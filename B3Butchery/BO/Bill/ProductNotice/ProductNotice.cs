@@ -1,4 +1,5 @@
 ﻿using System;
+using BWP.B3Butchery.BL;
 using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks;
 using BWP.B3Frameworks.Attributes;
@@ -25,6 +26,7 @@ namespace BWP.B3Butchery.BO {
   [DFCPrompt("地址", Property = "CustomerAddress")]
   [OrganizationLimitedDmo("Customer_ID", typeof(ICustomer))]
   [OrganizationLimitedDmo("Department_ID", typeof(Department))]
+  [BLType(typeof(IProductNoticeBL))]
   public class ProductNotice : DepartmentWorkFlowBill
     {
   

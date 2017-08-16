@@ -15,25 +15,203 @@ using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.EnterpriseServices.JsonRpc;
 using Forks.EnterpriseServices.SqlDoms;
 using Forks.Utils;
+using TSingSoft.WebPluginFramework;
 
 namespace BWP.B3Butchery.Rpcs
 {
   [Rpc]
-  public static class GoodsInfoRpc {
+  public static class GoodsInfoRpc
+  {
+
+    #region  配置存货
+
 
     [Rpc]
-    public static List<GoodsInfoDto> GetAllGoods(string input="")
+    public static void DeleteSettingedGoods(long goodsid)
+    {
+      var del = new DQDeleteDom(typeof(HandsetSelectedGoods));
+      del.Where.Conditions.Add(DQCondition.EQ("Goods_ID", goodsid));
+      del.EExecute();
+    }
+
+    [Rpc]
+    public static void InsertSettingedGoods(long goodsid)
+    {
+      var dmo = new HandsetSelectedGoods();
+      dmo.Goods_ID = goodsid;
+      using (var session = Dmo.NewSession())
+      {
+        session.Insert(dmo);
+        session.Commit();
+      }
+    }
+
+    [Rpc]
+    public static List<GoodsInfoDto> GetAllSettingedGoods()
     {
       var list = new List<GoodsInfoDto>();
       var joinGoods = new JoinAlias(typeof(Goods));
-//      var goodsProperty = new JoinAlias(typeof(GoodsProperty));
-//      var goodsPropertyCatalog = new JoinAlias(typeof(GoodsPropertyCatalog));
-      var query=new DQueryDom(joinGoods);
-     
-      query.Where.Conditions.Add(DQCondition.EQ("Stopped",false));
+      //      var goodsProperty = new JoinAlias(typeof(GoodsProperty));
+      //      var goodsPropertyCatalog = new JoinAlias(typeof(GoodsPropertyCatalog));
+      var query = new DQueryDom(joinGoods);
+
+      query.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
+      query.OrderBy.Expressions.Add(DQOrderByExpression.Create("Name"));
+      query.OrderBy.Expressions.Add(DQOrderByExpression.Create("Code"));
+
+
+      query.Columns.Add(DQSelectColumn.Field("ID"));
+      query.Columns.Add(DQSelectColumn.Field("Name"));
+      query.Columns.Add(DQSelectColumn.Field("MainUnit"));
+      query.Columns.Add(DQSelectColumn.Field("SecondUnit"));
+      query.Columns.Add(DQSelectColumn.Field("UnitConvertDirection"));
+      query.Columns.Add(DQSelectColumn.Field("MainUnitRatio"));
+      query.Columns.Add(DQSelectColumn.Field("SecondUnitRatio"));
+      query.Columns.Add(DQSelectColumn.Field("Code"));
+      query.Columns.Add(DQSelectColumn.Field("GoodsProperty_ID"));
+      query.Columns.Add(DQSelectColumn.Field("GoodsProperty_Name"));
+      query.Columns.Add(DQSelectColumn.Field("GoodsPropertyCatalog_Name"));
+      query.Columns.Add(DQSelectColumn.Field("SecondUnitII"));
+      query.Columns.Add(DQSelectColumn.Field("SecondUnitII_MainUnitRatio"));
+      query.Columns.Add(DQSelectColumn.Field("SecondUnitII_SecondUnitRatio"));
+      query.Columns.Add(DQSelectColumn.Field("Spec"));
+
+      query.Where.Conditions.Add(DQCondition.InSubQuery(DQExpression.Field("ID"), GetAllSettingedGoodsSubQuery()));
+
+      using (var session = Dmo.NewSession())
+      {
+        using (var reader = session.ExecuteReader(query))
+        {
+          while (reader.Read())
+          {
+            var dto = new GoodsInfoDto();
+            dto.Goods_ID = (long)reader[0];
+            dto.Goods_Name = (string)reader[1];
+            dto.Goods_MainUnit = (string)reader[2];
+            dto.Goods_SecondUnit = (string)reader[3];
+            dto.Goods_UnitConvertDirection = (NamedValue<主辅转换方向>?)reader[4];
+            dto.Goods_MainUnitRatio = (Money<decimal>?)reader[5];
+            dto.Goods_SecondUnitRatio = (Money<decimal>?)reader[6];
+            dto.Goods_Code = (string)reader[7];
+            if (dto.Goods_MainUnitRatio == null)
+            {
+              dto.Goods_MainUnitRatio = 1;
+            }
+            if (dto.Goods_SecondUnitRatio == null)
+            {
+              dto.Goods_SecondUnitRatio = 1;
+            }
+            dto.GoodsProperty_ID = (long?)reader[8];
+            dto.GoodsProperty_Name = (string)reader[9];
+            dto.GoodsPropertyCatalog_Name = (string)reader[10];
+            dto.SecondUnitII = (string)reader[11];
+            dto.SecondUnitII_MainUnitRatio = Convert.ToDecimal(reader[12]);
+            dto.SecondUnitII_SecondUnitRatio = Convert.ToDecimal(reader[13]);
+            dto.Goods_Spec = (string)(reader[14]);
+
+            list.Add(dto);
+          }
+        }
+      }
+      return list;
+
+    }
+
+    [Rpc]
+    public static List<GoodsInfoDto> GetAllUnSettingedGoods()
+    {
+      var list = new List<GoodsInfoDto>();
+      var joinGoods = new JoinAlias(typeof(Goods));
+      //      var goodsProperty = new JoinAlias(typeof(GoodsProperty));
+      //      var goodsPropertyCatalog = new JoinAlias(typeof(GoodsPropertyCatalog));
+      var query = new DQueryDom(joinGoods);
+
+      query.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
+      query.OrderBy.Expressions.Add(DQOrderByExpression.Create("Name"));
+      query.OrderBy.Expressions.Add(DQOrderByExpression.Create("Code"));
+
+
+      query.Columns.Add(DQSelectColumn.Field("ID"));
+      query.Columns.Add(DQSelectColumn.Field("Name"));
+      query.Columns.Add(DQSelectColumn.Field("MainUnit"));
+      query.Columns.Add(DQSelectColumn.Field("SecondUnit"));
+      query.Columns.Add(DQSelectColumn.Field("UnitConvertDirection"));
+      query.Columns.Add(DQSelectColumn.Field("MainUnitRatio"));
+      query.Columns.Add(DQSelectColumn.Field("SecondUnitRatio"));
+      query.Columns.Add(DQSelectColumn.Field("Code"));
+      query.Columns.Add(DQSelectColumn.Field("GoodsProperty_ID"));
+      query.Columns.Add(DQSelectColumn.Field("GoodsProperty_Name"));
+      query.Columns.Add(DQSelectColumn.Field("GoodsPropertyCatalog_Name"));
+      query.Columns.Add(DQSelectColumn.Field("SecondUnitII"));
+      query.Columns.Add(DQSelectColumn.Field("SecondUnitII_MainUnitRatio"));
+      query.Columns.Add(DQSelectColumn.Field("SecondUnitII_SecondUnitRatio"));
+      query.Columns.Add(DQSelectColumn.Field("Spec"));
+
+      query.Where.Conditions.Add(DQCondition.NotInSubQuery(DQExpression.Field("ID"), GetAllSettingedGoodsSubQuery()));
+
+      using (var session = Dmo.NewSession())
+      {
+        using (var reader = session.ExecuteReader(query))
+        {
+          while (reader.Read())
+          {
+            var dto = new GoodsInfoDto();
+            dto.Goods_ID = (long)reader[0];
+            dto.Goods_Name = (string)reader[1];
+            dto.Goods_MainUnit = (string)reader[2];
+            dto.Goods_SecondUnit = (string)reader[3];
+            dto.Goods_UnitConvertDirection = (NamedValue<主辅转换方向>?)reader[4];
+            dto.Goods_MainUnitRatio = (Money<decimal>?)reader[5];
+            dto.Goods_SecondUnitRatio = (Money<decimal>?)reader[6];
+            dto.Goods_Code = (string)reader[7];
+            if (dto.Goods_MainUnitRatio == null)
+            {
+              dto.Goods_MainUnitRatio = 1;
+            }
+            if (dto.Goods_SecondUnitRatio == null)
+            {
+              dto.Goods_SecondUnitRatio = 1;
+            }
+            dto.GoodsProperty_ID = (long?)reader[8];
+            dto.GoodsProperty_Name = (string)reader[9];
+            dto.GoodsPropertyCatalog_Name = (string)reader[10];
+            dto.SecondUnitII = (string)reader[11];
+            dto.SecondUnitII_MainUnitRatio = Convert.ToDecimal(reader[12]);
+            dto.SecondUnitII_SecondUnitRatio = Convert.ToDecimal(reader[13]);
+            dto.Goods_Spec = (string)(reader[14]);
+
+            list.Add(dto);
+          }
+        }
+      }
+      return list;
+
+    }
+    private static DQueryDom GetAllSettingedGoodsSubQuery()
+    {
+      var query = new DQueryDom(new JoinAlias(typeof(HandsetSelectedGoods)));
+      query.Columns.Add(DQSelectColumn.Field("Goods_ID"));
+      return query;
+    }
+
+    #endregion
+
+
+
+
+    [Rpc]
+    public static List<GoodsInfoDto> GetAllGoods(string input = "")
+    {
+      var list = new List<GoodsInfoDto>();
+      var joinGoods = new JoinAlias(typeof(Goods));
+      //      var goodsProperty = new JoinAlias(typeof(GoodsProperty));
+      //      var goodsPropertyCatalog = new JoinAlias(typeof(GoodsPropertyCatalog));
+      var query = new DQueryDom(joinGoods);
+
+      query.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
       if (!string.IsNullOrWhiteSpace(input))
       {
-        query.Where.Conditions.Add(DQCondition.Or(DQCondition.Like("Name",input),DQCondition.Like("Code", input),DQCondition.Like("Spell", input)));
+        query.Where.Conditions.Add(DQCondition.Or(DQCondition.Like("Name", input), DQCondition.Like("Code", input), DQCondition.Like("Spell", input)));
       }
       query.OrderBy.Expressions.Add(DQOrderByExpression.Create("Name"));
       query.OrderBy.Expressions.Add(DQOrderByExpression.Create("Code"));
@@ -79,10 +257,10 @@ namespace BWP.B3Butchery.Rpcs
             {
               dto.Goods_SecondUnitRatio = 1;
             }
-            dto.GoodsProperty_ID = (long?) reader[8];
-            dto.GoodsProperty_Name = (string) reader[9];
-            dto.GoodsPropertyCatalog_Name = (string) reader[10];
-            dto.SecondUnitII = (string) reader[11];
+            dto.GoodsProperty_ID = (long?)reader[8];
+            dto.GoodsProperty_Name = (string)reader[9];
+            dto.GoodsPropertyCatalog_Name = (string)reader[10];
+            dto.SecondUnitII = (string)reader[11];
             dto.SecondUnitII_MainUnitRatio = Convert.ToDecimal(reader[12]);
             dto.SecondUnitII_SecondUnitRatio = Convert.ToDecimal(reader[13]);
             dto.Goods_Spec = (string)(reader[14]);
@@ -110,10 +288,10 @@ namespace BWP.B3Butchery.Rpcs
       {
         throw new Exception("员工档案上没有配置部门");
       }
-   
+
       JoinAlias mainJoinAlias;
       var query = GetPlanDquery(out mainJoinAlias);
-       query.Where.Conditions.Add(B3ButcheryUtil.部门或上级部门条件(departId, mainJoinAlias));
+      query.Where.Conditions.Add(B3ButcheryUtil.部门或上级部门条件(departId, mainJoinAlias));
 
       return GetListByDquery(query);
     }
@@ -126,19 +304,19 @@ namespace BWP.B3Butchery.Rpcs
       {
         throw new Exception("员工档案上没有配置部门");
       }
-      var list=new List<GoodsInfoDto>();
-      var bill=new JoinAlias(typeof(ProductPlan));
-      var detail=new JoinAlias(typeof(ProductPlan_OutputDetail));
-      var goods=new JoinAlias(typeof(Goods));
-      var query=new DQueryDom(bill);
-      query.From.AddJoin(JoinType.Inner, new DQDmoSource(detail),DQCondition.EQ(bill,"ID",detail, "ProductPlan_ID") );
-      query.From.AddJoin(JoinType.Left, new DQDmoSource(goods),DQCondition.EQ(goods, "ID",detail, "Goods_ID") );
-      
-      query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(bill, "Date", DateTime.Today));
-      query.Where.Conditions.Add(DQCondition.LessThan(bill,"Date", DateTime.Today.AddDays(1)));
-      query.Where.Conditions.Add(DQCondition.EQ(bill,"BillState",单据状态.已审核));
+      var list = new List<GoodsInfoDto>();
+      var bill = new JoinAlias(typeof(ProductPlan));
+      var detail = new JoinAlias(typeof(ProductPlan_OutputDetail));
+      var goods = new JoinAlias(typeof(Goods));
+      var query = new DQueryDom(bill);
+      query.From.AddJoin(JoinType.Inner, new DQDmoSource(detail), DQCondition.EQ(bill, "ID", detail, "ProductPlan_ID"));
+      query.From.AddJoin(JoinType.Left, new DQDmoSource(goods), DQCondition.EQ(goods, "ID", detail, "Goods_ID"));
 
-//      query.Where.Conditions.Add(B3ButcheryUtil.部门或上级部门条件(departId??0, bill));
+      query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(bill, "Date", DateTime.Today));
+      query.Where.Conditions.Add(DQCondition.LessThan(bill, "Date", DateTime.Today.AddDays(1)));
+      query.Where.Conditions.Add(DQCondition.EQ(bill, "BillState", 单据状态.已审核));
+
+      //      query.Where.Conditions.Add(B3ButcheryUtil.部门或上级部门条件(departId??0, bill));
       OrganizationUtil.AddOrganizationLimit(query, typeof(ProductPlan));
 
       query.Columns.Add(DQSelectColumn.Field("Goods_ID", detail));
@@ -153,27 +331,27 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitII", detail));
       query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitII_MainUnitRatio", detail));
       query.Columns.Add(DQSelectColumn.Field("Goods_SecondUnitII_SecondUnitRatio", detail));
- 
+
       query.Columns.Add(DQSelectColumn.Field("GoodsProperty_ID", goods));
       query.Columns.Add(DQSelectColumn.Field("GoodsProperty_Name", goods));
       query.Columns.Add(DQSelectColumn.Field("GoodsPropertyCatalog_Name", goods));
 
-      query.Where.Conditions.Add(DQCondition.EQ(bill,"Domain_ID",DomainContext.Current.ID));
-      using (var session=Dmo.NewSession())
+      query.Where.Conditions.Add(DQCondition.EQ(bill, "Domain_ID", DomainContext.Current.ID));
+      using (var session = Dmo.NewSession())
       {
-        using (var reader=session.ExecuteReader(query))
+        using (var reader = session.ExecuteReader(query))
         {
           while (reader.Read())
           {
-            var dto=new GoodsInfoDto();
-            dto.Goods_ID = (long) reader[0];
-            dto.Goods_Name = (string) reader[1];
-            dto.Goods_MainUnit = (string) reader[2];
-            dto.Goods_SecondUnit = (string) reader[3];
-            dto.Goods_UnitConvertDirection = (NamedValue<主辅转换方向>?) reader[4];
-            dto.Goods_MainUnitRatio = (Money<decimal>?) reader[5];
-            dto.Goods_SecondUnitRatio = (Money<decimal>?) reader[6];
-            dto.Goods_Code = (string) reader[7];
+            var dto = new GoodsInfoDto();
+            dto.Goods_ID = (long)reader[0];
+            dto.Goods_Name = (string)reader[1];
+            dto.Goods_MainUnit = (string)reader[2];
+            dto.Goods_SecondUnit = (string)reader[3];
+            dto.Goods_UnitConvertDirection = (NamedValue<主辅转换方向>?)reader[4];
+            dto.Goods_MainUnitRatio = (Money<decimal>?)reader[5];
+            dto.Goods_SecondUnitRatio = (Money<decimal>?)reader[6];
+            dto.Goods_Code = (string)reader[7];
             if (dto.Goods_MainUnitRatio == null)
             {
               dto.Goods_MainUnitRatio = 1;
@@ -234,7 +412,7 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("Spell", goods));
       query.Columns.Add(DQSelectColumn.Field("Spec", goods));
 
-      query.OrderBy.Expressions.Add(DQOrderByExpression.Create(goods,"GoodsPropertyCatalog_Sort"));
+      query.OrderBy.Expressions.Add(DQOrderByExpression.Create(goods, "GoodsPropertyCatalog_Sort"));
 
       query.Where.Conditions.Add(DQCondition.EQ(bill, "Domain_ID", DomainContext.Current.ID));
 
@@ -276,8 +454,8 @@ namespace BWP.B3Butchery.Rpcs
             dto.GoodsProperty_Name = (string)reader[12];
             dto.GoodsPropertyCatalog_Name = (string)reader[13];
             dto.GoodsPropertyCatalog_Sort = (int?)reader[14];
-            dto.Goods_Spell=(string)reader[15];
-            dto.Goods_Spec=(string)reader[16];
+            dto.Goods_Spell = (string)reader[15];
+            dto.Goods_Spec = (string)reader[16];
 
 
 
@@ -290,9 +468,10 @@ namespace BWP.B3Butchery.Rpcs
 
 
     [Rpc]
-    public static GoodsInfoDto Get(long? id ) {
- 
-      if(id==null)
+    public static GoodsInfoDto Get(long? id)
+    {
+
+      if (id == null)
         return null;
       var goodsInfo = new GoodsInfoDto();
 
@@ -304,6 +483,6 @@ namespace BWP.B3Butchery.Rpcs
       goodsInfo.Goods_SecondUnitRatio = goods.SecondUnitRatio;
       return goodsInfo;
     }
- 
+
   }
 }

@@ -25,6 +25,16 @@ namespace BWP.B3Butchery.BL {
   public class ProductNoticeBL : DepartmentWorkFlowBillBL<ProductNotice>, IProductNoticeBL {
     private const short SaleForecastTypeID = B3FrameworksConsts.DmoTypeIDBases.B3Sale + 26;
 
+
+    protected override bool HasWorkFlowWeChatApproveFeature
+    {
+      get
+      {
+        return FeatureUtil.Enabled("B3Butchery.0015");
+      }
+    }
+
+
     public void CheckDetailGoods(ProductNotice dmo) {
       if (dmo.Customer_ID == null)
         return;
