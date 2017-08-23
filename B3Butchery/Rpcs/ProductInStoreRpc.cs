@@ -298,7 +298,7 @@ namespace BWP.B3Butchery.Rpcs
     {
       if (productPlanID == null)
         return null;
-      var query = new DQueryDom(new JoinAlias(typeof(ProductInStore)));
+      var query = new DQueryDom(new JoinAlias(typeof(ProductPlan)));
       query.Columns.Add(DQSelectColumn.Field("Date"));
       query.Where.Conditions.Add(DQCondition.EQ("ID", productPlanID));
       return query.EExecuteScalar<DateTime?>();
