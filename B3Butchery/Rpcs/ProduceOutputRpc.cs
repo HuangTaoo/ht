@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BO;
 using BWP.B3Butchery.Rpcs.RpcObject;
@@ -30,8 +31,7 @@ namespace BWP.B3Butchery.Rpcs
       query.From.AddJoin(JoinType.Inner, new DQDmoSource(detail), DQCondition.EQ(bill, "ID", detail, "ProduceOutput_ID"));
       query.Where.Conditions.Add(DQCondition.EQ("AccountingUnit_ID", accountUnitId));
 
-      //      query.Where.Conditions.Add(DQCondition.EQ("Department_ID", departId));
-
+      //query.Where.Conditions.Add(DQCondition.EQ("Department_ID", departId));
       //DQCondition.EQ(string.Format("Department_TreeDeep{0}ID", context.Department_Depth), context.Department_ID)
 
       query.Where.Conditions.Add(DQCondition.EQ(bill, "Domain_ID", DomainContext.Current.ID));
@@ -40,14 +40,13 @@ namespace BWP.B3Butchery.Rpcs
       query.Where.Conditions.Add(DQCondition.LessThan(bill, "Time", DateTime.Today.AddDays(1)));
       query.Where.Conditions.Add(DQCondition.EQ("FrozenStore_ID", storeId));
       query.Where.Conditions.Add(DQCondition.NotInSubQuery(DQExpression.Field(detail, "Goods_ID"), GetTodayGoodsByStoreSubQuery(accountUnitId, departId, storeId)));
-
+      query.Where.Conditions.EFieldInList(DQExpression.Field(bill, "PlanNumber_ID"), GetProductPlan().Select(x => x.ID).ToArray());
 
       OrganizationUtil.AddOrganizationLimit(query, typeof(ProduceOutput));
 
-
       query.Columns.Add(DQSelectColumn.Field("Goods_ID", detail));
       query.Columns.Add(DQSelectColumn.Field("Goods_Name", detail));
-      //      query.Columns.Add(DQSelectColumn.Field("Goods_InnerPackingPer", detail));
+      //query.Columns.Add(DQSelectColumn.Field("Goods_InnerPackingPer", detail));
       query.Columns.Add(DQSelectColumn.Sum(detail, "Number"));
       query.Columns.Add(DQSelectColumn.Create(DQExpression.Divide(DQExpression.Sum(DQExpression.Field(detail, "Number")), DQExpression.Field(detail, "Goods_InnerPackingPer")), "InnerPackingPer"));
       query.Columns.Add(DQSelectColumn.Field("Goods_InnerPackingPer", detail));
@@ -64,12 +63,14 @@ namespace BWP.B3Butchery.Rpcs
         {
           while (reader.Read())
           {
-            var goods = new GoodsInfoDto();
-            goods.Goods_ID = (long)reader[0];
-            goods.Goods_Name = (string)reader[1];
-            goods.Number = (decimal?)((Money<decimal>?)reader[2]);
-            goods.InnerPackingPer = (decimal?)reader[3];
-            goods.Goods_InnerPackingPer = (decimal?)reader[4];
+            var goods = new GoodsInfoDto
+            {
+              Goods_ID = (long) reader[0],
+              Goods_Name = (string) reader[1],
+              Number = (decimal?) ((Money<decimal>?) reader[2]),
+              InnerPackingPer = (decimal?) reader[3],
+              Goods_InnerPackingPer = (decimal?) reader[4]
+            };
             list.Add(goods);
           }
         }
@@ -94,6 +95,34 @@ namespace BWP.B3Butchery.Rpcs
       query.Distinct = true;
       query.Columns.Add(DQSelectColumn.Field("Goods_ID", detail));
       return query;
+    }
+
+    [Rpc]
+    public static List<ProductPlan> GetProductPlan()
+    {
+      var list = new List<ProductPlan>();
+      var bill = new JoinAlias(typeof(ProductPlan));
+      var query = new DQueryDom(bill);
+      query.Columns.Add(DQSelectColumn.Field("ID"));
+      query.Columns.Add(DQSelectColumn.Field("PlanNumber"));
+      query.Where.Conditions.Add(DQCondition.Or(DQCondition.And(DQCondition.GreaterThanOrEqual("EndDate", DateTime.Today), DQCondition.LessThanOrEqual("Date", DateTime.Today)), DQCondition.And(DQCondition.GreaterThanOrEqual("EndDate", DateTime.Today.AddDays(-1)), DQCondition.LessThanOrEqual("Date", DateTime.Today.AddDays(-1))), DQCondition.And(DQCondition.GreaterThanOrEqual("EndDate", DateTime.Today.AddDays(-2)), DQCondition.LessThanOrEqual("Date", DateTime.Today.AddDays(-2)))));
+      query.Where.Conditions.Add(DQCondition.EQ("BillState", 单据状态.已审核));
+      using (var context = new TransactionContext())
+      {
+        using (var reader = context.Session.ExecuteReader(query))
+        {
+          while (reader.Read())
+          {
+            var productPlan = new ProductPlan
+            {
+              ID = (long)reader[0],
+              PlanNumber = (string)reader[1]
+            };
+            list.Add(productPlan);
+          }
+        }
+      }
+      return list;
     }
 
     [Rpc]
