@@ -48,6 +48,10 @@ namespace BWP.B3Butchery.BO
     [Join("Goods_ID", "ID")]
     public long? GoodsProperty_ID { get; set; }
 
+    [ReferenceTo(typeof(Goods), "GoodsProperty_Name")]
+    [Join("Goods_ID", "ID")]
+    public string GoodsProperty_Name { get; set; }
+
     [ReferenceTo(typeof(GoodsBatch), "Name")]
     [Join("GoodsBatch_ID", "ID")]
     [LogicName("批号")]
