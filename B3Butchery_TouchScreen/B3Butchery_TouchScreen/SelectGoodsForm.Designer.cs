@@ -28,7 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
       this.txtInput = new BWP.WinFormControl.DFTextBox();
       this.button1 = new System.Windows.Forms.Button();
@@ -85,6 +85,7 @@
       this.button1.TabIndex = 0;
       this.button1.Text = "清空条件";
       this.button1.UseVisualStyleBackColor = true;
+      this.button1.Click += new System.EventHandler(this.button1_Click);
       // 
       // button2
       // 
@@ -150,9 +151,9 @@
       // 
       // 选择
       // 
-      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-      dataGridViewCellStyle3.NullValue = "选择";
-      this.选择.DefaultCellStyle = dataGridViewCellStyle3;
+      dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+      dataGridViewCellStyle4.NullValue = "选择";
+      this.选择.DefaultCellStyle = dataGridViewCellStyle4;
       this.选择.HeaderText = "选择";
       this.选择.Name = "选择";
       this.选择.ReadOnly = true;

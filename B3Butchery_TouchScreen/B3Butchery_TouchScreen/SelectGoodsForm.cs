@@ -85,5 +85,10 @@ namespace B3Butchery_TouchScreen
         Close();
       }
     }
+
+    private void button1_Click(object sender, EventArgs e)
+    {
+      txtInput.Text = "";
+    }
   }
 }

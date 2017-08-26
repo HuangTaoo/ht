@@ -149,6 +149,7 @@
       this.btnClearDate.TabIndex = 4;
       this.btnClearDate.Text = "清除";
       this.btnClearDate.UseVisualStyleBackColor = true;
+      this.btnClearDate.Click += new System.EventHandler(this.btnClearDate_Click);
       // 
       // EditGuidNameAndGuiGeForm
       // 

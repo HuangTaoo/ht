@@ -465,13 +465,14 @@ namespace B3Butchery_TouchScreen
       var lblBiaoShi = sender as Label;
       var gridConfig = lblBiaoShi.Parent.Tag as GridConfig;
       var f=new EditGuidNameAndGuiGeForm();
-      f.Init(gridConfig.Id,gridConfig.Name,gridConfig.GuiGe, gridConfig.Goods_ID, gridConfig.Goods_Name);
+      f.Init(gridConfig);
       if (f.ShowDialog() == DialogResult.OK)
       {
         gridConfig.Name = f.mName;
         gridConfig.GuiGe = f.mGuiGe;
         gridConfig.Goods_ID = f.mGoodsId;
         gridConfig.Goods_Name = f.mGoodsName;
+        gridConfig.ProductDate = f.mProductDate;
         lblBiaoShi.Text = f.mName;
         if (gridConfig.Goods_ID != null && gridConfig.Goods_ID > 0)
         {

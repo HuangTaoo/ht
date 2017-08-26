@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using B3Butchery_TouchScreen.SqlEntityFramWork;
 
 namespace B3Butchery_TouchScreen
 {
@@ -15,13 +16,13 @@ namespace B3Butchery_TouchScreen
     public long? mGoodsId;
     public string mName, mGuiGe, mGoodsName;
     public DateTime? mProductDate;
-    public void Init(int gridid, string name, string guige, long? goodsId, string goodsName)
+    public void Init(GridConfig config)
     {
-      mGridId = gridid;
-      mName = name;
-      mGuiGe = guige;
-      mGoodsId = goodsId;
-      mGoodsName = goodsName;
+      mGridId = config.Id;
+      mName = config.Name;
+      mGuiGe = config.GuiGe;
+      mGoodsId = config.Goods_ID;
+      mGoodsName = config.Goods_Name;
     }
 
     public EditGuidNameAndGuiGeForm()
@@ -34,12 +35,17 @@ namespace B3Butchery_TouchScreen
       txtName.Text = mName;
       txtGuiGe.Text = mGuiGe;
       txtGoodsName.Text = mGoodsName;
+      if (mProductDate.HasValue)
+      {
+        txtDate.Text = mProductDate.Value.ToString("yyyy-MM-dd");
+      }
     }
 
     private void button2_Click(object sender, EventArgs e)
     {
       mGoodsId = null;
       mGoodsName = "";
+      txtGoodsName.Text = "";
     }
 
     private void txtDate_Click(object sender, EventArgs e)
@@ -48,9 +54,14 @@ namespace B3Butchery_TouchScreen
       if (f.ShowDialog() == DialogResult.OK)
       {
         mProductDate = f.mDateTime;
-        txtDate.Text = f.mDateTime.ToString("yyyy-MM-dd");
+        txtDate.Text = mProductDate.Value.ToString("yyyy-MM-dd");
       }
-      
+    }
+
+    private void btnClearDate_Click(object sender, EventArgs e)
+    {
+      mProductDate = null;
+      txtDate.Text = "";
     }
 
     private void txtGoodsName_Click(object sender, EventArgs e)
