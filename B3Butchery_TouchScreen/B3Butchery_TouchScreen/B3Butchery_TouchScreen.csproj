@@ -71,6 +71,12 @@
     <Compile Include="Config\AppFactory.cs" />
     <Compile Include="Config\SerialProtConfig.cs" />
     <Compile Include="ControlUtil.cs" />
+    <Compile Include="EditGuidNameAndGuiGeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditGuidNameAndGuiGeForm.Designer.cs">
+      <DependentUpon>EditGuidNameAndGuiGeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrozenInStorePieceForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,9 +93,33 @@
     <Compile Include="Migrations\201708240933020_a1.Designer.cs">
       <DependentUpon>201708240933020_a1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708250525383_a2.cs" />
+    <Compile Include="Migrations\201708250525383_a2.Designer.cs">
+      <DependentUpon>201708250525383_a2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708250653307_a3.cs" />
+    <Compile Include="Migrations\201708250653307_a3.Designer.cs">
+      <DependentUpon>201708250653307_a3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708250817541_a4.cs" />
+    <Compile Include="Migrations\201708250817541_a4.Designer.cs">
+      <DependentUpon>201708250817541_a4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectDateFrom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectDateFrom.Designer.cs">
+      <DependentUpon>SelectDateFrom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectGoodsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectGoodsForm.Designer.cs">
+      <DependentUpon>SelectGoodsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SetBiaoQianForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +140,15 @@
     <Compile Include="SqlEntityFramWork\DbModel\InputRecord.cs" />
     <Compile Include="SqlEntityFramWork\SqlDbContext.cs" />
     <Compile Include="SqlEntityFramWork\SqlHelper.cs" />
+    <Compile Include="TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="EditGuidNameAndGuiGeForm.resx">
+      <DependentUpon>EditGuidNameAndGuiGeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrozenInStorePieceForm.resx">
       <DependentUpon>FrozenInStorePieceForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -118,6 +157,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708240933020_a1.resx">
       <DependentUpon>201708240933020_a1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708250525383_a2.resx">
+      <DependentUpon>201708250525383_a2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708250653307_a3.resx">
+      <DependentUpon>201708250653307_a3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708250817541_a4.resx">
+      <DependentUpon>201708250817541_a4.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -129,11 +177,20 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SelectDateFrom.resx">
+      <DependentUpon>SelectDateFrom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectGoodsForm.resx">
+      <DependentUpon>SelectGoodsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SetBiaoQianForm.resx">
       <DependentUpon>SetBiaoQianForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SetInputNumberForm.resx">
       <DependentUpon>SetInputNumberForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />

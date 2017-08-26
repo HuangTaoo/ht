@@ -10,7 +10,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using B3Butchery_TouchScreen.SqlEntityFramWork;
 using B3Butchery_TouchScreen.SqliteEntityFramWork;
+using B3HuaDu_TouchScreen.Config;
 using BWP.WinFormBase;
+using Forks.JsonRpc.Client;
+using Forks.JsonRpc.Client.Data;
 
 
 namespace B3Butchery_TouchScreen
@@ -23,6 +26,21 @@ namespace B3Butchery_TouchScreen
     public FrozenInStorePieceForm()
     {
       InitializeComponent();
+    }
+    private void FrozenInStorePieceForm_FormClosing(object sender, FormClosingEventArgs e)
+    {
+      OpenLoginForm();
+    }
+    void OpenLoginForm()
+    {
+      foreach (Form form in Application.OpenForms)
+      {
+        if (form is LoginForm)
+        {
+          form.Show();
+          return;
+        }
+      }
     }
 
     private void FrozenInStorePieceForm_Load(object sender, EventArgs e)
@@ -48,7 +66,6 @@ namespace B3Butchery_TouchScreen
           flpGrid.Controls.Add(ControlUtil.CreateGridPanel(gridConfig));
         }
       }
-      
     }
 
 
@@ -159,6 +176,108 @@ namespace B3Butchery_TouchScreen
       if (f.ShowDialog() == DialogResult.OK)
       {
         LoadBiaoQians();
+      }
+    }
+
+    private void btnCommit_Click(object sender, EventArgs e)
+    {
+      var sb=new StringBuilder();
+      var seccesGridConfigList = getSuccessGridConfigs();
+
+      foreach (IGrouping<DateTime?, GridConfig> grouping in seccesGridConfigList.GroupBy(x=>x.ProductDate))
+      {
+        try
+        {
+          var date = grouping.Key;
+          if (date == null)
+          {
+            date = DateTime.Today;
+          }
+
+          var dmo = new RpcObject("/MainSystem/B3Butchery/BO/FrozenInStore");
+          dmo.Set("Date", date);
+          foreach (GridConfig gridConfig in grouping)
+          {
+            var number = gridConfig.InputRecords.Sum(x => x.Number);
+            var weight = gridConfig.InputRecords.Sum(x => x.Weight);
+            //有数量并且没有提交
+            if ((number > 0 || weight > 0) && !gridConfig.IsCommited)
+            {
+              var detail = new RpcObject("/MainSystem/B3Butchery/BO/FrozenInStore_Detail");
+              detail.Set("Goods_ID", gridConfig.Goods_ID);
+              detail.Set("SecondNumber2", Convert.ToDecimal(number));//生产数量
+              detail.Set("Number", weight);//主数量
+              dmo.Get<ManyList>("Details").Add(detail);
+            }
+          }
+          RpcFacade.Call<long>("/MainSystem/B3Butchery/Rpcs/FrozenInStoreRpc/ButcherTouchScreenInsert", dmo);
+        }
+        catch (Exception exception)
+        {
+         sb.AppendLine(exception.Message);
+        }
+      }
+      //设置确定按钮是否能点击
+      SetBtnOkEnable(seccesGridConfigList);
+      SetIsCommitedTrue(seccesGridConfigList);
+      MessageBox.Show("提交成功");
+      if (sb.ToString().Length > 0)
+      {
+        MessageBox.Show(sb.ToString(),"未生产速冻入库错误信息");
+      }
+    }
+
+    private void SetIsCommitedTrue(List<GridConfig> seccesGridConfigList)
+    {
+      using (var db=new SqlDbContext())
+      {
+        foreach (GridConfig config in seccesGridConfigList)
+        {
+          var dbConfig = db.GridConfigs.Find(config.Id);
+          db.GridConfigs.Attach(dbConfig);
+          dbConfig.IsCommited = true;
+        }
+        db.SaveChanges();
+      }
+    }
+
+    List<GridConfig> getSuccessGridConfigs()
+    {
+      var succesGridConfigList = new List<GridConfig>();
+      using (var db = new SqlDbContext())
+      {
+        //遍历所有标签
+        var bqList = db.BiaoQians.OrderBy(x => x.Id).Skip(0).Take(10).ToList();
+        foreach (BiaoQian qian in bqList)
+        {
+          var gridConfigs = db.GridConfigs.Include(x => x.InputRecords).Where(x => x.BiaoQianId == qian.Id && x.Goods_ID.HasValue && x.Goods_ID.Value > 0 && !x.IsCommited).ToList();
+          foreach (GridConfig gridConfig in gridConfigs)
+          {
+              var number = gridConfig.InputRecords.Sum(x => x.Number);
+              var weight = gridConfig.InputRecords.Sum(x => x.Weight);
+              //有数量并且没有提交
+              if (number > 0 || weight > 0)
+              {
+              succesGridConfigList.Add(gridConfig);
+              }
+          }
+        }
+      }
+      return succesGridConfigList;
+    }
+
+    private void SetBtnOkEnable(List<GridConfig> seccesGridConfigList)
+    {
+        foreach (Control control in flpGrid.Controls)
+        {
+          var gridConfig = control.Tag as GridConfig;
+          //如果已经创建成功
+          if (seccesGridConfigList.Any(x => x.Id == gridConfig.Id))
+          {
+            gridConfig.IsCommited = true;
+            control.Controls["btnOk"].Enabled = true;
+            control.Controls["btnOk"].BackColor = Color.DodgerBlue;
+          }
       }
     }
   }

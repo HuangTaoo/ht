@@ -11,6 +11,7 @@ namespace B3HuaDu_TouchScreen.Client
     public long Goods_ID { get; set; }
     public string Goods_Name { get; set; }
     public string Goods_Code { get; set; }
+    public string Goods_Spec { get; set; }
 
     public decimal? Ratio { get; set; }
 

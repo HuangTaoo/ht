@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -23,8 +24,17 @@ namespace B3Butchery_TouchScreen.SqlEntityFramWork
     public string Name { get; set; }
     public string GuiGe { get; set; }
 
+    public long? Goods_ID { get; set; }
+    public string Goods_Name { get; set; }
+
+    public DateTime? ProductDate { get; set; }//生产日期
+
+    [DefaultValue(false)]
+    public bool IsCommited { get; set; }
+
     public virtual List<InputRecord> InputRecords { get; set; }
     public virtual List<GridAddedNumber> GridAddedNumbers { get; set; }
+
 
   }
 }

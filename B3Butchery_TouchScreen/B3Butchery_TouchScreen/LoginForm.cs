@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using B3HuaDu_TouchScreen.Config;
@@ -40,6 +41,21 @@ namespace B3Butchery_TouchScreen
     {
       txtName.Text = AppFactory.AppConfig.UserName;
       txtPwd.Text = AppFactory.AppConfig.Password;
+//      var td=new Thread(InitEF);
+//      td.Start();
+    }
+
+    private void InitEF()
+    {
+      using (var db=new SqlDbContext())
+      {
+        var bqList = db.BiaoQians.ToList();
+        button1.Invoke(new Action(() =>
+        {
+          button1.Enabled = true;
+        }) );
+       
+      }
     }
 
     private void button2_Click(object sender, EventArgs e)

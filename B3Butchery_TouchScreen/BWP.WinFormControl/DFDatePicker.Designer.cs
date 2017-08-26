@@ -37,7 +37,6 @@
       // 
       this.dateTimePicker1.CalendarFont = new System.Drawing.Font("宋体", 30F);
       this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
-      this.dateTimePicker1.Dock = System.Windows.Forms.DockStyle.Left;
       this.dateTimePicker1.Font = new System.Drawing.Font("宋体", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
       this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
       this.dateTimePicker1.Location = new System.Drawing.Point(0, 0);
@@ -61,8 +60,6 @@
       // 
       // btnDown
       // 
-      this.btnDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
       this.btnDown.Font = new System.Drawing.Font("宋体", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
       this.btnDown.Location = new System.Drawing.Point(354, -1);
       this.btnDown.Margin = new System.Windows.Forms.Padding(2);
