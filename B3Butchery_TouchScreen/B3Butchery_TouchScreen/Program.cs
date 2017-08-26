@@ -21,14 +21,14 @@ namespace B3Butchery_TouchScreen
     [STAThread]
     static void Main()
     {
-      try
-      {
+//      try
+//      {
         //处理未捕获的异常   
-        Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+//        Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
         //处理UI线程异常   
-        Application.ThreadException += Application_ThreadException;
+//        Application.ThreadException += Application_ThreadException;
         //处理非UI线程异常   
-        AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+//        AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
         var aProcessName = Process.GetCurrentProcess().ProcessName;
         if ((Process.GetProcessesByName(aProcessName)).GetUpperBound(0) > 0)
@@ -41,14 +41,15 @@ namespace B3Butchery_TouchScreen
           Application.SetCompatibleTextRenderingDefault(false);
 
           RpcFacade.Init(AppFactory.AppConfig.ServerUrl, "B3Butchery_TouchScreen");
+//          Application.Run(new  LoadingForm());
           Application.Run(new  LoginForm());
         }
-      }
-      catch (Exception e)
-      {
-        LogUtil.WriteError(e);
-        MessageBox.Show("错误：" + e.Message);
-      }
+//      }
+//      catch (Exception e)
+//      {
+//        LogUtil.WriteError(e);
+//        MessageBox.Show("错误：" + e.Message);
+//      }
 
     }
 

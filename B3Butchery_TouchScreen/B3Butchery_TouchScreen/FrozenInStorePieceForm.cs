@@ -6,10 +6,12 @@ using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using B3Butchery_TouchScreen.SqlEntityFramWork;
 using B3Butchery_TouchScreen.SqliteEntityFramWork;
+using B3Butchery_TouchScreen.Utils;
 using B3HuaDu_TouchScreen.Config;
 using BWP.WinFormBase;
 using Forks.JsonRpc.Client;
@@ -20,12 +22,23 @@ namespace B3Butchery_TouchScreen
 {
   public partial class FrozenInStorePieceForm : Form
   {
+    private LoadingForm loadingForm;
+    private Thread loadThread; //加载线程
 
     private BiaoQian mBiaoQian;
 
     public FrozenInStorePieceForm()
     {
       InitializeComponent();
+      loadingForm = new LoadingForm();
+
+      loadThread = new Thread((ThreadStart) delegate
+      {
+        Application.Run(loadingForm);
+      });
+      loadThread.IsBackground = true;
+      loadThread.Start();
+
     }
     private void FrozenInStorePieceForm_FormClosing(object sender, FormClosingEventArgs e)
     {
@@ -43,17 +56,19 @@ namespace B3Butchery_TouchScreen
       }
     }
 
+
     private void FrozenInStorePieceForm_Load(object sender, EventArgs e)
     {
       LoadBiaoQians();
 
-  
-//      flpGrid.Controls.Add(ControlUtil.CreateGridPanel(null));
-//      flpGrid.Controls.Add(ControlUtil.CreateGridPanel(null));
-//      flpGrid.Controls.Add(ControlUtil.CreateGridPanel(null));
-//      flpGrid.Controls.Add(ControlUtil.CreateGridPanel(null));
-//      flpGrid.Controls.Add(ControlUtil.CreateGridPanel(null));
+      loadingForm.Invoke(new Action(() => loadingForm.Close()));
+      if (loadThread.IsAlive)
+      {
+        loadThread.Abort();
+      }
+//      LoadingUtil.Hide();
     }
+
 
     void CreateOperateAreaControl(int biaoQianId)
     {
