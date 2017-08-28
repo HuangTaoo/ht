@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using B3Butchery_TouchScreen.SqlEntityFramWork;
+using KeyPad;
 
 namespace B3Butchery_TouchScreen
 {
@@ -401,7 +402,44 @@ namespace B3Butchery_TouchScreen
 
     private static void Text_Click(object sender, EventArgs e)
     {
-      MessageBox.Show("文本框点击了");
+      var txt = sender as TextBox;
+      var f=new Keypad();
+      if (f.ShowDialog()==true)
+      {
+        int result;
+        if (int.TryParse(f.Result, out result))
+        {
+          if (result > 0)
+          {
+            var gridConfig = txt.Parent.Tag as GridConfig;
+            if (gridConfig.InputRecords.Count == 50)
+            {
+              MessageBox.Show("最多添加50条记录");
+              return;
+            }
+
+            var record = new InputRecord();
+            record.Number = result;
+            record.GirdConfigId = gridConfig.Id;
+            int guige;
+            if (int.TryParse(gridConfig.GuiGe, out guige))
+            {
+              record.Weight = record.Number * guige;
+            }
+            gridConfig.InputRecords.Add(record);
+
+            //添加到数据库中
+            using (var db = new SqlDbContext())
+            {
+              db.InputRecords.Add(record);
+              db.SaveChanges();
+            }
+            txt.Text = "";
+            txt.Text = result.ToString();
+          }
+        }
+      }
+      //MessageBox.Show("文本框点击了");
     }
 
     private static void txtNumber_Change(object sender, EventArgs e)

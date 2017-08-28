@@ -7,12 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using KeyPad;
 
 namespace B3Butchery_TouchScreen
 {
   public partial class SetInputNumberForm : Form
   {
     public string Input1,Input2,Input3,Input4;
+
+    private void textBox1_Click(object sender, EventArgs e)
+    {
+      var txt = sender as TextBox;
+      var f = new Keypad();
+      if (f.ShowDialog() == true)
+      {
+        txt.Text = f.Result;
+      }
+    }
+
     public SetInputNumberForm()
     {
       InitializeComponent();

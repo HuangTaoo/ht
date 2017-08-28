@@ -57,6 +57,7 @@
       this.textBox1.Size = new System.Drawing.Size(128, 38);
       this.textBox1.TabIndex = 0;
       this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      this.textBox1.Click += new System.EventHandler(this.textBox1_Click);
       // 
       // label2
       // 
@@ -76,6 +77,7 @@
       this.textBox2.Size = new System.Drawing.Size(128, 38);
       this.textBox2.TabIndex = 1;
       this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      this.textBox2.Click += new System.EventHandler(this.textBox1_Click);
       // 
       // label3
       // 
@@ -95,6 +97,7 @@
       this.textBox3.Size = new System.Drawing.Size(128, 38);
       this.textBox3.TabIndex = 2;
       this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      this.textBox3.Click += new System.EventHandler(this.textBox1_Click);
       // 
       // label4
       // 
@@ -114,6 +117,7 @@
       this.textBox4.Size = new System.Drawing.Size(128, 38);
       this.textBox4.TabIndex = 3;
       this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      this.textBox4.Click += new System.EventHandler(this.textBox1_Click);
       // 
       // button1
       // 
