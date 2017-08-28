@@ -7,6 +7,7 @@ using Forks.EnterpriseServices.JsonRpc;
 using System;
 using BWP.B3Butchery.BL;
 using BWP.B3Butchery.Utils;
+using BWP.B3Frameworks.BO;
 using BWP.B3Frameworks.BO.NamedValueTemplate;
 using BWP.B3Frameworks.Utils;
 using Forks.EnterpriseServices.BusinessInterfaces;
@@ -19,6 +20,74 @@ namespace BWP.B3Butchery.Rpcs
   [Rpc]
   public static class FrozenInStoreRpc
   {
+
+    //速冻入库个人计件新建
+    [Rpc]
+    public static long ButcherTouchScreenInsert(FrozenInStore dmo)
+    {
+      using (var session = Dmo.NewSession())
+      {
+        var bl = BIFactory.Create<IFrozenInStoreBL>(session);
+        var profile = DomainUserProfileUtil.Load<B3ButcheryUserProfile>();
+        dmo.AccountingUnit_ID = profile.AccountingUnit_ID;
+        dmo.Store_ID = profile.FrozenInStore_Store_ID;
+
+        SetEmployeeDepartment(dmo, session);
+        SetProductPlan(dmo, session);
+
+        //日期默认当天
+        dmo.Date=DateTime.Today;
+        dmo.Domain_ID = DomainContext.Current.ID;
+        
+        bl.Insert(dmo);
+        session.Commit();
+        return dmo.ID;
+      }
+
+    }
+
+    private static void SetProductPlan(FrozenInStore dmo, IDmoSessionWithTransaction session)
+    {
+      var query=new DQueryDom(new JoinAlias(typeof(ProductPlan)));
+      query.Columns.Add(DQSelectColumn.Field("ID"));
+      query.Where.Conditions.Add(DQCondition.LessThanOrEqual("Date",dmo.Date));
+      query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual("EndDate", dmo.Date));
+      query.Where.Conditions.Add(DQCondition.EQ("BillState",单据状态.已审核));
+      var planid = query.EExecuteScalar<long?>(session);
+      dmo.ProductionPlan_ID = planid;
+    }
+
+    static void SetEmployeeDepartment(FrozenInStore dmo, IDmoSession session)
+    {
+      var employeeId = GetCurrentBindingEmployeeID(session);
+      dmo.Employee_ID = employeeId;
+      var query = new DQueryDom(new JoinAlias(typeof(Employee)));
+      query.Where.Conditions.Add(DQCondition.EQ("ID", employeeId));
+      query.Columns.Add(DQSelectColumn.Field("Department_ID"));
+      using (var reader = session.ExecuteReader(query))
+      {
+        if (reader.Read())
+        {
+          var depId= (long?)reader[0] ?? 0;
+          dmo.Department_ID= depId;
+        }
+      }
+    }
+
+    private static long? GetCurrentBindingEmployeeID(IDmoSession session)
+    {
+      if (BLContext.User.RoleSchema != B3FrameworksConsts.RoleSchemas.employee)
+      {
+        throw new Exception("当前用户不是员工类型");
+      }
+
+      var query = new DQueryDom(new JoinAlias(typeof(User_Employee)));
+      query.Where.Conditions.Add(DQCondition.EQ("User_ID", BLContext.User.ID));
+      query.Columns.Add(DQSelectColumn.Field("Employee_ID"));
+
+      var result = (long?)query.EExecuteScalar(session);
+      return result;
+    }
 
     [Rpc]
     public static long PdaInsertAndCheck(FrozenInStore dmo)

@@ -200,17 +200,22 @@ namespace BWP.B3Butchery.Rpcs
     #endregion
 
 
+    [Rpc(RpcFlags.SkipAuth)]
+    public static List<GoodsInfoDto> GetAllGoodsWithOutQuery()
+    {
+      return GetAllGoods("");
+    }
 
 
-    [Rpc]
-    public static List<GoodsInfoDto> GetAllGoods(string input = "")
+    [Rpc(RpcFlags.SkipAuth)]
+    public static List<GoodsInfoDto> GetAllGoods(string input)
     {
       var list = new List<GoodsInfoDto>();
       var joinGoods = new JoinAlias(typeof(Goods));
       //      var goodsProperty = new JoinAlias(typeof(GoodsProperty));
       //      var goodsPropertyCatalog = new JoinAlias(typeof(GoodsPropertyCatalog));
       var query = new DQueryDom(joinGoods);
-
+      query.Range = SelectRange.Top(100);
       query.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
       if (!string.IsNullOrWhiteSpace(input))
       {
