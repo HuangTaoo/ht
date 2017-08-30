@@ -30,6 +30,8 @@ namespace B3Butchery_TouchScreen
     public FrozenInStorePieceForm()
     {
       InitializeComponent();
+//      this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+
       loadingForm = new LoadingForm();
 
       loadThread = new Thread((ThreadStart) delegate
@@ -197,6 +199,7 @@ namespace B3Butchery_TouchScreen
     private void btnCommit_Click(object sender, EventArgs e)
     {
       var sb=new StringBuilder();
+      var ids=new List<long>();
       var seccesGridConfigList = getSuccessGridConfigs();
 
       foreach (IGrouping<DateTime?, GridConfig> grouping in seccesGridConfigList.GroupBy(x=>x.ProductDate))
@@ -225,7 +228,8 @@ namespace B3Butchery_TouchScreen
               dmo.Get<ManyList>("Details").Add(detail);
             }
           }
-          RpcFacade.Call<long>("/MainSystem/B3Butchery/Rpcs/FrozenInStoreRpc/ButcherTouchScreenInsert", dmo);
+         var id= RpcFacade.Call<long>("/MainSystem/B3Butchery/Rpcs/FrozenInStoreRpc/ButcherTouchScreenInsert", dmo);
+          ids.Add(id);
         }
         catch (Exception exception)
         {
@@ -235,7 +239,11 @@ namespace B3Butchery_TouchScreen
       //设置确定按钮是否能点击
       SetBtnOkEnable(seccesGridConfigList);
       SetIsCommitedTrue(seccesGridConfigList);
-      MessageBox.Show("提交成功");
+      if (ids.Count > 0)
+      {
+        MessageBox.Show("提交成功:"+string.Join(",",ids));
+      }
+     
       if (sb.ToString().Length > 0)
       {
         MessageBox.Show(sb.ToString(),"未生产速冻入库错误信息");
@@ -294,6 +302,11 @@ namespace B3Butchery_TouchScreen
             control.Controls["btnOk"].BackColor = Color.DodgerBlue;
           }
       }
+    }
+
+    private void button1_Click(object sender, EventArgs e)
+    {
+      Close();
     }
   }
 }

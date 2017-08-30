@@ -32,8 +32,9 @@
       this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
       this.flpBiaoQian = new System.Windows.Forms.FlowLayoutPanel();
       this.btnSetBiaoQian = new System.Windows.Forms.Button();
-      this.flpGrid = new System.Windows.Forms.FlowLayoutPanel();
       this.btnCommit = new System.Windows.Forms.Button();
+      this.flpGrid = new System.Windows.Forms.FlowLayoutPanel();
+      this.button1 = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
@@ -65,6 +66,7 @@
       this.flowLayoutPanel1.Controls.Add(this.flpBiaoQian);
       this.flowLayoutPanel1.Controls.Add(this.btnSetBiaoQian);
       this.flowLayoutPanel1.Controls.Add(this.btnCommit);
+      this.flowLayoutPanel1.Controls.Add(this.button1);
       this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
       this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -89,14 +91,6 @@
       this.btnSetBiaoQian.UseVisualStyleBackColor = true;
       this.btnSetBiaoQian.Click += new System.EventHandler(this.button6_Click);
       // 
-      // flpGrid
-      // 
-      this.flpGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.flpGrid.Location = new System.Drawing.Point(0, 0);
-      this.flpGrid.Name = "flpGrid";
-      this.flpGrid.Size = new System.Drawing.Size(1264, 923);
-      this.flpGrid.TabIndex = 0;
-      // 
       // btnCommit
       // 
       this.btnCommit.Font = new System.Drawing.Font("宋体", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -109,12 +103,34 @@
       this.btnCommit.UseVisualStyleBackColor = true;
       this.btnCommit.Click += new System.EventHandler(this.btnCommit_Click);
       // 
+      // flpGrid
+      // 
+      this.flpGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.flpGrid.Location = new System.Drawing.Point(0, 0);
+      this.flpGrid.Name = "flpGrid";
+      this.flpGrid.Size = new System.Drawing.Size(1264, 923);
+      this.flpGrid.TabIndex = 0;
+      // 
+      // button1
+      // 
+      this.button1.BackColor = System.Drawing.Color.Red;
+      this.button1.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+      this.button1.Location = new System.Drawing.Point(1191, 3);
+      this.button1.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
+      this.button1.Name = "button1";
+      this.button1.Size = new System.Drawing.Size(61, 52);
+      this.button1.TabIndex = 1;
+      this.button1.Text = "注销";
+      this.button1.UseVisualStyleBackColor = false;
+      this.button1.Click += new System.EventHandler(this.button1_Click);
+      // 
       // FrozenInStorePieceForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(1264, 985);
       this.Controls.Add(this.splitContainer1);
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.MaximizeBox = false;
       this.MinimizeBox = false;
       this.Name = "FrozenInStorePieceForm";
@@ -139,5 +155,6 @@
     private System.Windows.Forms.FlowLayoutPanel flpBiaoQian;
     private System.Windows.Forms.Button btnSetBiaoQian;
     private System.Windows.Forms.Button btnCommit;
+    private System.Windows.Forms.Button button1;
   }
 }
