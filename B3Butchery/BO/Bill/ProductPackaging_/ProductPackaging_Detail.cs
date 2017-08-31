@@ -41,6 +41,11 @@ namespace BWP.B3Butchery.BO
     [Join("NeiGoods_ID", "ID")]
     public string NeiGoods_Code { get; set; }
 
+    [LogicName("内包装主辅换算主单位比例")]
+    [ReferenceTo(typeof(Goods), "MainUnitRatio")]
+    [Join("NeiGoods_ID", "ID")]
+    public Money<decimal>? NeiGoods_MainUnitRatio { get; set; }
+
     [LogicName("内包装比例")]
     public Money<decimal>? NeiGoodsRatio { get; set; }
 
