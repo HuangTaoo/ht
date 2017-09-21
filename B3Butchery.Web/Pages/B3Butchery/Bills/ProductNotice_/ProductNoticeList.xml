@@ -24,6 +24,10 @@
         <Field name="Employee_ID"/>
         <QBE paramName="Employee_ID"/>
       </EQ>
+      <EQ>
+        <Field name="Customer_ID"/>
+        <QBE paramName="Customer_ID"/>
+      </EQ>
  
       <EQ>
         <Field name="ProductionUnit_ID"/>

@@ -15,6 +15,8 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
         AddDFBrowseGridColumn(grid, "Date");
         AddDFBrowseGridColumn(grid, "AccountingUnit_Name"); 
         AddDFBrowseGridColumn(grid, "ProductionUnit_Name"); 
+        AddDFBrowseGridColumn(grid, "Customer_Name"); 
+        AddDFBrowseGridColumn(grid, "Employee_Name"); 
       }
     }
 
@@ -49,6 +51,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       config.Add("CheckUser_Name");
       config.Add("AccountingUnit_ID"); 
       config.Add("Employee_ID");
+      config.Add("Customer_ID");
       config.Add("Date");
       config.Add("BillState");
       config.Add("ProductionUnit_ID");
