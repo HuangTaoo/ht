@@ -17,10 +17,12 @@ namespace B3ButcheryCE.FrozenInStoreConfirm_
     {
 
         long mStoreId;
-        public FrozenInStoreConfirmList(long storeId)
+        long mProductPlanId;
+        public FrozenInStoreConfirmList(long storeId, long productPlanId)
         {
             InitializeComponent();
             mStoreId = storeId;
+            mProductPlanId = productPlanId;
         }
 
         void LoadGoodsFromRpc()
@@ -133,6 +135,7 @@ namespace B3ButcheryCE.FrozenInStoreConfirm_
                         dmo.Set("AccountingUnit_ID", SysConfig.Current.AccountingUnit_ID);
                         dmo.Set("Department_ID", SysConfig.Current.Department_ID);
                         dmo.Set("Store_ID", mStoreId);
+                        dmo.Set("ProductionPlan_ID", mProductPlanId);
 
                         var detail = new RpcObject("/MainSystem/B3Butchery/BO/FrozenInStore_Detail");
                         detail.Set("Goods_ID", goods.Goods_ID);

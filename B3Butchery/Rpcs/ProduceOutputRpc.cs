@@ -36,8 +36,9 @@ namespace BWP.B3Butchery.Rpcs
 
       query.Where.Conditions.Add(DQCondition.EQ(bill, "Domain_ID", DomainContext.Current.ID));
       query.Where.Conditions.Add(DQCondition.EQ("BillState", 单据状态.已审核));
-      query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(bill, "Time", DateTime.Today));
-      query.Where.Conditions.Add(DQCondition.LessThan(bill, "Time", DateTime.Today.AddDays(1)));
+      query.Where.Conditions.Add(DQCondition.And(DQCondition.GreaterThanOrEqual(bill, "Time", DateTime.Today.AddDays(-3)), DQCondition.LessThanOrEqual(bill, "Time", DateTime.Today.AddDays(1))));
+      //query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(bill, "Time", DateTime.Today));
+      //query.Where.Conditions.Add(DQCondition.LessThan(bill, "Time", DateTime.Today.AddDays(1)));
       query.Where.Conditions.Add(DQCondition.EQ("FrozenStore_ID", storeId));
       query.Where.Conditions.Add(DQCondition.NotInSubQuery(DQExpression.Field(detail, "Goods_ID"), GetTodayGoodsByStoreSubQuery(accountUnitId, departId, storeId)));
       query.Where.Conditions.EFieldInList(DQExpression.Field(bill, "PlanNumber_ID"), GetProductPlan().Select(x => x.ID).ToArray());
@@ -47,7 +48,8 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("Goods_ID", detail));
       query.Columns.Add(DQSelectColumn.Field("Goods_Name", detail));
       //query.Columns.Add(DQSelectColumn.Field("Goods_InnerPackingPer", detail));
-      query.Columns.Add(DQSelectColumn.Sum(detail, "Number"));
+      query.Columns.Add(DQSelectColumn.Field("Number", detail));
+      //query.Columns.Add(DQSelectColumn.Sum(detail, "Number"));
       query.Columns.Add(DQSelectColumn.Create(DQExpression.Divide(DQExpression.Sum(DQExpression.Field(detail, "Number")), DQExpression.Field(detail, "Goods_InnerPackingPer")), "InnerPackingPer"));
       query.Columns.Add(DQSelectColumn.Field("Goods_InnerPackingPer", detail));
       //query.Columns.Add(DQSelectColumn.Create(DQExpression.Divide(DQExpression.Field(detail,"Number"),DQExpression.Field(detail, "Goods_InnerPackingPer")),"包装数"));
@@ -56,6 +58,7 @@ namespace BWP.B3Butchery.Rpcs
       query.GroupBy.Expressions.Add(DQExpression.Field(detail, "Goods_ID"));
       query.GroupBy.Expressions.Add(DQExpression.Field(detail, "Goods_Name"));
       query.GroupBy.Expressions.Add(DQExpression.Field(detail, "Goods_InnerPackingPer"));
+      query.GroupBy.Expressions.Add(DQExpression.Field(detail, "Number"));
 
       using (var session = Dmo.NewSession())
       {
@@ -65,11 +68,11 @@ namespace BWP.B3Butchery.Rpcs
           {
             var goods = new GoodsInfoDto
             {
-              Goods_ID = (long) reader[0],
-              Goods_Name = (string) reader[1],
-              Number = (decimal?) ((Money<decimal>?) reader[2]),
-              InnerPackingPer = (decimal?) reader[3],
-              Goods_InnerPackingPer = (decimal?) reader[4]
+              Goods_ID = (long)reader[0],
+              Goods_Name = (string)reader[1],
+              Number = (decimal?)(Money<decimal>?)reader[2],
+              InnerPackingPer = (decimal?)reader[3],
+              Goods_InnerPackingPer = (decimal?)reader[4]
             };
             list.Add(goods);
           }
@@ -90,8 +93,9 @@ namespace BWP.B3Butchery.Rpcs
       query.Where.Conditions.Add(DQCondition.EQ(bill, "Domain_ID", DomainContext.Current.ID));
       query.Where.Conditions.Add(DQCondition.EQ("BillState", 单据状态.已审核));
       query.Where.Conditions.Add(DQCondition.EQ("Store_ID", storeId));
-      query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(bill, "Date", DateTime.Today));
-      query.Where.Conditions.Add(DQCondition.LessThan(bill, "Date", DateTime.Today.AddDays(1)));
+      //query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(bill, "Date", DateTime.Today));
+      //query.Where.Conditions.Add(DQCondition.LessThan(bill, "Date", DateTime.Today.AddDays(1)));
+      query.Where.Conditions.Add(DQCondition.And(DQCondition.GreaterThanOrEqual(bill, "Date", DateTime.Today.AddDays(-3)), DQCondition.LessThanOrEqual(bill, "Date", DateTime.Today.AddDays(1))));
       query.Distinct = true;
       query.Columns.Add(DQSelectColumn.Field("Goods_ID", detail));
       return query;
@@ -105,7 +109,7 @@ namespace BWP.B3Butchery.Rpcs
       var query = new DQueryDom(bill);
       query.Columns.Add(DQSelectColumn.Field("ID"));
       query.Columns.Add(DQSelectColumn.Field("PlanNumber"));
-      query.Where.Conditions.Add(DQCondition.Or(DQCondition.And(DQCondition.GreaterThanOrEqual("EndDate", DateTime.Today), DQCondition.LessThanOrEqual("Date", DateTime.Today)), DQCondition.And(DQCondition.GreaterThanOrEqual("EndDate", DateTime.Today.AddDays(-1)), DQCondition.LessThanOrEqual("Date", DateTime.Today.AddDays(-1))), DQCondition.And(DQCondition.GreaterThanOrEqual("EndDate", DateTime.Today.AddDays(-2)), DQCondition.LessThanOrEqual("Date", DateTime.Today.AddDays(-2)))));
+      query.Where.Conditions.Add(DQCondition.Or(DQCondition.And(DQCondition.GreaterThanOrEqual("EndDate", DateTime.Today), DQCondition.LessThanOrEqual("Date", DateTime.Today)), DQCondition.And(DQCondition.GreaterThanOrEqual("EndDate", DateTime.Today.AddDays(-1)), DQCondition.LessThanOrEqual("Date", DateTime.Today.AddDays(-1))), DQCondition.And(DQCondition.GreaterThanOrEqual("EndDate", DateTime.Today.AddDays(-2)), DQCondition.LessThanOrEqual("Date", DateTime.Today.AddDays(-2))), DQCondition.And(DQCondition.GreaterThanOrEqual("EndDate", DateTime.Today.AddDays(-3)), DQCondition.LessThanOrEqual("Date", DateTime.Today.AddDays(-3)))));
       query.Where.Conditions.Add(DQCondition.EQ("BillState", 单据状态.已审核));
       using (var context = new TransactionContext())
       {
