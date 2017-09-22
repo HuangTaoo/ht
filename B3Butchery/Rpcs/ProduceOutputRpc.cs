@@ -48,8 +48,7 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("Goods_ID", detail));
       query.Columns.Add(DQSelectColumn.Field("Goods_Name", detail));
       //query.Columns.Add(DQSelectColumn.Field("Goods_InnerPackingPer", detail));
-      query.Columns.Add(DQSelectColumn.Field("Number", detail));
-      //query.Columns.Add(DQSelectColumn.Sum(detail, "Number"));
+      query.Columns.Add(DQSelectColumn.Sum(detail, "Number"));
       query.Columns.Add(DQSelectColumn.Create(DQExpression.Divide(DQExpression.Sum(DQExpression.Field(detail, "Number")), DQExpression.Field(detail, "Goods_InnerPackingPer")), "InnerPackingPer"));
       query.Columns.Add(DQSelectColumn.Field("Goods_InnerPackingPer", detail));
       //query.Columns.Add(DQSelectColumn.Create(DQExpression.Divide(DQExpression.Field(detail,"Number"),DQExpression.Field(detail, "Goods_InnerPackingPer")),"包装数"));
@@ -58,7 +57,6 @@ namespace BWP.B3Butchery.Rpcs
       query.GroupBy.Expressions.Add(DQExpression.Field(detail, "Goods_ID"));
       query.GroupBy.Expressions.Add(DQExpression.Field(detail, "Goods_Name"));
       query.GroupBy.Expressions.Add(DQExpression.Field(detail, "Goods_InnerPackingPer"));
-      query.GroupBy.Expressions.Add(DQExpression.Field(detail, "Number"));
 
       using (var session = Dmo.NewSession())
       {
