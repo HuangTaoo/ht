@@ -22,7 +22,7 @@ namespace BWP.B3Butchery.Rpcs
   public static class ProduceOutputRpc
   {
     [Rpc]
-    public static List<GoodsInfoDto> GetTodayGoodsByStore(long accountUnitId, long departId, long storeId)
+    public static List<GoodsInfoDto> GetTodayGoodsByStore(long accountUnitId, long departId, long storeId, long productPlanId)
     {
       var list = new List<GoodsInfoDto>();
       var bill = new JoinAlias(typeof(ProduceOutput));
@@ -40,6 +40,7 @@ namespace BWP.B3Butchery.Rpcs
       //query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(bill, "Time", DateTime.Today));
       //query.Where.Conditions.Add(DQCondition.LessThan(bill, "Time", DateTime.Today.AddDays(1)));
       query.Where.Conditions.Add(DQCondition.EQ("FrozenStore_ID", storeId));
+      query.Where.Conditions.Add(DQCondition.EQ("PlanNumber_ID", productPlanId));
       query.Where.Conditions.Add(DQCondition.NotInSubQuery(DQExpression.Field(detail, "Goods_ID"), GetTodayGoodsByStoreSubQuery(accountUnitId, departId, storeId)));
       query.Where.Conditions.EFieldInList(DQExpression.Field(bill, "PlanNumber_ID"), GetProductPlan().Select(x => x.ID).ToArray());
 

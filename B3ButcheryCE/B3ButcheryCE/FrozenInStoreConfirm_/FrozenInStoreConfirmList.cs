@@ -27,7 +27,7 @@ namespace B3ButcheryCE.FrozenInStoreConfirm_
 
         void LoadGoodsFromRpc()
         {
-            var list = RpcFacade.Call<List<RpcObject>>("/MainSystem/B3Butchery/Rpcs/ProduceOutputRpc/GetTodayGoodsByStore", SysConfig.Current.AccountingUnit_ID, SysConfig.Current.Department_ID, mStoreId);
+            var list = RpcFacade.Call<List<RpcObject>>("/MainSystem/B3Butchery/Rpcs/ProduceOutputRpc/GetTodayGoodsByStore", SysConfig.Current.AccountingUnit_ID, SysConfig.Current.Department_ID, mStoreId, mProductPlanId);
             listView1.BeginUpdate();
             listView1.Items.Clear();
             foreach (RpcObject item in list)
