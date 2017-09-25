@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using BWP.B3Butchery.BO;
 using BWP.B3Butchery.BL;
 using System.Web.UI;
@@ -11,14 +9,10 @@ using System.Web.UI.WebControls;
 using BWP.B3UnitedInfos;
 using BWP.B3Frameworks.Utils;
 using Forks.EnterpriseServices.DataForm;
-using BWP.Web.Utils;
 using BWP.B3Frameworks.BO.NamedValueTemplate;
-using BWP.B3Butchery;
 using Forks.EnterpriseServices.BusinessInterfaces;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
-using Forks.EnterpriseServices.DomainObjects2;
-using TSingSoft.WebPluginFramework;
-
+using DataKind = BWP.B3Frameworks.B3FrameworksConsts.DataSources;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.ProductPlan_
 {
@@ -171,8 +165,8 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductPlan_
     public override void AppToUI()
     {
       base.AppToUI();
-      if (CanSave)
-        mDFContainer.MakeReadonly("Employee_ID");
+      //if (CanSave)
+      //  mDFContainer.MakeReadonly("Employee_ID");
     }
 
     protected override void InitNewDmo(ProductPlan dmo)
