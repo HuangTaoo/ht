@@ -41,7 +41,7 @@ namespace BWP.B3Butchery.Rpcs
       //query.Where.Conditions.Add(DQCondition.LessThan(bill, "Time", DateTime.Today.AddDays(1)));
       query.Where.Conditions.Add(DQCondition.EQ("FrozenStore_ID", storeId));
       query.Where.Conditions.Add(DQCondition.EQ("PlanNumber_ID", productPlanId));
-      query.Where.Conditions.Add(DQCondition.NotInSubQuery(DQExpression.Field(detail, "Goods_ID"), GetTodayGoodsByStoreSubQuery(accountUnitId, departId, storeId)));
+      query.Where.Conditions.Add(DQCondition.NotInSubQuery(DQExpression.Field(detail, "Goods_ID"), GetTodayGoodsByStoreSubQuery(accountUnitId, departId, storeId, productPlanId)));
       query.Where.Conditions.EFieldInList(DQExpression.Field(bill, "PlanNumber_ID"), GetProductPlan().Select(x => x.ID).ToArray());
 
       OrganizationUtil.AddOrganizationLimit(query, typeof(ProduceOutput));
@@ -80,7 +80,7 @@ namespace BWP.B3Butchery.Rpcs
       return list;
     }
 
-    private static DQueryDom GetTodayGoodsByStoreSubQuery(long accountUnitId, long departId, long storeId)
+    private static DQueryDom GetTodayGoodsByStoreSubQuery(long accountUnitId, long departId, long storeId, long productPlanId)
     {
       var bill = new JoinAlias("instore", typeof(FrozenInStore));
       var detail = new JoinAlias("instoredetail", typeof(FrozenInStore_Detail));
@@ -92,6 +92,7 @@ namespace BWP.B3Butchery.Rpcs
       query.Where.Conditions.Add(DQCondition.EQ(bill, "Domain_ID", DomainContext.Current.ID));
       query.Where.Conditions.Add(DQCondition.EQ("BillState", 单据状态.已审核));
       query.Where.Conditions.Add(DQCondition.EQ("Store_ID", storeId));
+      query.Where.Conditions.Add(DQCondition.EQ("ProductionPlan_ID", productPlanId));
       //query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(bill, "Date", DateTime.Today));
       //query.Where.Conditions.Add(DQCondition.LessThan(bill, "Date", DateTime.Today.AddDays(1)));
       query.Where.Conditions.Add(DQCondition.And(DQCondition.GreaterThanOrEqual(bill, "Date", DateTime.Today.AddDays(-3)), DQCondition.LessThanOrEqual(bill, "Date", DateTime.Today.AddDays(1))));
