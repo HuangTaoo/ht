@@ -20,6 +20,7 @@ using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.EnterpriseServices.SqlDoms;
 using TSingSoft.WebControls2;
 using DataKind = BWP.B3Frameworks.B3FrameworksConsts.DataSources;
+using TSingSoft.WebControls2.QBELinks;
 
 namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
 {
@@ -109,7 +110,8 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
       hPanel.Add(QueryCreator.TimeRange(mainInfo.Fields["InStoreDate"], mQueryContainer, "MinInStoreDate", "MaxInStoreDate"));
 		}
 
-		DFTextBox goodsOrigin,goodsName;
+        DFTextBox goodsOrigin, goodsName;
+        DFChoiceBox _storeInput,cargoSpaceName;
 		protected override void AddQueryControls(VLayoutPanel vPanel)
 		{
 			var customPanel = new LayoutManager("Main", mainInfo, mQueryContainer);
@@ -118,7 +120,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
 			customPanel["AccountingUnit_ID"].NotAutoAddToContainer = true;
 			customPanel.Add("Department_ID", QueryCreator.DFChoiceBoxEnableMultiSelection(mainInfo.Fields["Department_ID"], mQueryContainer, "Department_ID", DataKind.授权部门全部));
 			customPanel["Department_ID"].NotAutoAddToContainer = true;
-			customPanel.Add("Store_ID", QueryCreator.DFChoiceBoxEnableMultiSelection(mainInfo.Fields["Store_ID"], mQueryContainer, "Store_ID", DataKind.授权仓库全部));
+			customPanel.Add("Store_ID",_storeInput= QueryCreator.DFChoiceBoxEnableMultiSelection(mainInfo.Fields["Store_ID"], mQueryContainer, "Store_ID", DataKind.授权仓库全部), false);
 			customPanel["Store_ID"].NotAutoAddToContainer = true;
 			customPanel.Add("InStoreType_ID", QueryCreator.DFChoiceBoxEnableMultiSelection(mainInfo.Fields["InStoreType_ID"], mQueryContainer, "InStoreType_ID", B3ButcheryDataSource.屠宰分割入库类型全部));
 			customPanel["InStoreType_ID"].NotAutoAddToContainer = true;
@@ -138,7 +140,8 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
       customPanel.Add("GoodsProperty_ID",new SimpleLabel("存货属性"),QueryCreator.DFChoiceBox(detailInfo.Fields["ID"],B3UnitedInfos.B3UnitedInfosConsts.DataSources.存货属性全部));
       customPanel.Add("PropertyCatalog_ID", new SimpleLabel("属性分类"), QueryCreator.DFChoiceBox(detailInfo.Fields["ID"], B3UnitedInfos.B3UnitedInfosConsts.DataSources.存货属性分类全部));
       customPanel.Add("DRemark", new SimpleLabel("备注"), QueryCreator.DFTextBox(detailInfo.Fields["Remark"]));
-      customPanel.Add("CargoSpace_ID", new SimpleLabel("货位"), QueryCreator.DFChoiceBox(detailInfo.Fields["CargoSpace_Name"], B3FrameworksConsts.DataSources.货位));
+      customPanel.Add("CargoSpace_ID", new SimpleLabel("货位"), cargoSpaceName = QueryCreator.DFChoiceBox(detailInfo.Fields["CargoSpace_Name"], B3ButcheryDataSource.货位), false);
+      
 
       customPanel.Add("BillState", QueryCreator.一般单据状态(mainInfo.Fields["BillState"]));    
      
@@ -147,6 +150,13 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
       TagWebUtil.AddTagQueryInput(mDmoTypeID, customPanel, config, mQueryContainer);
 			vPanel.Add(customPanel.CreateLayout());
 		}
+
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+            cargoSpaceName.OnBeforeDrop = "var ref = window.document.getElementById('" + _storeInput.ClientID + "');if(typeof(ref.value)!='undefined'){this.codeArgument = ref.value;}else if(ref.behind){this.codeArgument = ref.behind.get_value();};";
+
+        }
 
     string[] mainFields = new string[] { "ID", "AccountingUnit_Name", "Department_Name", "Store_Name", "InStoreType_Name", "InStoreDate", "CheckDate", "CreateUser_Name", "Remark", "BillState" };
 		string[] sumFileds = new string[] { "Number", "SecondNumber", "Money" };
