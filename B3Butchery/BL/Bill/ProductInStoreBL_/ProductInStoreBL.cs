@@ -65,6 +65,7 @@ namespace BWP.B3Butchery.BL
           Store_ID = dmo.Store_ID ?? 0,
           Goods_ID = detail.Goods_ID,
           GoodsBatch_ID = detail.GoodsBatch_ID,
+          CargoSpace_ID = detail.CargoSpace_ID,
           Number = detail.Number ?? 0,
           SecondNumber = detail.SecondNumber,
           Price = detail.Price,
