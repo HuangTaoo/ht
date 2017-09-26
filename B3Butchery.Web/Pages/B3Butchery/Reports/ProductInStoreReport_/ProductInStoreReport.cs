@@ -88,6 +88,9 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
       checkbox.Items.Add(new ListItem("每月"));
       checkbox.Items.Add(new ListItem("每年"));
 
+      checkbox.Items.Add(new ListItem("货位", "CargoSpace_Name"));
+
+
       panel.EAdd(checkbox);
       panel.EAddLiteral("<BR/>");
       panel.EAddLiteral("<span style='color:red'>属性分类等级:</span>");
@@ -135,6 +138,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
       customPanel.Add("GoodsProperty_ID",new SimpleLabel("存货属性"),QueryCreator.DFChoiceBox(detailInfo.Fields["ID"],B3UnitedInfos.B3UnitedInfosConsts.DataSources.存货属性全部));
       customPanel.Add("PropertyCatalog_ID", new SimpleLabel("属性分类"), QueryCreator.DFChoiceBox(detailInfo.Fields["ID"], B3UnitedInfos.B3UnitedInfosConsts.DataSources.存货属性分类全部));
       customPanel.Add("DRemark", new SimpleLabel("备注"), QueryCreator.DFTextBox(detailInfo.Fields["Remark"]));
+      customPanel.Add("CargoSpace_ID", new SimpleLabel("货位"), QueryCreator.DFChoiceBox(detailInfo.Fields["CargoSpace_Name"], B3FrameworksConsts.DataSources.货位));
 
       customPanel.Add("BillState", QueryCreator.一般单据状态(mainInfo.Fields["BillState"]));    
      
@@ -149,119 +153,125 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
     string[] goodsFields = new string[] { "Name", "GoodsProperty_Name", "Code", "Spec", "MainUnit", "SecondUnit", "Origin", "Brand", "PrintShortName" };
 	  private CheckBoxList _showTypeList;
 
-	  protected override DQueryDom GetQueryDom() {
-      mBrowseGrid.EnableRowsGroup = _showTypeList.Items.FindByText("合并单元格").Selected;
-			var query = base.GetQueryDom();
-			OrganizationUtil.AddOrganizationLimit<Department>(query, "Department_ID");
-      OrganizationUtil.AddOrganizationLimit<Store>(query, "Store_ID");
-      var bill = query.From.RootSource.Alias;
-			var detail = JoinAlias.Create("detail");
-			var goodsAlias = new JoinAlias(typeof(Goods));
-      var goodsProperty = new JoinAlias(typeof(GoodsProperty));
-      var propertyCatalog = new JoinAlias(typeof(GoodsPropertyCatalog));
-      query.From.AddJoin(JoinType.Left, new DQDmoSource(goodsAlias), DQCondition.EQ(detail, "Goods_ID", goodsAlias, "ID"));
-      query.From.AddJoin(JoinType.Left,new DQDmoSource(goodsProperty),DQCondition.EQ(goodsAlias, "GoodsProperty_ID", goodsProperty,"ID"));
-      query.From.AddJoin(JoinType.Left,new DQDmoSource(propertyCatalog),DQCondition.EQ(goodsProperty, "GoodsPropertyCatalog_ID", propertyCatalog,"ID"));
+      protected override DQueryDom GetQueryDom()
+      {
+          mBrowseGrid.EnableRowsGroup = _showTypeList.Items.FindByText("合并单元格").Selected;
+          var query = base.GetQueryDom();
+          OrganizationUtil.AddOrganizationLimit<Department>(query, "Department_ID");
+          OrganizationUtil.AddOrganizationLimit<Store>(query, "Store_ID");
+          var bill = query.From.RootSource.Alias;
+          var detail = JoinAlias.Create("detail");
+          var goodsAlias = new JoinAlias(typeof(Goods));
+          var goodsProperty = new JoinAlias(typeof(GoodsProperty));
+          var propertyCatalog = new JoinAlias(typeof(GoodsPropertyCatalog));
+          query.From.AddJoin(JoinType.Left, new DQDmoSource(goodsAlias), DQCondition.EQ(detail, "Goods_ID", goodsAlias, "ID"));
+          query.From.AddJoin(JoinType.Left, new DQDmoSource(goodsProperty), DQCondition.EQ(goodsAlias, "GoodsProperty_ID", goodsProperty, "ID"));
+          query.From.AddJoin(JoinType.Left, new DQDmoSource(propertyCatalog), DQCondition.EQ(goodsProperty, "GoodsPropertyCatalog_ID", propertyCatalog, "ID"));
 
-			foreach (ListItem field in checkbox.Items)
-			{
-				if (field.Selected)
-				{
-				  if (sumFileds.Contains(field.Value))
+          foreach (ListItem field in checkbox.Items)
           {
-            query.Columns.Add(DQSelectColumn.Sum(detail, field.Value));
-            SumColumnIndexs.Add(query.Columns.Count - 1);
-          }
-          else if (goodsFields.Contains(field.Value))
-          {
-            query.Columns.Add(DQSelectColumn.Field(field.Value, goodsAlias));
-            query.GroupBy.Expressions.Add(DQExpression.Field(goodsAlias, field.Value));
-          }
-          else if (mainFields.Contains(field.Value))
-          {
-            query.Columns.Add(DQSelectColumn.Field(field.Value));
-            query.GroupBy.Expressions.Add(DQExpression.Field(field.Value));
-          }
-          else if (field.Text == "每日")
-          {
-            var snippetDay = DQExpression.Snippet<DateTime?>("(Convert(nvarchar(10),[bill].[InStoreDate], 23))");
-            query.Columns.Add(DQSelectColumn.Create(snippetDay, "每日"));
-            query.GroupBy.Expressions.Add(snippetDay);
-          }
-          else if (field.Text == "每月")
-          {
-            var snippetMonth = DQExpression.Snippet<string>("Left(Convert(nvarchar(10),[bill].[InStoreDate], 23),7)");
-            query.Columns.Add(DQSelectColumn.Create(snippetMonth, "每月"));
-            query.GroupBy.Expressions.Add(snippetMonth);
-          }
-          else if (field.Text == "每年")
-          {
-            var snippetMonth = DQExpression.Snippet<string>("Left(Convert(nvarchar(10),[bill].[InStoreDate], 23),4)");
-            query.Columns.Add(DQSelectColumn.Create(snippetMonth, "每月"));
-            query.GroupBy.Expressions.Add(snippetMonth);
-          }
-          else if (field.Text == "标签")
-          {
-            var tarName = new JoinAlias(typeof (Dmo_TagNames));
-            query.From.AddJoin(JoinType.Left, new DQDmoSource(tarName), DQCondition.And(DQCondition.EQ(tarName, "DmoID", query.From.RootSource.Alias, "ID"), DQCondition.EQ(tarName, "DmoTypeID", mDmoTypeID)));
-            query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(tarName, "Names"), "标签"));
-            query.GroupBy.Expressions.Add(DQExpression.Field(tarName, "Names"));
-          }
-          else if (field.Text == "存货属性")
-          {
-            query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(goodsProperty, "Name"), field.Text));
-            query.GroupBy.Expressions.Add(DQExpression.Field(goodsProperty, "Name"));
-          }
-          else if (field.Text == "属性分类")
-          {
-            query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(propertyCatalog, "Name"), field.Text));
-            query.GroupBy.Expressions.Add(DQExpression.Field(propertyCatalog, "Name"));
-            var v = 0;
-            if (!depth.IsEmpty && int.TryParse(depth.Text, out v))
-            {
-              if (v < 0)
-                v = 0;
-              if (v > 8)
-                v = 8;
-              for (var i = 1; i <= v; i++)
+              if (field.Selected)
               {
-                var p = new JoinAlias("_p" + i, typeof (GoodsPropertyCatalog));
-                query.From.AddJoin(JoinType.Left, new DQDmoSource(p), DQCondition.EQ(p, "ID", propertyCatalog, string.Format("TreeDeep{0}ID", i)));
-                query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(p, "Name"), i + "级分类"));
-                query.GroupBy.Expressions.Add(DQExpression.Field(p, "Name"));
+                  if (sumFileds.Contains(field.Value))
+                  {
+                      query.Columns.Add(DQSelectColumn.Sum(detail, field.Value));
+                      SumColumnIndexs.Add(query.Columns.Count - 1);
+                  }
+                  else if (goodsFields.Contains(field.Value))
+                  {
+                      query.Columns.Add(DQSelectColumn.Field(field.Value, goodsAlias));
+                      query.GroupBy.Expressions.Add(DQExpression.Field(goodsAlias, field.Value));
+                  }
+                  else if (mainFields.Contains(field.Value))
+                  {
+                      query.Columns.Add(DQSelectColumn.Field(field.Value));
+                      query.GroupBy.Expressions.Add(DQExpression.Field(field.Value));
+                  }
+                  else if (field.Text == "每日")
+                  {
+                      var snippetDay = DQExpression.Snippet<DateTime?>("(Convert(nvarchar(10),[bill].[InStoreDate], 23))");
+                      query.Columns.Add(DQSelectColumn.Create(snippetDay, "每日"));
+                      query.GroupBy.Expressions.Add(snippetDay);
+                  }
+                  else if (field.Text == "每月")
+                  {
+                      var snippetMonth = DQExpression.Snippet<string>("Left(Convert(nvarchar(10),[bill].[InStoreDate], 23),7)");
+                      query.Columns.Add(DQSelectColumn.Create(snippetMonth, "每月"));
+                      query.GroupBy.Expressions.Add(snippetMonth);
+                  }
+                  else if (field.Text == "每年")
+                  {
+                      var snippetMonth = DQExpression.Snippet<string>("Left(Convert(nvarchar(10),[bill].[InStoreDate], 23),4)");
+                      query.Columns.Add(DQSelectColumn.Create(snippetMonth, "每月"));
+                      query.GroupBy.Expressions.Add(snippetMonth);
+                  }
+                  else if (field.Text == "标签")
+                  {
+                      var tarName = new JoinAlias(typeof(Dmo_TagNames));
+                      query.From.AddJoin(JoinType.Left, new DQDmoSource(tarName), DQCondition.And(DQCondition.EQ(tarName, "DmoID", query.From.RootSource.Alias, "ID"), DQCondition.EQ(tarName, "DmoTypeID", mDmoTypeID)));
+                      query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(tarName, "Names"), "标签"));
+                      query.GroupBy.Expressions.Add(DQExpression.Field(tarName, "Names"));
+                  }
+                  else if (field.Text == "存货属性")
+                  {
+                      query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(goodsProperty, "Name"), field.Text));
+                      query.GroupBy.Expressions.Add(DQExpression.Field(goodsProperty, "Name"));
+                  }
+                  else if (field.Text == "属性分类")
+                  {
+                      query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(propertyCatalog, "Name"), field.Text));
+                      query.GroupBy.Expressions.Add(DQExpression.Field(propertyCatalog, "Name"));
+                      var v = 0;
+                      if (!depth.IsEmpty && int.TryParse(depth.Text, out v))
+                      {
+                          if (v < 0)
+                              v = 0;
+                          if (v > 8)
+                              v = 8;
+                          for (var i = 1; i <= v; i++)
+                          {
+                              var p = new JoinAlias("_p" + i, typeof(GoodsPropertyCatalog));
+                              query.From.AddJoin(JoinType.Left, new DQDmoSource(p), DQCondition.EQ(p, "ID", propertyCatalog, string.Format("TreeDeep{0}ID", i)));
+                              query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(p, "Name"), i + "级分类"));
+                              query.GroupBy.Expressions.Add(DQExpression.Field(p, "Name"));
+                          }
+                      }
+                  }
+                  else if (field.Text == "货位")
+                  {
+                      query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(detail, "CargoSpace_Name"), field.Text));
+                      query.GroupBy.Expressions.Add(DQExpression.Field(detail, "CargoSpace_Name"));
+                  }
+                  else
+                  {
+                      var s = field.Value;
+                      if (field.Value == "DRemark")
+                      {
+                          s = "Remark";
+                          query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(detail, s), "备注"));
+                      }
+                      else
+                          query.Columns.Add(DQSelectColumn.Field(s, detail));
+                      query.GroupBy.Expressions.Add(DQExpression.Field(detail, s));
+                  }
               }
-            }
           }
-          else
-          {
-            var s = field.Value;
-            if (field.Value == "DRemark")
-            {
-              s = "Remark";
-              query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(detail, s), "备注"));
-            }
-            else
-              query.Columns.Add(DQSelectColumn.Field(s, detail));
-            query.GroupBy.Expressions.Add(DQExpression.Field(detail, s));
-          }
-				}
-			}
-      if (!string.IsNullOrEmpty(goodsOrigin.Text))
-				query.Where.Conditions.Add(DQCondition.Like(goodsAlias, "Origin", goodsOrigin.Text));
-      if (!goodsName.IsEmpty)
-        query.Where.Conditions.Add(DQCondition.Like(goodsAlias,"Name",goodsName.Text));
-			query.Where.Conditions.Add(DQCondition.And(DQCondition.EQ("Domain_ID", DomainContext.Current.ID)));
-      var brand = mQueryContainer.GetControl<DFChoiceBox>("Goods_Brand");
-      if (!brand.IsEmpty)
-        query.Where.Conditions.Add(DQCondition.EQ(goodsAlias, "Brand", brand.Value));
-      var gProperty = mQueryContainer.GetControl<DFChoiceBox>("GoodsProperty_ID");
-      if (!gProperty.IsEmpty)
-        query.Where.Conditions.Add(DQCondition.EQ(goodsProperty, "ID", gProperty.Value));
-      TreeUtil.AddTreeCondition<GoodsPropertyCatalog>(query, mQueryContainer, "PropertyCatalog_ID", propertyCatalog);
-      TagWebUtil.AddTagQueryCondition(mDmoTypeID, query, bill, mQueryContainer);
-			if (query.Columns.Count == 0)
-				throw new Exception("至少选择一条显示列");
-			return query;
-		}
+          if (!string.IsNullOrEmpty(goodsOrigin.Text))
+              query.Where.Conditions.Add(DQCondition.Like(goodsAlias, "Origin", goodsOrigin.Text));
+          if (!goodsName.IsEmpty)
+              query.Where.Conditions.Add(DQCondition.Like(goodsAlias, "Name", goodsName.Text));
+          query.Where.Conditions.Add(DQCondition.And(DQCondition.EQ("Domain_ID", DomainContext.Current.ID)));
+          var brand = mQueryContainer.GetControl<DFChoiceBox>("Goods_Brand");
+          if (!brand.IsEmpty)
+              query.Where.Conditions.Add(DQCondition.EQ(goodsAlias, "Brand", brand.Value));
+          var gProperty = mQueryContainer.GetControl<DFChoiceBox>("GoodsProperty_ID");
+          if (!gProperty.IsEmpty)
+              query.Where.Conditions.Add(DQCondition.EQ(goodsProperty, "ID", gProperty.Value));
+          TreeUtil.AddTreeCondition<GoodsPropertyCatalog>(query, mQueryContainer, "PropertyCatalog_ID", propertyCatalog);
+          TagWebUtil.AddTagQueryCondition(mDmoTypeID, query, bill, mQueryContainer);
+          if (query.Columns.Count == 0)
+              throw new Exception("至少选择一条显示列");
+          return query;
+      }
 	}
 }
