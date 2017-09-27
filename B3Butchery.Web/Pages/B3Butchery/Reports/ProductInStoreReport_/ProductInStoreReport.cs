@@ -140,7 +140,8 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
       customPanel.Add("GoodsProperty_ID",new SimpleLabel("存货属性"),QueryCreator.DFChoiceBox(detailInfo.Fields["ID"],B3UnitedInfos.B3UnitedInfosConsts.DataSources.存货属性全部));
       customPanel.Add("PropertyCatalog_ID", new SimpleLabel("属性分类"), QueryCreator.DFChoiceBox(detailInfo.Fields["ID"], B3UnitedInfos.B3UnitedInfosConsts.DataSources.存货属性分类全部));
       customPanel.Add("DRemark", new SimpleLabel("备注"), QueryCreator.DFTextBox(detailInfo.Fields["Remark"]));
-      customPanel.Add("CargoSpace_ID", new SimpleLabel("货位"), cargoSpaceName = QueryCreator.DFChoiceBox(detailInfo.Fields["CargoSpace_Name"], B3ButcheryDataSource.货位), false);
+      customPanel.Add("CargoSpace_ID", new SimpleLabel("货位"), cargoSpaceName = QueryCreator.DFChoiceBoxEnableMultiSelection(detailInfo.Fields["CargoSpace_ID"], mQueryContainer, "CargoSpace_ID", B3ButcheryDataSource.货位), false);
+      customPanel["CargoSpace_ID"].NotAutoAddToContainer = true;
       
 
       customPanel.Add("BillState", QueryCreator.一般单据状态(mainInfo.Fields["BillState"]));    
