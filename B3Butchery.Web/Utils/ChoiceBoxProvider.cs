@@ -14,6 +14,7 @@ using BWP.B3Frameworks.BO.NamedValueTemplate;
 using BWP.B3Frameworks;
 using TSingSoft.WebPluginFramework;
 using BWP.B3UnitedInfos.BO;
+using Forks.Utils.Collections;
 
 namespace BWP.B3Butchery.Web
 {
@@ -59,6 +60,31 @@ namespace BWP.B3Butchery.Web
         query.OrderBy.Expressions.Add(DQOrderByExpression.Create("ID", true));
         return query.EExecuteList<string, long>().Select(x => new WordPair(x.Item1, x.Item2.ToString()));
 			});
+
+            ChoiceBoxSettings.Register(B3ButcheryDataSource.货位, (argu) =>
+            {
+                if (string.IsNullOrEmpty(argu.CodeArgument))
+                {
+                    return EnumerableUtil.Null<WordPair>();
+                }
+
+                var query = new DQueryDom(new JoinAlias(typeof(CargoSpace)));
+                if (!string.IsNullOrEmpty(argu.CodeArgument))
+                {
+                    var ss = argu.CodeArgument.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                    query.Where.Conditions.EFieldInList("Store_ID", ss);
+                }
+
+                query.Columns.Add(DQSelectColumn.Field("Name"));
+                query.Columns.Add(DQSelectColumn.Field("ID"));
+                query.OrderBy.Expressions.Add(
+                  DQOrderByExpression.Create("ID"));
+                if (!string.IsNullOrEmpty(argu.InputArgument))
+                {
+                    query.Where.Conditions.Add(DQCondition.Like("Name", argu.InputArgument));
+                }
+                return ChoiceBoxQueryHelper.GetData(query);
+            });
 
 			ChoiceBoxSettings.Register(B3ButcheryDataSource.生产环节, (argu) =>
 			{

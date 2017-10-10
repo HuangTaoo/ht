@@ -215,7 +215,7 @@ namespace BWP.B3Butchery.Rpcs
       //      var goodsProperty = new JoinAlias(typeof(GoodsProperty));
       //      var goodsPropertyCatalog = new JoinAlias(typeof(GoodsPropertyCatalog));
       var query = new DQueryDom(joinGoods);
-      query.Range = SelectRange.Top(100);
+      //query.Range = SelectRange.Top(100);
       query.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
       if (!string.IsNullOrWhiteSpace(input))
       {

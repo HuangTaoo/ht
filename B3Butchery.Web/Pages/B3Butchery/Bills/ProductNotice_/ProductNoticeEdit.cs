@@ -72,6 +72,10 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       _detailGrid.ShowLineNo = true;
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
+      foreach (var ioc in TypeIOCCenter.GetIOCList<ProductNoticeEdit.BeforeDetailGridApplyLayout>(GetType()))
+      {
+          ioc.Invoke(_detailGrid);
+      }
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Spec"));      
       _detailGrid.Columns.EAdd(new DFEditGridColumn<DFTextBox>("Number")).SumMode = SumMode.Sum; 
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_MainUnit"));
@@ -91,7 +95,6 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       _detailGrid.ValueColumns.Add("Goods_MainUnitRatio");
       _detailGrid.ValueColumns.Add("Goods_SecondUnitRatio");
       mDFContainer.AddNonDFControl(_detailGrid, "$detailGrid");
-      
 
       var section = mPageLayoutManager.AddSection("DetaiColumns", "明细列");
       titlePanel.SetPageLayoutSetting(mPageLayoutManager, section.Name);
@@ -202,5 +205,10 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       _detailGrid.DataBind();
     }
 
+
+    public interface BeforeDetailGridApplyLayout
+    {
+        void Invoke(DFEditGrid grid);
+    }
   }
 }

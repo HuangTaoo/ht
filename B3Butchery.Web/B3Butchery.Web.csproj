@@ -332,7 +332,9 @@
     <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\ProductInStoreTemplate_\ProductInStoreTemplateList.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Pages\B3Butchery\Reports\ProductInStoreReport_\ProductInStoreReport.xml" />
+    <EmbeddedResource Include="Pages\B3Butchery\Reports\ProductInStoreReport_\ProductInStoreReport.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\B3Butchery\Reports\ProduceInputReport_\ProduceInputReport.xml" />
