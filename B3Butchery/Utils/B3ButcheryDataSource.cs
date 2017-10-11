@@ -18,6 +18,7 @@
     public const string 生产环节模板会计单位部门条件 = "生产环节模板会计单位部门条件";
     public const string 速冻库 = "B3Butchery_速冻库";
     public const string 货位 = "B3Butchery_货位";
+    public const string 车间品类 = "B3Butchery_车间品类";
     
   }
 }

@@ -265,6 +265,33 @@
       <Function index="10" name="完毕"/>
       <Function index="11" name="撤销完毕"/>
     </FunctionGroup>
+
+    <FunctionGroup name="车间品类" roleSchemas="employee" >
+      <Function index="0" name="访问"/>
+      <Function index="1" name="新建"/>
+      <Function index="2" name="编辑"/>
+      <Function index="3" name="删除"/>
+      <Function index="4" name="停用"/>
+      <Function index="5" name="启用"/>
+      <Function index="6" name="锁定"/>
+      <Function index="7" name="解锁"/>
+    </FunctionGroup>
+    
+    <FunctionGroup name="速冻入库配置单" roleSchemas="employee" >
+      <Function index="0" name="访问" />
+      <Function index="1" name="新建" />
+      <Function index="2" name="编辑" />
+      <Function index="3" name="删除" />
+      <Function index="4" name="审核" />
+      <Function index="5" name="撤销" />
+      <Function index="6" name="锁定" />
+      <Function index="7" name="解锁" />
+      <Function index="8" name="管理" />
+      <Function index="9" name="作废" />
+      <Function index="10" name="完毕"/>
+      <Function index="11" name="撤销完毕"/>
+    </FunctionGroup>
+    
   </Security>
   <Menus>
     <Menu id="0001"  features="B3Butchery.0007" name="/屠宰分割/信息设置/档案/生产线/新建" roles="B3Butchery.生产线.新建" url="B3Butchery/BaseInfos/ProductLine_/ProductLineEdit.aspx"/>
@@ -294,6 +321,9 @@
     <Menu id="0025"  name="/屠宰分割/功能/存货仓库设置" roles="B3Butchery.功能.存货仓库设置" url="B3Butchery/Tools/GoodsAccStoreSetting_/GoodsAccStoreSetting.aspx"/>
     <Menu id="0026"  name="/屠宰分割/业务单据/包装领用/列表" roles="B3Butchery.包装领用.访问" url="B3Butchery/Bills/PackingRecipients_/PackingRecipientsList.aspx"/>
     <Menu id="0027"  name="/屠宰分割/业务单据/领料单/列表" roles="B3Butchery.领料单.访问" url="B3Butchery/Bills/Picking_/PickingList.aspx"/>
+    <Menu id="0028"  name="/屠宰分割/信息设置/档案/车间品类/列表" roles="B3Butchery.车间品类.访问" url="B3Butchery/BaseInfos/WorkshopCategory_/WorkshopCategoryList.aspx"/>
+
+    <Menu id="0029"  name="/屠宰分割/业务单据/速冻入库配置单/列表" roles="B3Butchery.速冻入库配置单.访问" url="B3Butchery/Bills/FrozenInStoreSetBill_/FrozenInStoreSetBillList.aspx"/>
   </Menus>
 
   <Hippo>
