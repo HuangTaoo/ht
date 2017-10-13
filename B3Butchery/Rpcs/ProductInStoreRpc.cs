@@ -6,6 +6,7 @@ using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BO;
 using BWP.B3Butchery.Rpcs.RpcObject;
 using BWP.B3Frameworks;
+using BWP.B3Frameworks.BO;
 using BWP.B3Frameworks.BO.NamedValueTemplate;
 using Forks.EnterpriseServices.BusinessInterfaces;
 using Forks.EnterpriseServices.DataForm;
@@ -188,12 +189,12 @@ namespace BWP.B3Butchery.Rpcs
     [Rpc]
     public static List<RpcEasyProductInStore> GetProductInStoreList()
     {
-
       var query = new DQueryDom(new JoinAlias(typeof(ProductInStore)));
       query.Columns.Add(DQSelectColumn.Field("ID"));
       query.Columns.Add(DQSelectColumn.Field("InStoreDate"));
       query.Where.Conditions.Add(DQCondition.EQ("BillState", 单据状态.未审核));
       OrganizationUtil.AddOrganizationLimit(query, typeof(ProductInStore));
+      OrganizationUtil.AddOrganizationLimit<Store>(query, "Store_ID");
       query.Where.Conditions.Add(DQCondition.IsNotNull(DQExpression.Field("InStoreDate")));
       try
       {
