@@ -9,7 +9,6 @@ using Forks.EnterpriseServices;
 using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
 using Forks.Utils;
-using TSingSoft.WebControls2;
 
 namespace BWP.B3Butchery.BO
 {
@@ -20,73 +19,63 @@ namespace BWP.B3Butchery.BO
   {
     public long FrozenInStoreSetBill_ID { get; set; }
 
-    [LogicName("计数存货")]
-    public long CalculateGoods_ID { get; set; }
+    [LogicName("存货")]
+    public long Goods_ID { get; set; }
 
-    [ReferenceTo(typeof(CalculateGoods), "Name")]
-    [Join("CalculateGoods_ID", "ID")]
-    [LogicName("计数存货名称")]
-    public string CalculateGoods_Name { get; set; }
+    [ReferenceTo(typeof(Goods), "Name")]
+    [Join("Goods_ID", "ID")]
+    [LogicName("存货名称")]
+    public string Goods_Name { get; set; }
 
-    [ReferenceTo(typeof(CalculateGoods), "Code")]
-    [Join("CalculateGoods_ID", "ID")]
-    [LogicName("计数存货编号")]
-    public string CalculateGoods_Code { get; set; }
+    [ReferenceTo(typeof(Goods), "PrintShortName")]
+    [Join("Goods_ID", "ID")]
+    [LogicName("存货简称")]
+    public string Goods_PrintShortName { get; set; }
+
+    [ReferenceTo(typeof(Goods), "Code")]
+    [Join("Goods_ID", "ID")]
+    [LogicName("存货编号")]
+    public string Goods_Code { get; set; }
 
     [LogicName("主单位")]
-    [ReferenceTo(typeof(CalculateGoods), "MainUnit")]
-    [Join("CalculateGoods_ID", "ID")]
-    public string CalculateGoods_MainUnit { get; set; }
+    [ReferenceTo(typeof(Goods), "MainUnit")]
+    [Join("Goods_ID", "ID")]
+    public string Goods_MainUnit { get; set; }
 
     [LogicName("辅单位")]
-    [ReferenceTo(typeof(CalculateGoods), "SecondUnit")]
-    [Join("CalculateGoods_ID", "ID")]
-    public string CalculateGoods_SecondUnit { get; set; }
+    [ReferenceTo(typeof(Goods), "SecondUnit")]
+    [Join("Goods_ID", "ID")]
+    public string Goods_SecondUnit { get; set; }
+
+    [LogicName("规格")]
+    [ReferenceTo(typeof(Goods), "Spec")]
+    [Join("Goods_ID", "ID")]
+    public string Goods_Spec { get; set; }
+
+    [LogicName("存货属性")]
+    public long? GoodsProperty_ID { get; set; }
+
+    [LogicName("存货属性")]
+    [Join("GoodsProperty_ID", "ID")]
+    [ReferenceTo(typeof(GoodsProperty), "Name")]
+    public string GoodsProperty_Name { get; set; }
 
 
-    [LogicName("主辅换算主单位比例")]
-    [ReferenceTo(typeof(CalculateGoods), "MainUnitRatio")]
-    [Join("CalculateGoods_ID", "ID")]
-    public Money<decimal>? MainUnitRatio { get; set; }
-
-    [LogicName("主辅换算辅单位比例")]
-    [ReferenceTo(typeof(CalculateGoods), "SecondUnitRatio")]
-    [Join("CalculateGoods_ID", "ID")]
-    public Money<decimal>? SecondUnitRatio { get; set; }
-
-    [LogicName("主辅转换方向")]
-    [ReferenceTo(typeof(CalculateGoods), "UnitConvertDirection")]
-    [Join("CalculateGoods_ID", "ID")]
-    public NamedValue<主辅转换方向>? UnitConvertDirection { get; set; }
-
-    [LogicName("辅单位II")]
-    [ReferenceTo(typeof(CalculateGoods), "SecondUnitII")]
-    [Join("CalculateGoods_ID", "ID")]
-    public string SecondUnitII { get; set; }
-
-    [LogicName("主辅II换算主单位比例")]
-    [ReferenceTo(typeof(CalculateGoods), "SecondUnitII_MainUnitRatio")]
-    [Join("CalculateGoods_ID", "ID")]
-    public Money<decimal>? SecondUnitII_MainUnitRatio { get; set; }
-
-    [LogicName("主辅II换算辅单位比例")]
-    [ReferenceTo(typeof(CalculateGoods), "SecondUnitII_SecondUnitRatio")]
-    [Join("CalculateGoods_ID", "ID")]
-    public Money<decimal>? SecondUnitII_SecondUnitRatio { get; set; }
-
-    [LogicName("计数分类")]
-    public long? CalculateCatalog_ID { get; set; }
-
-    [LogicName("计数分类")]
-    [Join("CalculateCatalog_ID", "ID")]
-    [ReferenceTo(typeof(CalculateGoods), "Name")]
-    public string CalculateCatalog_Name { get; set; }
+    [ReferenceTo(typeof(GoodsProperty), "GoodsPropertyCatalog_Name")]
+    [LogicName("存货属性分类")]
+    [Join("GoodsProperty_ID", "ID")]
+    public string GoodsPropertyCatalog_Name { get; set; }
 
     [LogicName("默认盘数")]
-    [Join("CalculateGoods_ID", "ID")]
-    [ReferenceTo(typeof(CalculateGoods), "DefaultNumber1")]
-    public int? DefaultNumber1 { get; set; }
-    
+    public int? DefaultNumber { get; set; }
+
+
+//    [LogicName("主辅换算辅单位比例")]
+//    public Money<decimal>? SecondUnitRatio { get; set; }
+
+    [LogicName("主辅换算主单位比例")]
+    public Money<decimal>? MainUnitRatio { get; set; }
+
   }
 
   [Serializable]

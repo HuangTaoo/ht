@@ -8,6 +8,8 @@ using Forks.EnterpriseServices.BusinessInterfaces;
 using Forks.EnterpriseServices.DomainObjects2;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.EnterpriseServices.JsonRpc;
+using Newtonsoft.Json;
+using TSingSoft.WebPluginFramework;
 
 namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
 {
@@ -44,11 +46,24 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
     }
 
 
-//    [Rpc(RpcFlags.SkipAuth)]
-//    public static List<Car> GetCar()
-//    {
-//      return GetBaseInfoList<Car>();
-//    }
+    [Rpc(RpcFlags.SkipAuth)]
+    public static string GetCalculateGoods()
+    {
+      var query = new DmoQuery(typeof(CalculateGoods));
+      query.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
+      var list = query.EExecuteList().Cast<CalculateGoods>().ToList();
+      return JsonConvert.SerializeObject(list);
+    }
+
+
+    [Rpc(RpcFlags.SkipAuth)]
+    public static string GetCalculateSpec()
+    {
+      var query = new DmoQuery(typeof(CalculateSpec));
+      query.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
+      var list = query.EExecuteList().Cast<CalculateSpec>().ToList();
+      return JsonConvert.SerializeObject(list);
+    }
 
 
     static List<T> GetBaseInfoList<T>() where T : BaseInfo, new()
