@@ -10,7 +10,7 @@ using Forks.EnterpriseServices.BusinessInterfaces;
 namespace BWP.B3Butchery.BL
 {
   [BusinessInterface(typeof(CalculateGoodsBL))]
-  [LogicName("计数存货")]
+  [LogicName("计数名称")]
   public interface ICalculateGoodsBL : IDomainBaseInfoBL<CalculateGoods>
   { }
 

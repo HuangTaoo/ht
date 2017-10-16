@@ -20,7 +20,7 @@
     public const string 货位 = "B3Butchery_货位";
     public const string 车间品类 = "B3Butchery_车间品类";
     public const string 计数分类 = "B3Butchery_计数分类";
-    public const string 计数存货 = "B3Butchery_计数存货";
+    public const string 计数名称 = "B3Butchery_计数名称";
     
   }
 }

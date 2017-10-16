@@ -45,8 +45,8 @@ namespace BWP.Web.Pages.B3Butchery.Bills.FrozenInStoreSetBill_
       if (CanSave)
       {
         var hPanel = vPanel.Add(new HLayoutPanel(), new VLayoutOption(HorizontalAlign.Left));
-        hPanel.Add(new SimpleLabel("选择计数存货"));
-        var selectGoods = hPanel.Add(new ChoiceBox(B3ButcheryDataSource.计数存货) { Width = Unit.Pixel(130), EnableMultiSelection = true, EnableInputArgument = true, AutoPostBack = true });
+        hPanel.Add(new SimpleLabel("选择计数名称"));
+        var selectGoods = hPanel.Add(new ChoiceBox(B3ButcheryDataSource.计数名称) { Width = Unit.Pixel(130), EnableMultiSelection = true, EnableInputArgument = true, AutoPostBack = true });
         selectGoods.SelectedValueChanged += delegate
         {
           _detailGrid.GetFromUI();
@@ -72,7 +72,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.FrozenInStoreSetBill_
 
         var addGoodsbt = hPanel.Add(new DialogButton
         {
-          Text = "选择存货",
+          Text = "选择计数名称",
         });
         addGoodsbt.Url = "/B3Butchery/Dialogs/SelectCalculateGoodsDialog.aspx";
         addGoodsbt.Click += delegate

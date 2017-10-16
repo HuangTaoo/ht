@@ -17,7 +17,7 @@ using TSingSoft.WebControls2;
 
 namespace BWP.B3Butchery.BO
 {
-  [DFClass, Serializable, LogicName("计数存货")]
+  [DFClass, Serializable, LogicName("计数名称")]
   public class CalculateGoods :  DomainBaseInfo
   {
     [DbColumn(DbType = SqlDbType.NVarChar, AllowNull = false, Length = 50, Unique = true)]

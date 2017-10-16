@@ -37,7 +37,7 @@ namespace BWP.B3Butchery.Web
 				}.GetData();
 			});
 
-      ChoiceBoxSettings.Register(B3ButcheryDataSource.计数存货, (argu) =>
+      ChoiceBoxSettings.Register(B3ButcheryDataSource.计数名称, (argu) =>
 			{
 				return new DomainChoiceBoxQueryHelper<CalculateGoods>(argu)
 				{
