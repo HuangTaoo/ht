@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Select xmlns="urn:XDQuery">
+  <Columns>
+  </Columns>
+  <From>
+    <DmoClass class="BWP.B3Butchery.BO.CalculateGoods, B3Butchery"/>
+  </From>
+  <Where>
+    <And>
+      <Or>
+        <Contains>
+          <Field name="Name"/>
+          <QBE paramName="Name"/>
+        </Contains>
+        <Contains>
+          <Field name="Spell"/>
+          <QBE paramName="Name"/>
+        </Contains>
+      </Or>
+      <Contains>
+        <Field name="Spec"/>
+        <QBE paramName="Spec"/>
+      </Contains>
+      <Contains>
+        <Field name="Code"/>
+        <QBE paramName="Code"/>
+      </Contains>
+      <EQ>
+        <Field name="CalculateCatalog_ID"/>
+        <QBE paramName="CalculateCatalog_ID"/>
+      </EQ>
+  
+    </And>
+  </Where>
+</Select>

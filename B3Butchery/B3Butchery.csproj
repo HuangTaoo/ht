@@ -148,6 +148,9 @@
       <Link>tsapp_version.cs</Link>
     </Compile>
     <Compile Include="B3ButcheryConfig.cs" />
+    <Compile Include="BL\BaseInfo\CalculateCatalogBL_\CalculateCatalogBL.cs" />
+    <Compile Include="BL\BaseInfo\CalculateGoodsBL_\CalculateGoodsBL.cs" />
+    <Compile Include="BL\BaseInfo\CalculateSpecBL_\CalculateSpecBL.cs" />
     <Compile Include="BL\BaseInfo\FrozenStore_\FrozenStoreBL.cs" />
     <Compile Include="BL\BaseInfo\InStoreTypeBL_\InStoreTypeBL.cs" />
     <Compile Include="BL\BaseInfo\ProductInStoreTemplateBL_\ProductInStoreTemplateBL.cs" />
@@ -169,6 +172,9 @@
     <Compile Include="BL\Bill\ProductPlanBL_\ProductPlanBL.cs" />
     <Compile Include="BL\Bill\TemporaryStorage_\TemporaryStorageBL.cs" />
     <Compile Include="BO\B3ButcheryUserProfile.cs" />
+    <Compile Include="BO\BaseInfo\CalculateCatalog_\CalculateCatalog.cs" />
+    <Compile Include="BO\BaseInfo\CalculateGoods_\CalculateGoods.cs" />
+    <Compile Include="BO\BaseInfo\CalculateSpec_\CalculateSpec.cs" />
     <Compile Include="BO\BaseInfo\FrozenStore_\FrozenStore.cs" />
     <Compile Include="BO\BaseInfo\InStoreType_\InStoreType.cs" />
     <Compile Include="BO\BaseInfo\ProductInStoreTemplate_\ProductInStoreTemplate.cs" />

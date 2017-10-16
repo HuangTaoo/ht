@@ -36,6 +36,22 @@ namespace BWP.B3Butchery.Web
 					OnlyAvailable = true
 				}.GetData();
 			});
+
+      ChoiceBoxSettings.Register(B3ButcheryDataSource.计数存货, (argu) =>
+			{
+				return new DomainChoiceBoxQueryHelper<CalculateGoods>(argu)
+				{
+					OnlyAvailable = true
+				}.GetData();
+			});
+
+      ChoiceBoxSettings.Register(B3ButcheryDataSource.计数分类, (argu) =>
+			{
+				return new DomainChoiceBoxQueryHelper<CalculateCatalog>(argu)
+				{
+					OnlyAvailable = true
+				}.GetData();
+			});
       ChoiceBoxSettings.Register(B3ButcheryDataSource.速冻库, (argu) =>
       {
         return new DomainChoiceBoxQueryHelper<FrozenStore>(argu)

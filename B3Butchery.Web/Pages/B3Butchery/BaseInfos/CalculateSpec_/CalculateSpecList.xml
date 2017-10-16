@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Select xmlns="urn:XDQuery">
+  <Columns>
+    <Field name="ID"/>
+  </Columns>
+  <From>
+    <DmoClass class="BWP.B3Butchery.BO.CalculateSpec, B3Butchery"/>
+  </From>
+  <Where>
+    <And>
+      <EQ>
+        <Field name="ID"/>
+        <QBE paramName="ID"/>
+      </EQ>
+     
+      <Or>
+        <Contains>
+          <Field name="Name"/>
+          <QBE paramName="Name"/>
+        </Contains>
+        <Contains>
+          <Field name="Spell"/>
+          <QBE paramName="Name"/>
+        </Contains>
+      </Or>
+      <EQ>
+        <Field name="Stopped"/>
+        <QBE paramName="Stopped"/>
+      </EQ>
+      <EQ>
+        <Field name="IsLocked"/>
+        <QBE paramName="IsLocked"/>
+      </EQ>
+      <Contains>
+        <Field name="Remark"/>
+        <QBE paramName="Remark"/>
+      </Contains>
+    </And>
+  </Where>
+</Select>

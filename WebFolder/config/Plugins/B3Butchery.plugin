@@ -277,6 +277,39 @@
       <Function index="7" name="解锁"/>
     </FunctionGroup>
     
+    <FunctionGroup name="计数分类" roleSchemas="employee" >
+      <Function index="0" name="访问"/>
+      <Function index="1" name="新建"/>
+      <Function index="2" name="编辑"/>
+      <Function index="3" name="删除"/>
+      <Function index="4" name="停用"/>
+      <Function index="5" name="启用"/>
+      <Function index="6" name="锁定"/>
+      <Function index="7" name="解锁"/>
+    </FunctionGroup>
+    
+    <FunctionGroup name="计数存货" roleSchemas="employee" >
+      <Function index="0" name="访问"/>
+      <Function index="1" name="新建"/>
+      <Function index="2" name="编辑"/>
+      <Function index="3" name="删除"/>
+      <Function index="4" name="停用"/>
+      <Function index="5" name="启用"/>
+      <Function index="6" name="锁定"/>
+      <Function index="7" name="解锁"/>
+    </FunctionGroup>
+    
+    <FunctionGroup name="计数规格" roleSchemas="employee" >
+      <Function index="0" name="访问"/>
+      <Function index="1" name="新建"/>
+      <Function index="2" name="编辑"/>
+      <Function index="3" name="删除"/>
+      <Function index="4" name="停用"/>
+      <Function index="5" name="启用"/>
+      <Function index="6" name="锁定"/>
+      <Function index="7" name="解锁"/>
+    </FunctionGroup>
+    
     <FunctionGroup name="速冻入库配置单" roleSchemas="employee" >
       <Function index="0" name="访问" />
       <Function index="1" name="新建" />
@@ -321,9 +354,15 @@
     <Menu id="0025"  name="/屠宰分割/功能/存货仓库设置" roles="B3Butchery.功能.存货仓库设置" url="B3Butchery/Tools/GoodsAccStoreSetting_/GoodsAccStoreSetting.aspx"/>
     <Menu id="0026"  name="/屠宰分割/业务单据/包装领用/列表" roles="B3Butchery.包装领用.访问" url="B3Butchery/Bills/PackingRecipients_/PackingRecipientsList.aspx"/>
     <Menu id="0027"  name="/屠宰分割/业务单据/领料单/列表" roles="B3Butchery.领料单.访问" url="B3Butchery/Bills/Picking_/PickingList.aspx"/>
-    <Menu id="0028"  name="/屠宰分割/信息设置/档案/车间品类/列表" roles="B3Butchery.车间品类.访问" url="B3Butchery/BaseInfos/WorkshopCategory_/WorkshopCategoryList.aspx"/>
+    
+    
+    <Menu id="0028" features="B3Butchery.0016" name="/屠宰分割/信息设置/档案/车间品类/列表" roles="B3Butchery.车间品类.访问" url="B3Butchery/BaseInfos/WorkshopCategory_/WorkshopCategoryList.aspx"/>
 
-    <Menu id="0029"  name="/屠宰分割/业务单据/速冻入库配置单/列表" roles="B3Butchery.速冻入库配置单.访问" url="B3Butchery/Bills/FrozenInStoreSetBill_/FrozenInStoreSetBillList.aspx"/>
+    <Menu id="0029" features="B3Butchery.0016" name="/屠宰分割/业务单据/速冻入库配置单/列表" roles="B3Butchery.速冻入库配置单.访问" url="B3Butchery/Bills/FrozenInStoreSetBill_/FrozenInStoreSetBillList.aspx"/>
+    <Menu id="0030" features="B3Butchery.0016"  name="/屠宰分割/信息设置/档案/计数分类/列表" roles="B3Butchery.计数分类.访问" url="B3Butchery/BaseInfos/CalculateCatalog_/CalculateCatalogList.aspx"/>
+    <Menu id="0031" features="B3Butchery.0016"  name="/屠宰分割/信息设置/档案/计数存货/列表" roles="B3Butchery.计数存货.访问" url="B3Butchery/BaseInfos/CalculateGoods_/CalculateGoodsList.aspx"/>
+    <Menu id="0032" features="B3Butchery.0016"  name="/屠宰分割/信息设置/档案/计数规格/列表" roles="B3Butchery.计数规格.访问" url="B3Butchery/BaseInfos/CalculateSpec_/CalculateSpecList.aspx"/>
+    
   </Menus>
 
   <Hippo>
@@ -349,5 +388,6 @@
     <Feature id="0013" name="投入单"/>
     <Feature id="0014" name="暂存单"/>
     <Feature id="0015" name="微信审批生产通知单"/>
+    <Feature id="0016" name="车间计数"/>
   </Features>
 </Plugin>

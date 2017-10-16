@@ -118,6 +118,24 @@
     <Compile Include="..\..\..\version\tsapp_version.cs">
       <Link>tsapp_version.cs</Link>
     </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\CalculateCatalog_\CalculateCatalogEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\CalculateCatalog_\CalculateCatalogList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\CalculateGoods_\CalculateGoodsEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\CalculateGoods_\CalculateGoodsList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\CalculateSpec_\CalculateSpecEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\CalculateSpec_\CalculateSpecList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\BaseInfos\FrozenStore_\FrozenStoreEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -256,6 +274,9 @@
     <Compile Include="Pages\B3Butchery\Dialogs\ProductInStoreTempDialog.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\B3Butchery\Dialogs\SelectCalculateGoodsDialog.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\Dialogs\SelectGoodsDialog.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -382,6 +403,7 @@
     <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductNotice_\ProductNoticeList.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Dialogs\SelectCalculateGoodsDialog.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\FrozenInStoreSetBill_\FrozenInStoreSetBillList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\WorkshopCategory_\WorkshopCategoryList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\FrozenInStoreReport_\FrozenInStoreReport.xml" />
@@ -395,6 +417,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\FrozenStore_\FrozenStoreList.xml" />
+    <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\CalculateCatalog_\CalculateCatalogList.xml" />
+    <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\CalculateGoods_\CalculateGoodsList.xml" />
+    <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\CalculateSpec_\CalculateSpecList.xml" />
     <Content Include="Pages\B3Butchery\BaseInfos\ProductInStore_Temp_\ProductInStore_TempList.xml">
       <SubType>Designer</SubType>
     </Content>
