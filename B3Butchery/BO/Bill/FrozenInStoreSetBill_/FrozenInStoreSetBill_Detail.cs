@@ -47,12 +47,12 @@ namespace BWP.B3Butchery.BO
     [LogicName("主辅换算主单位比例")]
     [ReferenceTo(typeof(CalculateGoods), "MainUnitRatio")]
     [Join("CalculateGoods_ID", "ID")]
-    public Money<decimal>? MainUnitRatio { get; set; }
+    public decimal? MainUnitRatio { get; set; }
 
     [LogicName("主辅换算辅单位比例")]
     [ReferenceTo(typeof(CalculateGoods), "SecondUnitRatio")]
     [Join("CalculateGoods_ID", "ID")]
-    public Money<decimal>? SecondUnitRatio { get; set; }
+    public decimal? SecondUnitRatio { get; set; }
 
     [LogicName("主辅转换方向")]
     [ReferenceTo(typeof(CalculateGoods), "UnitConvertDirection")]
@@ -67,12 +67,12 @@ namespace BWP.B3Butchery.BO
     [LogicName("主辅II换算主单位比例")]
     [ReferenceTo(typeof(CalculateGoods), "SecondUnitII_MainUnitRatio")]
     [Join("CalculateGoods_ID", "ID")]
-    public Money<decimal>? SecondUnitII_MainUnitRatio { get; set; }
+    public decimal? SecondUnitII_MainUnitRatio { get; set; }
 
     [LogicName("主辅II换算辅单位比例")]
     [ReferenceTo(typeof(CalculateGoods), "SecondUnitII_SecondUnitRatio")]
     [Join("CalculateGoods_ID", "ID")]
-    public Money<decimal>? SecondUnitII_SecondUnitRatio { get; set; }
+    public decimal? SecondUnitII_SecondUnitRatio { get; set; }
 
     [LogicName("计数分类")]
     public long? CalculateCatalog_ID { get; set; }

@@ -48,10 +48,10 @@ namespace BWP.B3Butchery.BO
     public string SecondUnit { get; set; }
 
     [LogicName("主辅换算主单位比例")]
-    public Money<decimal>? MainUnitRatio { get; set; }
+    public decimal? MainUnitRatio { get; set; }
 
     [LogicName("主辅换算辅单位比例")]
-    public Money<decimal>? SecondUnitRatio { get; set; }
+    public decimal? SecondUnitRatio { get; set; }
 
     [LogicName("主辅转换方向")]
     public NamedValue<主辅转换方向>? UnitConvertDirection { get; set; }
@@ -63,10 +63,10 @@ namespace BWP.B3Butchery.BO
     public string SecondUnitII { get; set; }
 
     [LogicName("主辅II换算主单位比例")]
-    public Money<decimal>? SecondUnitII_MainUnitRatio { get; set; }
+    public decimal? SecondUnitII_MainUnitRatio { get; set; }
 
     [LogicName("主辅II换算辅单位比例")]
-    public Money<decimal>? SecondUnitII_SecondUnitRatio { get; set; }
+    public decimal? SecondUnitII_SecondUnitRatio { get; set; }
 
 
     [LogicName("默认盘数1")]
