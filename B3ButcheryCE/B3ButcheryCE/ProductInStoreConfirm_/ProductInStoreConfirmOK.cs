@@ -17,6 +17,7 @@ namespace B3ButcheryCE.ProductInStoreConfirm_
     public partial class ProductInStoreConfirmOK : Form
     {
         string pId;
+        public int state = 0;
         public ProductInStoreConfirmOK(string id)
         {
             InitializeComponent();
@@ -79,7 +80,7 @@ namespace B3ButcheryCE.ProductInStoreConfirm_
                     return;
                 }
                 MessageBox.Show("审核成功");
-
+                state = 1;
                 try
                 {
                     //九联业务，如果九联模块用户个性设置中，{默认其他出库会计单位}{默认其他出库仓库}和单据相同，生成【其他出库单】
@@ -94,6 +95,10 @@ namespace B3ButcheryCE.ProductInStoreConfirm_
                         MessageBox.Show("没有其他出库审核权限");
                         return;
                     }
+                    else if (id == -2)
+                        return;
+                    else if (id == -3)
+                        return;
                     MessageBox.Show("生成已审核其他出库No." + id);
                 }
                 catch (Exception)
