@@ -79,7 +79,7 @@ namespace BWP.B3Butchery.BO
 
     [LogicName("计数分类")]
     [Join("CalculateCatalog_ID", "ID")]
-    [ReferenceTo(typeof(CalculateGoods), "Name")]
+    [ReferenceTo(typeof(CalculateCatalog), "Name")]
     public string CalculateCatalog_Name { get; set; }
 
     [LogicName("默认盘数")]
