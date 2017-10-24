@@ -63,6 +63,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.FrozenInStoreSetBill_
               detail.CalculateGoods_SecondUnit = goods.SecondUnit;
               detail.CalculateCatalog_ID = goods.CalculateCatalog_ID;
               detail.CalculateCatalog_Name = goods.CalculateCatalog_Name;
+              detail.SecondUnitII = goods.SecondUnitII;
               Dmo.Details.Add(detail);
             }
           }
@@ -91,6 +92,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.FrozenInStoreSetBill_
             detail.CalculateGoods_SecondUnit = goods.SecondUnit;
             detail.CalculateCatalog_ID = goods.CalculateCatalog_ID;
             detail.CalculateCatalog_Name = goods.CalculateCatalog_Name;
+            detail.SecondUnitII = goods.SecondUnitII;
             Dmo.Details.Add(detail);
           }
           _detailGrid.DataBind();
@@ -111,6 +113,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.FrozenInStoreSetBill_
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("CalculateGoods_Name"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("CalculateGoods_MainUnit"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("CalculateGoods_SecondUnit"));
+      _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("SecondUnitII"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("DefaultNumber1"));
 
       _detailGrid.ValueColumns.Add("CalculateGoods_ID");
