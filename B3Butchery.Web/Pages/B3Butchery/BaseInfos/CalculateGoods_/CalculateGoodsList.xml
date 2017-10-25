@@ -17,6 +17,10 @@
         <QBE paramName="Code"/>
       </EQ>
       <EQ>
+        <Field name="Goods_ID"/>
+        <QBE paramName="Goods_ID"/>
+      </EQ>
+      <EQ>
         <Field name="CalculateCatalog_ID"/>
         <QBE paramName="CalculateCatalog_ID"/>
       </EQ>

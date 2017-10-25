@@ -5,6 +5,7 @@ using System.Text;
 using System.Web.Script.Serialization;
 using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BO;
+using BWP.B3Butchery.Rpcs.ClientServiceRpc.Dtos;
 using BWP.B3Frameworks;
 using BWP.B3UnitedInfos.BO;
 using Forks.EnterpriseServices.BusinessInterfaces;
@@ -32,11 +33,54 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       return jsonStr;
     }
 
-    [Rpc(RpcFlags.SkipAuth)]
+    [Rpc]
+    public static long CreateOutPutByJson(string json)
+    {
+      var dto = JsonConvert.DeserializeObject<OutPutDto>(json);
+
+      using (var session = Dmo.NewSession())
+      {
+        var bl = BIFactory.Create<IProduceOutputBL>(session);
+        var dmo=new ProduceOutput();
+
+        dmo.Domain_ID = DomainContext.Current.ID;
+        dmo.AccountingUnit_ID = dto.AccountingUnit_ID;
+        dmo.Department_ID = dto.Department_ID;
+        dmo.Time = dto.Time;
+        foreach (var dtodetail in dto.Details)
+        {
+          var detail=new ProduceOutput_Detail();
+          detail.Goods_ID = dtodetail.Goods_ID??0;
+          detail.Goods_Name = dtodetail.Goods_Name;
+          detail.Number = dtodetail.Number;
+          detail.SecondNumber = dtodetail.SecondNumber;
+          detail.SecondNumber2 = dtodetail.SecondNumber2;
+
+          if (detail.Goods_ID == 0)
+          {
+            var goodsid = GetGoodsIdByName(session, detail.Goods_Name);
+            if (goodsid == null || goodsid == 0)
+            {
+              throw new Exception("没有找到计数名称：" + detail.Goods_Name + " 对应的存货");
+            }
+            detail.Goods_ID = goodsid.Value;
+          }
+          dmo.Details.Add(detail);
+        }
+
+        bl.Insert(dmo);
+
+        session.Commit();
+        return dmo.ID;
+        
+      }
+   
+    }
+
+    [Rpc]
     public static long CreateOutPut(ProduceOutput output)
     {
-      using (new SpecialDomainUserBLScope(output.CreateUser_Name))
-      {
+      
         using (var session=Dmo.NewSession())
         {
           var bl = BIFactory.Create<IProduceOutputBL>(session);
@@ -45,14 +89,22 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
 
           foreach (var detail in output.Details)
           {
-            detail.Goods_ID = GetGoodsIdByName(session, detail.Goods_Name)??0;
+            if (detail.Goods_ID == 0)
+            {
+              var goodsid = GetGoodsIdByName(session, detail.Goods_Name);
+              if (goodsid == null || goodsid == 0)
+              {
+                throw new Exception("没有找到计数名称："+detail.Goods_Name+" 对应的存货");
+              }
+              detail.Goods_ID = goodsid.Value;
+            }
           }
 
           bl.Insert(output);
           return output.ID;
         }
      
-      }
+      
     }
 
     static long? GetGoodsIdByName(IDmoSession session, string name)

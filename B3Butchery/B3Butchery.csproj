@@ -241,6 +241,7 @@
     <Compile Include="Rpcs\ClientServiceRpc\BaseInfoWithCode.cs" />
     <Compile Include="Rpcs\ClientServiceRpc\CSBaseInfoRpc.cs" />
     <Compile Include="Rpcs\ClientServiceRpc\CSBillRpc.cs" />
+    <Compile Include="Rpcs\ClientServiceRpc\Dtos\OutputDto.cs" />
     <Compile Include="Rpcs\FrozenInStoreRpc.cs" />
     <Compile Include="Rpcs\GoodsBatchRpc.cs" />
     <Compile Include="Rpcs\ProduceOutputRpc.cs" />

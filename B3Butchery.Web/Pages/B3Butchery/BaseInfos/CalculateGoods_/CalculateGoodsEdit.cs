@@ -29,6 +29,7 @@ namespace BWP.Web.Pages.B3Butchery.BaseInfos.CalculateGoods_
       config.Add("SecondUnitII_SecondUnitRatio");
 
       config.Add("DefaultNumber1");
+      config.Add("Goods_ID");
       config.Add("Remark");
       layoutManager.Config = config;
       parent.Controls.Add(layoutManager.CreateLayout());

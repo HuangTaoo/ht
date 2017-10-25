@@ -16,6 +16,7 @@ namespace BWP.Web.Pages.B3Butchery.BaseInfos.CalculateGoods_
       {
         config.Add("Code");
         config.Add("CalculateCatalog_ID");
+        config.Add("Goods_ID");
 
       }));
     }
@@ -30,6 +31,7 @@ namespace BWP.Web.Pages.B3Butchery.BaseInfos.CalculateGoods_
         AddDFBrowseGridColumn(grid, "MainUnit");
         AddDFBrowseGridColumn(grid, "SecondUnit");
         AddDFBrowseGridColumn(grid, "DefaultNumber1");
+        AddDFBrowseGridColumn(grid, "Goods_Name");
       }
     }
   }

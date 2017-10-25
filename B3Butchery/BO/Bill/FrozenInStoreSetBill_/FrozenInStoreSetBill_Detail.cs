@@ -86,7 +86,12 @@ namespace BWP.B3Butchery.BO
     [Join("CalculateGoods_ID", "ID")]
     [ReferenceTo(typeof(CalculateGoods), "DefaultNumber1")]
     public int? DefaultNumber1 { get; set; }
-    
+
+    [LogicName("存货")]
+    [ReferenceTo(typeof(CalculateGoods), "Goods_ID")]
+    [Join("CalculateGoods_ID", "ID")]
+    public long? Goods_ID { get; set; }
+
   }
 
   [Serializable]

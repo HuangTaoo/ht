@@ -93,6 +93,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.FrozenInStoreSetBill_
             detail.CalculateCatalog_ID = goods.CalculateCatalog_ID;
             detail.CalculateCatalog_Name = goods.CalculateCatalog_Name;
             detail.SecondUnitII = goods.SecondUnitII;
+
             Dmo.Details.Add(detail);
           }
           _detailGrid.DataBind();
