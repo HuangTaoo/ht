@@ -30,12 +30,12 @@ namespace BWP.Web.Pages.B3Butchery.Reports.OutPutInStoreDiffReport_
 		DFInfo mainInfo = DFInfo.Get(typeof(ProduceOutput));
 		protected override string AccessRoleName
 		{
-			get { return "B3Butchery.报表.差异表"; }
+            get { return "B3Butchery.报表.产出与入库差异表"; }
 		}
 
 		protected override string Caption
 		{
-			get { return "差异表"; }
+            get { return "产出与入库差异表"; }
 		}
 
 		CheckBoxListWithReverseSelect checkbox;

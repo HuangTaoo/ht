@@ -148,10 +148,12 @@
       <Function index="0" name="成品入库分析" />
       <Function index="1" name="投入单分析"/>
       <Function index="2" name="产出单分析"/>
-      <Function index="3" name="差异表"/>
+      <Function index="3" name="产出与入库差异表"/>
       <Function index="4" name="生产日报数据分析"/>
       <Function index="5" name="生产通知分析"/>
       <Function index="6" name="速冻入库分析" />
+	  <Function index="7" name="产出与速冻差异表"/>
+	  <Function index="8" name="速冻与入库差异表" />
     </FunctionGroup>
     <FunctionGroup name="生产环节模板" roleSchemas="employee" >
       <Function index="0" name="访问"/>
@@ -341,7 +343,7 @@
     <Menu id="0012"  features="B3Butchery.0005" name="/屠宰分割/业务单据/成品入库/列表" roles="B3Butchery.成品入库.访问" url="B3Butchery/Bills/ProductInStore_/ProductInStoreList.aspx"/>
     <Menu id="0013"  features="B3Butchery.0011" name="/屠宰分割/信息设置/档案/成品入库模板/列表" roles="B3Butchery.成品入库模板.访问" url="B3Butchery/BaseInfos/ProductInStoreTemplate_/ProductInStoreTemplateList.aspx"/>
     <Menu id="0014"  features="B3Butchery.0012" name="/屠宰分割/信息设置/档案/生产环节模板/列表" roles="B3Butchery.生产环节模板.访问" url="B3Butchery/BaseInfos/ProductLinkTemplate_/ProductLinkTemplateList.aspx"/>
-    <Menu id="0015"  features="B3Butchery.0002" name="/屠宰分割/报表/差异表" roles="B3Butchery.报表.差异表" url="B3Butchery/Reports/OutPutInStoreDiffReport_/OutPutInStoreDiffReport.aspx"/>
+    <Menu id="0015"  features="B3Butchery.0002" name="/屠宰分割/报表/产出与入库差异表" roles="B3Butchery.报表.产出与入库差异表" url="B3Butchery/Reports/OutPutInStoreDiffReport_/OutPutInStoreDiffReport.aspx"/>
     <Menu id="0016"  features="B3Butchery.0009" name="/屠宰分割/业务单据/生产日报/列表" roles="B3Butchery.生产日报.访问" url="B3Butchery/Bills/DailyProductReport_/DailyProductReportList.aspx"/>
     <Menu id="0017"  features="B3Butchery.0009" name="/屠宰分割/功能/存货参考单价配置" roles="B3Butchery.功能.存货参考单价配置" url="B3Butchery/Tools/GoodsReferencePriceConfig_/GoodsReferencePriceConfig.aspx"/>
     <Menu id="0018"  features="B3Butchery.0002" name="/屠宰分割/功能/成品转半成品配置" roles="B3Butchery.功能.成品转半成品配置" url="B3Butchery/Tools/ChengPinToBanChengPinConfigPage_/ChengPinToBanChengPinConfigPage.aspx"/>
@@ -362,6 +364,9 @@
     <Menu id="0030" features="B3Butchery.0016"  name="/屠宰分割/信息设置/档案/计数分类/列表" roles="B3Butchery.计数分类.访问" url="B3Butchery/BaseInfos/CalculateCatalog_/CalculateCatalogList.aspx"/>
     <Menu id="0031" features="B3Butchery.0016"  name="/屠宰分割/信息设置/档案/计数名称/列表" roles="B3Butchery.计数名称.访问" url="B3Butchery/BaseInfos/CalculateGoods_/CalculateGoodsList.aspx"/>
     <Menu id="0032" features="B3Butchery.0016"  name="/屠宰分割/信息设置/档案/计数规格/列表" roles="B3Butchery.计数规格.访问" url="B3Butchery/BaseInfos/CalculateSpec_/CalculateSpecList.aspx"/>
+
+	 <Menu id="0033"  features="B3Butchery.0017" name="/屠宰分割/报表/产出与速冻差异表" roles="B3Butchery.报表.产出与速冻差异表" url="B3Butchery/Reports/OutPutQuickFreezeDiffReport_/OutPutQuickFreezeDiffReport.aspx"/>
+	 <Menu id="0034"  features="B3Butchery.0018" name="/屠宰分割/报表/速冻与入库差异表" roles="B3Butchery.报表.速冻与入库差异表" url="B3Butchery/Reports/QuickFreezeInStoreDiffReport_/QuickFreezeInStoreDiffReport.aspx"/>
     
   </Menus>
 
@@ -374,7 +379,7 @@
 
   <Features>
     <Feature id="0001" name="包装差异表"/>
-    <Feature id="0002" name="差异表"/>
+    <Feature id="0002" name="产出与入库差异表"/>
     <Feature id="0003" name="产出单"/>
     <Feature id="0004" name="成本核算"/>
     <Feature id="0005" name="成品入库"/>
@@ -389,5 +394,7 @@
     <Feature id="0014" name="暂存单"/>
     <Feature id="0015" name="微信审批生产通知单"/>
     <Feature id="0016" name="车间计数"/>
+	  <Feature id="0017" name="产出与速冻差异表"/>
+	  <Feature id="0018" name="速冻与入库差异表"/>
   </Features>
 </Plugin>
