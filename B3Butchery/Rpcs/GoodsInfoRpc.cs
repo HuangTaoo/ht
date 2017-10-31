@@ -323,7 +323,7 @@ namespace BWP.B3Butchery.Rpcs
 
     //根据部门取当天的生产计划存货   为了兼容旧的接口保留了，新的接口不调用此方法
     [Rpc]
-    public static List<GoodsInfoDto> GetByDepartPlan(long? departId)
+    public static List<GoodsInfoDto> GetByDepartPlan(long? departId, long? productionPlanId = null)
     {
       if (departId == null || departId == 0)
       {
@@ -337,10 +337,11 @@ namespace BWP.B3Butchery.Rpcs
       query.From.AddJoin(JoinType.Inner, new DQDmoSource(detail), DQCondition.EQ(bill, "ID", detail, "ProductPlan_ID"));
       query.From.AddJoin(JoinType.Left, new DQDmoSource(goods), DQCondition.EQ(goods, "ID", detail, "Goods_ID"));
 
-      query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(bill, "Date", DateTime.Today));
-      query.Where.Conditions.Add(DQCondition.LessThan(bill, "Date", DateTime.Today.AddDays(1)));
+      //query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(bill, "Date", DateTime.Today));
+      //query.Where.Conditions.Add(DQCondition.LessThan(bill, "Date", DateTime.Today.AddDays(1)));
       query.Where.Conditions.Add(DQCondition.EQ(bill, "BillState", 单据状态.已审核));
-
+      if(productionPlanId!=null)
+        query.Where.Conditions.Add(DQCondition.EQ(bill, "ID", productionPlanId));
       //      query.Where.Conditions.Add(B3ButcheryUtil.部门或上级部门条件(departId??0, bill));
       OrganizationUtil.AddOrganizationLimit(query, typeof(ProductPlan));
 
@@ -563,7 +564,7 @@ namespace BWP.B3Butchery.Rpcs
             dto.Goods_MainUnit = (string)reader[2];
             dto.Goods_SecondUnit = (string)reader[3];
             dto.Goods_UnitConvertDirection = (NamedValue<主辅转换方向>?)reader[4];
-            
+
             dto.Goods_MainUnitRatio = (Money<decimal>?)reader[5];
             dto.Goods_SecondUnitRatio = (Money<decimal>?)reader[6];
             dto.Goods_Code = (string)reader[7];
