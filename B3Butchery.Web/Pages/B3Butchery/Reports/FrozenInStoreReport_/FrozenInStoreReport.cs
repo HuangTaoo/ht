@@ -12,6 +12,7 @@ using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using TSingSoft.WebControls2;
+using BWP.B3Frameworks.BO.NamedValueTemplate;
 
 namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreReport_
 {
@@ -94,6 +95,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreReport_
       var main = JoinAlias.Create("bill");
       var detail = JoinAlias.Create("detail");
       var query = base.GetQueryDom();
+      query.Where.Conditions.Add(DQCondition.EQ(main, "BillState", 单据状态.已审核));
       OrganizationUtil.AddOrganizationLimit<Department>(query, "Department_ID");
       foreach (ListItem field in _checkbox.Items)
       {
