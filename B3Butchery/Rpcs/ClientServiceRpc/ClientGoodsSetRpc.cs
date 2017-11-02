@@ -12,10 +12,8 @@ using TSingSoft.WebPluginFramework;
 namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
 {
     [Rpc]
-    class ClientGoodsSetRpc
+    public static class ClientGoodsSetRpc
     {
-
-        static JavaScriptSerializer serializer = new JavaScriptSerializer();
 
         [Rpc(RpcFlags.SkipAuth)]
         public static string GetList()

@@ -240,7 +240,7 @@
     <Compile Include="Hippo\QueryObjs\ProductNoticeQueryObj.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rpcs\BaseInfoRpc.cs" />
-    <Compile Include="Rpcs\ClientGoodsSetRpc.cs" />
+    <Compile Include="Rpcs\ClientServiceRpc\ClientGoodsSetRpc.cs" />
     <Compile Include="Rpcs\ClientRpc.cs" />
     <Compile Include="Rpcs\ClientServiceRpc\BaseInfoWithCode.cs" />
     <Compile Include="Rpcs\ClientServiceRpc\CSBaseInfoRpc.cs" />
