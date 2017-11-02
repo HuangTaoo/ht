@@ -151,6 +151,7 @@
     <Compile Include="BL\BaseInfo\CalculateCatalogBL_\CalculateCatalogBL.cs" />
     <Compile Include="BL\BaseInfo\CalculateGoodsBL_\CalculateGoodsBL.cs" />
     <Compile Include="BL\BaseInfo\CalculateSpecBL_\CalculateSpecBL.cs" />
+    <Compile Include="BL\BaseInfo\ClientGoodsSet_\ClientGoodsSetBL.cs" />
     <Compile Include="BL\BaseInfo\FrozenStore_\FrozenStoreBL.cs" />
     <Compile Include="BL\BaseInfo\InStoreTypeBL_\InStoreTypeBL.cs" />
     <Compile Include="BL\BaseInfo\ProductInStoreTemplateBL_\ProductInStoreTemplateBL.cs" />
@@ -175,6 +176,8 @@
     <Compile Include="BO\BaseInfo\CalculateCatalog_\CalculateCatalog.cs" />
     <Compile Include="BO\BaseInfo\CalculateGoods_\CalculateGoods.cs" />
     <Compile Include="BO\BaseInfo\CalculateSpec_\CalculateSpec.cs" />
+    <Compile Include="BO\BaseInfo\ClientGoodsSet_\ClientGoodsSet.cs" />
+    <Compile Include="BO\BaseInfo\ClientGoodsSet_\ClientGoodsSet_Detail.cs" />
     <Compile Include="BO\BaseInfo\FrozenStore_\FrozenStore.cs" />
     <Compile Include="BO\BaseInfo\InStoreType_\InStoreType.cs" />
     <Compile Include="BO\BaseInfo\ProductInStoreTemplate_\ProductInStoreTemplate.cs" />
@@ -237,6 +240,7 @@
     <Compile Include="Hippo\QueryObjs\ProductNoticeQueryObj.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rpcs\BaseInfoRpc.cs" />
+    <Compile Include="Rpcs\ClientGoodsSetRpc.cs" />
     <Compile Include="Rpcs\ClientRpc.cs" />
     <Compile Include="Rpcs\ClientServiceRpc\BaseInfoWithCode.cs" />
     <Compile Include="Rpcs\ClientServiceRpc\CSBaseInfoRpc.cs" />

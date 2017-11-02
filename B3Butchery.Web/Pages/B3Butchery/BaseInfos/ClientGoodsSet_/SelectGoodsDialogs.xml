@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Select xmlns="urn:XDQuery">
+  <Columns>
+    <Field name="ID"/>
+  </Columns>
+  <From>
+    <Join>
+      <DmoClass class="BWP.B3UnitedInfos.BO.Goods, B3UnitedInfos" alias="goods"/>
+      <DmoClass class="BWP.B3UnitedInfos.BO.GoodsProperty, B3UnitedInfos" alias="prop"/>
+ 
+      <Condition>
+        <EQ>
+          <Field name="GoodsProperty_ID" alias="goods"/>
+          <Field name="ID" alias="prop"/>
+        </EQ>
+      </Condition>
+    </Join>
+  </From>
+  <Where>
+    <And>
+      <Contains>
+        <Field name="Name" alias="goods"/>
+        <QBE paramName="Name"/>
+      </Contains>
+      <Contains>
+        <Field name="Code" alias="goods"/>
+        <QBE paramName="Code"/>
+      </Contains>
+      <QBEIn>
+        <Field name="GoodsProperty_ID" alias="goods"/>
+        <QBE paramName="GoodsProperty_ID"/>
+      </QBEIn>
+      <QBEIn>
+        <Field name="GoodsPropertyCatalog_ID" alias="prop"/>
+        <QBE paramName="GoodsPropertyCatalog_ID"/>
+      </QBEIn>
+    </And>
+  </Where>
+</Select>

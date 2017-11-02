@@ -136,6 +136,15 @@
     <Compile Include="Pages\B3Butchery\BaseInfos\CalculateSpec_\CalculateSpecList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\ClientGoodsSet_\ClientGoodsSetEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\ClientGoodsSet_\ClientGoodsSetList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\ClientGoodsSet_\SelectGoodsDialogs.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\BaseInfos\FrozenStore_\FrozenStoreEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -420,6 +429,8 @@
     <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\CalculateCatalog_\CalculateCatalogList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\CalculateGoods_\CalculateGoodsList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\CalculateSpec_\CalculateSpecList.xml" />
+    <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\ClientGoodsSet_\ClientGoodsSetList.xml" />
+    <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\ClientGoodsSet_\SelectGoodsDialogs.xml" />
     <Content Include="Pages\B3Butchery\BaseInfos\ProductInStore_Temp_\ProductInStore_TempList.xml">
       <SubType>Designer</SubType>
     </Content>

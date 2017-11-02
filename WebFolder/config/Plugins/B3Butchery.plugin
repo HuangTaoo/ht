@@ -309,6 +309,17 @@
       <Function index="6" name="锁定"/>
       <Function index="7" name="解锁"/>
     </FunctionGroup>
+
+    <FunctionGroup name="客户端存货配置" roleSchemas="employee" >
+      <Function index="0" name="访问"/>
+      <Function index="1" name="新建"/>
+      <Function index="2" name="编辑"/>
+      <Function index="3" name="删除"/>
+      <Function index="4" name="停用"/>
+      <Function index="5" name="启用"/>
+      <Function index="6" name="锁定"/>
+      <Function index="7" name="解锁"/>
+    </FunctionGroup>
     
     <FunctionGroup name="速冻入库配置单" roleSchemas="employee" >
       <Function index="0" name="访问" />
@@ -362,6 +373,7 @@
     <Menu id="0030" features="B3Butchery.0016"  name="/屠宰分割/信息设置/档案/计数分类/列表" roles="B3Butchery.计数分类.访问" url="B3Butchery/BaseInfos/CalculateCatalog_/CalculateCatalogList.aspx"/>
     <Menu id="0031" features="B3Butchery.0016"  name="/屠宰分割/信息设置/档案/计数名称/列表" roles="B3Butchery.计数名称.访问" url="B3Butchery/BaseInfos/CalculateGoods_/CalculateGoodsList.aspx"/>
     <Menu id="0032" features="B3Butchery.0016"  name="/屠宰分割/信息设置/档案/计数规格/列表" roles="B3Butchery.计数规格.访问" url="B3Butchery/BaseInfos/CalculateSpec_/CalculateSpecList.aspx"/>
+    <Menu id="0033" features="B3Butchery.0016"  name="/屠宰分割/信息设置/档案/客户端存货配置/列表" roles="B3Butchery.客户端存货配置.访问" url="B3Butchery/BaseInfos/ClientGoodsSet_/ClientGoodsSetList.aspx"/>
     
   </Menus>
 
