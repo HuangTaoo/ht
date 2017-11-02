@@ -9,7 +9,7 @@ using System.Text;
 using System.Web.Script.Serialization;
 using TSingSoft.WebPluginFramework;
 
-namespace BWP.B3Butchery.Rpcs
+namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
 {
     [Rpc]
     class ClientGoodsSetRpc
