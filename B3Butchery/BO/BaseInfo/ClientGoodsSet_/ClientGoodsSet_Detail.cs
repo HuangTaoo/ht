@@ -38,6 +38,9 @@ namespace BWP.B3Butchery.BO
     [ReferenceTo(typeof(Goods), "Spell")]
     public string Goods_Spell { get; set; }
 
+    [Join("Goods_ID", "ID")]
+    [ReferenceTo(typeof(Goods), "MainUnitRatio")]
+    public decimal? Goods_MainUnitRatio { get; set; }//主副转换关系 主比例
 
   }
 
