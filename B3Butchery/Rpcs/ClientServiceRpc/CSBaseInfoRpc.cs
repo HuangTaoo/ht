@@ -47,6 +47,24 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       return list;
     }
 
+    [Rpc(RpcFlags.SkipAuth)]
+    public static string GetPlanNoBaseInfo()
+    {
+        var query = new DQueryDom(new JoinAlias(typeof(ProductPlan)));
+        query.Columns.Add(DQSelectColumn.Field("PlanNumber"));
+
+        query.Where.Conditions.Add(DQCondition.LessThanOrEqual("Date", DateTime.Today));
+        query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual("EndDate", DateTime.Today));
+        query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual("BillState", 20));
+
+        using (var context = new TransactionContext())
+        {
+            var list = query.EExecuteList<string>(context.Session);
+            return JsonConvert.SerializeObject(list);
+        }
+
+    }
+
 
     [Rpc(RpcFlags.SkipAuth)]
     public static string GetCalculateGoods()
