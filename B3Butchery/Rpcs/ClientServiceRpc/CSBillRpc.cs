@@ -52,6 +52,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
         {
             throw new Exception("生产计划中不存在" + dto.PlanNumber + "计划号");
         }
+        dmo.PlanNumber_ID = id;
         foreach (var dtodetail in dto.Details)
         {
           var detail=new ProduceOutput_Detail();
