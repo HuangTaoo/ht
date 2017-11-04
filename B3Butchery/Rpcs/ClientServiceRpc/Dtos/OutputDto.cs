@@ -16,6 +16,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc.Dtos
     public long? Department_ID { get; set; }
     public DateTime Time { get; set; }
 
+    public string PlanNumber { get; set; }
     public List<OutPut_DetailDto> Details { get; set; }
   }
 

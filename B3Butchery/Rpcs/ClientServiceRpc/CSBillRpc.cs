@@ -47,6 +47,11 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
         dmo.AccountingUnit_ID = dto.AccountingUnit_ID;
         dmo.Department_ID = dto.Department_ID;
         dmo.Time = dto.Time;
+        var id = GetProductIdByName(session ,dto.PlanNumber);
+        if (id == null)
+        {
+            throw new Exception("生产计划中不存在" + dto.PlanNumber + "计划号");
+        }
         foreach (var dtodetail in dto.Details)
         {
           var detail=new ProduceOutput_Detail();
@@ -114,6 +119,15 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       query.Where.Conditions.Add(DQCondition.EQ("Name",name));
       query.Columns.Add(DQSelectColumn.Field("ID"));
       return query.EExecuteScalar<long?>(session);
+    }
+
+    static long? GetProductIdByName(IDmoSession session, string name)
+    {
+        var query = new DQueryDom(new JoinAlias(typeof(ProductPlan)));
+        query.Where.Conditions.Add(DQCondition.EQ("PlanNumber", name));
+        query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual("BillState", 20));
+        query.Columns.Add(DQSelectColumn.Field("ID"));
+        return query.EExecuteScalar<long?>(session);
     }
   }
 }
