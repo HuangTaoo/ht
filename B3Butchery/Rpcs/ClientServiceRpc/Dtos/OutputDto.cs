@@ -26,5 +26,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc.Dtos
     public decimal? Number { get; set; }
     public decimal? SecondNumber { get; set; }
     public decimal? SecondNumber2 { get; set; }
+
+    public string CalculateSpec_Name { get; set; }
   }
 }

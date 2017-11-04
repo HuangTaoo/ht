@@ -52,6 +52,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
           var detail=new ProduceOutput_Detail();
           detail.Goods_ID = dtodetail.Goods_ID??0;
           detail.Goods_Name = dtodetail.Goods_Name;
+          detail.Remark = dtodetail.CalculateSpec_Name;
           detail.Number = dtodetail.Number;
           detail.SecondNumber = dtodetail.SecondNumber;
           detail.SecondNumber2 = dtodetail.SecondNumber2;
