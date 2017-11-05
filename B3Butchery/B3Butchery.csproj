@@ -154,6 +154,7 @@
     <Compile Include="BL\BaseInfo\CalculateSpecBL_\CalculateSpecBL.cs" />
     <Compile Include="BL\BaseInfo\ClientGoodsSet_\ClientGoodsSetBL.cs" />
     <Compile Include="BL\BaseInfo\FrozenStore_\FrozenStoreBL.cs" />
+    <Compile Include="BL\BaseInfo\HandoverRecord_\HandoverRecordBL.cs" />
     <Compile Include="BL\BaseInfo\InStoreTypeBL_\InStoreTypeBL.cs" />
     <Compile Include="BL\BaseInfo\ProductInStoreTemplateBL_\ProductInStoreTemplateBL.cs" />
     <Compile Include="BL\BaseInfo\ProductLineBL_\ProductLineBL.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="BO\BaseInfo\ClientGoodsSet_\ClientGoodsSet.cs" />
     <Compile Include="BO\BaseInfo\ClientGoodsSet_\ClientGoodsSet_Detail.cs" />
     <Compile Include="BO\BaseInfo\FrozenStore_\FrozenStore.cs" />
+    <Compile Include="BO\BaseInfo\HandoverRecord_\HandoverRecord.cs" />
     <Compile Include="BO\BaseInfo\InStoreType_\InStoreType.cs" />
     <Compile Include="BO\BaseInfo\ProductInStoreTemplate_\ProductInStoreTemplate.cs" />
     <Compile Include="BO\BaseInfo\ProductInStoreTemplate_\ProductInStoreTemplate_GoodsDetail.cs" />
