@@ -114,12 +114,29 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       
     }
 
+
+   
+
     static long? GetGoodsIdByName(IDmoSession session, string name)
     {
-      var query=new DQueryDom(new JoinAlias(typeof(Goods)));
-      query.Where.Conditions.Add(DQCondition.EQ("Name",name));
-      query.Columns.Add(DQSelectColumn.Field("ID"));
-      return query.EExecuteScalar<long?>(session);
+       var firstQuery = new DQueryDom(new JoinAlias(typeof(CalculateGoods)));
+       firstQuery.Columns.Add(DQSelectColumn.Field("Goods_ID"));
+        firstQuery.Where.Conditions.Add(DQCondition.EQ("Name", name));
+        firstQuery.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
+      var goodsID =  firstQuery.EExecuteScalar<long?>(session);
+        if (goodsID == null || goodsID == 0)
+        {
+            var query = new DQueryDom(new JoinAlias(typeof(Goods)));
+            query.Where.Conditions.Add(DQCondition.EQ("Name", name));
+            query.Columns.Add(DQSelectColumn.Field("ID"));
+            goodsID =  query.EExecuteScalar<long?>(session);
+            
+        }
+
+        return goodsID;
+
+
+
     }
 
     static long? GetProductIdByName(IDmoSession session, string name)
