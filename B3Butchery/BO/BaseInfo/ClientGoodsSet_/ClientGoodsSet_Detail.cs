@@ -7,6 +7,8 @@ using BWP.B3UnitedInfos.BO;
 using Forks.EnterpriseServices;
 using Forks.EnterpriseServices.DomainObjects2;
 using Forks.Utils;
+using BWP.B3Butchery.Attributes;
+using Newtonsoft.Json;
 
 namespace BWP.B3Butchery.BO
 {
@@ -41,6 +43,7 @@ namespace BWP.B3Butchery.BO
 
     [Join("Goods_ID", "ID")]
     [ReferenceTo(typeof(Goods), "MainUnitRatio")]
+    [JsonConverter(typeof(MoneyJsonConverter))]  
     public Money<decimal>? Goods_MainUnitRatio { get; set; }//主副转换关系 主比例
 
   }
