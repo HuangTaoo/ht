@@ -7,6 +7,7 @@
    
 
         <DFListBand collection="$Details" itemType="$DetailType" enablePaging="true" >
+          <Field name="CalculateCatalog_Name" header = "计件分类"/>
           <Field name="Goods_Name" header = "计件名称"/>
           <Field name="Remark" header = "计件规格"/>
           <Field name="RecordCount" header = "记录数"/>
