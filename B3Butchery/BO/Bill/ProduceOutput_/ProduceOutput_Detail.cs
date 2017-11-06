@@ -38,6 +38,15 @@ namespace BWP.B3Butchery.BO
     public Money<decimal>? Goods_SecondUnitII_SecondUnitRatio { get; set; }
 
       public int?RecordCount  { get; set; }
+
+      [LogicName("计数分类")]
+
+      public long? CalculateCatalog_ID { get; set; }
+
+      [LogicName("计数分类")]
+      [ReferenceTo(typeof(CalculateCatalog), "Name")]
+      [Join("CalculateCatalog_ID", "ID")]
+      public string CalculateCatalog_Name { get; set; }
   }
   [Serializable]
   public class ProduceOutput_DetailCollection : DmoCollection<ProduceOutput_Detail>

@@ -7,7 +7,8 @@
    
 
         <DFListBand collection="$Details" itemType="$DetailType" enablePaging="true" >
-          <Field name="Remark" header = "计件名称"/>
+          <Field name="Goods_Name" header = "计件名称"/>
+          <Field name="Remark" header = "计件规格"/>
           <Field name="RecordCount" header = "记录数"/>
           <Field name="SecondNumber" header = "盘数"/>
           <Field name="SecondNumber2" header = "袋数"/>

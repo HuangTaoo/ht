@@ -80,7 +80,8 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
           detail.SecondNumber = dtodetail.SecondNumber;
           detail.SecondNumber2 = dtodetail.SecondNumber2;
            detail.RecordCount = dtodetail.RecordCount;
-
+            detail.CalculateCatalog_Name = detail.Goods_Name;
+            detail.CalculateCatalog_ID = GetCalculateCatalogIDByName(session ,detail.Goods_Name);
           if (detail.Goods_ID == 0)
           {
             var goodsid = GetGoodsIdByName(session, detail.Goods_Name);
@@ -101,6 +102,15 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       }
    
     }
+
+    private static long? GetCalculateCatalogIDByName(IDmoSession session ,string name)
+      {
+          var query = new DQueryDom(new JoinAlias(typeof(CalculateGoods)));
+          query.Where.Conditions.Add(DQCondition.EQ("Name", name));
+          query.Columns.Add(DQSelectColumn.Field("CalculateCatalog_ID"));
+          query.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
+          return query.EExecuteScalar<long?>(session);
+      }
 
     [Rpc]
     public static long CreateOutPut(ProduceOutput output)
