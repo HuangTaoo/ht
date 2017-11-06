@@ -47,23 +47,38 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       return list;
     }
 
-    [Rpc(RpcFlags.SkipAuth)]
-    public static string GetPlanNoBaseInfo()
-    {
-        var query = new DQueryDom(new JoinAlias(typeof(ProductPlan)));
-        query.Columns.Add(DQSelectColumn.Field("PlanNumber"));
+      [Rpc(RpcFlags.SkipAuth)]
+      public static string GetPlanNoBaseInfo()
+      {
+          var query = new DQueryDom(new JoinAlias(typeof(ProductPlan)));
+          query.Columns.Add(DQSelectColumn.Field("PlanNumber"));
+          query.Columns.Add(DQSelectColumn.Field("ID"));
+          query.Where.Conditions.Add(DQCondition.LessThanOrEqual("Date", DateTime.Today));
+          query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual("EndDate", DateTime.Today));
+          query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual("BillState", 20));
 
-        query.Where.Conditions.Add(DQCondition.LessThanOrEqual("Date", DateTime.Today));
-        query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual("EndDate", DateTime.Today));
-        query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual("BillState", 20));
+          using (var context = new TransactionContext())
+          {
+              var list = new List<PlanNoBaseInfo>();
+              ;
 
-        using (var context = new TransactionContext())
-        {
-            var list = query.EExecuteList<string>(context.Session);
-            return JsonConvert.SerializeObject(list);
-        }
+              using (var reader = context.Session.ExecuteReader(query))
+              {
+                  while (reader.Read())
+                  {
+                      var plan = new PlanNoBaseInfo();
+                      plan.ID = (long)reader[1];
+                      plan.Name = (string)reader[0];
+                      list.Add(plan);
+                  }
 
-    }
+                  return JsonConvert.SerializeObject(list);
+              }
+
+
+          }
+
+      }
 
 
     [Rpc(RpcFlags.SkipAuth)]

@@ -183,6 +183,7 @@
     <Compile Include="BO\BaseInfo\FrozenStore_\FrozenStore.cs" />
     <Compile Include="BO\BaseInfo\HandoverRecord_\HandoverRecord.cs" />
     <Compile Include="BO\BaseInfo\InStoreType_\InStoreType.cs" />
+    <Compile Include="BO\BaseInfo\PlanNoBaseInfo_\PlanNoBaseInfo.cs" />
     <Compile Include="BO\BaseInfo\ProductInStoreTemplate_\ProductInStoreTemplate.cs" />
     <Compile Include="BO\BaseInfo\ProductInStoreTemplate_\ProductInStoreTemplate_GoodsDetail.cs" />
     <Compile Include="BO\BaseInfo\ProductInStoreTemplate_\ProductInStoreTemplate_StoreDetail.cs" />
