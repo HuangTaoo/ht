@@ -37,7 +37,7 @@ namespace BWP.B3Butchery.BO
     [Join("Goods_ID", "ID")]
     public Money<decimal>? Goods_SecondUnitII_SecondUnitRatio { get; set; }
 
-      public int?RecordCount  { get; set; }
+      public int? RecordCount  { get; set; }
 
       [LogicName("计数分类")]
 
