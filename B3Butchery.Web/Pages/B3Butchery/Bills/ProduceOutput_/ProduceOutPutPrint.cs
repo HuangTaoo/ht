@@ -14,7 +14,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceOutput_
         protected override void AddParameters(IDictionary<string, object> dic)
         {
             dic.Add("$Details", Dmo.Details);
-            dic.Add("$DetailType", typeof(ProductInStore_Detail));
+            dic.Add("$DetailType", typeof(ProduceOutput_Detail));
         }
     }
 }
