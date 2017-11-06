@@ -34,56 +34,56 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       return jsonStr;
     }
 
-      [Rpc]
-      public static long CreateHandoverRecordJson(string json)
-      {
-          var list = JsonConvert.DeserializeObject<List<HandoverRecord>>(json);
-
-          using (var session = Dmo.NewSession())
-          {
-              var bl = BIFactory.Create<IProduceOutputBL>(session);
-              var dmo = new ProduceOutput();
-
-              dmo.Domain_ID = DomainContext.Current.ID;
-              dmo.AccountingUnit_ID = dto.AccountingUnit_ID;
-              dmo.Department_ID = dto.Department_ID;
-              dmo.Time = dto.Time;
-              var id = GetProductIdByName(session, dto.PlanNumber);
-              if (id == null)
-              {
-                  throw new Exception("生产计划中不存在" + dto.PlanNumber + "计划号");
-              }
-              dmo.PlanNumber_ID = id;
-              foreach (var dtodetail in dto.Details)
-              {
-                  var detail = new ProduceOutput_Detail();
-                  detail.Goods_ID = dtodetail.Goods_ID ?? 0;
-                  detail.Goods_Name = dtodetail.Goods_Name;
-                  detail.Remark = dtodetail.CalculateSpec_Name;
-                  detail.Number = dtodetail.Number;
-                  detail.SecondNumber = dtodetail.SecondNumber;
-                  detail.SecondNumber2 = dtodetail.SecondNumber2;
-
-                  if (detail.Goods_ID == 0)
-                  {
-                      var goodsid = GetGoodsIdByName(session, detail.Goods_Name);
-                      if (goodsid == null || goodsid == 0)
-                      {
-                          throw new Exception("没有找到计数名称：" + detail.Goods_Name + " 对应的存货");
-                      }
-                      detail.Goods_ID = goodsid.Value;
-                  }
-                  dmo.Details.Add(detail);
-              }
-
-              bl.Insert(dmo);
-
-              session.Commit();
-              return dmo.ID;
-
-          }
-
-      }
+//      [Rpc]
+//      public static long CreateHandoverRecordJson(string json)
+//      {
+//          var list = JsonConvert.DeserializeObject<List<HandoverRecord>>(json);
+//
+//          using (var session = Dmo.NewSession())
+//          {
+//              var bl = BIFactory.Create<IProduceOutputBL>(session);
+//              var dmo = new ProduceOutput();
+//
+//              dmo.Domain_ID = DomainContext.Current.ID;
+//              dmo.AccountingUnit_ID = dto.AccountingUnit_ID;
+//              dmo.Department_ID = dto.Department_ID;
+//              dmo.Time = dto.Time;
+//              var id = GetProductIdByName(session, dto.PlanNumber);
+//              if (id == null)
+//              {
+//                  throw new Exception("生产计划中不存在" + dto.PlanNumber + "计划号");
+//              }
+//              dmo.PlanNumber_ID = id;
+//              foreach (var dtodetail in dto.Details)
+//              {
+//                  var detail = new ProduceOutput_Detail();
+//                  detail.Goods_ID = dtodetail.Goods_ID ?? 0;
+//                  detail.Goods_Name = dtodetail.Goods_Name;
+//                  detail.Remark = dtodetail.CalculateSpec_Name;
+//                  detail.Number = dtodetail.Number;
+//                  detail.SecondNumber = dtodetail.SecondNumber;
+//                  detail.SecondNumber2 = dtodetail.SecondNumber2;
+//
+//                  if (detail.Goods_ID == 0)
+//                  {
+//                      var goodsid = GetGoodsIdByName(session, detail.Goods_Name);
+//                      if (goodsid == null || goodsid == 0)
+//                      {
+//                          throw new Exception("没有找到计数名称：" + detail.Goods_Name + " 对应的存货");
+//                      }
+//                      detail.Goods_ID = goodsid.Value;
+//                  }
+//                  dmo.Details.Add(detail);
+//              }
+//
+//              bl.Insert(dmo);
+//
+//              session.Commit();
+//              return dmo.ID;
+//
+//          }
+//
+//      }
 
     [Rpc]
     public static long CreateOutPutByJson(string json)
