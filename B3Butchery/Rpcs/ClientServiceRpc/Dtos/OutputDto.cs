@@ -29,5 +29,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc.Dtos
     public decimal? SecondNumber2 { get; set; }
 
     public string CalculateSpec_Name { get; set; }
+
+      public int? RecordCount { get; set; }
   }
 }

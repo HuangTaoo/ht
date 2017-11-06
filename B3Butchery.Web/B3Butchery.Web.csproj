@@ -229,6 +229,9 @@
     <Compile Include="Pages\B3Butchery\Bills\ProduceInput_\ProduceInputList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProduceOutput_\ProduceOutputPrint.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\Bills\ProductInStore_Temp_\ProductInStore_TempEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

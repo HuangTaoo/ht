@@ -36,6 +36,8 @@ namespace BWP.B3Butchery.BO
     [ReferenceTo(typeof(Goods), "SecondUnitII_SecondUnitRatio")]
     [Join("Goods_ID", "ID")]
     public Money<decimal>? Goods_SecondUnitII_SecondUnitRatio { get; set; }
+
+      public int?RecordCount  { get; set; }
   }
   [Serializable]
   public class ProduceOutput_DetailCollection : DmoCollection<ProduceOutput_Detail>

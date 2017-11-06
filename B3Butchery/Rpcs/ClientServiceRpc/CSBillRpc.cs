@@ -79,6 +79,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
           detail.Number = dtodetail.Number;
           detail.SecondNumber = dtodetail.SecondNumber;
           detail.SecondNumber2 = dtodetail.SecondNumber2;
+           detail.RecordCount = dtodetail.RecordCount;
 
           if (detail.Goods_ID == 0)
           {

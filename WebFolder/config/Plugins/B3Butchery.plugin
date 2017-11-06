@@ -77,6 +77,7 @@
       <Function index="9" name="作废" />
       <Function index="10" name="完毕"/>
       <Function index="11" name="撤销完毕"/>
+      <Function index="12" name="打印" />
     </FunctionGroup>
     <FunctionGroup name="投入单" roleSchemas="employee" >
       <Function index="0" name="访问" />
