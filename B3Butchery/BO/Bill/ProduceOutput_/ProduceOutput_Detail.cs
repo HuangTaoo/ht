@@ -19,6 +19,8 @@ namespace BWP.B3Butchery.BO
       public long? CalculateGoods_ID { get; set; }
 
       [LogicName("计数名称")]
+      [ReferenceTo(typeof(CalculateGoods), "Name")]
+      [Join("CalculateGoods_ID", "ID")]
       public string CalculateGoods_Name { get; set; }
       [LogicName("计划号")]
       public long? PlanNumber_ID { get; set; }
