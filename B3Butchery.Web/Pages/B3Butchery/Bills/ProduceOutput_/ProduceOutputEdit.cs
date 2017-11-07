@@ -12,6 +12,7 @@ using Forks.EnterpriseServices.DataForm;
 using TSingSoft.WebPluginFramework;
 using BWP.Web.Utils;
 using BWP.B3Butchery.Utils;
+using BWP.B3Frameworks;
 
 
 namespace BWP.Web.Pages.B3Butchery.Bills.ProduceOutput_
@@ -85,7 +86,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceOutput_
       detailEditor.IsEditableFunc = (field, detail) => CanSave;
       outputDetailGrid = vPanel.Add(new DFEditGrid(detailEditor) { Width = Unit.Percentage(100) });
       outputDetailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
-      outputDetailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("CalculateCatalog_Name"));
+ 
       outputDetailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
       outputDetailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Spec"));
       outputDetailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Number"));
@@ -95,7 +96,12 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceOutput_
       outputDetailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("SecondNumber2"));
       outputDetailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_SecondUnit2"));
       outputDetailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Remark"));
+
+      foreach (var ioc in TypeIOCCenter.GetIOCList<IOCs.BeforeDetailGridApplyLayout>(this.GetType()))
+      {
         
+          ioc.Invoke(outputDetailGrid);
+      }
       outputDetailGrid.ValueColumns.Add("Goods_UnitConvertDirection");
       outputDetailGrid.ValueColumns.Add("Goods_MainUnitRatio");
       outputDetailGrid.ValueColumns.Add("Goods_SecondUnitRatio");
@@ -132,5 +138,14 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceOutput_
       base.InitNewDmo(dmo);
       dmo.Time = BLContext.Now;
     }
+
+      public class IOCs
+      {
+
+          public interface BeforeDetailGridApplyLayout
+          {
+              void Invoke(DFEditGrid grid);
+          }
+      }
   }
 }

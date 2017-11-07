@@ -11,7 +11,15 @@ namespace BWP.B3Butchery.BO
 
   public class ProduceOutput_Detail : GoodsDetail
   {
-    
+      [LogicName("计划号")]
+      public long? PlanNumber_ID { get; set; }
+
+      [LogicName("计划号")]
+      [ReferenceTo(typeof(ProductPlan), "PlanNumber")]
+      [Join("PlanNumber_ID", "ID")]
+      public string PlanNumber_Name { get; set; }
+
+
     [LogicName("内包装比例")]
     [ReferenceTo(typeof(Goods), "InnerPackingPer")]
     [Join("Goods_ID", "ID")]
