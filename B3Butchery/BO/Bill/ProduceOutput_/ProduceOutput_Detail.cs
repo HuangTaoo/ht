@@ -11,6 +11,15 @@ namespace BWP.B3Butchery.BO
 
   public class ProduceOutput_Detail : GoodsDetail
   {
+
+
+      #region 仙坛客户端 添加数据
+
+      [LogicName("计数名称")]
+      public long? CalculateGoods_ID { get; set; }
+
+      [LogicName("计数名称")]
+      public string CalculateGoods_Name { get; set; }
       [LogicName("计划号")]
       public long? PlanNumber_ID { get; set; }
 
@@ -18,6 +27,9 @@ namespace BWP.B3Butchery.BO
       [ReferenceTo(typeof(ProductPlan), "PlanNumber")]
       [Join("PlanNumber_ID", "ID")]
       public string PlanNumber_Name { get; set; }
+
+          #endregion
+   
 
 
     [LogicName("内包装比例")]

@@ -64,12 +64,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
         dmo.AccountingUnit_ID = dto.AccountingUnit_ID;
         dmo.Department_ID = dto.Department_ID;
         dmo.Time = dto.Time;
-        var id = GetProductIdByName(session ,dto.PlanNumber);
-        if (id == null)
-        {
-            throw new Exception("生产计划中不存在" + dto.PlanNumber + "计划号");
-        }
-        dmo.PlanNumber_ID = id;
+
         foreach (var dtodetail in dto.Details)
         {
           var detail=new ProduceOutput_Detail();
@@ -81,7 +76,19 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
           detail.SecondNumber2 = dtodetail.SecondNumber2;
            detail.RecordCount = dtodetail.RecordCount;
             detail.CalculateCatalog_Name = detail.Goods_Name;
-            detail.CalculateCatalog_ID = GetCalculateCatalogIDByName(session ,detail.Goods_Name);
+            var calculateCatalog = GetCalculateCatalogIDByName(session ,detail.Goods_Name);
+            if (calculateCatalog != null)
+            {
+                detail.CalculateCatalog_ID = calculateCatalog.Item1;
+                detail.CalculateGoods_ID = calculateCatalog.Item2;
+            }
+
+            var id = GetProductIdByName(session, dtodetail.PlanNumber);
+            if (id == null)
+            {
+                //throw new Exception("生产计划中不存在" + dtodetail.PlanNumber + "计划号");
+            }
+            detail.PlanNumber_ID = id;
           if (detail.Goods_ID == 0)
           {
             var goodsid = GetGoodsIdByName(session, detail.Goods_Name);
@@ -103,13 +110,14 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
    
     }
 
-    private static long? GetCalculateCatalogIDByName(IDmoSession session ,string name)
+    private static Tuple<long?, long?> GetCalculateCatalogIDByName(IDmoSession session ,string name)
       {
           var query = new DQueryDom(new JoinAlias(typeof(CalculateGoods)));
           query.Where.Conditions.Add(DQCondition.EQ("Name", name));
           query.Columns.Add(DQSelectColumn.Field("CalculateCatalog_ID"));
+        query.Columns.Add(DQSelectColumn.Field("ID"));
           query.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
-          return query.EExecuteScalar<long?>(session);
+          return query.EExecuteScalar<long?, long?>(session);
       }
 
     [Rpc]
