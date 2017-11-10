@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BWP.B3Frameworks.Utils;
 using Bwp.Hippo;
 using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BO;
@@ -48,7 +49,8 @@ namespace BWP.B3Butchery.Hippo.Actions_
 			if (queryobj.MaxTime.HasValue)
 				query.Where.Conditions.Add(DQCondition.LessThanOrEqual("Time", queryobj.MaxTime.Value));
 			query.Where.Conditions.Add(DQCondition.EQ("Domain_ID", DomainContext.Current.ID));
-			query.Range = new SelectRange(data.Start, data.Count);
+      query.Range = new SelectRange(data.Start, data.Count);
+      OrganizationUtil.AddOrganizationLimit(query, typeof(ProduceInput));
 			var pagedData = new DFDataAdapter(new LoadArguments(query)).PagedFill();
 			data.Start = 0;
 			data.Count = (int)pagedData.TotalCount;

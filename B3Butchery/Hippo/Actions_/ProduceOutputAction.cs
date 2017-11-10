@@ -1,6 +1,7 @@
 ﻿using System;
 using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks.BO.NamedValueTemplate;
+using BWP.B3Frameworks.Utils;
 using Bwp.Hippo;
 using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BO;
@@ -48,6 +49,7 @@ namespace BWP.B3Butchery.Hippo.Actions_
         query.Where.Conditions.Add(DQCondition.LessThanOrEqual("Time", queryobj.MaxTime.Value));
       query.Where.Conditions.Add(DQCondition.EQ("Domain_ID", DomainContext.Current.ID));
       query.Range = new SelectRange(data.Start, data.Count);
+      OrganizationUtil.AddOrganizationLimit(query, typeof(ProduceOutput ));
       var pagedData = new DFDataAdapter(new LoadArguments(query)).PagedFill();
       data.Start = 0;
       data.Count = (int)pagedData.TotalCount;

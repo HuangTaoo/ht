@@ -49,6 +49,7 @@ namespace BWP.B3Butchery.Hippo.Actions_
         query.Where.Conditions.Add(DQCondition.LessThanOrEqual("Date", queryobj.MaxTime.Value));
       query.Where.Conditions.Add(DQCondition.EQ("Domain_ID", DomainContext.Current.ID));
       query.Range = new SelectRange(data.Start, data.Count);
+      OrganizationUtil.AddOrganizationLimit(query, typeof(ProductNotice ));
       var pagedData = new DFDataAdapter(new LoadArguments(query)).PagedFill();
       data.Start = 0;
       data.Count = (int)pagedData.TotalCount;
