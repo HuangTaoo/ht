@@ -45,16 +45,6 @@ namespace BWP.B3Butchery.BO {
     [LogicName("客户")]
     public long? Customer_ID { get; set; }
 
-    [LogicName("客户")]
-    [Join("Customer_ID", "ID")]
-    [ReferenceTo(typeof(ICustomer), "Name")]
-    public string Customer_Name { get; set; }
-
-    [LogicName("地址")]
-    [Join("Customer_ID", "ID")]
-    [ReferenceTo(typeof(ICustomer), "CustomerAddress")]
-    public string CustomerAddress { get; set; }
-
     [LogicName("生产单位")]
     [DFDataKind(B3ProduceUnitedInfosDataSources.生产单位全部)]
     [DFExtProperty(B3FrameworksConsts.DFExtProperties.DisplayField, "ProductionUnit_Name")]
@@ -75,6 +65,16 @@ namespace BWP.B3Butchery.BO {
     [Join("ProductionUnit_ID", "ID")]
     public string ProductionUnit_Name { get; set; }
      
+    [LogicName("客户")]
+    [Join("Customer_ID", "ID")]
+    [ReferenceTo(typeof(ICustomer), "Name")]
+    public string Customer_Name { get; set; }
+
+    [LogicName("地址")]
+    [Join("Customer_ID", "ID")]
+    [ReferenceTo(typeof(ICustomer), "CustomerAddress")]
+    public string CustomerAddress { get; set; }
+
     #endregion
 
   }

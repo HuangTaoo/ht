@@ -166,6 +166,7 @@
     <Compile Include="BL\Bill\FrozenInStore_\FrozenInStoreBL.cs" />
     <Compile Include="BL\Bill\PackingRecipients_\PackingRecipientsBL.cs" />
     <Compile Include="BL\Bill\PickingBL\PickingBL.cs" />
+    <Compile Include="BL\Bill\ProduceFinish_\ProduceFinishBL.cs" />
     <Compile Include="BL\Bill\ProduceInputBL_\ProduceInputBL.cs" />
     <Compile Include="BL\Bill\ProduceOutputBL_\ProduceOutputBL.cs" />
     <Compile Include="BL\Bill\ProductInStoreBL_\ProductInStoreBL.cs" />
@@ -208,6 +209,8 @@
     <Compile Include="BO\Bill\PackingRecipients_\PackingRecipients_Detail.cs" />
     <Compile Include="BO\Bill\Picking_\Picking.cs" />
     <Compile Include="BO\Bill\Picking_\Picking_Detail.cs" />
+    <Compile Include="BO\Bill\ProduceFinish_\ProduceFinish.cs" />
+    <Compile Include="BO\Bill\ProduceFinish_\ProduceFinish_Detail.cs" />
     <Compile Include="BO\Bill\ProduceInput_\ProduceInput.cs" />
     <Compile Include="BO\Bill\ProduceInput_\ProduceInput_Detail.cs" />
     <Compile Include="BO\Bill\ProduceOutput_\ProduceOutput.cs" />
