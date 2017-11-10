@@ -5,6 +5,7 @@ using System.Text;
 using System.Web.Script.Serialization;
 using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BL.BaseInfo.HandoverRecord_;
+using BWP.B3Butchery.BL.Bill.WorkShopPackBillBL_;
 using BWP.B3Butchery.BO;
 using BWP.B3Butchery.BO.BaseInfo;
 using BWP.B3Butchery.Rpcs.ClientServiceRpc.Dtos;
@@ -49,8 +50,60 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
           }
       }
 
+      [Rpc]
+      public static long CreateWorkShopPackJson(string json)
+      {
+          var dto = JsonConvert.DeserializeObject<WorkShopDto>(json);
+          using (var session = Dmo.NewSession())
+          {
+              var bl = BIFactory.Create<IWorkShopPackBillBL>(session);
+              var dmo = new WorkShopPackBill();
 
-    [Rpc]
+              dmo.Domain_ID = DomainContext.Current.ID;
+              dmo.AccountingUnit_ID = dto.AccountingUnit_ID;
+              dmo.Department_ID = dto.Department_ID;
+              dmo.Date = dto.Time;
+
+              foreach (var dtodetail in dto.Details)
+              {
+                  var detail = new WorkShopRecord();
+                  detail.Goods_ID = dtodetail.Goods_ID ?? 0;
+                  detail.Goods_Name = dtodetail.Goods_Name;
+                  detail.Remark = dtodetail.CalculateSpec_Name;
+                  detail.Number = dtodetail.Number;
+                  detail.SecondNumber = dtodetail.SecondNumber;
+             
+
+
+
+                  //var id = GetProductIdByName(session, dtodetail.PlanNumber);
+                  //if (id == null)
+                  //{
+                  //    //throw new Exception("生产计划中不存在" + dtodetail.PlanNumber + "计划号");
+                  //}
+                  //detail.PlanNumber_ID = id;
+                  //if (detail.Goods_ID == 0)
+                  //{
+                  //    var goodsid = GetGoodsIdByName(session, detail.Goods_Name);
+                  //    if (goodsid == null || goodsid == 0)
+                  //    {
+                  //        throw new Exception("没有找到计数名称：" + detail.Goods_Name + " 对应的存货");
+                  //    }
+                  //    detail.Goods_ID = goodsid.Value;
+                  //}
+                  dmo.Details.Add(detail);
+              }
+
+              bl.Insert(dmo);
+
+              session.Commit();
+              return dmo.ID;
+          }
+      }
+
+
+
+      [Rpc]
     public static long CreateOutPutByJson(string json)
     {
       var dto = JsonConvert.DeserializeObject<OutPutDto>(json);

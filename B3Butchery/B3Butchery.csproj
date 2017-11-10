@@ -174,6 +174,7 @@
     <Compile Include="BL\Bill\ProductPackagingBL_\ProductPackagingBL.cs" />
     <Compile Include="BL\Bill\ProductPlanBL_\ProductPlanBL.cs" />
     <Compile Include="BL\Bill\TemporaryStorage_\TemporaryStorageBL.cs" />
+    <Compile Include="BL\Bill\WorkShopPackBillBL_\WorkShopPackBillBL.cs" />
     <Compile Include="BO\B3ButcheryUserProfile.cs" />
     <Compile Include="BO\BaseInfo\CalculateCatalog_\CalculateCatalog.cs" />
     <Compile Include="BO\BaseInfo\CalculateGoods_\CalculateGoods.cs" />
@@ -224,6 +225,8 @@
     <Compile Include="BO\Bill\ProductPlan_\ProductPlan_OutputDetail.cs" />
     <Compile Include="BO\Bill\TemporaryStorage_\TemporaryStorage.cs" />
     <Compile Include="BO\Bill\TemporaryStorage_\TemporaryStorage_Detail.cs" />
+    <Compile Include="BO\Bill\WorkShopPackBill_\WorkShopPackBill.cs" />
+    <Compile Include="BO\Bill\WorkShopPackBill_\WorkShopRecord.cs" />
     <Compile Include="BO\Goods_Accounting_Store.cs" />
     <Compile Include="BO\Ref\ChengPinToBanChengPinConfig.cs" />
     <Compile Include="BO\Ref\GoodsReferencePrice.cs" />
@@ -249,6 +252,7 @@
     <Compile Include="Rpcs\ClientServiceRpc\BaseInfoWithCode.cs" />
     <Compile Include="Rpcs\ClientServiceRpc\CSBaseInfoRpc.cs" />
     <Compile Include="Rpcs\ClientServiceRpc\CSBillRpc.cs" />
+    <Compile Include="Rpcs\ClientServiceRpc\Dtos\WorkShopDto.cs" />
     <Compile Include="Rpcs\ClientServiceRpc\Dtos\OutputDto.cs" />
     <Compile Include="Rpcs\FrozenInStoreRpc.cs" />
     <Compile Include="Rpcs\GoodsBatchRpc.cs" />
