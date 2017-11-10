@@ -223,6 +223,15 @@
     <Compile Include="Pages\B3Butchery\Bills\Picking_\PickingList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProduceFinish_\ProduceFinishList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProduceFinish_\ProduceFinishEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\ProduceFinish_\ProduceFinishPrint.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\Bills\ProduceInput_\ProduceInputEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -278,6 +287,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\B3Butchery\Bills\TemporaryStorage_\TemporaryStorageList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Dialogs\SelectProductNoticeDialog.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\B3Butchery\Dialogs\GoodsBatchEdit.cs">
@@ -415,6 +427,8 @@
     <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductNotice_\ProductNoticeList.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Dialogs\SelectProductNoticeDialog.xml" />
+    <EmbeddedResource Include="Pages\B3Butchery\Bills\ProduceFinish_\ProduceFinishList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Dialogs\SelectCalculateGoodsDialog.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\FrozenInStoreSetBill_\FrozenInStoreSetBillList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\WorkshopCategory_\WorkshopCategoryList.xml" />

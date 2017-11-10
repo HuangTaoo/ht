@@ -2,6 +2,7 @@
 using Forks.EnterpriseServices;
 using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
+using Forks.Utils;
 using TSingSoft.WebControls2;
 using BWP.B3SaleInterface.BO;
 using BWP.B3Frameworks.Utils;
@@ -32,6 +33,9 @@ namespace BWP.B3Butchery.BO {
 
     [LogicName("源单据明细ID")]
     public long? DmoDetailID { get; set; }
+
+    [LogicName("已完工数量")]
+    public Money<decimal>? DoneNumber { get; set; }
 
     //仙坛模块使用
     [DbColumn(DefaultValue = false)]
