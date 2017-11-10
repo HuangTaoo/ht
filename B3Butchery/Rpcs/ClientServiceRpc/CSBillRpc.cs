@@ -122,6 +122,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
         {
           var detail=new ProduceOutput_Detail();
           detail.Goods_ID = dtodetail.Goods_ID??0;
+            detail.CalculateGoods_ID = dtodetail.CalculateGoods_ID;
           detail.Goods_Name = dtodetail.Goods_Name;
           detail.Remark = dtodetail.CalculateSpec_Name;
           detail.Number = dtodetail.Number;
@@ -135,22 +136,22 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
                 detail.CalculateCatalog_ID = calculateCatalog.Item1;
                 detail.CalculateGoods_ID = calculateCatalog.Item2;
             }
-
+            if (detail.Goods_ID == 0)
+            {
+                var goodsid = GetGoodsIdByName(session, detail.Goods_Name);
+                if (goodsid == null || goodsid == 0)
+                {
+                    throw new Exception("没有找到计数名称：" + detail.Goods_Name + " 对应的存货");
+                }
+                detail.Goods_ID = goodsid.Value;
+            }
             var id = GetProductIdByName(session, dtodetail.PlanNumber);
             if (id == null)
             {
-                //throw new Exception("生产计划中不存在" + dtodetail.PlanNumber + "计划号");
+                throw new Exception("生产计划中不存在" + dtodetail.PlanNumber + "计划号");
             }
             detail.PlanNumber_ID = id;
-          if (detail.Goods_ID == 0)
-          {
-            var goodsid = GetGoodsIdByName(session, detail.Goods_Name);
-            if (goodsid == null || goodsid == 0)
-            {
-              throw new Exception("没有找到计数名称：" + detail.Goods_Name + " 对应的存货");
-            }
-            detail.Goods_ID = goodsid.Value;
-          }
+
           dmo.Details.Add(detail);
         }
 

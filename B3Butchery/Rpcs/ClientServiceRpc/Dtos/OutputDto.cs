@@ -22,6 +22,8 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc.Dtos
 
   public class OutPut_DetailDto
   {
+
+      public long? CalculateGoods_ID { get; set; }
     public long? Goods_ID { get; set; }
     public string Goods_Name { get; set; }
     public decimal? Number { get; set; }
