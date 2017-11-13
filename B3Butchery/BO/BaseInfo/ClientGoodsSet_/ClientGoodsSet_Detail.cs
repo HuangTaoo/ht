@@ -60,6 +60,9 @@ namespace BWP.B3Butchery.BO
     [JsonConverter(typeof(MoneyJsonConverter))]  
     public Money<decimal>? Goods_MainUnitRatio { get; set; }//主副转换关系 主比例
 
+      //当数据源为生产通知单时 设置
+    public DateTime? CompletedDate { get; set; }
+
   }
 
   [Serializable]
