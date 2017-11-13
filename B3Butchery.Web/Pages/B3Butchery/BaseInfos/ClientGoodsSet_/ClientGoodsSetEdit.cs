@@ -95,6 +95,8 @@ namespace BWP.Web.Pages.B3Butchery.BaseInfos.ClientGoodsSet_
       _detailGrid = new DFEditGrid(editor);
       _detailGrid.DFGridSetEnabled = false;
       _detailGrid.Width = Unit.Percentage(100);
+   
+        _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("GoodsProperty_Name"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Spec"));

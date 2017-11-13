@@ -21,6 +21,20 @@ namespace BWP.B3Butchery.BO
     [LogicName("存货")]
     public long Goods_ID { get; set; }
 
+
+      
+      [LogicName("存货属性")]
+      [Join("Goods_ID", "ID")]
+      [ReferenceTo(typeof(Goods), "GoodsProperty_ID")]
+    public long? GoodsProperty_ID { get; set; }
+
+          [LogicName("存货属性")]
+      [Join("Goods_ID", "ID")]
+      [ReferenceTo(typeof(Goods), "GoodsProperty_Name")]
+      public string GoodsProperty_Name { get; set; }
+
+          
+
     [LogicName("存货")]
     [Join("Goods_ID", "ID")]
     [ReferenceTo(typeof(Goods), "Name")]
