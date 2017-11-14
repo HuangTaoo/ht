@@ -263,5 +263,37 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       return list;
     }
 
+      [Rpc(RpcFlags.SkipAuth)]
+      public static List<Store> GetStore()
+      {
+          var query = new DQueryDom(new JoinAlias(typeof(Store)));
+          query.Columns.Add(DQSelectColumn.Field("ID"));
+          query.Columns.Add(DQSelectColumn.Field("Name"));
+          query.Columns.Add(DQSelectColumn.Field("Code"));
+          query.Columns.Add(DQSelectColumn.Field("Stopped"));
+          query.Columns.Add(DQSelectColumn.Field("Domain_ID"));
+          query.Columns.Add(DQSelectColumn.Field("Spell"));
+
+          var list = new List<Store>();
+          using (var context = new TransactionContext())
+          {
+              using (var reader = context.Session.ExecuteReader(query))
+              {
+                  while (reader.Read())
+                  {
+                      var entity = new Store();
+                      entity.ID = (long)reader[0];
+                      entity.Name = (string)reader[1];
+                      entity.Code = (string)reader[2];
+                      entity.Stopped = (bool)reader[3];
+                      entity.Domain_ID = (long)reader[4];
+                      entity.Spell = (string)reader[5];
+                      list.Add(entity);
+                  }
+              }
+          }
+          return list;
+      }
+
   }
 }
