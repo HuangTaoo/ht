@@ -16,10 +16,7 @@
   </From>
   <Where>
     <And>
-      <QBEIn>
-        <Field name="ProductionPlan_ID"/>
-        <QBE paramName="ProductionPlan_ID"/>
-      </QBEIn>
+
       <GreaterThanOrEqual>
         <Field name="Date"/>
         <QBE paramName="MinDate" />
@@ -58,7 +55,10 @@
         <Field name="Goods_ID"  alias="detail"/>
         <QBE paramName="Goods_ID"/>
       </QBEIn>
-
+      <QBEIn>
+        <Field name="PlanNumber_ID" alias ="detail"/>
+        <QBE paramName="PlanNumber_ID"/>
+      </QBEIn>
       <QBEIn>
         <Field name="BillState"/>
         <QBE paramName ="BillState"/>

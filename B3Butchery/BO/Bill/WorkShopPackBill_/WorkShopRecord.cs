@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using BWP.B3Frameworks.BO;
 using BWP.B3UnitedInfos.BO;
 using Forks.EnterpriseServices;
 using Forks.EnterpriseServices.DomainObjects2;
@@ -24,13 +25,6 @@ namespace BWP.B3Butchery.BO
 
         #region 仙坛客户端 添加数据
 
-        //[LogicName("计数名称")]
-        //public long? CalculateGoods_ID { get; set; }
-
-        //[LogicName("计数名称")]
-        //[ReferenceTo(typeof(CalculateGoods), "Name")]
-        //[Join("CalculateGoods_ID", "ID")]
-        //public string CalculateGoods_Name { get; set; }
         [LogicName("计划号")]
         public long? PlanNumber_ID { get; set; }
 

@@ -11,6 +11,12 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc.Dtos
         public long? Department_ID { get; set; }
         public DateTime Time { get; set; }
         public string Code { get; set; }//叉车板上的码
+
+
+        public long? Store_ID { get; set; }
+
+
+        public string Store_Name { get; set; }
         public List<WorkShopRecordDto> Details { get; set; }
     }
 
@@ -26,6 +32,9 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc.Dtos
         public string CalculateSpec_Name { get; set; }
 
         public string PlanNumber { get; set; }
+
+      
+
 
 
     }

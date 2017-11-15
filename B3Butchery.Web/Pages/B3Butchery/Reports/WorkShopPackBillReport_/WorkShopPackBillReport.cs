@@ -39,19 +39,19 @@ namespace BWP.Web.Pages.B3Butchery.Reports.WorkShopPackBillReport_
         {
             var customPanel = new LayoutManager("Main", _mainInfo, mQueryContainer);
 
-            //customPanel.Add("ProductionPlan_ID", new SimpleLabel("计划号"), QueryCreator.DFChoiceBoxEnableMultiSelection(_mainInfo.Fields["ProductionPlan_ID"], mQueryContainer, "ProductionPlan_ID", B3ButcheryDataSource.计划号));
-            //customPanel["ProductionPlan_ID"].NotAutoAddToContainer = true;
+            customPanel.Add("PlanNumber_ID", new SimpleLabel("计划号"), QueryCreator.DFChoiceBoxEnableMultiSelection(_detailInfo.Fields["PlanNumber_ID"], mQueryContainer, "PlanNumber_ID", B3ButcheryDataSource.计划号));
+            customPanel["PlanNumber_ID"].NotAutoAddToContainer = true;
             customPanel.Add("AccountingUnit_ID", QueryCreator.DFChoiceBoxEnableMultiSelection(_mainInfo.Fields["AccountingUnit_ID"], mQueryContainer, "AccountingUnit_ID", B3FrameworksConsts.DataSources.授权会计单位全部));
             customPanel["AccountingUnit_ID"].NotAutoAddToContainer = true;
             customPanel.Add("Department_ID", QueryCreator.DFChoiceBoxEnableMultiSelection(_mainInfo.Fields["Department_ID"], mQueryContainer, "Department_ID", B3FrameworksConsts.DataSources.授权部门全部));
             customPanel["Department_ID"].NotAutoAddToContainer = true;
-
+            customPanel.Add("Store_ID", new SimpleLabel("仓库"), QueryCreator.DFChoiceBoxEnableMultiSelection(_mainInfo.Fields["Store_ID"], mQueryContainer, "Store_ID", B3ButcheryDataSource.速冻库));
+            customPanel["Store_ID"].NotAutoAddToContainer = true;
 
             customPanel.Add("BillState", QueryCreator.一般单据状态可多选(_mainInfo.Fields["BillState"]));
             customPanel["BillState"].NotAutoAddToContainer = true;
 
-            //customPanel.Add("Store_ID", new SimpleLabel("速冻库"), QueryCreator.DFChoiceBoxEnableMultiSelection(_mainInfo.Fields["Store_ID"], mQueryContainer, "Store_ID", B3ButcheryDataSource.速冻库));
-            //customPanel["Store_ID"].NotAutoAddToContainer = true;
+     
 
             customPanel.Add("Goods_ID", new SimpleLabel("存货"), QueryCreator.DFChoiceBoxEnableMultiSelection(_detailInfo.Fields["Goods_ID"], mQueryContainer, "Goods_ID", B3UnitedInfosConsts.DataSources.存货));
             customPanel["Goods_ID"].NotAutoAddToContainer = true;
@@ -65,22 +65,25 @@ namespace BWP.Web.Pages.B3Butchery.Reports.WorkShopPackBillReport_
             base.InitQueryPanel(queryPanel);
             var panel = queryPanel.CreateTab("显示字段");
             _checkbox = new CheckBoxListWithReverseSelect { RepeatColumns = 6, RepeatDirection = RepeatDirection.Horizontal };
-            _checkbox.Items.Add(new ListItem("入库日期", "Date"));
-//            _checkbox.Items.Add(new ListItem("计划号", "ProductionPlan_PlanNumber"));
+            _checkbox.Items.Add(new ListItem("日期", "Date"));
+   
             _checkbox.Items.Add(new ListItem("会计单位", "AccountingUnit_Name"));
             _checkbox.Items.Add(new ListItem("部门", "Department_Name"));
-            _checkbox.Items.Add(new ListItem("经办人", "Employee_Name"));
-//            _checkbox.Items.Add(new ListItem("速冻库", "Store_Name"));
-
+ 
+            _checkbox.Items.Add(new ListItem("仓库", "Store_Name"));
             _checkbox.Items.Add(new ListItem("摘要", "Remark"));
             _checkbox.Items.Add(new ListItem("存货名称", "Goods_Name"));
             _checkbox.Items.Add(new ListItem("存货编码", "Goods_Code"));
             _checkbox.Items.Add(new ListItem("规格", "Goods_Spec"));
             _checkbox.Items.Add(new ListItem("主数量", "Number"));
             _checkbox.Items.Add(new ListItem("主单位", "Goods_MainUnit"));
-//            _checkbox.Items.Add(new ListItem("生产数量", "SecondNumber2"));
-//            _checkbox.Items.Add(new ListItem("生产单位", "Goods_SecondUnit2"));
-            _checkbox.Items.Add(new ListItem("创建人", "CreateUser_Name"));
+
+            _checkbox.Items.Add(new ListItem("计划号", "PlanNumber_Name"));
+            _checkbox.Items.Add(new ListItem("辅数量", "SecondNumber"));
+            _checkbox.Items.Add(new ListItem("辅单位", "Goods_SecondUnit"));
+            _checkbox.Items.Add(new ListItem("辅数量II", "SecondNumber2"));
+            _checkbox.Items.Add(new ListItem("辅单位II", "Goods_SecondUnitII"));
+
             _checkbox.Items.Add(new ListItem("备注", "Remark"));
             panel.EAdd(_checkbox);
             var hPanel = new HLayoutPanel();
@@ -107,31 +110,35 @@ namespace BWP.Web.Pages.B3Butchery.Reports.WorkShopPackBillReport_
             {
                 if (field.Selected)
                 {
+
                     switch (field.Text)
                     {
-                        case "入库日期":
-                        case "计划号":
+                        case "日期":
+                    
                         case "会计单位":
                         case "部门":
-                        case "经办人":
-                        case "速冻库":
-                        case "入库类型":
-                        case "创建人":
+                        case "仓库":
                         case "摘要":
                             query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(main, field.Value), field.Text));
                             query.GroupBy.Expressions.Add(DQExpression.Field(main, field.Value));
                             break;
+                        case "计划号":
                         case "存货名称":
+                       
                         case "存货编码":
                         case "规格":
                         case "主单位":
-                        case "生产单位":
+                        case "辅单位":
+                        case "辅单位II":
                         case "备注":
                             query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(detail, field.Value), field.Text));
                             query.GroupBy.Expressions.Add(DQExpression.Field(detail, field.Value));
                             break;
                         case "主数量":
-                        case "生产数量":
+              
+                        case "辅数量":
+                        case "辅数量II":
+
                             query.Columns.Add(DQSelectColumn.Create(DQExpression.Sum(DQExpression.Field(detail, field.Value)), field.Text));
                             SumColumnIndexs.Add(query.Columns.Count - 1);
                             break;

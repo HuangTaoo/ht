@@ -35,6 +35,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.WorkShopPackBill_
             layoutManager.Config = config;
             config.Add("AccountingUnit_ID");
             config.Add("Department_ID");
+            config.Add("Store_ID");
             config.Add("Date");
             config.Add("Remark");
             pageLayoutSection.SetRequired("AccountingUnit_ID");
@@ -79,8 +80,11 @@ namespace BWP.Web.Pages.B3Butchery.Bills.WorkShopPackBill_
 
             _detailGrid = new DFEditGrid(editor) { DFGridSetEnabled = false, Width = Unit.Percentage(100) };
 
+
             _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
             _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
+
+            _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("PlanNumber_Name"));
             _detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Number"));
             _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_MainUnit"));
             _detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("SecondNumber"));

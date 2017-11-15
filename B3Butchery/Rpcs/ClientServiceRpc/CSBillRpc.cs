@@ -62,6 +62,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
               dmo.AccountingUnit_ID = dto.AccountingUnit_ID;
               dmo.Department_ID = dto.Department_ID;
               dmo.Date = dto.Time;
+              dmo.Store_ID = dto.Store_ID;
 
               foreach (var dtodetail in dto.Details)
               {
@@ -71,16 +72,16 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
                   detail.Remark = dtodetail.CalculateSpec_Name;
                   detail.Number = dtodetail.Number;
                   detail.SecondNumber = dtodetail.SecondNumber;
-             
+                  detail.SecondNumber2 = dtodetail.SecondNumber2;
+                  
 
 
-
-                  //var id = GetProductIdByName(session, dtodetail.PlanNumber);
-                  //if (id == null)
-                  //{
-                  //    //throw new Exception("生产计划中不存在" + dtodetail.PlanNumber + "计划号");
-                  //}
-                  //detail.PlanNumber_ID = id;
+                  var id = GetProductIdByName(session, dtodetail.PlanNumber);
+                  if (id == null)
+                  {
+                      //throw new Exception("生产计划中不存在" + dtodetail.PlanNumber + "计划号");
+                  }
+                  detail.PlanNumber_ID = id;
                   //if (detail.Goods_ID == 0)
                   //{
                   //    var goodsid = GetGoodsIdByName(session, detail.Goods_Name);
