@@ -10,7 +10,7 @@ using Forks.EnterpriseServices.DomainObjects2;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using TSingSoft.WebPluginFramework;
 
-namespace BWP.B3Butchery.BL.Bill.WorkShopPackBillBL_
+namespace BWP.B3Butchery.BL
 {
 
 

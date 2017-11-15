@@ -21,6 +21,8 @@ namespace BWP.B3Butchery.BO
         private  DateTime? _date = DateTime.Today;
 
 
+        [LogicName("日期")]
+
         public DateTime? Date {
             get { return _date; } 
             set { _date = value; } }

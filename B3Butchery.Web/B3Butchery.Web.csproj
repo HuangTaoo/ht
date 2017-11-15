@@ -289,6 +289,12 @@
     <Compile Include="Pages\B3Butchery\Bills\TemporaryStorage_\TemporaryStorageList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\WorkShopPackBill_\WorkShopPackBillEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\WorkShopPackBill_\WorkShopPackBillList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\Dialogs\SelectProductNoticeDialog.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -427,6 +433,7 @@
     <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductNotice_\ProductNoticeList.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Bills\WorkShopPackBill_\WorkShopPackBillList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Dialogs\SelectProductNoticeDialog.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\ProduceFinish_\ProduceFinishList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Dialogs\SelectCalculateGoodsDialog.xml" />

@@ -5,7 +5,6 @@ using System.Text;
 using System.Web.Script.Serialization;
 using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BL.BaseInfo.HandoverRecord_;
-using BWP.B3Butchery.BL.Bill.WorkShopPackBillBL_;
 using BWP.B3Butchery.BO;
 using BWP.B3Butchery.BO.BaseInfo;
 using BWP.B3Butchery.Rpcs.ClientServiceRpc.Dtos;
