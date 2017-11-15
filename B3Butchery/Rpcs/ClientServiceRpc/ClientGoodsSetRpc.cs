@@ -61,7 +61,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
             query.Columns.Add(DQSelectColumn.Field("Spec", goods));
             query.Columns.Add(DQSelectColumn.Field("Code", goods));
             query.Columns.Add(DQSelectColumn.Field("SecondUnitII_MainUnitRatio", goods));
-            
+            query.Columns.Add(DQSelectColumn.Field("StandardSecondNumber", goods));
             
             using (var reader = session.ExecuteReader(query))
             {
@@ -78,6 +78,8 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
                     clientDe.Goods_Spec = (string)reader[7];
                     clientDe.Goods_Code = (string)reader[8];
                     clientDe.Goods_SecondUnitII_MainUnitRatio = (Money<decimal>?)reader[9];
+                    clientDe.Goods_StandardSecondNumber = (Money<decimal>?)reader[10];
+                    
                     client.Details.Add(clientDe);
                 }
             }

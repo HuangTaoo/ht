@@ -66,6 +66,17 @@ namespace BWP.B3Butchery.BO
     public Money<decimal>? Goods_SecondUnitII_MainUnitRatio { get; set; }//主副转换关系 主比例
       
 
+      [Join("Goods_ID", "ID")]
+      [ReferenceTo(typeof(Goods), "StandardSecondNumber")]
+      [JsonConverter(typeof(MoneyJsonConverter))]
+      public Money<decimal>? Goods_StandardSecondNumber { get; set; }//仙坛客户端中标准箱数
+
+      
+
+
+
+
+
       //当数据源为生产通知单时 设置
     public DateTime? CompletedDate { get; set; }
 
