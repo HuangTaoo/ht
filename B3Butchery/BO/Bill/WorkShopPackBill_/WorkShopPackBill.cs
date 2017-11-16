@@ -41,7 +41,9 @@ namespace BWP.B3Butchery.BO
         public string Store_Name { get; set; }
 
 
-
+        //叉车码
+        [LogicName("叉车码")]
+        public string ChaCarBarCode { get; set; }
 
 
         private  DateTime? _date = DateTime.Today;

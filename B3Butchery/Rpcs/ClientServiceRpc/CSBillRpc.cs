@@ -63,6 +63,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
               dmo.Department_ID = dto.Department_ID;
               dmo.Date = dto.Time;
               dmo.Store_ID = dto.Store_ID;
+              dmo.ChaCarBarCode = dto.Code;
 
               foreach (var dtodetail in dto.Details)
               {
@@ -73,7 +74,8 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
                   detail.Number = dtodetail.Number;
                   detail.SecondNumber = dtodetail.SecondNumber;
                   detail.SecondNumber2 = dtodetail.SecondNumber2;
-                  
+                  detail.ChaCarBoardCode = dtodetail.ChaCarBarCode;
+                  detail.BarCode = dtodetail.Code;
 
 
                   var id = GetProductIdByName(session, dtodetail.PlanNumber);

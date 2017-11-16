@@ -37,6 +37,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.WorkShopPackBill_
             config.Add("Department_ID");
             config.Add("Store_ID");
             config.Add("Date");
+            config.Add("ChaCarBarCode");
             config.Add("Remark");
             pageLayoutSection.SetRequired("AccountingUnit_ID");
             pageLayoutSection.ApplyLayout(layoutManager, config, mPageLayoutManager, mDFInfo);
@@ -85,6 +86,8 @@ namespace BWP.Web.Pages.B3Butchery.Bills.WorkShopPackBill_
             _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
 
             _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("PlanNumber_Name"));
+            _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("ChaCarBoardCode"));
+            _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("BarCode"));
             _detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Number"));
             _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_MainUnit"));
             _detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("SecondNumber"));
@@ -104,6 +107,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.WorkShopPackBill_
         public override void AppToUI()
         {
             base.AppToUI();
+            mDFContainer.MakeReadonly("ChaCarBarCode");
             _detailGrid.DataBind();
         }
 
