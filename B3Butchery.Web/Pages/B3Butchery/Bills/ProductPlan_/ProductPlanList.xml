@@ -28,6 +28,13 @@
         <Field name="IsLocked"/>
         <QBE paramName="IsLocked"/>
       </EQ>
+
+      
+
+      <Contains>
+        <Field name="PlanNumber"/>
+        <QBE paramName="PlanNumber"/>
+      </Contains>
       <Contains>
         <Field name="CreateUser_Name"/>
         <QBE paramName="CreateUser_Name"/>

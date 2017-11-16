@@ -26,6 +26,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductPlan_
         config.AddAfter("AccountingUnit_ID", "Date");
         config.AddAfter("Department_ID", "AccountingUnit_ID");
         config.AddAfter("Employee_ID", "Department_ID");
+        config.AddAfter("PlanNumber", "Employee_ID");
       }));
     }
 
@@ -37,6 +38,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductPlan_
         AddDFBrowseGridColumn(grid, "AccountingUnit_Name");
         AddDFBrowseGridColumn(grid, "Department_Name");
         AddDFBrowseGridColumn(grid, "Employee_Name");
+        AddDFBrowseGridColumn(grid, "PlanNumber");
         AddDFBrowseGridColumn(grid, "Date");
         AddDFBrowseGridColumn(grid, "EndDate");
         AddDFBrowseGridColumn(grid, "ProductType");
