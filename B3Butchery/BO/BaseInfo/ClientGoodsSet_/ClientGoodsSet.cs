@@ -9,7 +9,7 @@ using Forks.EnterpriseServices.DomainObjects2;
 
 namespace BWP.B3Butchery.BO
 {
-  [LogicName("客户端存货配置")]
+  [LogicName("包装存货配置")]
   [Serializable, DFClass]
   public class ClientGoodsSet: DomainBaseInfo
   {

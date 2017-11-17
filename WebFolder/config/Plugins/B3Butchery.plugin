@@ -313,7 +313,7 @@
       <Function index="7" name="解锁"/>
     </FunctionGroup>
 
-    <FunctionGroup name="客户端存货配置" roleSchemas="employee" >
+    <FunctionGroup name="包装存货配置" roleSchemas="employee" >
       <Function index="0" name="访问"/>
       <Function index="1" name="新建"/>
       <Function index="2" name="编辑"/>
@@ -405,7 +405,7 @@
     <Menu id="0030" features="B3Butchery.0016"  name="/屠宰分割/信息设置/档案/计数分类/列表" roles="B3Butchery.计数分类.访问" url="B3Butchery/BaseInfos/CalculateCatalog_/CalculateCatalogList.aspx"/>
     <Menu id="0031" features="B3Butchery.0016"  name="/屠宰分割/信息设置/档案/计数名称/列表" roles="B3Butchery.计数名称.访问" url="B3Butchery/BaseInfos/CalculateGoods_/CalculateGoodsList.aspx"/>
     <Menu id="0032" features="B3Butchery.0016"  name="/屠宰分割/信息设置/档案/计数规格/列表" roles="B3Butchery.计数规格.访问" url="B3Butchery/BaseInfos/CalculateSpec_/CalculateSpecList.aspx"/>
-    <Menu id="0033" features="B3Butchery.0016"  name="/屠宰分割/信息设置/档案/客户端存货配置/列表" roles="B3Butchery.客户端存货配置.访问" url="B3Butchery/BaseInfos/ClientGoodsSet_/ClientGoodsSetList.aspx"/>
+    <Menu id="0033" features="B3Butchery.0016"  name="/屠宰分割/信息设置/档案/包装存货配置/列表" roles="B3Butchery.包装存货配置.访问" url="B3Butchery/BaseInfos/ClientGoodsSet_/ClientGoodsSetList.aspx"/>
     <Menu id="0034" features="B3Butchery.0017"  name="/屠宰分割/业务单据/生产完工/列表" roles="B3Butchery.生产完工单.访问" url="B3Butchery/Bills/ProduceFinish_/ProduceFinishList.aspx"/>
 
 
