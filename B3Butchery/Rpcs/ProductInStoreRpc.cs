@@ -285,7 +285,6 @@ namespace BWP.B3Butchery.Rpcs
           d.ProductionDate = GetProductPlanDate(d.ProductPlan_ID);
         }
         var bl = BIFactory.Create<IProductInStoreBL>(context);
-        dmo.InStoreDate = BLContext.Today;
         //dmo.BillState = 单据状态.已审核;
         dmo.IsHandsetSend = true;
         bl.Insert(dmo);

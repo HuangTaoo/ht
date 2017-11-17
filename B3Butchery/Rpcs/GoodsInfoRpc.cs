@@ -323,7 +323,7 @@ namespace BWP.B3Butchery.Rpcs
 
     //根据部门取当天的生产计划存货   为了兼容旧的接口保留了，新的接口不调用此方法
     [Rpc]
-    public static List<GoodsInfoDto> GetByDepartPlan(long? departId, long? productionPlanId = null)
+    public static List<GoodsInfoDto> GetByDepartPlan(long? departId, long? productionPlanId = null, string productionPlanNumber = "")
     {
       if (departId == null || departId == 0)
       {
@@ -340,8 +340,10 @@ namespace BWP.B3Butchery.Rpcs
       //query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(bill, "Date", DateTime.Today));
       //query.Where.Conditions.Add(DQCondition.LessThan(bill, "Date", DateTime.Today.AddDays(1)));
       query.Where.Conditions.Add(DQCondition.EQ(bill, "BillState", 单据状态.已审核));
-      if(productionPlanId!=null)
-        query.Where.Conditions.Add(DQCondition.EQ(bill, "ID", productionPlanId));
+      //if(productionPlanId!=null)
+      //  query.Where.Conditions.Add(DQCondition.EQ(bill, "ID", productionPlanId));
+      if (productionPlanNumber != "")
+        query.Where.Conditions.Add(DQCondition.EQ(bill, "PlanNumber", productionPlanNumber));
       //      query.Where.Conditions.Add(B3ButcheryUtil.部门或上级部门条件(departId??0, bill));
       OrganizationUtil.AddOrganizationLimit(query, typeof(ProductPlan));
 
@@ -361,7 +363,7 @@ namespace BWP.B3Butchery.Rpcs
       query.Columns.Add(DQSelectColumn.Field("GoodsProperty_ID", goods));
       query.Columns.Add(DQSelectColumn.Field("GoodsProperty_Name", goods));
       query.Columns.Add(DQSelectColumn.Field("GoodsPropertyCatalog_Name", goods));
-
+      query.Distinct = true;
       query.Where.Conditions.Add(DQCondition.EQ(bill, "Domain_ID", DomainContext.Current.ID));
       using (var session = Dmo.NewSession())
       {
