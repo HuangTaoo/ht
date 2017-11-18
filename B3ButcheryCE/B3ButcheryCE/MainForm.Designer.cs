@@ -46,7 +46,6 @@
             this.buttonFileGroupValuation.Size = new System.Drawing.Size(99, 29);
             this.buttonFileGroupValuation.TabIndex = 15;
             this.buttonFileGroupValuation.Text = "案组计件新增";
-            this.buttonFileGroupValuation.Visible = false;
             this.buttonFileGroupValuation.Click += new System.EventHandler(this.buttonFileGroupValuation_Click);
             // 
             // buttonSyncBaseInfo
@@ -56,7 +55,6 @@
             this.buttonSyncBaseInfo.Size = new System.Drawing.Size(99, 29);
             this.buttonSyncBaseInfo.TabIndex = 16;
             this.buttonSyncBaseInfo.Text = "同步基础信息";
-            this.buttonSyncBaseInfo.Visible = false;
             this.buttonSyncBaseInfo.Click += new System.EventHandler(this.buttonSyncBaseInfo_Click);
             // 
             // button1
@@ -66,7 +64,6 @@
             this.button1.Size = new System.Drawing.Size(99, 29);
             this.button1.TabIndex = 17;
             this.button1.Text = "个人计件新增";
-            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btn_ProductInStore
@@ -76,7 +73,6 @@
             this.btn_ProductInStore.Size = new System.Drawing.Size(99, 29);
             this.btn_ProductInStore.TabIndex = 19;
             this.btn_ProductInStore.Text = "成品入库新增";
-            this.btn_ProductInStore.Visible = false;
             this.btn_ProductInStore.Click += new System.EventHandler(this.btn_ProductInStore_Click);
             // 
             // statusBar1
@@ -92,7 +88,6 @@
             this.productLink_Btn.Size = new System.Drawing.Size(99, 29);
             this.productLink_Btn.TabIndex = 21;
             this.productLink_Btn.Text = "生产环节新增";
-            this.productLink_Btn.Visible = false;
             this.productLink_Btn.Click += new System.EventHandler(this.productLink_Btn_Click);
             // 
             // button2
@@ -102,7 +97,6 @@
             this.button2.Size = new System.Drawing.Size(99, 29);
             this.button2.TabIndex = 23;
             this.button2.Text = "产量统计";
-            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // btn_ProductInStoreOK

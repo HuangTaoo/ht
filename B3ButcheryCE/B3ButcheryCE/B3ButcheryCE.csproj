@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E5D43615-A797-4FE5-BA52-EC9936D9A004}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -526,6 +526,9 @@
     <Content Include="SCAN.Scanner1D.dll" />
     <Content Include="SCAN.Scanner2D.dll" />
     <Content Include="Scanner2DV.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\" />
