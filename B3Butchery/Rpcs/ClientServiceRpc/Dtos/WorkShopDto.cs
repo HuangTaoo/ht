@@ -7,6 +7,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc.Dtos
 {
     public class WorkShopDto
     {
+        public long? MiddleWorkBillID { get; set; }//中间服务器上的 包装ID
         public long? AccountingUnit_ID { get; set; }
         public long? Department_ID { get; set; }
         public DateTime Time { get; set; }

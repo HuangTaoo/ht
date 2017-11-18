@@ -57,7 +57,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
           {
               var bl = BIFactory.Create<IWorkShopPackBillBL>(session);
               var dmo = new WorkShopPackBill();
-
+              dmo.MiddleWorkBillID = dto.MiddleWorkBillID;
               dmo.Domain_ID = DomainContext.Current.ID;
               dmo.AccountingUnit_ID = dto.AccountingUnit_ID;
               dmo.Department_ID = dto.Department_ID;
