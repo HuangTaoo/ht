@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using BWP.B3Frameworks;
@@ -41,7 +42,7 @@ namespace BWP.B3Butchery.BO
         [LogicName("仓库")]
         public string Store_Name { get; set; }
 
-
+        [DbColumn(DbType = SqlDbType.NVarChar, Length = 200)]
         //叉车码
         [LogicName("叉车码")]
         public string ChaCarBarCode { get; set; }

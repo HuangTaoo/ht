@@ -40,8 +40,10 @@ namespace BWP.B3Butchery.BO
         public string Goods_SecondUnitII { get; set; }
 
         #endregion
+        [DbColumn(DbType = SqlDbType.NVarChar, Length = 200)]
         [LogicName("叉车码")]
         public string ChaCarBoardCode { get; set; }//叉车板的条码
+        [DbColumn(DbType = SqlDbType.NVarChar, Length = 200)]
         [LogicName("箱子码")]
         public string BarCode { get; set; }//箱子上的条码
 
