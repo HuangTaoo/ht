@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -18,9 +17,7 @@ using BWP.Web.Utils;
 using BWP.Web.Pages.B3Butchery.Dialogs;
 using TSingSoft.WebPluginFramework;
 using BWP.Web.Actions;
-using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using BWP.B3Frameworks;
-using Forks.EnterpriseServices.SqlDoms;
 using BWP.B3UnitedInfos.Utils;
 using BWP.B3Butchery;
 
@@ -105,6 +102,9 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
         return CanSave;
       };
       detailGrid = titlePanel.EAdd(new DFEditGrid(detailGridEditor) { Width = Unit.Percentage(100), ShowLineNo = true });
+      if (GlobalFlags.get(B3UnitedInfosConsts.GlobalFlags.库存支持品牌项)) {
+        detailGrid.Columns.Add(new DFEditGridColumn("BrandItem_ID"));
+      }
       detailGrid.Columns.Add(new DFEditGridColumn("ProductionDate"));
       var productPlanCol = new DFEditGridColumn<DFChoiceBox>("ProductPlan_ID");
       productPlanCol.InitEditControl += delegate(object sender, InitEditControlEventArgs<DFChoiceBox> e)

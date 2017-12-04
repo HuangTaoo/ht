@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BWP.B3Frameworks;
+using BWP.B3UnitedInfos;
 using Forks.EnterpriseServices.DataForm;
 using BWP.B3Frameworks.BO;
 using Forks.EnterpriseServices;
@@ -38,7 +40,17 @@ namespace BWP.B3Butchery.BO
     [LogicName("不含税金额")]
     public Money<金额>? NTaxMoney { get; set; }
 
+    [DFDataKind(B3UnitedInfosConsts.DataSources.品牌项)]
+    [DFExtProperty(B3FrameworksConsts.DFExtProperties.DisplayField, "BrandItem_Name")]
+    [LogicName("品牌项")]
+    public long? BrandItem_ID { get; set; }
+
     #region ReferenceTo
+
+    [ReferenceTo(typeof(BrandItem), "Name")]
+    [Join("BrandItem_ID", "ID")]
+    [DFPrompt("品牌项")]
+    public string BrandItem_Name { get; set; }
 
     [ReferenceTo(typeof(Goods), "TaxRate")]
     [Join("Goods_ID", "ID")]

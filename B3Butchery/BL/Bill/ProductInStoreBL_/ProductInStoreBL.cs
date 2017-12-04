@@ -70,7 +70,8 @@ namespace BWP.B3Butchery.BL
           SecondNumber = detail.SecondNumber,
           Price = detail.Price,
         };
-
+        resultDetail.BrandItem_ID = detail.BrandItem_ID;
+        resultDetail.BrandItem_Name = detail.BrandItem_Name;
         resultBill.Details.Add(resultDetail);
       }
       return resultBill;
