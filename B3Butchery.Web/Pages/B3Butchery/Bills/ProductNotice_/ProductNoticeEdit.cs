@@ -18,7 +18,6 @@ using TSingSoft.WebControls2;
 using TSingSoft.WebPluginFramework;
 using BWP.B3UnitedInfos.Utils;
 using BWP.B3Frameworks;
-using BWP.Web.Pages.TypeIocs;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
   public class ProductNoticeEdit : DepartmentWorkFlowBillEditPage<ProductNotice, IProductNoticeBL> {
@@ -39,7 +38,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       config.Add("Customer_ID");
       config.Add("Employee_ID"); 
       config.Add("ProductionUnit_ID");
-        config.Add("CustomerAddress");
+      config.Add("CustomerAddress");
       config.Add("Remark");
 
       pageLayoutSection.SetRequired("AccountingUnit_ID" );
@@ -57,9 +56,8 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
         AddToolsPanel(toobar);
       }
 
-      AddCopyAndPaste(toobar);      
-
-      var editor = new DFCollectionEditor<ProductNotice_Detail>(() => Dmo.Details);
+      AddCopyAndPaste(toobar);
+      var editor=AddYunKenGridOrderByID();
       editor.AllowDeletionFunc = () => CanSave;
 
       editor.CanDeleteFunc = detail => true;
@@ -72,6 +70,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       _detailGrid.ShowLineNo = true;
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
+      AddYunKenGridColumns(_detailGrid);
       foreach (var ioc in TypeIOCCenter.GetIOCList<ProductNoticeEdit.BeforeDetailGridApplyLayout>(GetType()))
       {
           ioc.Invoke(_detailGrid);
@@ -106,6 +105,15 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       var scriptManager = new GoodsEditGridScriptManager(_detailGrid, "Number" );
       titlePanel.Controls.Add(scriptManager);
 
+    }
+
+    protected virtual DFCollectionEditor<ProductNotice_Detail> AddYunKenGridOrderByID()//耘垦模块‘排序号’字段排序
+    {
+       return new DFCollectionEditor<ProductNotice_Detail>(() => Dmo.Details);
+    }
+
+    protected virtual void AddYunKenGridColumns(DFEditGrid _detailGrid)//耘垦模块grid增加列
+    {
     }
 
     protected virtual void AddProductNoticeDetailGrid(DFEditGrid _detailGrid)
