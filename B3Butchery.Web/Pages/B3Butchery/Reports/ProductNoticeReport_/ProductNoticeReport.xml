@@ -5,7 +5,7 @@
   <From>
     <Join type="Left">
       <DmoClass class="BWP.B3Butchery.BO.ProductNotice, B3Butchery" alias="main"/>
-      <DmoClass class="BWP.B3Butchery.BO.ProductNotice_Detail, B3Butchery"  alias="detail"/>
+      <DmoClass class="BWP.B3Butchery.BO.ProductNotice_Detail, B3Butchery" alias="detail"/>
       <Condition>
         <And>
           <EQ>
@@ -48,7 +48,7 @@
       </QBEIn>
       <GreaterThanOrEqual>
         <Field name="Date"/>
-        <QBE paramName="MinDate" />
+        <QBE paramName="MinDate"/>
       </GreaterThanOrEqual>
       <LessThanOrEqual>
         <Field name="Date"/>
@@ -65,6 +65,10 @@
       <QBEIn>
         <Field name="Goods_ID" alias="detail"/>
         <QBE paramName="Goods_ID"/>
+      </QBEIn>
+      <QBEIn>
+        <Field name="BrandItem_ID" alias="detail"/>
+        <QBE paramName="BrandItem_ID"/>
       </QBEIn>
     </And>
   </Where>

@@ -57,7 +57,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       }
 
       AddCopyAndPaste(toobar);
-      var editor=AddYunKenGridOrderByID();
+      var editor= AddGridByOrderByID();
       editor.AllowDeletionFunc = () => CanSave;
 
       editor.CanDeleteFunc = detail => true;
@@ -70,7 +70,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       _detailGrid.ShowLineNo = true;
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
-      AddYunKenGridColumns(_detailGrid);
+      AddGridColumnsByBrandItem_ID(_detailGrid);
       foreach (var ioc in TypeIOCCenter.GetIOCList<ProductNoticeEdit.BeforeDetailGridApplyLayout>(GetType()))
       {
           ioc.Invoke(_detailGrid);
@@ -107,12 +107,12 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
 
     }
 
-    protected virtual DFCollectionEditor<ProductNotice_Detail> AddYunKenGridOrderByID()//耘垦模块‘排序号’字段排序
+    protected virtual DFCollectionEditor<ProductNotice_Detail> AddGridByOrderByID()
     {
        return new DFCollectionEditor<ProductNotice_Detail>(() => Dmo.Details);
     }
 
-    protected virtual void AddYunKenGridColumns(DFEditGrid _detailGrid)//耘垦模块grid增加列
+    protected virtual void AddGridColumnsByBrandItem_ID(DFEditGrid _detailGrid)
     {
     }
 
