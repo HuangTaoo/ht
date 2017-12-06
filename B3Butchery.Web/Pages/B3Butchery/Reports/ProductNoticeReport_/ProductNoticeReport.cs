@@ -46,7 +46,6 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
       _checkbox.Items.Add(new ListItem("会计单位", "AccountingUnit_Name"));
       _checkbox.Items.Add(new ListItem("部门", "Department_Name"));
       _checkbox.Items.Add(new ListItem("业务员", "Employee_Name"));
-      _checkbox.Items.Add(new ListItem("品牌", "BrandItem_Name"));
       _checkbox.Items.Add(new ListItem("单据状态", "BillState"));
       AddQueryPanelByBrandItem_Name(_checkbox);
       _checkbox.Items.Add(new ListItem("日期", "Date"));
