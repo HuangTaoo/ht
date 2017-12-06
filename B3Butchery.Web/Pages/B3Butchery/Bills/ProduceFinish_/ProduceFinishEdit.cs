@@ -39,7 +39,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
 
     }
 
-    DFEditGrid _detailGrid;
+   protected DFEditGrid _detailGrid;
     private void CreateOutputDetailPanel(TitlePanel tPanel) {
       var hPanel = new HLayoutPanel();
 
@@ -92,6 +92,8 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
           }
           _detailGrid.DataBind();
         };
+
+        AddCustomerToolBar(hPanel);
       }
       var detailEditor = new DFCollectionEditor<ProduceFinish_Detail>(() => Dmo.Details) {
         AllowDeletionFunc = () => CanSave,
@@ -112,6 +114,11 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
       _detailGrid.ValueColumns.Add("Goods_MainUnitRatio");
       _detailGrid.ValueColumns.Add("Goods_SecondUnitRatio");
       new Main_Second_ConvertRatioRowManager(_detailGrid, "Number", "SecondNumber");
+    }
+
+    protected virtual  void AddCustomerToolBar(HLayoutPanel hPanel)
+    {
+    
     }
 
     public override void GetFromUI() {
