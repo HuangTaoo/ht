@@ -48,7 +48,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.WorkShopPackBillReport_
             customPanel.Add("Store_ID", new SimpleLabel("仓库"), QueryCreator.DFChoiceBoxEnableMultiSelection(_mainInfo.Fields["Store_ID"], mQueryContainer, "Store_ID", B3ButcheryDataSource.速冻库));
             customPanel["Store_ID"].NotAutoAddToContainer = true;
 
-            customPanel.Add("BillState", QueryCreator.一般单据状态可多选(_mainInfo.Fields["BillState"]));
+            customPanel.Add("BillState", mQueryContainer.Add(QueryCreator.一般单据状态可多选(_mainInfo.Fields["BillState"]), "BillState"));
             customPanel["BillState"].NotAutoAddToContainer = true;
 
      
