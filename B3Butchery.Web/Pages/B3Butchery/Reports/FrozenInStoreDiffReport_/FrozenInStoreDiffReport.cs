@@ -322,6 +322,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
                 dom.Where.Conditions.Add(DQCondition.And(c1, c2));
             }
             dom.GroupBy.Expressions.Add(DQExpression.Field(detail, "Goods2_ID"));
+            dom.Where.Conditions.Add(DQCondition.InEQ(main, "BillState", 1));
             return dom;
         }
     }
@@ -359,6 +360,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
                 var c1 = DQCondition.GreaterThanOrEqual(main, "Date", date.Value.AddDays(1));
                 dom.Where.Conditions.Add(DQCondition.And(c1, c2));
             }
+            dom.Where.Conditions.Add(DQCondition.InEQ(main, "BillState", 1));
             return dom;
         }
 
