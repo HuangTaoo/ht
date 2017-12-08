@@ -211,6 +211,12 @@
     <Compile Include="Pages\B3Butchery\Bills\FrozenInStore_\FrozenInStoreList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\FrozenOutStore_\FrozenOutStoreEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\FrozenOutStore_\FrozenOutStoreList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\Bills\PackingRecipients_\PackingRecipientsEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -355,6 +361,7 @@
     <Compile Include="Pages\B3Butchery\Tools\GoodsReferencePriceConfig_\GoodsReferencePriceConfig.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\B3Butchery\WebControls\B3BuctheryDFIDLink.cs" />
     <Compile Include="Pages\TypeIocs\ProductNoticeEditIoc.cs" />
     <Compile Include="PluginClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -436,6 +443,7 @@
     <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductNotice_\ProductNoticeList.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Bills\FrozenOutStore_\FrozenOutStoreList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\WorkShopPackBillReport_\WorkShopPackBillReport.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\WorkShopPackBill_\WorkShopPackBillList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Dialogs\SelectProductNoticeDialog.xml" />

@@ -97,7 +97,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
               }
 
               bl.Insert(dmo);
-
+              bl.Check(dmo);
               session.Commit();
               return dmo.ID;
           }

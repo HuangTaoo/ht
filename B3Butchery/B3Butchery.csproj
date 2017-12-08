@@ -164,6 +164,7 @@
     <Compile Include="BL\Bill\DailyProductReportBL_\DailyProductReportBL.cs" />
     <Compile Include="BL\Bill\FrozenInStoreSetBillBL_\IFrozenInStoreSetBillBL.cs" />
     <Compile Include="BL\Bill\FrozenInStore_\FrozenInStoreBL.cs" />
+    <Compile Include="BL\Bill\FrozenOutStore_\FrozenOutStoreBL.cs" />
     <Compile Include="BL\Bill\PackingRecipients_\PackingRecipientsBL.cs" />
     <Compile Include="BL\Bill\PickingBL\PickingBL.cs" />
     <Compile Include="BL\Bill\ProduceFinish_\ProduceFinishBL.cs" />
@@ -205,6 +206,8 @@
     <Compile Include="BO\Bill\FrozenInStoreSetBill_\FrozenInStoreSetBill_Detail.cs" />
     <Compile Include="BO\Bill\FrozenInStore_\FrozenInStore.cs" />
     <Compile Include="BO\Bill\FrozenInStore_\FrozenInStore_Detail.cs" />
+    <Compile Include="BO\Bill\FrozenOutStore_\FrozenOutStore.cs" />
+    <Compile Include="BO\Bill\FrozenOutStore_\FrozenOutStore_Detail.cs" />
     <Compile Include="BO\Bill\PackingRecipients_\PackingRecipients.cs" />
     <Compile Include="BO\Bill\PackingRecipients_\PackingRecipients_Detail.cs" />
     <Compile Include="BO\Bill\Picking_\Picking.cs" />
