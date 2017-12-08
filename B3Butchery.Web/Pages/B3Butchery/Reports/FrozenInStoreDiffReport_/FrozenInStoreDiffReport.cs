@@ -71,12 +71,14 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
             _checkbox.Items.Add(new ListItem("部门", "Department_Name"));
             _checkbox.Items.Add(new ListItem("产出单品名", "Goods_Name"));
             _checkbox.Items.Add(new ListItem("产出数量", "Number"));
+            _checkbox.Items.Add(new ListItem("产出辅数量", "SecondNumber2"));
             _checkbox.Items.Add(new ListItem("速冻出库品名", "Goods_Name"));
+            _checkbox.Items.Add(new ListItem("速冻出库辅数量", "SecondNumber2"));
             _checkbox.Items.Add(new ListItem("速冻出库数量", "Number"));
             _checkbox.Items.Add(new ListItem("产出单差异", "产出单差异"));
             _checkbox.Items.Add(new ListItem("包装品名", "成品Name"));
             _checkbox.Items.Add(new ListItem("包装数量", "Number"));
-   
+            _checkbox.Items.Add(new ListItem("包装辅数量", "SecondNumber2"));
 
 
             panel.EAdd(_checkbox);
@@ -92,7 +94,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
         {
             hPanel.Add(new SimpleLabel("日期"));
             dateInput = new DateInput();
-            dateInput.Value = DateTime.Today;
+            dateInput.Value = DateTime.Today.AddDays(-1);
 
             hPanel.Add(dateInput);
 //            hPanel.Add(QueryCreator.DateRange(_mainInfo.Fields["Date"], mQueryContainer, "MinDate", "MaxDate"));
@@ -142,14 +144,22 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
                         case "产出单品名":
                         case "速冻出库品名":
                         case "产出数量":
+                        case "产出辅数量":
+                            
                             query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(main, field.Value), field.Text));
                             query.GroupBy.Expressions.Add(DQExpression.Field(main, field.Value));
                             break;
 
                         case "速冻出库数量":
-                           
+                            
                             query.Columns.Add(DQSelectColumn.Create(包装Exp, field.Text));
                             query.GroupBy.Expressions.Add(包装Exp);
+                            break;
+
+                        case "速冻出库辅数量":
+
+                            query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(frozenNum, "AllSecondNumber2"), field.Text));
+                            query.GroupBy.Expressions.Add(DQExpression.Field(frozenNum, "AllSecondNumber2"));
                             break;
                         case "包装品名":
                             query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(frozen, field.Value), field.Text));
@@ -157,6 +167,8 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
                             break;
 
                         case "包装数量":
+                        case "包装辅数量":
+                            
                             query.Columns.Add(DQSelectColumn.Create(DQExpression.Sum(DQExpression.Field(frozen, field.Value)), field.Text));
                             SumColumnIndexs.Add(query.Columns.Count - 1);
                             break;
@@ -223,8 +235,8 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
         public string Goods_Name { get; set; }
 
         public decimal? Number { get; set; }
-
-
+        public decimal? SecondNumber2 { get; set; }
+//        产出辅数量
 
 
         private static DQueryDom GetDom(DateTime? date)
@@ -242,7 +254,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
             dom.Columns.Add(DQSelectColumn.Field("Goods_ID", detail));
             dom.Columns.Add(DQSelectColumn.Field("Goods_Name", detail));
             dom.Columns.Add(DQSelectColumn.Sum(detail, "Number"));
-
+            dom.Columns.Add(DQSelectColumn.Sum(detail, "SecondNumber2"));
 
 
             dom.GroupBy.Expressions.Add(exp);
@@ -266,7 +278,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
 
         public static void Register(DQueryDom mainDom, DateTime? date)
         {
-            mainDom.RegisterQueryTable(typeof(ProductOutTemp), new[] { "AccountingUnit_Name", "Department_Name", "Time", "Goods_ID", "Goods_Name", "Number" }, GetDom(date));
+            mainDom.RegisterQueryTable(typeof(ProductOutTemp), new[] { "AccountingUnit_Name", "Department_Name", "Time", "Goods_ID", "Goods_Name", "Number", "SecondNumber2" }, GetDom(date));
         }
 
 //        public static void AddJoin(DQueryDom mainDom, JoinAlias selfAlias, JoinAlias detailAlias)
@@ -290,10 +302,10 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
     {
         public long? Goods_ID { get; set; }
         public decimal? AllNumber { get; set; }
-
+        public decimal? AllSecondNumber2 { get; set; }
         public static void Register(DQueryDom mainDom, DateTime? date)
         {
-            mainDom.RegisterQueryTable(typeof(FrozeTemp), new[] { "Goods_ID", "AllNumber" }, GetAllNumDom(date));
+            mainDom.RegisterQueryTable(typeof(FrozeTemp), new[] { "Goods_ID", "AllNumber", "AllSecondNumber2" }, GetAllNumDom(date));
         }
 
         public static void AddJoin(DQueryDom mainDom, JoinAlias selfAlias)
@@ -313,7 +325,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
 
             dom.Columns.Add(DQSelectColumn.Create(DQExpression.Field(detail, "Goods2_ID"), "Goods_ID"));
             dom.Columns.Add(DQSelectColumn.Create(DQExpression.Sum(DQExpression.Field(detail, "Number")), "AllNumber"));
-
+            dom.Columns.Add(DQSelectColumn.Create(DQExpression.Sum(DQExpression.Field(detail, "SecondNumber2")), "AllSecondNumber2"));
 
             if (date != null)
             {
@@ -334,8 +346,8 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
         public long? 成品ID { get; set; }
         public string 成品Name { get; set; }
         public decimal? Number { get; set; }
-
- 
+        public decimal? SecondNumber2 { get; set; }
+        
 
 
         private static DQueryDom GetDom(DateTime? date)
@@ -353,6 +365,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
             dom.Columns.Add(DQSelectColumn.Create(DQExpression.Field(detail, "Goods_Name"), "成品Name"));
          
             dom.Columns.Add(DQSelectColumn.Field("Number", detail));
+            dom.Columns.Add(DQSelectColumn.Field("SecondNumber2", detail));
 
             if (date != null)
             {
@@ -368,7 +381,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
 
         public static void Register(DQueryDom mainDom, DateTime? date)
         {
-            mainDom.RegisterQueryTable(typeof(FrozenOutTemp), new[] { "Date", "Goods_ID", "成品ID", "成品Name", "Number" }, GetDom(date));
+            mainDom.RegisterQueryTable(typeof(FrozenOutTemp), new[] { "Date", "Goods_ID", "成品ID", "成品Name", "Number", "SecondNumber2" }, GetDom(date));
         }
 
         public static void AddJoin(DQueryDom mainDom, JoinAlias selfAlias)
