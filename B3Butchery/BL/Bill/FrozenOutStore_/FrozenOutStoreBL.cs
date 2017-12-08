@@ -19,6 +19,9 @@ namespace BWP.B3Butchery.BL
     }
     public class FrozenOutStoreBL : DepartmentWorkFlowBillBL<FrozenOutStore>, IFrozenOutStoreBL
     {
-
+        protected override void beforeSave(FrozenOutStore dmo)
+        {
+            base.beforeSave(dmo);
+        }
     }
 }

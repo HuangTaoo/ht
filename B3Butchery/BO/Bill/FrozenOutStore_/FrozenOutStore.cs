@@ -10,7 +10,7 @@ using Forks.EnterpriseServices.DomainObjects2;
 
 namespace BWP.B3Butchery.BO
 {
-    [Serializable, DFClass, LogicName("速冻出库单")]
+    [Serializable, DFClass, LogicName("速冻出库")]
     [OrganizationLimitedDmo("Department_ID", typeof(Department))]
     public class FrozenOutStore:DepartmentWorkFlowBill
     {
