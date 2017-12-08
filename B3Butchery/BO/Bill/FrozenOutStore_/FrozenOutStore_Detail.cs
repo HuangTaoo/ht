@@ -32,6 +32,18 @@ namespace BWP.B3Butchery.BO
         [Join("Goods2_ID", "ID")]
         public string Goods2_Name { get; set; }
 
+        [LogicName("主单位")]
+        [ReferenceTo(typeof(Goods), "MainUnit")]
+        [Join("Goods2_ID", "ID")]
+        public string Goods2_MainUnit { get; set; }
+
+        [LogicName("辅单位")]
+        [ReferenceTo(typeof(Goods), "SecondUnit")]
+        [Join("Goods2_ID", "ID")]
+        public string Goods2_SecondUnit { get; set; }
+
+
+
 
         public Money<decimal>? SecondNumber2 { get; set; }
 

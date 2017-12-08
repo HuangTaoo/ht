@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using BWP.B3Butchery.BO;
 using BWP.B3Butchery.Utils;
@@ -39,17 +40,21 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
 
         readonly DFInfo _mainInfo = DFInfo.Get(typeof(ProduceOutput));
         readonly DFInfo _detailInfo = DFInfo.Get(typeof(ProduceOutput_Detail));
+
+        private DFChoiceBox auuInput;
+        private DFChoiceBox departInput;
+        private DFChoiceBox goodInput;
         protected override void AddQueryControls(VLayoutPanel vPanel)
         {
             var customPanel = new LayoutManager("Main", _mainInfo, mQueryContainer);
 
-            customPanel.Add("AccountingUnit_ID", QueryCreator.DFChoiceBoxEnableMultiSelection(_mainInfo.Fields["AccountingUnit_ID"], mQueryContainer, "AccountingUnit_ID", B3FrameworksConsts.DataSources.授权会计单位全部));
+           auuInput = customPanel.Add("AccountingUnit_ID", QueryCreator.DFChoiceBoxEnableMultiSelection(_mainInfo.Fields["AccountingUnit_ID"], mQueryContainer, "AccountingUnit_ID", B3FrameworksConsts.DataSources.授权会计单位全部));
             customPanel["AccountingUnit_ID"].NotAutoAddToContainer = true;
-            customPanel.Add("Department_ID", QueryCreator.DFChoiceBoxEnableMultiSelection(_mainInfo.Fields["Department_ID"], mQueryContainer, "Department_ID", B3FrameworksConsts.DataSources.授权部门全部));
+         departInput =   customPanel.Add("Department_ID", QueryCreator.DFChoiceBoxEnableMultiSelection(_mainInfo.Fields["Department_ID"], mQueryContainer, "Department_ID", B3FrameworksConsts.DataSources.授权部门全部));
             customPanel["Department_ID"].NotAutoAddToContainer = true;
-           
 
-            customPanel.Add("Goods_ID", new SimpleLabel("存货"), QueryCreator.DFChoiceBoxEnableMultiSelection(_detailInfo.Fields["Goods_ID"], mQueryContainer, "Goods_ID", B3UnitedInfosConsts.DataSources.存货));
+
+            customPanel.Add("Goods_ID", new SimpleLabel("存货"), goodInput = QueryCreator.DFChoiceBoxEnableMultiSelection(_detailInfo.Fields["Goods_ID"], mQueryContainer, "Goods_ID", B3UnitedInfosConsts.DataSources.存货));
             customPanel["Goods_ID"].NotAutoAddToContainer = true;
             customPanel.CreateDefaultConfig(2).Expand = false;
             vPanel.Add(customPanel.CreateLayout());
@@ -66,14 +71,14 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
             _checkbox.Items.Add(new ListItem("部门", "Department_Name"));
             _checkbox.Items.Add(new ListItem("产出单品名", "Goods_Name"));
             _checkbox.Items.Add(new ListItem("产出数量", "Number"));
-
             _checkbox.Items.Add(new ListItem("速冻出库品名", "Goods_Name"));
             _checkbox.Items.Add(new ListItem("速冻出库数量", "Number"));
+            _checkbox.Items.Add(new ListItem("产出单差异", "产出单差异"));
             _checkbox.Items.Add(new ListItem("包装品名", "成品Name"));
             _checkbox.Items.Add(new ListItem("包装数量", "Number"));
    
 
-            _checkbox.Items.Add(new ListItem("产出单差异", "产出单差异"));
+
             panel.EAdd(_checkbox);
             var hPanel = new HLayoutPanel();
             CreateDataRangePanel(hPanel);
@@ -94,38 +99,36 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
         }
 
 
-
+        protected override void InitForm(HtmlForm form)
+        {
+            base.InitForm(form);
+            mBrowseGrid.EnableRowsGroup = true;
+        }
 
 
         protected override DQueryDom GetQueryDom()
         {
-            var main = JoinAlias.Create("bill");
-            var detail = JoinAlias.Create("detail");
-            var query = base.GetQueryDom();
-            query.Where.Conditions.Add(DQCondition.EQ(main, "BillState", 单据状态.已审核));
-            OrganizationUtil.AddOrganizationLimit<Department>(query, "Department_ID");
+//            var main = JoinAlias.Create("bill");
+//            var detail = JoinAlias.Create("detail");
+//            var query = base.GetQueryDom();
+
+            var main = new JoinAlias(typeof(ProductOutTemp));
+            var query = new DQueryDom(main);
+            ProductOutTemp.Register(query, dateInput.Date);
+
+
+      
 
             var frozen = new JoinAlias("tempFrozen", typeof(FrozenOutTemp));
+
+            var frozenNum = new JoinAlias("tempFrozenAllNumber", typeof(FrozeTemp));
             FrozenOutTemp.Register(query, dateInput.Value);
-            FrozenOutTemp.AddJoin(query,frozen, detail);
+            FrozenOutTemp.AddJoin(query,frozen);
 
+            FrozeTemp.Register(query, dateInput.Value);
+            FrozeTemp.AddJoin(query, frozenNum);
 
-
-//            _checkbox.Items.Add(new ListItem("会计单位", "AccountingUnit_Name"));
-//            _checkbox.Items.Add(new ListItem("部门", "Department_Name"));
-//            _checkbox.Items.Add(new ListItem("经办人", "Employee_Name"));
-//
-//
-//            _checkbox.Items.Add(new ListItem("产出单品名", "Goods_Name"));
-//            _checkbox.Items.Add(new ListItem("产出数量", "Number"));
-//
-//            _checkbox.Items.Add(new ListItem("速冻出库品名", "Goods_Name"));
-//            _checkbox.Items.Add(new ListItem("速冻出库数量", "Number"));
-//            _checkbox.Items.Add(new ListItem("包装品名", "成品ID"));
-//            _checkbox.Items.Add(new ListItem("包装数量", "成品Name"));
-//
-//
-//            _checkbox.Items.Add(new ListItem("产出单差异", "产出单差异"));
+            var 包装Exp = DQExpression.Field(frozenNum, "AllNumber");
             foreach (ListItem field in _checkbox.Items)
             {
                 if (field.Selected)
@@ -136,22 +139,17 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
                         case "会计单位":
                         case "部门":
                         case "经办人":
+                        case "产出单品名":
+                        case "速冻出库品名":
+                        case "产出数量":
                             query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(main, field.Value), field.Text));
                             query.GroupBy.Expressions.Add(DQExpression.Field(main, field.Value));
                             break;
-                        case "产出单品名":
-                        case "速冻出库品名":
-                            query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(detail, field.Value), field.Text));
-                            query.GroupBy.Expressions.Add(DQExpression.Field(detail, field.Value));
-                            break;
-                        case "产出数量":
-                            query.Columns.Add(DQSelectColumn.Create(DQExpression.Sum(DQExpression.Field(detail, field.Value)), field.Text));
-                            SumColumnIndexs.Add(query.Columns.Count - 1);
-                            break;
-                            
+
                         case "速冻出库数量":
-                            query.Columns.Add(DQSelectColumn.Create(DQExpression.Sum(DQExpression.Field(frozen, field.Value)), field.Text));
-                            SumColumnIndexs.Add(query.Columns.Count - 1);
+                           
+                            query.Columns.Add(DQSelectColumn.Create(包装Exp, field.Text));
+                            query.GroupBy.Expressions.Add(包装Exp);
                             break;
                         case "包装品名":
                             query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(frozen, field.Value), field.Text));
@@ -164,7 +162,11 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
                             break;
                         case  "产出单差异":
 
+                            var 产出Exp = DQExpression.Field(main, "Number");
 
+                            query.Columns.Add(DQSelectColumn.Create(DQExpression.Subtract(产出Exp, 包装Exp), field.Text));
+
+                            query.GroupBy.Expressions.Add(DQExpression.Subtract(产出Exp, 包装Exp));
                             break;
                     }
                 }
@@ -173,11 +175,159 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
             {
                 query.Where.Conditions.Add(DQCondition.EQ(main, "Time", dateInput.Value));
             }
+            if (!string.IsNullOrEmpty(auuInput.Value))
+            {
+
+                query.Where.Conditions.Add(DQCondition.InList(DQExpression.Field(main, "AccountingUnit_Name"), auuInput.GetValues().Select(x => DQExpression.Value(x)).ToArray()));
+            }
+
+            if (!string.IsNullOrEmpty(departInput.Value))
+            {
+
+                query.Where.Conditions.Add(DQCondition.InList(DQExpression.Field(main, "Department_Name"), departInput.GetValues().Select(x => DQExpression.Value(x)).ToArray()));
+            }
+            if (!string.IsNullOrEmpty(goodInput.Value))
+            {
+
+                query.Where.Conditions.Add(DQCondition.InList(DQExpression.Field(main, "Goods_ID"), goodInput.GetValues().Select(x => DQExpression.Value(x)).ToArray()));
+            }
+
+
             return query;
         }
     }
 
 
+
+
+
+    //            _checkbox.Items.Add(new ListItem("会计单位", "AccountingUnit_Name"));
+    //            _checkbox.Items.Add(new ListItem("部门", "Department_Name"));
+    //            _checkbox.Items.Add(new ListItem("经办人", "Employee_Name"));
+    //
+    //
+    //            _checkbox.Items.Add(new ListItem("产出单品名", "Goods_Name"));
+    //            _checkbox.Items.Add(new ListItem("产出数量", "Number"));
+    //
+    //            _checkbox.Items.Add(new ListItem("速冻出库品名", "Goods_Name"));
+    //            _checkbox.Items.Add(new ListItem("速冻出库数量", "Number"));
+    //            _checkbox.Items.Add(new ListItem("包装品名", "成品ID"));
+    //            _checkbox.Items.Add(new ListItem("包装数量", "成品Name"));
+    class ProductOutTemp
+    {
+
+        public string AccountingUnit_Name { get; set; }
+        public string Department_Name { get; set; }
+        public DateTime? Time { get; set; }
+
+
+        public long? Goods_ID { get; set; }
+
+        public string Goods_Name { get; set; }
+
+        public decimal? Number { get; set; }
+
+
+
+
+        private static DQueryDom GetDom(DateTime? date)
+        {
+            var main = new JoinAlias("__produMain", typeof(ProduceOutput));
+
+            var detail = new JoinAlias("__prodDetail", typeof(ProduceOutput_Detail));
+            var dom = new DQueryDom(main);
+            dom.From.AddJoin(JoinType.Left, new DQDmoSource(detail), DQCondition.EQ(detail, "ProduceOutput_ID", main, "ID"));
+
+            dom.Columns.Add(DQSelectColumn.Field("AccountingUnit_Name", main));
+            dom.Columns.Add(DQSelectColumn.Field("Department_Name", main));
+            var exp = DQExpression.Snippet(" (CONVERT(varchar(10), [__produMain].[Time], 23))");
+            dom.Columns.Add(DQSelectColumn.Create(exp, "Time"));
+            dom.Columns.Add(DQSelectColumn.Field("Goods_ID", detail));
+            dom.Columns.Add(DQSelectColumn.Field("Goods_Name", detail));
+            dom.Columns.Add(DQSelectColumn.Sum(detail, "Number"));
+
+
+
+            dom.GroupBy.Expressions.Add(exp);
+            dom.GroupBy.Expressions.Add(DQExpression.Field(main, "AccountingUnit_Name"));
+            dom.GroupBy.Expressions.Add(DQExpression.Field(main, "Department_Name"));
+            dom.GroupBy.Expressions.Add(DQExpression.Field(detail, "Goods_ID"));
+            dom.GroupBy.Expressions.Add(DQExpression.Field(detail, "Goods_Name"));
+    
+            if (date != null)
+            {
+                var c2 = DQCondition.LessThanOrEqual(main, "Time", date.Value.AddDays(1));
+                var c1 = DQCondition.GreaterThanOrEqual(main, "Time", date.Value);
+                dom.Where.Conditions.Add(DQCondition.And(c1, c2));
+            }
+
+            dom.Where.Conditions.Add(DQCondition.EQ(main, "BillState", 单据状态.已审核));
+//            OrganizationUtil.AddOrganizationLimit<Department>(query, "Department_ID");
+            return dom;
+        }
+
+
+        public static void Register(DQueryDom mainDom, DateTime? date)
+        {
+            mainDom.RegisterQueryTable(typeof(ProductOutTemp), new[] { "AccountingUnit_Name", "Department_Name", "Time", "Goods_ID", "Goods_Name", "Number" }, GetDom(date));
+        }
+
+//        public static void AddJoin(DQueryDom mainDom, JoinAlias selfAlias, JoinAlias detailAlias)
+//        {
+//
+//            var root = mainDom.From.RootSource.Alias;
+//            var datediff =
+//                DQExpression.DateDiff(DQExpression.Field(selfAlias, "Date"), DQExpression.Field(root, "Time"));
+//            mainDom.From.AddJoin(JoinType.Left, new DQDmoSource(selfAlias), DQCondition.And(
+//              DQCondition.EQ(DQExpression.Value(-1), datediff),
+//              DQCondition.EQ(selfAlias, "Goods_ID", detailAlias, "Goods_ID")));
+//        }
+    }
+
+
+
+
+
+
+    class FrozeTemp
+    {
+        public long? Goods_ID { get; set; }
+        public decimal? AllNumber { get; set; }
+
+        public static void Register(DQueryDom mainDom, DateTime? date)
+        {
+            mainDom.RegisterQueryTable(typeof(FrozeTemp), new[] { "Goods_ID", "AllNumber" }, GetAllNumDom(date));
+        }
+
+        public static void AddJoin(DQueryDom mainDom, JoinAlias selfAlias)
+        {
+            var root = mainDom.From.RootSource.Alias;
+            mainDom.From.AddJoin(JoinType.Left, new DQDmoSource(selfAlias), DQCondition.And(
+                DQCondition.EQ(selfAlias, "Goods_ID", root, "Goods_ID")));
+        }
+        private static DQueryDom GetAllNumDom(DateTime? date)
+        {
+            var main = new JoinAlias("__frezenMainte", typeof(FrozenOutStore));
+
+            var detail = new JoinAlias("__frezenMainte_De", typeof(FrozenOutStore_Detail));
+            var dom = new DQueryDom(main);
+            dom.From.AddJoin(JoinType.Left, new DQDmoSource(detail), DQCondition.EQ(detail, "FrozenOutStore_ID", main, "ID"));
+
+
+            dom.Columns.Add(DQSelectColumn.Create(DQExpression.Field(detail, "Goods2_ID"), "Goods_ID"));
+            dom.Columns.Add(DQSelectColumn.Create(DQExpression.Sum(DQExpression.Field(detail, "Number")), "AllNumber"));
+
+
+            if (date != null)
+            {
+                var c2 = DQCondition.LessThanOrEqual(main, "Date", date.Value.AddDays(2));
+                var c1 = DQCondition.GreaterThanOrEqual(main, "Date", date.Value.AddDays(1));
+                dom.Where.Conditions.Add(DQCondition.And(c1, c2));
+            }
+            dom.GroupBy.Expressions.Add(DQExpression.Field(detail, "Goods2_ID"));
+            return dom;
+        }
+    }
     class FrozenOutTemp
     {
 
@@ -187,6 +337,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
         public string 成品Name { get; set; }
         public decimal? Number { get; set; }
 
+ 
 
 
         private static DQueryDom GetDom(DateTime? date)
@@ -204,27 +355,32 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
             dom.Columns.Add(DQSelectColumn.Create(DQExpression.Field(detail, "Goods_Name"), "成品Name"));
          
             dom.Columns.Add(DQSelectColumn.Field("Number", detail));
+
             if (date != null)
             {
-                dom.Where.Conditions.Add(DQCondition.EQ(exp, DQExpression.Value<DateTime>(date.Value.AddDays(1))));
+                var c2 = DQCondition.LessThanOrEqual(main, "Date", date.Value.AddDays(2));
+                var c1 = DQCondition.GreaterThanOrEqual(main, "Date", date.Value.AddDays(1));
+                dom.Where.Conditions.Add(DQCondition.And(c1, c2));
             }
             return dom;
         }
+
+
 
         public static void Register(DQueryDom mainDom, DateTime? date)
         {
             mainDom.RegisterQueryTable(typeof(FrozenOutTemp), new[] { "Date", "Goods_ID", "成品ID", "成品Name", "Number" }, GetDom(date));
         }
 
-        public static void AddJoin(DQueryDom mainDom, JoinAlias selfAlias, JoinAlias detailAlias)
+        public static void AddJoin(DQueryDom mainDom, JoinAlias selfAlias)
         {
 
             var root = mainDom.From.RootSource.Alias;
             var datediff =
                 DQExpression.DateDiff(DQExpression.Field(selfAlias, "Date"), DQExpression.Field(root, "Time"));
             mainDom.From.AddJoin(JoinType.Left, new DQDmoSource(selfAlias), DQCondition.And(
-              DQCondition.EQ(DQExpression.Value(1), datediff),
-              DQCondition.EQ(selfAlias, "Goods_ID", detailAlias, "Goods_ID")));
+              DQCondition.EQ(DQExpression.Value(-1), datediff),
+              DQCondition.EQ(selfAlias, "Goods_ID", root, "Goods_ID")));
         }
     }
 

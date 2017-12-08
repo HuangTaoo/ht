@@ -120,7 +120,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.FrozenOutStore_
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
         _detailGrid.Columns.EAdd(new DFEditGridColumn<DFValueLabel>("Goods2_Name")).HeaderText = "半成品名称";
       _detailGrid.Columns.EAdd(new DFEditGridColumn<DFTextBox>("Number")).HeaderText = "主数量";
-      _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_MainUnit"));
+      _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods2_MainUnit"));
 
       _detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("Remark"));
 

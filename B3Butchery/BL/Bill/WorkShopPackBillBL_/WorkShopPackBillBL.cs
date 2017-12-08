@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using BWP.B3Butchery.BO;
 using BWP.B3Frameworks.BL;
+using BWP.B3Frameworks.BO.NamedValueTemplate;
 using BWP.B3Frameworks.Utils;
 using Forks.EnterpriseServices;
 using Forks.EnterpriseServices.BusinessInterfaces;
@@ -74,6 +75,63 @@ namespace BWP.B3Butchery.BL
         protected override void doUnCheck(WorkShopPackBill dmo)
         {
             base.doUnCheck(dmo);
+
+            //撤销时删除当前单据
+
+            DeleteFrozenOutStore(dmo);
+
+
         }
+
+        private void DeleteFrozenOutStore(WorkShopPackBill dmo)
+        {
+            var bl = BIFactory.Create<IFrozenOutStoreBL>(Session);
+            var id = GetFrozenId(dmo.ID);
+
+            var bo = bl.Load(id??0);
+            if (bo != null)
+            {
+
+                if (bo.BillState == 单据状态.已审核)
+                {
+                    throw  new Exception("关联单据" +id+ "已审核");
+                }
+                else if (bo.BillState == 单据状态.未审核)
+                {
+                    bl.Delete(bo);
+                }
+            }
+           
+
+
+
+        }
+
+
+
+
+        private long? GetFrozenId(long id)
+        {
+            var main = new JoinAlias(typeof(FrozenOutStore));
+            var query = new DQueryDom(main);
+            query.Columns.Add(DQSelectColumn.Field("ID", main));
+            query.Where.Conditions.Add(DQCondition.EQ(main, "WorkBill_ID", id));
+            long? froId = null;
+
+            using (var reader = Session.ExecuteReader(query))
+            {
+                if (reader.Read())
+                {
+                    froId =  (long)reader[0];
+
+                }
+            }
+            return froId;
+           
+        }
+
+
+
+
     }
 }
