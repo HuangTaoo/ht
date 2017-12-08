@@ -25,8 +25,6 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
 {
   public class ProductInStoreEdit : DepartmentWorkFlowBillEditPage<ProductInStore, IProductInStoreBL>
   {
-
-
     protected override void BuildBody(Control container)
     {
       var mainInfo = container.EAdd(new TitlePanel("基本信息"));
@@ -56,7 +54,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
     {
     }
 
-    DFEditGrid detailGrid;
+     protected DFEditGrid detailGrid;
     private void CreateDetailPanel(TitlePanel titlePanel)
     {
       var hPanel = titlePanel.EAdd(new HLayoutPanel());
@@ -267,6 +265,9 @@ function(result,dfContainer){
         }
         detailGrid.DataBind();
       }));
+      ProduceFinishBtn(hPanel, this);//耘垦选择生产完工单button
+
+
       var loadProductInStoreTemp = hPanel.Add(new DialogButton { Text = "选择模板", });
       loadProductInStoreTemp.Url = "/B3Butchery/Dialogs/ProductInStoreTempDialog.aspx";
       loadProductInStoreTemp.Click += delegate
@@ -304,6 +305,10 @@ function(result,dfContainer){
       };
     }
 
+    protected virtual void ProduceFinishBtn(HLayoutPanel hPanel, ProductInStoreEdit page)
+    {
+
+    }
     private void ReceiveSelectedGoodsDetailDialog()
     {
       var selectedList = DialogUtil.GetCachedObj<SelectedGoodsDetail>(this);
