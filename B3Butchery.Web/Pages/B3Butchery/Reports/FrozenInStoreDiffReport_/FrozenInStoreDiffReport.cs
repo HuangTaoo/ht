@@ -171,10 +171,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
                     }
                 }
             }
-            if (dateInput.Value != null)
-            {
-                query.Where.Conditions.Add(DQCondition.EQ(main, "Time", dateInput.Value));
-            }
+
             if (!string.IsNullOrEmpty(auuInput.Value))
             {
 
