@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Select xmlns="urn:XDQuery">
+  <Columns>
+  </Columns>
+  <From>
+    <Join>
+      <DmoClass class="BWP.B3Butchery.BO.ProduceOutput, B3Butchery" alias="bill"/>
+      <DmoClass class="BWP.B3Butchery.BO.ProduceOutput_Detail, B3Butchery" alias="detail"/>
+      <Condition>
+        <EQ>
+          <Field name="ID"/>
+          <Field name="ProduceOutput_ID" alias="detail"/>
+        </EQ>
+      </Condition>
+    </Join>
+  </From>
+  <Where>
+    <And>
+      <QBEIn>
+        <Field name="ProductionPlan_ID"/>
+        <QBE paramName="ProductionPlan_ID"/>
+      </QBEIn>
+      <GreaterThanOrEqual>
+        <Field name="Date"/>
+        <QBE paramName="MinDate" />
+      </GreaterThanOrEqual>
+      <LessThanOrEqual>
+        <Field name="Date"/>
+        <QBE paramName="MaxDate"/>
+      </LessThanOrEqual>
+      <QBEIn>
+        <Field name="AccountingUnit_ID"/>
+        <QBE paramName="AccountingUnit_ID"/>
+      </QBEIn>
+      <QBEIn>
+        <Field name="Department_ID"/>
+        <QBE paramName="Department_ID"/>
+      </QBEIn>
+      <QBEIn>
+        <Field name="Department_ID"/>
+        <QBE paramName="Department_ID"/>
+      </QBEIn>
+      <QBEIn>
+        <Field name="Employee_ID"/>
+        <QBE paramName="Employee_ID"/>
+      </QBEIn>
+      <QBEIn>
+        <Field name="Store_ID"/>
+        <QBE paramName="Store_ID"/>
+      </QBEIn>
+      <QBEIn>
+        <Field name="OtherInStoreType_ID"/>
+        <QBE paramName="OtherInStoreType_ID"/>
+      </QBEIn>
+      <Like>
+        <Field name="Remark"/>
+        <QBE paramName="Remark"/>
+      </Like>
+      <QBEIn>
+        <Field name="Goods_ID"  alias="detail"/>
+        <QBE paramName="Goods_ID"/>
+      </QBEIn>
+    </And>
+  </Where>
+</Select>

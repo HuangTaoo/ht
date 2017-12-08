@@ -154,6 +154,7 @@
       <Function index="5" name="生产通知分析"/>
       <Function index="6" name="速冻入库分析" />
       <Function index="7" name="车间包装分析" />
+      <Function index="8" name="速冻入库归零差异表" />
       
     </FunctionGroup>
     <FunctionGroup name="生产环节模板" roleSchemas="employee" >
@@ -426,6 +427,8 @@
 
     <Menu id="0035" features="B3Butchery.0018" name="/屠宰分割/业务单据/车间包装/列表" roles="B3Butchery.车间包装.访问" url="B3Butchery/Bills/WorkShopPackBill_/WorkShopPackBillList.aspx"/>
     <Menu id="0036" features="B3Butchery.0018" name="/屠宰分割/业务单据/速冻出库/列表" roles="B3Butchery.速冻出库.访问" url="B3Butchery/Bills/FrozenOutStore_/FrozenOutStoreList.aspx"/>
+
+    <Menu id="0037" name="/屠宰分割/报表/速冻入库归零差异表" roles="B3Butchery.报表.速冻入库归零差异表" url="B3Butchery/Reports/FrozenInStoreDiffReport_/FrozenInStoreDiffReport.aspx"/>
   </Menus>
 
   <Hippo>
