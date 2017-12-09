@@ -46,6 +46,7 @@ namespace BWP.B3Butchery.BO
 
 
         //当前存货 ---半成品
+        [LogicName("辅数量Ⅱ")]
         public Money<decimal>? SecondNumber2 { get; set; }
 
         [LogicName("辅单位Ⅱ")]

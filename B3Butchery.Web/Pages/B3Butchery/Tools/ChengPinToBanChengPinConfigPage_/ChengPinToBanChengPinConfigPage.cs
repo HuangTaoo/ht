@@ -120,10 +120,14 @@ namespace BWP.Web.Pages.B3Butchery.Tools.ChengPinToBanChengPinConfigPage_
 
 		DQueryDom GetQueryDom()
 		{
+            
 			var dom = mQueryContainer.Build();
 			var goodsAlias = dom.From.RootSource.Alias;
+            var prop = new JoinAlias("pro", typeof(GoodsProperty));
+
 			var refAlias = new JoinAlias(typeof(ChengPinToBanChengPinConfig));
 			dom.From.AddJoin(JoinType.Left, new DQDmoSource(refAlias), DQCondition.EQ(goodsAlias, "ID", refAlias, "Goods_ID"));
+            dom.From.AddJoin(JoinType.Left, new DQDmoSource(prop), DQCondition.EQ(goodsAlias, "GoodsProperty_ID", prop, "ID"));
 			dom.Columns.Add(DQSelectColumn.Field("ID"));
 			dom.Columns.Add(DQSelectColumn.Field("Name", "成品名称"));
 			dom.Columns.Add(DQSelectColumn.Field("Code", "成品编码"));
@@ -134,6 +138,7 @@ namespace BWP.Web.Pages.B3Butchery.Tools.ChengPinToBanChengPinConfigPage_
 			dom.Columns.Add(DQSelectColumn.Field("Goods2_Spec", refAlias));
 			dom.Columns.Add(DQSelectColumn.Field("Remark", refAlias));
 			dom.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
+            dom.Where.Conditions.Add(DQCondition.EQ(prop, "EnableSale", true));
 			return dom;
 		}
 
