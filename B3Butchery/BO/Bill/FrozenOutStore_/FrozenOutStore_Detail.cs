@@ -25,19 +25,19 @@ namespace BWP.B3Butchery.BO
         [ReferenceTo(typeof(ProductPlan), "PlanNumber")]
         [Join("PlanNumber_ID", "ID")]
         public string PlanNumber_Name { get; set; }
-        [LogicName("半成品")]
+        [LogicName("成品")]
         public long? Goods2_ID { get; set; }
-        [LogicName("半成品")]
+        [LogicName("成品")]
         [ReferenceTo(typeof(Goods), "Name")]
         [Join("Goods2_ID", "ID")]
         public string Goods2_Name { get; set; }
 
-        [LogicName("主单位")]
+        [LogicName("成品主单位")]
         [ReferenceTo(typeof(Goods), "MainUnit")]
         [Join("Goods2_ID", "ID")]
         public string Goods2_MainUnit { get; set; }
 
-        [LogicName("辅单位")]
+        [LogicName("成品单位")]
         [ReferenceTo(typeof(Goods), "SecondUnit")]
         [Join("Goods2_ID", "ID")]
         public string Goods2_SecondUnit { get; set; }
@@ -45,6 +45,7 @@ namespace BWP.B3Butchery.BO
 
 
 
+        //当前存货 ---半成品
         public Money<decimal>? SecondNumber2 { get; set; }
 
         [LogicName("辅单位Ⅱ")]

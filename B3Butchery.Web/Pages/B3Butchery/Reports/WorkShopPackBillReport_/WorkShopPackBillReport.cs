@@ -65,6 +65,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.WorkShopPackBillReport_
             base.InitQueryPanel(queryPanel);
             var panel = queryPanel.CreateTab("显示字段");
             _checkbox = new CheckBoxListWithReverseSelect { RepeatColumns = 6, RepeatDirection = RepeatDirection.Horizontal };
+            _checkbox.Items.Add(new ListItem("单据", "ID"));
             _checkbox.Items.Add(new ListItem("日期", "Date"));
    
             _checkbox.Items.Add(new ListItem("会计单位", "AccountingUnit_Name"));
@@ -114,7 +115,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.WorkShopPackBillReport_
                     switch (field.Text)
                     {
                         case "日期":
-                    
+                        case "单据":
                         case "会计单位":
                         case "部门":
                         case "仓库":

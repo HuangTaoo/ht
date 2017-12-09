@@ -116,9 +116,9 @@ namespace BWP.Web.Pages.B3Butchery.Bills.FrozenOutStore_
             e.Control.Width = Unit.Pixel(120);
         };
 
-        _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
+        _detailGrid.Columns.EAdd(new DFEditGridColumn<DFValueLabel>("Goods_Name")).HeaderText = "半成品名称";
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
-        _detailGrid.Columns.EAdd(new DFEditGridColumn<DFValueLabel>("Goods2_Name")).HeaderText = "半成品名称";
+        _detailGrid.Columns.EAdd(new DFEditGridColumn<DFValueLabel>("Goods2_Name")).HeaderText = "成品名称";
       _detailGrid.Columns.EAdd(new DFEditGridColumn<DFTextBox>("Number")).HeaderText = "主数量";
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods2_MainUnit"));
 

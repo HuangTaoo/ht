@@ -47,13 +47,13 @@ namespace BWP.B3Butchery.BL
             foreach (var one in group)
             {
                 var de = new FrozenOutStore_Detail();
-                de.Goods_ID = one.Key.Goods_ID;
+                de.Goods2_ID = one.Key.Goods_ID;
                 DmoUtil.RefreshDependency(de, "Goods_ID");
                 de.PlanNumber_ID = one.Key.PlanNumber_ID;
                 de.Number = one.Sum(x => (x.Number??0).Value);
                 de.SecondNumber = one.Sum(x => (x.SecondNumber ?? 0).Value);
                 de.SecondNumber2 = one.Sum(x => (x.SecondNumber2 ?? 0).Value);
-                de.Goods2_ID = GetBanChengPinByGoodsID(de.Goods_ID);
+                de.Goods_ID = GetBanChengPinByGoodsID(one.Key.Goods_ID) ?? 0;
                 bo.Details.Add(de);
             }
             bl.Insert(bo);
