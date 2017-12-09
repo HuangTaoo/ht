@@ -323,7 +323,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
             dom.From.AddJoin(JoinType.Left, new DQDmoSource(detail), DQCondition.EQ(detail, "FrozenOutStore_ID", main, "ID"));
 
 
-            dom.Columns.Add(DQSelectColumn.Create(DQExpression.Field(detail, "Goods2_ID"), "Goods_ID"));
+            dom.Columns.Add(DQSelectColumn.Field("Goods_ID", detail));
             dom.Columns.Add(DQSelectColumn.Create(DQExpression.Sum(DQExpression.Field(detail, "Number")), "AllNumber"));
             dom.Columns.Add(DQSelectColumn.Create(DQExpression.Sum(DQExpression.Field(detail, "SecondNumber2")), "AllSecondNumber2"));
 
@@ -333,7 +333,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
                 var c1 = DQCondition.GreaterThanOrEqual(main, "Date", date.Value.AddDays(1));
                 dom.Where.Conditions.Add(DQCondition.And(c1, c2));
             }
-            dom.GroupBy.Expressions.Add(DQExpression.Field(detail, "Goods2_ID"));
+            dom.GroupBy.Expressions.Add(DQExpression.Field(detail, "Goods_ID"));
             dom.Where.Conditions.Add(DQCondition.InEQ(main, "BillState", 1));
             return dom;
         }
@@ -360,9 +360,9 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
 
             var exp = DQExpression.Snippet(" (CONVERT(varchar(10), [__frezenMain].[Date], 23))");
             dom.Columns.Add(DQSelectColumn.Create(exp, "Date"));
-            dom.Columns.Add(DQSelectColumn.Create(DQExpression.Field(detail, "Goods2_ID"), "Goods_ID"));
-            dom.Columns.Add(DQSelectColumn.Create(DQExpression.Field(detail, "Goods_ID"), "成品ID"));
-            dom.Columns.Add(DQSelectColumn.Create(DQExpression.Field(detail, "Goods_Name"), "成品Name"));
+            dom.Columns.Add(DQSelectColumn.Field("Goods_ID", detail));
+            dom.Columns.Add(DQSelectColumn.Create(DQExpression.Field(detail, "Goods2_ID"), "成品ID"));
+            dom.Columns.Add(DQSelectColumn.Create(DQExpression.Field(detail, "Goods2_Name"), "成品Name"));
          
             dom.Columns.Add(DQSelectColumn.Field("Number", detail));
             dom.Columns.Add(DQSelectColumn.Field("SecondNumber2", detail));
