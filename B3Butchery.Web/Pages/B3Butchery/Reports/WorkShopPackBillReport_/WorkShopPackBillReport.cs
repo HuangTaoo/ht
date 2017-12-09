@@ -38,7 +38,8 @@ namespace BWP.Web.Pages.B3Butchery.Reports.WorkShopPackBillReport_
         protected override void AddQueryControls(VLayoutPanel vPanel)
         {
             var customPanel = new LayoutManager("Main", _mainInfo, mQueryContainer);
-
+            customPanel.Add("ID", mQueryContainer.Add(new DFTextBox(_mainInfo.Fields["ID"]), "ID"));
+            customPanel["ID"].NotAutoAddToContainer = true;
             customPanel.Add("PlanNumber_ID", new SimpleLabel("计划号"), QueryCreator.DFChoiceBoxEnableMultiSelection(_detailInfo.Fields["PlanNumber_ID"], mQueryContainer, "PlanNumber_ID", B3ButcheryDataSource.计划号));
             customPanel["PlanNumber_ID"].NotAutoAddToContainer = true;
             customPanel.Add("AccountingUnit_ID", QueryCreator.DFChoiceBoxEnableMultiSelection(_mainInfo.Fields["AccountingUnit_ID"], mQueryContainer, "AccountingUnit_ID", B3FrameworksConsts.DataSources.授权会计单位全部));
@@ -65,7 +66,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.WorkShopPackBillReport_
             base.InitQueryPanel(queryPanel);
             var panel = queryPanel.CreateTab("显示字段");
             _checkbox = new CheckBoxListWithReverseSelect { RepeatColumns = 6, RepeatDirection = RepeatDirection.Horizontal };
-            _checkbox.Items.Add(new ListItem("单据", "ID"));
+            _checkbox.Items.Add(new ListItem("单据号", "ID"));
             _checkbox.Items.Add(new ListItem("日期", "Date"));
    
             _checkbox.Items.Add(new ListItem("会计单位", "AccountingUnit_Name"));
@@ -115,7 +116,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.WorkShopPackBillReport_
                     switch (field.Text)
                     {
                         case "日期":
-                        case "单据":
+                        case "单据号":
                         case "会计单位":
                         case "部门":
                         case "仓库":

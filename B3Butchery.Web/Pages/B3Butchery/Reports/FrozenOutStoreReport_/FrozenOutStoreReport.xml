@@ -16,6 +16,10 @@
   </From>
   <Where>
     <And>
+      <EQ>
+        <Field name="ID"/>
+        <QBE paramName="ID"/>
+      </EQ>
       <QBEIn>
         <Field name="ProductionPlan_ID"/>
         <QBE paramName="ProductionPlan_ID"/>

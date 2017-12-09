@@ -16,7 +16,10 @@
   </From>
   <Where>
     <And>
-
+      <EQ>
+        <Field name="ID"/>
+        <QBE paramName="ID"/>
+      </EQ>
       <GreaterThanOrEqual>
         <Field name="Date"/>
         <QBE paramName="MinDate" />
