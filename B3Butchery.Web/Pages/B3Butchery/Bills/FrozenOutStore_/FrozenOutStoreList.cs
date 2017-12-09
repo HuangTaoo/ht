@@ -44,12 +44,12 @@ namespace BWP.Web.Pages.B3Butchery.Bills.FrozenOutStore_
         protected override void InitToolBar(HLayoutPanel toolbar)
         {
             base.InitToolBar(toolbar);
-//            if (User.IsInRole("B3Butchery.报表.速冻入库分析"))
-//            {
-//                var dataAnysBtn = new TSButton() { Text = "数据分析", UseSubmitBehavior = false };
-//                dataAnysBtn.OnClientClick = string.Format("OpenUrlInTopTab('{0}','速冻入库分析');return false;", WpfPageUrl.ToGlobal(AspUtil.AddTimeStampToUrl("~/B3Butchery/Reports/FrozenOutStoreReport_/FrozenOutStoreReport.aspx")));
-//                toolbar.Add(dataAnysBtn);
-//            }
+            if (User.IsInRole("B3Butchery.报表.速冻出库分析"))
+            {
+                var dataAnysBtn = new TSButton() { Text = "数据分析", UseSubmitBehavior = false };
+                dataAnysBtn.OnClientClick = string.Format("OpenUrlInTopTab('{0}','速冻出库分析');return false;", WpfPageUrl.ToGlobal(AspUtil.AddTimeStampToUrl("~/B3Butchery/Reports/FrozenOutStoreReport_/FrozenOutStoreReport.aspx")));
+                toolbar.Add(dataAnysBtn);
+            }
         }
     }
 }

@@ -322,6 +322,9 @@
     <Compile Include="Pages\B3Butchery\Reports\FrozenInStoreDiffReport_\FrozenInStoreDiffReport.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\B3Butchery\Reports\FrozenOutStoreReport_\FrozenOutStoreReport.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\Reports\FrozenInStoreReport_\FrozenInStoreReport.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -446,6 +449,7 @@
     <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductNotice_\ProductNoticeList.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Reports\FrozenInStoreReport_\FrozenInStoreReport.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\FrozenInStoreDiffReport_\FrozenInStoreDiffReport.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\FrozenOutStore_\FrozenOutStoreList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\WorkShopPackBillReport_\WorkShopPackBillReport.xml" />
@@ -455,7 +459,7 @@
     <EmbeddedResource Include="Pages\B3Butchery\Dialogs\SelectCalculateGoodsDialog.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\FrozenInStoreSetBill_\FrozenInStoreSetBillList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\WorkshopCategory_\WorkshopCategoryList.xml" />
-    <EmbeddedResource Include="Pages\B3Butchery\Reports\FrozenInStoreReport_\FrozenInStoreReport.xml" />
+    <EmbeddedResource Include="Pages\B3Butchery\Reports\FrozenOutStoreReport_\FrozenOutStoreReport.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\PickingAnalyse_\PickingAnalyse.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\PackingRecipientsAnalyse_\PackingRecipientsAnalyse.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\Picking_\PickingList.xml" />

@@ -155,6 +155,7 @@
       <Function index="6" name="速冻入库分析" />
       <Function index="7" name="车间包装分析" />
       <Function index="8" name="速冻入库归零差异表" />
+      <Function index="9" name="速冻出库分析" />
       
     </FunctionGroup>
     <FunctionGroup name="生产环节模板" roleSchemas="employee" >
