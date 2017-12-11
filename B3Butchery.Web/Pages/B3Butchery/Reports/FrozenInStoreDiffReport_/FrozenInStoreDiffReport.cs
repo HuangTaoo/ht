@@ -73,9 +73,11 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
             _checkbox.Items.Add(new ListItem("产出数量", "Number"));
             _checkbox.Items.Add(new ListItem("产出辅数量", "SecondNumber2"));
             _checkbox.Items.Add(new ListItem("速冻出库品名", "Goods_Name"));
-            _checkbox.Items.Add(new ListItem("速冻出库辅数量", "SecondNumber2"));
             _checkbox.Items.Add(new ListItem("速冻出库数量", "Number"));
-            _checkbox.Items.Add(new ListItem("产出单差异", "产出单差异"));
+            _checkbox.Items.Add(new ListItem("速冻出库辅数量", "SecondNumber2"));
+
+            _checkbox.Items.Add(new ListItem("产出单差异(重量)", "产出单差异(重量)"));
+            _checkbox.Items.Add(new ListItem("产出单差异(袋数)", "产出单差异(袋数)"));
             _checkbox.Items.Add(new ListItem("包装品名", "成品Name"));
             _checkbox.Items.Add(new ListItem("包装数量", "Number"));
             _checkbox.Items.Add(new ListItem("包装辅数量", "SecondNumber2"));
@@ -130,7 +132,8 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
             FrozeTemp.Register(query, dateInput.Value);
             FrozeTemp.AddJoin(query, frozenNum);
 
-            var 包装Exp = DQExpression.Field(frozenNum, "AllNumber");
+            var 速冻出库重量Exp = DQExpression.Field(frozenNum, "AllNumber");
+            var 速冻出库袋数Exp = DQExpression.Field(frozenNum, "AllSecondNumber2");
             foreach (ListItem field in _checkbox.Items)
             {
                 if (field.Selected)
@@ -152,14 +155,14 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
 
                         case "速冻出库数量":
                             
-                            query.Columns.Add(DQSelectColumn.Create(包装Exp, field.Text));
-                            query.GroupBy.Expressions.Add(包装Exp);
+                            query.Columns.Add(DQSelectColumn.Create(速冻出库重量Exp, field.Text));
+                            query.GroupBy.Expressions.Add(速冻出库重量Exp);
                             break;
 
                         case "速冻出库辅数量":
+                            query.Columns.Add(DQSelectColumn.Create(速冻出库袋数Exp, field.Text));
+                            query.GroupBy.Expressions.Add(速冻出库袋数Exp);
 
-                            query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(frozenNum, "AllSecondNumber2"), field.Text));
-                            query.GroupBy.Expressions.Add(DQExpression.Field(frozenNum, "AllSecondNumber2"));
                             break;
                         case "包装品名":
                             query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(frozen, field.Value), field.Text));
@@ -172,13 +175,21 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
                             query.Columns.Add(DQSelectColumn.Create(DQExpression.Sum(DQExpression.Field(frozen, field.Value)), field.Text));
                             SumColumnIndexs.Add(query.Columns.Count - 1);
                             break;
-                        case  "产出单差异":
+                        case  "产出单差异(重量)":
 
-                            var 产出Exp = DQExpression.Field(main, "Number");
+                            var 产出重量Exp = DQExpression.Field(main, "Number");
 
-                            query.Columns.Add(DQSelectColumn.Create(DQExpression.Subtract(产出Exp, 包装Exp), field.Text));
+                            query.Columns.Add(DQSelectColumn.Create(DQExpression.Subtract(产出重量Exp, 速冻出库重量Exp), field.Text));
 
-                            query.GroupBy.Expressions.Add(DQExpression.Subtract(产出Exp, 包装Exp));
+                            query.GroupBy.Expressions.Add(DQExpression.Subtract(产出重量Exp, 速冻出库重量Exp));
+                            break;
+                        case "产出单差异(袋数)":
+
+                            var 产出袋数Exp = DQExpression.Field(main, "SecondNumber2");
+
+                            query.Columns.Add(DQSelectColumn.Create(DQExpression.Subtract(产出袋数Exp, 速冻出库袋数Exp), field.Text));
+
+                            query.GroupBy.Expressions.Add(DQExpression.Subtract(产出袋数Exp, 速冻出库袋数Exp));
                             break;
                     }
                 }
