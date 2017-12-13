@@ -18,7 +18,24 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
   [Rpc]
   public static class CSBaseInfoRpc
   {
-    [Rpc(RpcFlags.SkipAuth)]
+
+
+        [Rpc(RpcFlags.SkipAuth)]
+        public static string GetAllWorkShopCountConfigList()
+        {
+            var dmoquery = new DmoQuery(typeof(WorkShopCountConfig));
+            dmoquery.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
+            var list = dmoquery.EExecuteList().Cast<WorkShopCountConfig>().ToList();
+
+            var jsonStr = JsonConvert.SerializeObject(list);
+            //var jsonStr = serializer.Serialize(list);
+            return jsonStr;
+        }
+
+
+
+
+        [Rpc(RpcFlags.SkipAuth)]
     public static List<WorkshopCategory> GetWorkshopCategory()
     {
       var query = new DQueryDom(new JoinAlias(typeof(WorkshopCategory)));

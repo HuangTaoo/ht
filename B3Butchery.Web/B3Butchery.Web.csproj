@@ -193,6 +193,12 @@
     <Compile Include="Pages\B3Butchery\BaseInfos\WorkshopCategory_\WorkshopCategoryList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\WorkShopCountConfig_\WorkShopCountConfigEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\WorkShopCountConfig_\WorkShopCountConfigList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\Bills\DailyProductReport_\DailyProductReportEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -449,6 +455,7 @@
     <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductNotice_\ProductNoticeList.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\WorkShopCountConfig_\WorkShopCountConfigList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\FrozenInStoreReport_\FrozenInStoreReport.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\FrozenInStoreDiffReport_\FrozenInStoreDiffReport.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\FrozenOutStore_\FrozenOutStoreList.xml" />

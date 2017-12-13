@@ -340,6 +340,20 @@
       <Function index="10" name="完毕"/>
       <Function index="11" name="撤销完毕"/>
     </FunctionGroup>
+    <FunctionGroup name="车间计数配置单" roleSchemas="employee" >
+      <Function index="0" name="访问" />
+      <Function index="1" name="新建" />
+      <Function index="2" name="编辑" />
+      <Function index="3" name="删除" />
+      <Function index="4" name="审核" />
+      <Function index="5" name="撤销" />
+      <Function index="6" name="锁定" />
+      <Function index="7" name="解锁" />
+      <Function index="8" name="管理" />
+      <Function index="9" name="作废" />
+      <Function index="10" name="完毕"/>
+      <Function index="11" name="撤销完毕"/>
+    </FunctionGroup>
     <FunctionGroup name="生产完工单" roleSchemas="employee" >
       <Function index="0" name="访问" />
       <Function index="1" name="新建" />
@@ -430,6 +444,8 @@
     <Menu id="0036" features="B3Butchery.0018" name="/屠宰分割/业务单据/速冻出库/列表" roles="B3Butchery.速冻出库.访问" url="B3Butchery/Bills/FrozenOutStore_/FrozenOutStoreList.aspx"/>
 
     <Menu id="0037" name="/屠宰分割/报表/速冻入库归零差异表" roles="B3Butchery.报表.速冻入库归零差异表" url="B3Butchery/Reports/FrozenInStoreDiffReport_/FrozenInStoreDiffReport.aspx"/>
+
+    <Menu id="0038" features="B3Butchery.0016" name="/屠宰分割/信息设置/档案/车间计数配置单/列表" roles="B3Butchery.车间计数配置单.访问" url="B3Butchery/BaseInfos/WorkShopCountConfig_/WorkShopCountConfigList.aspx"/>
   </Menus>
 
   <Hippo>

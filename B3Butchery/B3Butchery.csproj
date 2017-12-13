@@ -161,6 +161,7 @@
     <Compile Include="BL\BaseInfo\ProductLinksBL_\ProductLinksBL_.cs" />
     <Compile Include="BL\BaseInfo\ProductLinkTemplateBL_\ProductLinkTemplateBL.cs" />
     <Compile Include="BL\BaseInfo\WorkshopCategoryBL_\IWorkshopCategoryBL.cs" />
+    <Compile Include="BL\BaseInfo\WorkShopCountConfig_\WorkShopCountConfigBL.cs" />
     <Compile Include="BL\Bill\DailyProductReportBL_\DailyProductReportBL.cs" />
     <Compile Include="BL\Bill\FrozenInStoreSetBillBL_\IFrozenInStoreSetBillBL.cs" />
     <Compile Include="BL\Bill\FrozenInStore_\FrozenInStoreBL.cs" />
@@ -197,6 +198,8 @@
     <Compile Include="BO\BaseInfo\ProductLink_\ProductLinks_InputDetail.cs" />
     <Compile Include="BO\BaseInfo\ProductLink_\ProductLinks_OutputDetail.cs" />
     <Compile Include="BO\BaseInfo\WorkshopCategory_\WorkshopCategory.cs" />
+    <Compile Include="BO\BaseInfo\WorkShopCountConfig_\WorkShopCountConfig.cs" />
+    <Compile Include="BO\BaseInfo\WorkShopCountConfig_\WorkShopCountConfig_Detail.cs" />
     <Compile Include="BO\Base\GoodsDetail.cs" />
     <Compile Include="BO\Base\HandsetSelectedGoods.cs" />
     <Compile Include="BO\Bill\DailyProductReport_\DailyProductReport.cs" />

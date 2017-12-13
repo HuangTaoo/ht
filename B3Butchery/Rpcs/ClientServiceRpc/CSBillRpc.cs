@@ -35,7 +35,9 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       return jsonStr;
     }
 
-      [Rpc]
+
+
+        [Rpc]
 
       public static long CreateHandoverRecordJson(string json)
       {
