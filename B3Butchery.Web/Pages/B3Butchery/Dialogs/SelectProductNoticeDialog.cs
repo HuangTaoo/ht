@@ -1,17 +1,19 @@
 ﻿using System;
 using BWP.B3Butchery.BO;
 using BWP.B3Frameworks;
+using BWP.B3UnitedInfos;
 using BWP.Web.Layout;
 using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.Utils;
 using TSingSoft.WebControls2;
+using TSingSoft.WebPluginFramework;
 
 namespace BWP.Web.Pages.B3Butchery.Dialogs {
   class SelectProductNoticeDialog : DmoMultiSelectDialog<ProductNotice, ProduceFinish_Detail> {
     private DFCheckBox _hideFinishedBill;
-
+    protected readonly bool _useBrand = GlobalFlags.get(B3UnitedInfosConsts.GlobalFlags.库存支持品牌项);
     protected override void CreateQuery(VLayoutPanel vPanel) {
       var layoutManager = new LayoutManager("", mDFInfo, mQueryContainer);
 
@@ -45,14 +47,14 @@ namespace BWP.Web.Pages.B3Butchery.Dialogs {
       grid.Columns.Add(new DFBrowseGridColumn("Goods_SecondUnit"));
       grid.Columns.Add(new DFBrowseGridColumn("Number"));
       grid.Columns.Add(new DFBrowseGridColumn("SecondNumber"));
-
+      if(_useBrand)
+        grid.Columns.Add(new DFBrowseGridColumn("BrandItem_Name"));
     }
 
     protected override DQueryDom GetQueryDom() {
       var dom = base.GetQueryDom();
       var detail = JoinAlias.Create("detail");
       var alias = dom.From.RootSource.Alias;
-
       dom.Columns.Add(DQSelectColumn.Field("ID", alias));
       dom.Columns.Add(DQSelectColumn.Create(DQExpression.Field(detail, "ID"), "DetailID"));
       dom.Columns.Add(DQSelectColumn.Field("AccountingUnit_Name"));
@@ -64,6 +66,8 @@ namespace BWP.Web.Pages.B3Butchery.Dialogs {
       dom.Columns.Add(DQSelectColumn.Field("Number", detail));
       dom.Columns.Add(DQSelectColumn.Field("SecondNumber", detail));
       dom.Columns.Add(DQSelectColumn.Field("DoneNumber", detail));
+      dom.Columns.Add(DQSelectColumn.Field("BrandItem_Name", detail));
+      dom.Columns.Add(DQSelectColumn.Field("BrandItem_ID", detail));
       dom.EAddCheckedCondition(alias);
       dom.Where.Conditions.Add(DQCondition.EQ(alias, "Domain_ID", DomainContext.Current.ID));
       if (_hideFinishedBill.Checked) {
@@ -79,7 +83,8 @@ namespace BWP.Web.Pages.B3Butchery.Dialogs {
       dmo.ProductNotice_Detail_ID = (long)row["DetailID"];
       dmo.Number = (Money<Decimal>?)row["Number"] - ((Money<Decimal>?)row["DoneNumber"] ?? 0);
       dmo.SecondNumber = (Money<Decimal>?)row["SecondNumber"];
-
+      dmo.BrandItem_ID = (long?)row["BrandItem_ID"];
+      dmo.BrandItem_Name = (string)row["BrandItem_Name"];
     }
 
   }

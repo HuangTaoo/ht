@@ -13,6 +13,7 @@ using BWP.Web.Utils;
 using BWP.Web.WebControls;
 using Forks.EnterpriseServices.DataForm;
 using TSingSoft.WebControls2;
+using TSingSoft.WebPluginFramework;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
   public class ProduceFinishEdit : DepartmentWorkFlowBillEditPage<ProduceFinish, IProduceFinishBL> {
@@ -40,6 +41,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
     }
 
    protected DFEditGrid _detailGrid;
+   protected readonly bool _useBrand = GlobalFlags.get(B3UnitedInfosConsts.GlobalFlags.库存支持品牌项);
     private void CreateOutputDetailPanel(TitlePanel tPanel) {
       var hPanel = new HLayoutPanel();
 
@@ -102,6 +104,8 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
       };
       _detailGrid = new DFEditGrid(detailEditor) { Width = Unit.Percentage(100) };
       tPanel.Controls.Add(_detailGrid);
+      if(_useBrand)
+        _detailGrid.Columns.Add(new DFEditGridColumn("BrandItem_ID"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
       _detailGrid.Add(new DFEditGridColumn<DFValueLabel>("Goods_Spec"));

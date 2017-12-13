@@ -21,6 +21,8 @@ using Forks.EnterpriseServices.SqlDoms;
 using TSingSoft.WebControls2;
 using DataKind = BWP.B3Frameworks.B3FrameworksConsts.DataSources;
 using TSingSoft.WebControls2.QBELinks;
+using TSingSoft.WebPluginFramework;
+using BWP.B3UnitedInfos;
 
 namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
 {
@@ -29,6 +31,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
 		DFInfo mainInfo = DFInfo.Get(typeof(ProductInStore));
 		DFInfo detailInfo = DFInfo.Get(typeof(ProductInStore_Detail));
     readonly static short mDmoTypeID = TypeUtil.GetNullableDmoTypeID<ProductInStore>().Value;
+    protected readonly bool _useBrand = GlobalFlags.get(B3UnitedInfosConsts.GlobalFlags.库存支持品牌项);
 		protected override string AccessRoleName
 		{
 			get { return "B3Butchery.报表.成品入库分析"; }
@@ -90,8 +93,8 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
       checkbox.Items.Add(new ListItem("每年"));
 
       checkbox.Items.Add(new ListItem("货位", "CargoSpace_Name"));
-
-
+      if(_useBrand)
+        checkbox.Items.Add(new ListItem("品牌项", "BrandItem_Name"));
       panel.EAdd(checkbox);
       panel.EAddLiteral("<BR/>");
       panel.EAddLiteral("<span style='color:red'>属性分类等级:</span>");
@@ -144,8 +147,10 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
       customPanel["CargoSpace_ID"].NotAutoAddToContainer = true;
       
 
-      customPanel.Add("BillState", QueryCreator.一般单据状态(mainInfo.Fields["BillState"]));    
-     
+      customPanel.Add("BillState", QueryCreator.一般单据状态(mainInfo.Fields["BillState"]));
+      if (_useBrand) {
+        customPanel.Add("BrandItem_ID", new SimpleLabel("品牌项"), QueryCreator.DFChoiceBoxEnableMultiSelection(detailInfo.Fields["ID"], B3UnitedInfosConsts.DataSources.品牌项));
+      }
       var config = customPanel.CreateDefaultConfig(4);
       config.Expand = false;
       TagWebUtil.AddTagQueryInput(mDmoTypeID, customPanel, config, mQueryContainer);

@@ -84,6 +84,10 @@
         <Field name="Remark" alias="detail"/>
         <QBE paramName="DRemark"/>
       </Like>
+      <QBEIn>
+        <Field name="BrandItem_ID" alias="detail"/>
+        <QBE paramName="BrandItem_ID"/>
+      </QBEIn>
 		</And>
 	</Where>
 </Select>
