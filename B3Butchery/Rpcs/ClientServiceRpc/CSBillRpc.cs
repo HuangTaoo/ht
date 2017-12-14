@@ -134,18 +134,18 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
           detail.SecondNumber2 = dtodetail.SecondNumber2;
            detail.RecordCount = dtodetail.RecordCount;
             detail.CalculateCatalog_Name = detail.Goods_Name;
-            var calculateCatalog = GetCalculateCatalogIDByName(session ,detail.Goods_Name);
-            if (calculateCatalog != null)
-            {
-                detail.CalculateCatalog_ID = calculateCatalog.Item1;
-                detail.CalculateGoods_ID = calculateCatalog.Item2;
-            }
+            //var calculateCatalog = GetCalculateCatalogIDByName(session ,detail.Goods_Name);
+            //if (calculateCatalog != null)
+            //{
+            //    detail.CalculateCatalog_ID = calculateCatalog.Item1;
+            //    detail.CalculateGoods_ID = calculateCatalog.Item2;
+            //}
             if (detail.Goods_ID == 0)
             {
                 var goodsid = GetGoodsIdByName(session, detail.Goods_Name);
                 if (goodsid == null || goodsid == 0)
                 {
-                    throw new Exception("没有找到计数名称：" + detail.Goods_Name + " 对应的存货");
+                    throw new Exception("没有找到存货名称：" + detail.Goods_Name + " 对应的存货");
                 }
                 detail.Goods_ID = goodsid.Value;
             }
@@ -213,19 +213,19 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
 
     static long? GetGoodsIdByName(IDmoSession session, string name)
     {
-       var firstQuery = new DQueryDom(new JoinAlias(typeof(CalculateGoods)));
-       firstQuery.Columns.Add(DQSelectColumn.Field("Goods_ID"));
-        firstQuery.Where.Conditions.Add(DQCondition.EQ("Name", name));
-        firstQuery.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
-      var goodsID =  firstQuery.EExecuteScalar<long?>(session);
-        if (goodsID == null || goodsID == 0)
-        {
+      // var firstQuery = new DQueryDom(new JoinAlias(typeof(CalculateGoods)));
+      // firstQuery.Columns.Add(DQSelectColumn.Field("Goods_ID"));
+      //  firstQuery.Where.Conditions.Add(DQCondition.EQ("Name", name));
+      //  firstQuery.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
+      //var goodsID =  firstQuery.EExecuteScalar<long?>(session);
+      //  if (goodsID == null || goodsID == 0)
+      //  {
             var query = new DQueryDom(new JoinAlias(typeof(Goods)));
             query.Where.Conditions.Add(DQCondition.EQ("Name", name));
             query.Columns.Add(DQSelectColumn.Field("ID"));
-            goodsID =  query.EExecuteScalar<long?>(session);
+           var  goodsID =  query.EExecuteScalar<long?>(session);
             
-        }
+        //}
 
         return goodsID;
 
