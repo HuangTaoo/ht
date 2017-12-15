@@ -47,6 +47,13 @@ namespace BWP.B3Butchery.BO
 
     #endregion
 
+    #region 耘垦个性字段
+
+    [LogicName("生产完工明细ID")]
+    public long? ProduceFinish_Detail_ID { get; set; }
+
+    #endregion
+
     [NonDmoProperty]
     public short BillType {
       get { return DmoTypeIDAttribute.GetID(typeof(ProductInStore)); }
