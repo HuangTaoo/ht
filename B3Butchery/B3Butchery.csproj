@@ -149,6 +149,7 @@
     </Compile>
     <Compile Include="Attributes\MoneyJsonConverter.cs" />
     <Compile Include="B3ButcheryConfig.cs" />
+    <Compile Include="BL\BaseInfo\ButcheryGoods_\ButcheryGoodsBL.cs" />
     <Compile Include="BL\BaseInfo\CalculateCatalogBL_\CalculateCatalogBL.cs" />
     <Compile Include="BL\BaseInfo\CalculateGoodsBL_\CalculateGoodsBL.cs" />
     <Compile Include="BL\BaseInfo\CalculateSpecBL_\CalculateSpecBL.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="BL\Bill\TemporaryStorage_\TemporaryStorageBL.cs" />
     <Compile Include="BL\Bill\WorkShopPackBillBL_\WorkShopPackBillBL.cs" />
     <Compile Include="BO\B3ButcheryUserProfile.cs" />
+    <Compile Include="BO\BaseInfo\ButcheryGoods_\ButcheryGoods.cs" />
     <Compile Include="BO\BaseInfo\CalculateCatalog_\CalculateCatalog.cs" />
     <Compile Include="BO\BaseInfo\CalculateGoods_\CalculateGoods.cs" />
     <Compile Include="BO\BaseInfo\CalculateSpec_\CalculateSpec.cs" />

@@ -118,6 +118,12 @@
     <Compile Include="..\..\..\version\tsapp_version.cs">
       <Link>tsapp_version.cs</Link>
     </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\ButcheryGoods_\ButcheryGoodsEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\ButcheryGoods_\ButcheryGoodsList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\BaseInfos\CalculateCatalog_\CalculateCatalogEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -482,6 +488,7 @@
     <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\CalculateSpec_\CalculateSpecList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\ClientGoodsSet_\ClientGoodsSetList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\ClientGoodsSet_\SelectGoodsDialogs.xml" />
+    <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\ButcheryGoods_\ButcheryGoodsList.xml" />
     <Content Include="Pages\B3Butchery\BaseInfos\ProductInStore_Temp_\ProductInStore_TempList.xml">
       <SubType>Designer</SubType>
     </Content>
