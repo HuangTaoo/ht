@@ -44,6 +44,17 @@
       <Function index="6" name="锁定"/>
       <Function index="7" name="解锁"/>
     </FunctionGroup>
+    <FunctionGroup name="生产班组" roleSchemas="employee">
+      <Function index="0" name="访问"/>
+      <Function index="1" name="新建"/>
+      <Function index="2" name="编辑"/>
+      <Function index="3" name="删除"/>
+      <Function index="4" name="停用"/>
+      <Function index="5" name="启用"/>
+      <Function index="6" name="锁定"/>
+      <Function index="7" name="解锁"/>
+    </FunctionGroup>
+    
     <FunctionGroup name="生产环节" roleSchemas="employee">
       <Function index="0" name="访问"/>
       <Function index="1" name="新建"/>
@@ -461,6 +472,8 @@
 
     <Menu id="0038" features="B3Butchery.0016" name="/屠宰分割/信息设置/档案/车间计数配置单/列表" roles="B3Butchery.车间计数配置单.访问" url="B3Butchery/BaseInfos/WorkShopCountConfig_/WorkShopCountConfigList.aspx"/>
     <Menu id="0039" name="/屠宰分割/信息设置/档案/存货/列表" roles="B3Butchery.存货.访问" url="B3Butchery/BaseInfos/ButcheryGoods_/ButcheryGoodsList.aspx"/>
+    <Menu id="0040"   name="/屠宰分割/信息设置/档案/生产班组/列表" roles="B3Butchery.生产班组.访问" url="B3Butchery/BaseInfos/ProductShift_/ProductShiftList.aspx"/>
+  
   </Menus>
 
   <Hippo>

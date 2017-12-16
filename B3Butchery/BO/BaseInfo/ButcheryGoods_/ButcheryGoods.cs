@@ -28,5 +28,19 @@ namespace BWP.B3Butchery.BO
         [LogicName("标准盘数")]
         public Money<decimal>? StandPlateNumber { get; set; }
 
+        [LogicName("是否半成品")]
+        [DbColumn(DefaultValue = true)]
+        public bool IsSemiGoods { get; set; }
+
+        [LogicName("生产班组")]
+        [DFDataKind(B3ButcheryDataSource.生产班组)]
+        [DFExtProperty(B3FrameworksConsts.DFExtProperties.DisplayField, "ProductShift_Name")]
+        [DFExtProperty(B3FrameworksConsts.DFExtProperties.QueryDataKind, B3ButcheryDataSource.生产班组)]
+        public long? ProductShift_ID { get; set; }
+
+        [Join("ProductShift_ID", "ID")]
+        [LogicName("生产班组")]
+        [ReferenceTo(typeof(ProductShift), "Name")]
+        public string ProductShift_Name { get; set; }
     }
 }

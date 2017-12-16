@@ -37,7 +37,13 @@ namespace BWP.B3Butchery.BL
         protected override void beforeSave(ButcheryGoods dmo)
         {
             base.beforeSave(dmo);
-
+            if (dmo.IsSemiGoods == true)
+            {
+                if (dmo.ProductShift_ID == null)
+                {
+                    throw new Exception("当前存货为半成品，则班组字段为必选");
+                }
+            }
           
         }
 

@@ -2,7 +2,8 @@
 {
   public class B3ButcheryDataSource
   {
-    public const string 生产线 = "B3Butchery_生产线";
+        public const string 生产班组 = "B3Butchery_生产班组";
+        public const string 生产线 = "B3Butchery_生产线";
     public const string 生产线全部 = "B3Butchery_生产线全部";
     public const string 计划号 = "计划号";
     public const string 生产环节 = "生产环节";

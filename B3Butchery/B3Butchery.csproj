@@ -161,6 +161,7 @@
     <Compile Include="BL\BaseInfo\ProductLineBL_\ProductLineBL.cs" />
     <Compile Include="BL\BaseInfo\ProductLinksBL_\ProductLinksBL_.cs" />
     <Compile Include="BL\BaseInfo\ProductLinkTemplateBL_\ProductLinkTemplateBL.cs" />
+    <Compile Include="BL\BaseInfo\ProductShift_\ProductShiftBL.cs" />
     <Compile Include="BL\BaseInfo\WorkshopCategoryBL_\IWorkshopCategoryBL.cs" />
     <Compile Include="BL\BaseInfo\WorkShopCountConfig_\WorkShopCountConfigBL.cs" />
     <Compile Include="BL\Bill\DailyProductReportBL_\DailyProductReportBL.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="BO\BaseInfo\ProductLink_\ProductLinks.cs" />
     <Compile Include="BO\BaseInfo\ProductLink_\ProductLinks_InputDetail.cs" />
     <Compile Include="BO\BaseInfo\ProductLink_\ProductLinks_OutputDetail.cs" />
+    <Compile Include="BO\BaseInfo\ProductShift_\ProductShift.cs" />
     <Compile Include="BO\BaseInfo\WorkshopCategory_\WorkshopCategory.cs" />
     <Compile Include="BO\BaseInfo\WorkShopCountConfig_\WorkShopCountConfig.cs" />
     <Compile Include="BO\BaseInfo\WorkShopCountConfig_\WorkShopCountConfig_Detail.cs" />
