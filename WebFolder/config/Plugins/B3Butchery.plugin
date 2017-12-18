@@ -182,7 +182,9 @@
       <Function index="8" name="速冻入库归零差异表" />
       <Function index="9" name="速冻出库分析" />
       <Function index="10" name="班组包材领用测算表" />
+      <Function index="11" name="归零差异表" />
       
+
     </FunctionGroup>
     <FunctionGroup name="生产环节模板" roleSchemas="employee" >
       <Function index="0" name="访问"/>
@@ -505,6 +507,7 @@
     <Menu id="0042" name="/屠宰分割/信息设置/档案/类别分类" roles="B3Butchery.类别分类.访问" url="B3Butchery/BaseInfos/CategoryClassification_/CategoryClassificationList.aspx"/>
     
     <Menu id="0043" name="/屠宰分割/信息设置/档案/存货类别" roles="B3Butchery.存货类别.访问" url="B3Butchery/BaseInfos/GoodsCategory_/GoodsCategoryList.aspx"/>
+    <Menu id="0044" name="/屠宰分割/报表/归零差异表" roles="B3Butchery.报表.归零差异表" url="B3Butchery/Reports/FrozenInStoreDiffReport_/ZeroDiffReport.aspx"/>
 
     
     

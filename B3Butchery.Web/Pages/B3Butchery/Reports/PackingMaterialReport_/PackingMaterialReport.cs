@@ -27,7 +27,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
         {
             if (!User.IsInRole("B3Butchery.报表.班组包材领用测算表"))
                 throw new AppSecurityException();
-            form.Controls.Add(new PageTitle("在职员工考勤表"));
+            form.Controls.Add(new PageTitle("班组包材领用测算表"));
             var vPanel = form.EAdd(new VLayoutPanel());
             CreateQueryPanel(vPanel);
 

@@ -41,6 +41,11 @@ namespace BWP.B3Butchery.BO
         [Join("Goods_ID", "ID")]
         public long? Goods_ProductShift_ID { get; set; }
 
+        [LogicName("存货类别")]
+        [ReferenceTo(typeof(ButcheryGoods), "GoodsCategory_ID")]
+        [Join("Goods_ID", "ID")]
+        public long? GoodsCategory_ID { get; set; }
+        
         #endregion
 
 

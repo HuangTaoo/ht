@@ -352,6 +352,9 @@
     <Compile Include="Pages\B3Butchery\Reports\FrozenInStoreDiffReport_\FrozenInStoreDiffReport.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\B3Butchery\Reports\FrozenInStoreDiffReport_\ZeroDiffReport.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\Reports\FrozenOutStoreReport_\FrozenOutStoreReport.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
