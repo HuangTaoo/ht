@@ -4,6 +4,7 @@ using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices;
 using Forks.EnterpriseServices.DomainObjects2;
 using Forks.Utils;
+using BWP.B3Butchery.Utils;
 
 namespace BWP.B3Butchery.BO
 {
@@ -30,11 +31,21 @@ namespace BWP.B3Butchery.BO
       [Join("PlanNumber_ID", "ID")]
       public string PlanNumber_Name { get; set; }
 
-          #endregion
-   
+        [LogicName("包装模式")]
+        [ReferenceTo(typeof(ButcheryGoods), "PackageModel")]
+        [Join("Goods_ID", "ID")]
+        public NamedValue<包装模式>? Goods_PackageModel { get; set; }
+
+        [LogicName("生产班组")]
+        [ReferenceTo(typeof(ButcheryGoods), "ProductShift_ID")]
+        [Join("Goods_ID", "ID")]
+        public long? Goods_ProductShift_ID { get; set; }
+
+        #endregion
 
 
-    [LogicName("内包装比例")]
+
+        [LogicName("内包装比例")]
     [ReferenceTo(typeof(Goods), "InnerPackingPer")]
     [Join("Goods_ID", "ID")]
     public Money<decimal>? Goods_InnerPackingPer { get; set; }
