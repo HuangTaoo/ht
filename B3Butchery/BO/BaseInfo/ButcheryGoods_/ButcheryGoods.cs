@@ -19,7 +19,20 @@ namespace BWP.B3Butchery.BO
     [DmoTypeID(B3FrameworksConsts.DmoTypeIDBases.B3Butchery, DmoTypeIDOffsets.ButcheryGoods)]
     public class ButcheryGoods:Goods
     {
-        [Join("GoodsProperty_ID", "ID")]
+
+     [LogicName("存货类别")]
+    [DFDataKind(B3ButcheryDataSource.存货类别)]
+    [DFExtProperty("DisplayField", "GoodsCategory_Name")]
+    [DFExtProperty(B3ButcheryDataSource.速冻库, B3ButcheryDataSource.存货类别)]
+    public long? GoodsCategory_ID { get; set; }
+
+    [LogicName("存货类别")]
+    [ReferenceTo(typeof(GoodsCategory), "Name")]
+    [Join("GoodsCategory_ID", "ID")]
+    public string GoodsCategory_Name { get; set; }
+
+
+    [Join("GoodsProperty_ID", "ID")]
         [LogicName("属性分类")]
         [ReferenceTo(typeof(GoodsProperty), "GoodsPropertyCatalog_ID")]
         public long? GoodsPropertyCatalog_ID { get; set; }

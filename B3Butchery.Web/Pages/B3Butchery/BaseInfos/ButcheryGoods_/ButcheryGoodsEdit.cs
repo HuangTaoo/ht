@@ -132,6 +132,7 @@ namespace BWP.Web.Pages.B3Butchery.BaseInfos.ButcheryGoods_
             var config = new AutoLayoutConfig();
             layoutManager.Config = config;
             config.Add("GoodsProperty_ID");
+            config.Add("GoodsCategory_ID");
 
             config.Add("Name");
             config.Add("PrintShortName");

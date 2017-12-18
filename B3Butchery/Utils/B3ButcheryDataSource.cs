@@ -22,6 +22,8 @@
     public const string 车间品类 = "B3Butchery_车间品类";
     public const string 计数分类 = "B3Butchery_计数分类";
     public const string 计数名称 = "B3Butchery_计数名称";
+    public const string 类别分类 = "B3Butchery_类别分类";
+    public const string 存货类别 = "B3Butchery_存货类别";
     
   }
 }
