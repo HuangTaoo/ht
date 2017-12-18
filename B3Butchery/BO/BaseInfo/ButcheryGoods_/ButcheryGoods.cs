@@ -23,7 +23,9 @@ namespace BWP.B3Butchery.BO
         [LogicName("属性分类")]
         [ReferenceTo(typeof(GoodsProperty), "GoodsPropertyCatalog_ID")]
         public long? GoodsPropertyCatalog_ID { get; set; }
-
+        //仙坛客户端 的标准箱数 （车间包装时用到）
+        [LogicName("标准箱数")]
+        public Money<decimal>? StandardSecondNumber { get; set; }
 
         [LogicName("标准盘数")]
         public Money<decimal>? StandPlateNumber { get; set; }
@@ -42,5 +44,9 @@ namespace BWP.B3Butchery.BO
         [LogicName("生产班组")]
         [ReferenceTo(typeof(ProductShift), "Name")]
         public string ProductShift_Name { get; set; }
+
+        [LogicName("包装模式")]
+
+        public NamedValue<包装模式>? PackageModel { get; set; }
     }
 }

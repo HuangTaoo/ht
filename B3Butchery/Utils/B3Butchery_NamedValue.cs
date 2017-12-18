@@ -26,4 +26,11 @@ namespace BWP.B3Butchery.Utils
     public static readonly NamedValue<暂存类型> 未冻好 = new NamedValue<暂存类型>(1);
     public static readonly NamedValue<暂存类型> 返车间 = new NamedValue<暂存类型>(2);
   }
+
+    public sealed class 包装模式
+    {
+        public static readonly NamedValue<包装模式> 箱装 = new NamedValue<包装模式>(0);
+        public static readonly NamedValue<包装模式> 袋装 = new NamedValue<包装模式>(1);
+
+    }
 }

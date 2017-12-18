@@ -153,9 +153,11 @@ namespace BWP.Web.Pages.B3Butchery.BaseInfos.ButcheryGoods_
             config.Add("SecondUnitII_MainUnitRatio");
             config.Add("SecondUnitII_SecondUnitRatio");
             config.Add("StandPlateNumber");
+            config.Add("StandardSecondNumber");
             config.Add("IsSemiGoods");
             config.Add("ProductShift_ID");
-
+            config.Add("PackageModel");
+            
             config.Add("Remark");
 
 
