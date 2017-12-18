@@ -6,6 +6,8 @@ using Forks.EnterpriseServices.DomainObjects2;
 using BWP.B3Frameworks;
 using BWP.B3Butchery.Utils;
 using TSingSoft.WebControls2;
+using BWP.B3ProduceUnitedInfos;
+using BWP.B3ProduceUnitedInfos.BO;
 
 namespace BWP.B3Butchery.BO
 {
@@ -43,7 +45,26 @@ namespace BWP.B3Butchery.BO
 		[Join("PlanNumber_ID", "ID")]
 		public string PlanNumber_Name { get; set; }
 
-		[LogicName("生产环节")]
+
+
+
+
+
+        [LogicName("生产单位")]
+        [DFNotEmpty]
+        [DFDataKind(B3ProduceUnitedInfosDataSources.生产单位全部)]
+        [DFExtProperty("DisplayField", "ProductionUnit_Name")]
+        public long? ProductionUnit_ID { get; set; }
+
+        [LogicName("生产单位")]
+        [ReferenceTo(typeof(ProductionUnit), "Name")]
+        [Join("ProductionUnit_ID", "ID")]
+        public string ProductionUnit_Name { get; set; }
+
+
+
+
+        [LogicName("生产环节")]
 		[DFExtProperty("WebControlType", DFEditControl.ChoiceBox)]
 		[DFDataKind(B3ButcheryDataSource.生产环节)]
 		[DFExtProperty("DisplayField", "ProductLinks_Name")]
