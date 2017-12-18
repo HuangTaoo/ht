@@ -70,6 +70,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
         #region 添加搜索列
 
         FilterTree accFilterTree;
+        private  static string mAccName = "acc";
         FilterTreeContainer mTreeContainer = new FilterTreeContainer();
         //班组
         private Control CreateAccPart()
@@ -88,7 +89,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
                     }
                 }
             };
-            mTreeContainer.Add("acc", accFilterTree);
+            mTreeContainer.Add(mAccName, accFilterTree);
             accFilterTree.FilterAction = (query, node) =>
             {
                 if (!string.IsNullOrEmpty(node.Value))
@@ -167,6 +168,22 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
 
             mTreeContainer.Select += delegate
             {
+                //当选中的是 会计单位的时候 
+                if (mTreeContainer.SelectName == mAccName)
+                {
+                    var rootNode = proudceUnitFilterTree.DataSource;
+                    var packModeInfo = GetProduceUnitInfo();
+                    proudceUnitFilterTree.DataSource.Childs.Clear();
+                    foreach (var item in packModeInfo)
+                    {
+                        proudceUnitFilterTree.DataSource.Childs.Add(new FilterTreeNode(item.Item2, item.Item1.ToString()));
+                    }
+                    proudceUnitFilterTree.DataBind();
+                }
+
+
+
+
                 var query = GetQueryDom();
                 mTreeContainer.AddConditions(query);
 
@@ -189,14 +206,28 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
         }
         private List<Tuple<long, string>> GetProduceUnitInfo()
         {
-            return GetBaseInfo<ProductionUnit>();
+            return GetBaseInfo<ProductionUnit>((DQueryDom dom) =>         
+            {
+                var selectAuu = accFilterTree.GetSelecteItem();
+                if (selectAuu != null)
+                {
+                    if (!string.IsNullOrEmpty(selectAuu.Value))
+                    {
+                        var auuID = long.Parse(selectAuu.Value);
+                        dom.Where.Conditions.Add(DQCondition.EQ("AccountingUnit_ID", auuID));
+                    }
+            
+                }
+            }
+            );
+
         }
         private List<Tuple<long, string>> GetGoodsCategoryInfo()
         {
             return GetBaseInfo<GoodsCategory>();
         }
 
-        private List<Tuple<long, string>> GetBaseInfo<T>()
+        private List<Tuple<long, string>> GetBaseInfo<T>(Action<DQueryDom> action = null)
         {
             var query = new DQueryDom(new JoinAlias(typeof(T)));
 
@@ -206,6 +237,10 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
             query.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
             query.Where.Conditions.Add(DQCondition.EQ("Domain_ID", DomainContext.Current.ID));
             OrganizationUtil.AddOrganizationLimit(query, typeof(T));
+            if (action != null)
+            {
+                action(query);
+            }
             return query.EExecuteList<long, string>();
         }
         #endregion
