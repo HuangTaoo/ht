@@ -13,12 +13,13 @@ using Forks.EnterpriseServices.DomainObjects2;
 using Forks.EnterpriseServices.SqlDoms;
 using System.Web.UI.WebControls;
 using BWP.B3Frameworks.BO;
+using BWP.Web.Layout;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
 {
-	class ProductInStoreList : DomainBillListPage<ProductInStore, IProductInStoreBL>
+	public class ProductInStoreList : DomainBillListPage<ProductInStore, IProductInStoreBL>
 	{
-    ChoiceBox planNumberBox;
+     ChoiceBox planNumberBox;
 		protected override void AddQueryControls(VLayoutPanel vPanel)
 		{
 			vPanel.Add(CreateDefaultBillQueryControls((panel, config) =>
@@ -33,8 +34,14 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
 				config.AddAfter("CheckEmployee_ID", "InStoreDate");
 				config.AddAfter("CheckDate", "CheckEmployee_ID");
         config.AddAfter("ProductPlan_ID", "CheckDate");
+        AddQuery(config);
 			}));
 		}
+
+    protected virtual void AddQuery(AutoLayoutConfig config)
+    {
+
+    }
 
 		protected override void AddDFBrowseGridColumn(DFBrowseGrid grid, string field)
 		{
