@@ -85,8 +85,11 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
       }
       if (CanSave)
       {
+        if (EnableAddSameCargoSpace)
+        {
+          AddSameCargoSpace(hPanel);
+        }
 
-        AddSameCargoSpace(hPanel);
       }
 
       var detailGridEditor = new DFCollectionEditor<ProductInStore_Detail>(() => Dmo.Details);
@@ -170,9 +173,45 @@ function(result,dfContainer){
     }
 
     //添加统一 货位按钮
-    public virtual void AddSameCargoSpace(HLayoutPanel hPanel)
+    private void AddSameCargoSpace(HLayoutPanel hPanel)
     {
+      hPanel.Add(new SimpleLabel("选择货位"));
+      var selectCargo =
+        hPanel.Add(new ChoiceBox(B3FrameworksConsts.DataSources.货位)
+        {
+          Width = Unit.Pixel(130),
+          EnableInputArgument = true,
+          EnableTopItem = true,
+          OnBeforeDrop = "this.codeArgument = __DFContainer.getValue('Store_ID');"
+        });
 
+      var summary = new TSButton() { Text = "统一货位" };
+      summary.Click += (sender, e) =>
+      {
+        if (!selectCargo.IsEmpty)
+        {
+          detailGrid.GetFromUI();
+          var cargoSpace_ID = long.Parse(selectCargo.Value);
+          var cargoSpace_Name = selectCargo.DisplayValue;
+
+          foreach (var r in Dmo.Details)
+          {
+            r.CargoSpace_ID = cargoSpace_ID;
+            r.CargoSpace_Name = cargoSpace_Name;
+
+
+          }
+          detailGrid.DataBind();
+        }
+
+      };
+      hPanel.Add(summary);
+
+    }
+
+    protected virtual bool EnableAddSameCargoSpace
+    {
+      get { return false; }
     }
 
     public virtual void AddColumn(DFEditGrid detailGrid)
