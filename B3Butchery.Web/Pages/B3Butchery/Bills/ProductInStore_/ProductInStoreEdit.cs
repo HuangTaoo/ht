@@ -20,6 +20,7 @@ using BWP.Web.Actions;
 using BWP.B3Frameworks;
 using BWP.B3UnitedInfos.Utils;
 using BWP.B3Butchery;
+using System.Collections;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
 {
@@ -81,6 +82,11 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
           detailGrid.DataBind();
 
         }));
+      }
+      if (CanSave)
+      {
+
+        AddSameCargoSpace(hPanel);
       }
 
       var detailGridEditor = new DFCollectionEditor<ProductInStore_Detail>(() => Dmo.Details);
@@ -163,10 +169,19 @@ function(result,dfContainer){
       titlePanel.SetPageLayoutSetting(mPageLayoutManager, section.Name);
     }
 
+    //添加统一 货位按钮
+    public virtual void AddSameCargoSpace(HLayoutPanel hPanel)
+    {
+
+    }
+
     public virtual void AddColumn(DFEditGrid detailGrid)
     {
 
     }
+
+
+ 
 
     private void AddToolsBar(HLayoutPanel hPanel)
     {
