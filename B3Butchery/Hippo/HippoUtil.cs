@@ -239,7 +239,7 @@ namespace BWP.B3Butchery.Hippo
 					new FieldDesc {Name = "SecondNumber", Title = "辅数量"},
 					new FieldDesc {Name = "Remark", Title = "备注"}                      
 								},
-				ItemFormat = "存货名称: [Goods_Name]\n存货编码: [Goods_Code]\n规格: [Goods_Spec]\n主数量: [Number]\n辅数量: [SecondNumber]\n备注: [Remark]",
+				ItemFormat = "存货名称: [Goods_Name]\n存货编码: [Goods_Code]\n规格: [Goods_Spec]\n生产计划号: [ProductPlan_ID]\n主数量: [Number]\n辅数量: [SecondNumber]\n备注: [Remark]",
 				ActionBar = "New"
 			};
 			model.Collections.Add(detail);
