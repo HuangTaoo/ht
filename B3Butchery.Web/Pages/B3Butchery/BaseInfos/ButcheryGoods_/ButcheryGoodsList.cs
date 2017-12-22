@@ -28,7 +28,7 @@ namespace BWP.Web.Pages.B3Butchery.BaseInfos.ButcheryGoods_
             var dom = base.GetQueryDom();
             var prop = new JoinAlias(typeof(GoodsProperty));
             dom.From.AddJoin(JoinType.Inner, new DQDmoSource(prop), DQCondition.EQ(prop, "ID", dom.From.RootSource.Alias, "GoodsProperty_ID"));
-            dom.Where.Conditions.Add(DQCondition.EQ(prop, "EnableSale", true));
+ 
             DomainUtil.AddDomainPermissionLimit(dom, typeof(GoodsProperty), prop);
             return dom;
         }
