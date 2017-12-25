@@ -36,8 +36,12 @@ namespace BWP.B3Butchery.Hippo.QueryObjs
 		public string Store_Name { get; set; }
 
 		public long? InStoreType_ID { get; set; }
+	  public string InStoreType_Name { get; set; }
 
-		public string InStoreType_Name { get; set; }
+    public long? ProductPlan_ID { get; set; }
+		public string ProductPlan_Name { get; set; }
+
+
 
     public long? ProductInStoreTemplate_ID { get; set; }
 
