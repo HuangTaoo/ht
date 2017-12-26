@@ -15,7 +15,10 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceOutput_
         {
 
             var details = Dmo.Details.OrderBy(x => x.CalculateCatalog_Name).ToList();
-            dic.Add("$Details", details);
+
+      var details2 = Dmo.Details.OrderBy(x => x.GoodsProperty_Name).ToList();
+      dic.Add("$Details2", details2);
+      dic.Add("$Details", details);
             dic.Add("$DetailType", typeof(ProduceOutput_Detail));
             var date = Dmo.Time == null ? "" : Dmo.Time.Value.ToShortDateString();
             dic.Add("$日期", date);
