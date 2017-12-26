@@ -2,6 +2,7 @@
 using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks;
 using BWP.B3Frameworks.Utils;
+using BWP.Web.WebControls;
 using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
@@ -28,16 +29,16 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
             if (!User.IsInRole("B3Butchery.报表.班组包材领用测算表"))
                 throw new AppSecurityException();
             form.Controls.Add(new PageTitle("班组包材领用测算表"));
-            var vPanel = form.EAdd(new VLayoutPanel());
-            CreateQueryPanel(vPanel);
+    
+            CreateQueryPanel(form.EAdd(new TitlePanel("查询条件", "查询条件")));
 
-            CreateDetailPanel(vPanel);
+            CreateDetailPanel(form.EAdd(new TitlePanel("查询结果", "查询结果")));
         }
 
-        private void CreateDetailPanel(VLayoutPanel vPanel)
+        private void CreateDetailPanel(TitlePanel vPanel)
         {
-            detailGrid = vPanel.Add(new DFBrowseGrid(new DFDataTableEditor()) { Width = Unit.Percentage(100) });
-            detailGrid.Columns.Add(new DFBrowseGridColumn("Goods_Name"));
+            detailGrid = vPanel.EAdd(new DFBrowseGrid(new DFDataTableEditor()) { Width = Unit.Percentage(100) });
+            detailGrid.Columns.EAdd(new DFBrowseGridColumn("Goods_Name"));
             detailGrid.Columns.Add(new DFBrowseGridColumn("PlanNumber_Name"));
             detailGrid.Columns.Add(new DFBrowseGridColumn("计数规格"));
             detailGrid.Columns.EAdd(new DFBrowseGridColumn("盘数")).SumMode = SumMode.Sum;
@@ -45,12 +46,16 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
             detailGrid.Columns.EAdd(new DFBrowseGridColumn("重量")).SumMode = SumMode.Sum;
             detailGrid.Columns.Add(new DFBrowseGridColumn("包装模式"));
 
-        }
+      var section = mPageLayoutManager.AddSection("DetailColumns", "布局");
+      section.ApplyLayout(detailGrid, mPageLayoutManager, DFInfo.Get(typeof(ProduceOutput_Detail)));
+      vPanel.SetPageLayoutSetting(mPageLayoutManager, section.Name);
+    }
 
         DFDateTimeInput dateInput;
         DFDateTimeInput enddateInput;
-        private void CreateQueryPanel(VLayoutPanel vPanel)
+        private void CreateQueryPanel(TitlePanel titlePanel)
         {
+          var vPanel = titlePanel.EAdd(new VLayoutPanel());
             var tablePanel = vPanel.Add(new TableLayoutPanel(5, 5), new VLayoutOption(System.Web.UI.WebControls.HorizontalAlign.Justify));
             var row = 0;
             const int labelWidth = 4;
