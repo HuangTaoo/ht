@@ -44,7 +44,8 @@ namespace BWP.Web.Pages.B3Butchery.BaseInfos.WorkShopCountConfig_
             config.Add("Name");
             config.Add("Date");
             config.Add("WorkshopCategory_ID");
-            config.Add("Remark");
+      config.Add("No");
+      config.Add("Remark");
 
             pageLayoutSection.ApplyLayout(layoutManager, config, mPageLayoutManager, mDFInfo);
 
