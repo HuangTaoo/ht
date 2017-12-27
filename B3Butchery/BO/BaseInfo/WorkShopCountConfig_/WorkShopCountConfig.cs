@@ -30,7 +30,7 @@ namespace BWP.B3Butchery.BO
 
 
     [LogicName("客户端显示序号")]
-    [DbColumn(AllowNull = false, Unique = true, DefaultValue =0)]
+    [DbColumn(AllowNull = false, DefaultValue =0)]
     public int No { get; set; }
 
 
