@@ -6,6 +6,7 @@ using BWP.Web.WebControls;
 using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
+using Forks.EnterpriseServices.SqlDoms;
 using Forks.Utils;
 using Forks.Utils.Collections;
 using System;
@@ -16,8 +17,10 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using TSingSoft.WebControls2;
+using TSingSoft.WebControls2.DFGrids;
 using TSingSoft.WebPluginFramework;
 using TSingSoft.WebPluginFramework.Controls;
+using TSingSoft.WebPluginFramework.Exports;
 using TSingSoft.WebPluginFramework.Security;
 
 namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
@@ -49,9 +52,51 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
       var section = mPageLayoutManager.AddSection("DetailColumns", "布局");
       section.ApplyLayout(detailGrid, mPageLayoutManager, DFInfo.Get(typeof(ProduceOutput_Detail)));
       vPanel.SetPageLayoutSetting(mPageLayoutManager, section.Name);
+
+
+      InitToolBar(vPanel);
     }
 
-        DFDateTimeInput dateInput;
+
+    #region 创建ToolBar 导出和打印
+
+    void InitToolBar(TitlePanel panel)
+    {
+      var toolbar = new HLayoutPanel();
+      toolbar.CssClass += " LeftPaddingWrapper";
+      panel.EAdd(toolbar);
+      var exporter = new Exporter();
+      toolbar.Add(new TSButton("导出到Excel", delegate {
+        var lastQuery = detailGrid.LastQuery;
+        if (lastQuery == null)
+          throw new Exception("请先进行查询");
+        var dom = new LoadArguments((DQueryDom)lastQuery.DQuery.Clone());
+        foreach (var colIndex in lastQuery.SumColumns)
+          dom.SumColumns.Add(colIndex);
+        foreach (var colIndex in lastQuery.GroupSumColumns)
+          dom.GroupSumColumns.Add(colIndex);
+        dom.DQuery.Range = SelectRange.All;
+        string fileName = "班组包材领用测算表.xlsx";
+        exporter.Export(new QueryResultExcelExporter(fileName, GetQueryResult(dom)));
+      }));
+      toolbar.Add(exporter);
+      toolbar.Add(new TSButton("打印")).OnClientClick = "print();return false;";
+    }
+
+
+
+    private QueryResult GetQueryResult(LoadArguments arg)
+    {
+      var data = new DFDataTableEditor().Load(arg);
+      return new QueryResult(data.TotalCount, data.Data.Rows, data.Data.Columns, arg.SumColumns.Any() ? data.Data.SumRow : null);
+    }
+
+
+    #endregion
+
+
+
+    DFDateTimeInput dateInput;
         DFDateTimeInput enddateInput;
         private void CreateQueryPanel(TitlePanel titlePanel)
         {
