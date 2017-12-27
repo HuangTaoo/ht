@@ -183,7 +183,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
             query.From.AddJoin(Forks.EnterpriseServices.SqlDoms.JoinType.Left, new DQDmoSource(main), DQCondition.EQ(main, "ID", detail, "ProduceOutput_ID"));
             query.From.AddJoin(Forks.EnterpriseServices.SqlDoms.JoinType.Left, new DQDmoSource(goods), DQCondition.EQ(goods, "ID", detail, "Goods_ID"));
             query.Columns.Add(DQSelectColumn.Field("Goods_Name"));
-            query.Columns.Add(DQSelectColumn.Field("PlanNumber_Name", main));
+            query.Columns.Add(DQSelectColumn.Field("PlanNumber_Name", detail));
    
             query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(detail, "Remark"), "计数规格"));
             query.Columns.Add(DQSelectColumn.Create(DQExpression.Sum(DQExpression.Field(detail, "SecondNumber")), "盘数"));
@@ -196,7 +196,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
             //query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(goods, "ProductShift_ID"), "生产班组ID"));
 
             query.GroupBy.Expressions.Add(DQExpression.Field(detail,"Goods_Name"));
-            query.GroupBy.Expressions.Add(DQExpression.Field(main, "PlanNumber_Name"));
+            query.GroupBy.Expressions.Add(DQExpression.Field(detail, "PlanNumber_Name"));
             query.GroupBy.Expressions.Add(DQExpression.Field(detail, "Remark"));
             query.GroupBy.Expressions.Add(DQExpression.Field(goods, "PackageModel"));
             //query.GroupBy.Expressions.Add(DQExpression.Field(goods, "ProductShift_ID"));
