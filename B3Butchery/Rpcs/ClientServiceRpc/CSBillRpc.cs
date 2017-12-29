@@ -120,6 +120,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
         dmo.Domain_ID = DomainContext.Current.ID;
         dmo.AccountingUnit_ID = dto.AccountingUnit_ID;
         dmo.Department_ID = dto.Department_ID;
+        dmo.ProductionUnit_ID = dto.ProductionUnit_ID;
         dmo.Time = dto.Time;
 
         foreach (var dtodetail in dto.Details)
@@ -181,6 +182,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
                 dmo.Domain_ID = DomainContext.Current.ID;
                 dmo.AccountingUnit_ID = dto.AccountingUnit_ID;
                 dmo.Department_ID = dto.Department_ID;
+                dmo.ProductionUnit_ID = dto.ProductionUnit_ID;
                 dmo.Time = dto.Time;
 
                 foreach (var dtodetail in dto.Details)

@@ -14,6 +14,8 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc.Dtos
     }
     public long? AccountingUnit_ID { get; set; }
     public long? Department_ID { get; set; }
+
+    public long? ProductionUnit_ID { get; set; }
     public DateTime Time { get; set; }
 
 
