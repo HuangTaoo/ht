@@ -19,6 +19,9 @@ namespace BWP.B3Butchery.Rpcs.RpcObject
     public long? Department_ID { get; set; }
     public string Department_Name { get; set; }
 
+    public long? ProductionUnit_ID { get; set; }
+    public string ProductionUnit_Name { get; set; }
+
     public string Role { get; set; }
   }
 }

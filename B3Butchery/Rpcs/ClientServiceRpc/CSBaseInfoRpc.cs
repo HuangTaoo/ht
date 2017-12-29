@@ -150,7 +150,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       var rel = new JoinAlias(typeof(User_Employee));
       var emp = new JoinAlias(typeof(Employee));
       var du = new JoinAlias(typeof(DomainUser));
-      var setting = new JoinAlias(typeof(B3FrameworksDomainUserProfile));
+      var setting = new JoinAlias(typeof(B3ButcheryUserProfile));
       var query = new DQueryDom(user);
       query.From.AddJoin(JoinType.Left, new DQDmoSource(rel), DQCondition.EQ(user, "ID", rel, "User_ID"));
       query.From.AddJoin(JoinType.Left, new DQDmoSource(emp), DQCondition.EQ(rel, "Employee_ID", emp, "ID"));
@@ -165,8 +165,10 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       query.Columns.Add(DQSelectColumn.Field("Name", emp));
       query.Columns.Add(DQSelectColumn.Field("Department_ID", emp));
       query.Columns.Add(DQSelectColumn.Field("Department_Name", emp));
-      query.Columns.Add(DQSelectColumn.Field("DefaultAccountingUnit_ID", setting));
-      query.Columns.Add(DQSelectColumn.Field("DefaultAccountingUnit_Name", setting));
+      query.Columns.Add(DQSelectColumn.Field("AccountingUnit_ID", setting));
+      query.Columns.Add(DQSelectColumn.Field("AccountingUnit_Name", setting));
+      query.Columns.Add(DQSelectColumn.Field("ProductionUnit_ID", setting));
+      query.Columns.Add(DQSelectColumn.Field("ProductionUnit_Name", setting));
       query.Columns.Add(DQSelectColumn.Field("Remark", emp));
       query.Where.Conditions.Add(DQCondition.IsNotNull(DQExpression.Field(rel, "Employee_ID")));
       var list = new List<EmpInfoTable>();
@@ -186,7 +188,9 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
             entity.Department_Name = (string)reader[6];
             entity.AccountingUnit_ID = (long?)reader[7];
             entity.AccountingUnit_Name = (string)reader[8];
-            entity.Role = (string)reader[9];
+            entity.ProductionUnit_ID = (long?)reader[9];
+            entity.ProductionUnit_Name = (string)reader[10];
+            entity.Role = (string)reader[11];
             list.Add(entity);
           }
         }

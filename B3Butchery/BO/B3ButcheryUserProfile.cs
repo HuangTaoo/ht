@@ -8,6 +8,8 @@ using Forks.EnterpriseServices;
 using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
 using TSingSoft.WebControls2;
+using BWP.B3ProduceUnitedInfos;
+using BWP.B3ProduceUnitedInfos.BO;
 
 namespace BWP.B3Butchery.BO
 {
@@ -16,8 +18,7 @@ namespace BWP.B3Butchery.BO
 	[LogicName("屠宰分割模块个性设置")]
 	public class B3ButcheryUserProfile : DomainUserProfileBase
 	{
-		[LogicName("成品入库单入库时间与操作时间间隔(天)")]
-		public int? ProductInStoreDaysBrake { get; set; }
+
 
     [LogicName("会计单位")]
     [DFDataKind(B3FrameworksConsts.DataSources.授权会计单位)]
@@ -29,6 +30,15 @@ namespace BWP.B3Butchery.BO
     [Join("AccountingUnit_ID", "ID")]
     [DFPrompt("会计单位")]
     public string AccountingUnit_Name { get; set; }
+    [LogicName("生产单位")]
+    [DFDataKind(B3ProduceUnitedInfosDataSources.生产单位全部)]
+    [DFExtProperty("DisplayField", "ProductionUnit_Name")]
+    public long? ProductionUnit_ID { get; set; }
+
+    [LogicName("生产单位")]
+    [ReferenceTo(typeof(ProductionUnit), "Name")]
+    [Join("ProductionUnit_ID", "ID")]
+    public string ProductionUnit_Name { get; set; }
 
 
     [LogicName("成品入库默认仓库")]
@@ -54,6 +64,14 @@ namespace BWP.B3Butchery.BO
     [Join("FrozenInStore_Store_ID", "ID")]
     [LogicName("成品入库默认仓库")]
     public string FrozenInStore_Store_Name { get; set; }
+
+    [LogicName("成品入库单入库时间与操作时间间隔(天)")]
+    public int? ProductInStoreDaysBrake { get; set; }
+
+
+
+
+
 
   }
 }
