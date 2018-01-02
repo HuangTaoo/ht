@@ -2,6 +2,8 @@
 using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks;
 using BWP.B3Frameworks.Utils;
+using BWP.Web.Actions;
+using BWP.Web.Utils;
 using BWP.Web.WebControls;
 using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
@@ -63,7 +65,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
     void InitToolBar(TitlePanel panel)
     {
       var toolbar = new HLayoutPanel();
-      toolbar.CssClass += " LeftPaddingWrapper";
+      toolbar.CssClass += "LeftPaddingWrapper";
       panel.EAdd(toolbar);
       var exporter = new Exporter();
       toolbar.Add(new TSButton("导出到Excel", delegate {
@@ -80,7 +82,9 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
         exporter.Export(new QueryResultExcelExporter(fileName, GetQueryResult(dom)));
       }));
       toolbar.Add(exporter);
-      toolbar.Add(new TSButton("打印")).OnClientClick = "print();return false;";
+      var printAction = new ButcheryPrintAction("PackingMaterialReportPrint.aspx");
+      var printBtn = new ClientActionButton(printAction);
+      toolbar.Add(printBtn);
     }
 
 
@@ -96,7 +100,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
 
 
 
-    DFDateTimeInput dateInput;
+        DFDateTimeInput dateInput;
         DFDateTimeInput enddateInput;
         private void CreateQueryPanel(TitlePanel titlePanel)
         {

@@ -297,7 +297,9 @@
     <Compile Include="Utils\DmoTypeIDOffsets.cs" />
     <Compile Include="Utils\Main_Second_ConvertRatioRowManager.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DataExchange\ProduceOutputImport.html" />
   </ItemGroup>

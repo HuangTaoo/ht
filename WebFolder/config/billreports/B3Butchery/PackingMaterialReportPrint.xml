@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BillReports xmlns="urn:BillReports" version="1.0" displayName="班组测算" phyName="班组测算">
+  <Report phyName="标准格式">
+    <BillReport xmlns="urn:BillReport" version="1" displayName="标准格式" >
+      <Bands>
+
+        <HtmlBand>
+          <![CDATA[
+		  	  <style type="text/css">
+		  td{font-size:15px }
+		  td{font-family:宋体}
+		  </style>
+		 
+
+		  		 
+		  <div align = 'center'style = 'padding-top:50px;font-size:15pt;font-family:黑体;'> 班组测算表  </div >
+
+		  
+
+    <table class='table' width='100%' style='border-collapse:collapse;text-align:left;' border='0'>
+  <col width='20%'><col width='20%'/><col width='20%'/><col width='10%'/><col width='10%'/><col width='10%'/><col width='10%'/>
+
+
+$班组测算打印
+
+</table>
+          
+          ]]>
+        </HtmlBand>
+
+
+      </Bands>
+    </BillReport>
+  </Report>
+</BillReports>
