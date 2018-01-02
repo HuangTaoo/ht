@@ -1,6 +1,8 @@
 ﻿using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BO;
+using Forks.EnterpriseServices.BusinessInterfaces;
 using Forks.EnterpriseServices.DataForm;
+using Forks.EnterpriseServices.DomainObjects2;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.EnterpriseServices.SqlDoms;
 using Forks.Utils;
@@ -108,7 +110,146 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
 
     private string GetHtml()
     {
-      return "";
+      var sb = new StringBuilder();
+
+      sb.Append("<tr>");
+      sb.Append("<td >存货名称</td>");
+      sb.Append("<td > 计划号</td>");
+      sb.Append("<td >计数规格</td>");
+      sb.Append("<td >盘数</td>");
+      sb.Append("<td >袋数</td>");
+      sb.Append("<td >重量</td>");
+      sb.Append("<td >包装模式</td>");
+      sb.Append("</tr>");
+
+
+      var query = GetQueryDom();
+      using (var context = new TransactionContext())
+      {
+        using (var reader = context.Session.ExecuteReader(query))
+        {
+     
+          while(reader.Read())
+          {
+            int i = 0;
+            sb.Append("<tr>");
+            sb.Append(string.Format("<td >{0}</td>", reader[i++]));
+            sb.Append(string.Format("<td >{0}</td>", reader[i++]));
+            sb.Append(string.Format("<td >{0}</td>", reader[i++]));
+            sb.Append(string.Format("<td >{0}</td>", reader[i++]));
+            sb.Append(string.Format("<td >{0}</td>", reader[i++]));
+            sb.Append(string.Format("<td >{0}</td>", reader[i++]));
+            sb.Append(string.Format("<td >{0}</td>", reader[i++]));
+            sb.Append("</tr>");
+          }
+        }
+
+
+      }
+
+
+
+
+
+      return sb.ToString();
+    }
+
+    long? Shift_ID
+    {
+      get
+      {
+        var str = Request.QueryString["Shift"];
+        if (string.IsNullOrEmpty(str))
+        {
+          return null;
+        }
+        return long.Parse(str);
+      }
+    }
+    long? PackMode
+    {
+      get
+      {
+        var str = Request.QueryString["PackMode"];
+        if (string.IsNullOrEmpty(str))
+        {
+          return null;
+        }
+        return long.Parse(str);
+      }
+    }
+    DateTime? BeginDate
+    {
+      get
+      {
+        var str = Request.QueryString["BeginDate"];
+        if (string.IsNullOrEmpty(str))
+        {
+          return null;
+        }
+        return DateTime.Parse(str);
+      }
+    }
+    DateTime? EndDate
+    {
+      get
+      {
+        var str = Request.QueryString["EndDate"];
+        if (string.IsNullOrEmpty(str))
+        {
+          return null;
+        }
+        return DateTime.Parse(str);
+      }
+    }
+    private DQueryDom GetQueryDom()
+    {
+
+      var detail = new JoinAlias("__detail", typeof(ProduceOutput_Detail));
+      var main = new JoinAlias("__main", typeof(ProduceOutput));
+      var goods = new JoinAlias("__goods", typeof(ButcheryGoods));
+
+      var query = new DQueryDom(detail);
+      query.From.AddJoin(JoinType.Left, new DQDmoSource(main), DQCondition.EQ(main, "ID", detail, "ProduceOutput_ID"));
+      query.From.AddJoin(JoinType.Left, new DQDmoSource(goods), DQCondition.EQ(goods, "ID", detail, "Goods_ID"));
+      query.Columns.Add(DQSelectColumn.Field("Goods_Name"));
+      query.Columns.Add(DQSelectColumn.Field("PlanNumber_Name", detail));
+
+      query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(detail, "Remark"), "计数规格"));
+      query.Columns.Add(DQSelectColumn.Create(DQExpression.Sum(DQExpression.Field(detail, "SecondNumber")), "盘数"));
+
+      query.Columns.Add(DQSelectColumn.Create(DQExpression.Sum(DQExpression.Field(detail, "SecondNumber2")), "袋数"));
+
+      query.Columns.Add(DQSelectColumn.Create(DQExpression.Sum(DQExpression.Field(detail, "Number")), "重量"));
+
+      query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(goods, "PackageModel"), "包装模式"));
+
+      query.GroupBy.Expressions.Add(DQExpression.Field(detail, "Goods_Name"));
+      query.GroupBy.Expressions.Add(DQExpression.Field(detail, "PlanNumber_Name"));
+      query.GroupBy.Expressions.Add(DQExpression.Field(detail, "Remark"));
+      query.GroupBy.Expressions.Add(DQExpression.Field(goods, "PackageModel"));
+
+      if (Shift_ID != null)
+      {
+        query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(detail, "Goods_ProductShift_ID", Shift_ID));
+      }
+      if (PackMode != null)
+      {
+        query.Where.Conditions.Add(DQCondition.LessThanOrEqual(detail, "Goods_PackageModel", PackMode));
+      }
+      if (BeginDate != null)
+      {
+        query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(main, "Time", BeginDate));
+      }
+      if (EndDate!= null)
+      {
+        query.Where.Conditions.Add(DQCondition.LessThanOrEqual(main, "Time", EndDate));
+      }
+      return query;
+
+
+
+
     }
 
     private bool Print

@@ -13,6 +13,8 @@ namespace BWP.Web.Utils
 
     public ButcheryPrintAction(string printPage, string text) : base(printPage, text) { }
 
+   
+
     public override bool Enabled
     {
       get

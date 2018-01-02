@@ -2,7 +2,6 @@
 using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks;
 using BWP.B3Frameworks.Utils;
-using BWP.Web.Actions;
 using BWP.Web.Utils;
 using BWP.Web.WebControls;
 using Forks.EnterpriseServices.DataForm;
@@ -82,11 +81,11 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
         exporter.Export(new QueryResultExcelExporter(fileName, GetQueryResult(dom)));
       }));
       toolbar.Add(exporter);
-      var printAction = new ButcheryPrintAction("PackingMaterialReportPrint.aspx");
-      var printBtn = new ClientActionButton(printAction);
+
+      var printBtn = new TSButton("打印");
+      printBtn.OnClientClick = "preventEventDefault(event);if(window.__printUrl){Print(window.__printUrl);}else{alert('先搜索出结果才能打印');}";
       toolbar.Add(printBtn);
     }
-
 
 
     private QueryResult GetQueryResult(LoadArguments arg)
@@ -203,7 +202,35 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
 
             mTreeContainer.Select += delegate
             {
-                var query = GetQueryDom();
+
+              var shift = "";
+              var packModel = "";
+              var beginDate = "";
+              var endDate = "";
+              if (shiftFilterTree != null)
+              {
+                var shiftNode = shiftFilterTree.GetSelecteItem();
+                 shift = shiftNode.Value;
+
+              }
+              if (packModeFilterTree != null)
+              {
+                var packNode = packModeFilterTree.GetSelecteItem();
+                 packModel = packNode.Value;
+              }
+              if (dateInput.Value != null)
+              {
+                beginDate = dateInput.Value.ToString();
+              }
+              if (enddateInput.Value != null)
+              {
+                endDate = enddateInput.Value.ToString();
+              }
+              var printUrl = string.Format("PackingMaterialReportPrint.aspx?Shift={0}&PackMode={1}&BeginDate={2}&EndDate={3}", shift, packModel, beginDate, endDate);
+              Page.ClientScript.RegisterStartupScript(this.GetType(), "__printUrl", string.Format("window.__printUrl='{0}';", printUrl), true);
+
+
+              var query = GetQueryDom();
                 mTreeContainer.AddConditions(query);
 
                 var args = new LoadArguments(query);
@@ -229,8 +256,8 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
             var goods = new JoinAlias("__goods", typeof(ButcheryGoods));
 
             var query = new DQueryDom(detail);
-            query.From.AddJoin(Forks.EnterpriseServices.SqlDoms.JoinType.Left, new DQDmoSource(main), DQCondition.EQ(main, "ID", detail, "ProduceOutput_ID"));
-            query.From.AddJoin(Forks.EnterpriseServices.SqlDoms.JoinType.Left, new DQDmoSource(goods), DQCondition.EQ(goods, "ID", detail, "Goods_ID"));
+            query.From.AddJoin(JoinType.Left, new DQDmoSource(main), DQCondition.EQ(main, "ID", detail, "ProduceOutput_ID"));
+            query.From.AddJoin(JoinType.Left, new DQDmoSource(goods), DQCondition.EQ(goods, "ID", detail, "Goods_ID"));
             query.Columns.Add(DQSelectColumn.Field("Goods_Name"));
             query.Columns.Add(DQSelectColumn.Field("PlanNumber_Name", detail));
    
