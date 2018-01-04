@@ -2,7 +2,8 @@
 {
   public class B3ButcheryDataSource
   {
-    public const string 生产线 = "B3Butchery_生产线";
+        public const string 生产班组 = "B3Butchery_生产班组";
+        public const string 生产线 = "B3Butchery_生产线";
     public const string 生产线全部 = "B3Butchery_生产线全部";
     public const string 计划号 = "计划号";
     public const string 生产环节 = "生产环节";
@@ -21,6 +22,8 @@
     public const string 车间品类 = "B3Butchery_车间品类";
     public const string 计数分类 = "B3Butchery_计数分类";
     public const string 计数名称 = "B3Butchery_计数名称";
+    public const string 类别分类 = "B3Butchery_类别分类";
+    public const string 存货类别 = "B3Butchery_存货类别";
     
   }
 }

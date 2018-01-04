@@ -56,7 +56,12 @@
 				<Field name="ProductPlan_ID" alias="detail"/>
 				<QBE paramName="ProductPlan_ID"/>
 			</QBEIn>
-			<QBEIn>
+      <QBEIn>
+        <Field name="ProductionUnit_ID" />
+        <QBE paramName="ProductionUnit_ID"/>
+      </QBEIn>
+      
+      <QBEIn>
 				<Field name="CargoSpace_ID" alias="detail"/>
 				<QBE paramName="CargoSpace_ID"/>
 			</QBEIn>

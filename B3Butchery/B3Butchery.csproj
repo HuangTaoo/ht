@@ -149,17 +149,21 @@
     </Compile>
     <Compile Include="Attributes\MoneyJsonConverter.cs" />
     <Compile Include="B3ButcheryConfig.cs" />
+    <Compile Include="BL\BaseInfo\ButcheryGoods_\ButcheryGoodsBL.cs" />
     <Compile Include="BL\BaseInfo\CalculateCatalogBL_\CalculateCatalogBL.cs" />
     <Compile Include="BL\BaseInfo\CalculateGoodsBL_\CalculateGoodsBL.cs" />
     <Compile Include="BL\BaseInfo\CalculateSpecBL_\CalculateSpecBL.cs" />
+    <Compile Include="BL\BaseInfo\CategoryClassificationBL_\CategoryClassificationBL.cs" />
     <Compile Include="BL\BaseInfo\ClientGoodsSet_\ClientGoodsSetBL.cs" />
     <Compile Include="BL\BaseInfo\FrozenStore_\FrozenStoreBL.cs" />
+    <Compile Include="BL\BaseInfo\GoodsCategoryBL_\GoodsCategoryBL.cs" />
     <Compile Include="BL\BaseInfo\HandoverRecord_\HandoverRecordBL.cs" />
     <Compile Include="BL\BaseInfo\InStoreTypeBL_\InStoreTypeBL.cs" />
     <Compile Include="BL\BaseInfo\ProductInStoreTemplateBL_\ProductInStoreTemplateBL.cs" />
     <Compile Include="BL\BaseInfo\ProductLineBL_\ProductLineBL.cs" />
     <Compile Include="BL\BaseInfo\ProductLinksBL_\ProductLinksBL_.cs" />
     <Compile Include="BL\BaseInfo\ProductLinkTemplateBL_\ProductLinkTemplateBL.cs" />
+    <Compile Include="BL\BaseInfo\ProductShift_\ProductShiftBL.cs" />
     <Compile Include="BL\BaseInfo\WorkshopCategoryBL_\IWorkshopCategoryBL.cs" />
     <Compile Include="BL\BaseInfo\WorkShopCountConfig_\WorkShopCountConfigBL.cs" />
     <Compile Include="BL\Bill\DailyProductReportBL_\DailyProductReportBL.cs" />
@@ -179,12 +183,15 @@
     <Compile Include="BL\Bill\TemporaryStorage_\TemporaryStorageBL.cs" />
     <Compile Include="BL\Bill\WorkShopPackBillBL_\WorkShopPackBillBL.cs" />
     <Compile Include="BO\B3ButcheryUserProfile.cs" />
+    <Compile Include="BO\BaseInfo\ButcheryGoods_\ButcheryGoods.cs" />
     <Compile Include="BO\BaseInfo\CalculateCatalog_\CalculateCatalog.cs" />
     <Compile Include="BO\BaseInfo\CalculateGoods_\CalculateGoods.cs" />
     <Compile Include="BO\BaseInfo\CalculateSpec_\CalculateSpec.cs" />
+    <Compile Include="BO\BaseInfo\CategoryClassification_\CategoryClassification.cs" />
     <Compile Include="BO\BaseInfo\ClientGoodsSet_\ClientGoodsSet.cs" />
     <Compile Include="BO\BaseInfo\ClientGoodsSet_\ClientGoodsSet_Detail.cs" />
     <Compile Include="BO\BaseInfo\FrozenStore_\FrozenStore.cs" />
+    <Compile Include="BO\BaseInfo\GoodsCategory_\GoodsCategory.cs" />
     <Compile Include="BO\BaseInfo\HandoverRecord_\HandoverRecord.cs" />
     <Compile Include="BO\BaseInfo\InStoreType_\InStoreType.cs" />
     <Compile Include="BO\BaseInfo\PlanNoBaseInfo_\PlanNoBaseInfo.cs" />
@@ -197,6 +204,7 @@
     <Compile Include="BO\BaseInfo\ProductLink_\ProductLinks.cs" />
     <Compile Include="BO\BaseInfo\ProductLink_\ProductLinks_InputDetail.cs" />
     <Compile Include="BO\BaseInfo\ProductLink_\ProductLinks_OutputDetail.cs" />
+    <Compile Include="BO\BaseInfo\ProductShift_\ProductShift.cs" />
     <Compile Include="BO\BaseInfo\WorkshopCategory_\WorkshopCategory.cs" />
     <Compile Include="BO\BaseInfo\WorkShopCountConfig_\WorkShopCountConfig.cs" />
     <Compile Include="BO\BaseInfo\WorkShopCountConfig_\WorkShopCountConfig_Detail.cs" />
@@ -289,7 +297,9 @@
     <Compile Include="Utils\DmoTypeIDOffsets.cs" />
     <Compile Include="Utils\Main_Second_ConvertRatioRowManager.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DataExchange\ProduceOutputImport.html" />
   </ItemGroup>

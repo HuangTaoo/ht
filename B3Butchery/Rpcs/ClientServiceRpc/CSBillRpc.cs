@@ -120,6 +120,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
         dmo.Domain_ID = DomainContext.Current.ID;
         dmo.AccountingUnit_ID = dto.AccountingUnit_ID;
         dmo.Department_ID = dto.Department_ID;
+        dmo.ProductionUnit_ID = dto.ProductionUnit_ID;
         dmo.Time = dto.Time;
 
         foreach (var dtodetail in dto.Details)
@@ -133,14 +134,14 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
           detail.SecondNumber = dtodetail.SecondNumber;
           detail.SecondNumber2 = dtodetail.SecondNumber2;
            detail.RecordCount = dtodetail.RecordCount;
-            detail.CalculateCatalog_Name = detail.Goods_Name;
-            //var calculateCatalog = GetCalculateCatalogIDByName(session ,detail.Goods_Name);
-            //if (calculateCatalog != null)
-            //{
-            //    detail.CalculateCatalog_ID = calculateCatalog.Item1;
-            //    detail.CalculateGoods_ID = calculateCatalog.Item2;
-            //}
-            if (detail.Goods_ID == 0)
+            //detail.CalculateCatalog_Name = detail.Goods_Name;
+                    var calculateCatalog = GetCalculateCatalogIDByName(session, detail.Goods_Name);
+                    if (calculateCatalog != null)
+                    {
+                        detail.CalculateCatalog_ID = calculateCatalog.Item1;
+                        detail.CalculateGoods_ID = calculateCatalog.Item2;
+                    }
+                    if (detail.Goods_ID == 0)
             {
                 var goodsid = GetGoodsIdByName(session, detail.Goods_Name);
                 if (goodsid == null || goodsid == 0)
@@ -168,7 +169,71 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
    
     }
 
-    private static Tuple<long?, long?> GetCalculateCatalogIDByName(IDmoSession session ,string name)
+        [Rpc]
+        public static long CreateOutPutByJson2(string json)
+        {
+            var dto = JsonConvert.DeserializeObject<OutPutDto>(json);
+
+            using (var session = Dmo.NewSession())
+            {
+                var bl = BIFactory.Create<IProduceOutputBL>(session);
+                var dmo = new ProduceOutput();
+
+                dmo.Domain_ID = DomainContext.Current.ID;
+                dmo.AccountingUnit_ID = dto.AccountingUnit_ID;
+                dmo.Department_ID = dto.Department_ID;
+                dmo.ProductionUnit_ID = dto.ProductionUnit_ID;
+                dmo.Time = dto.Time;
+
+                foreach (var dtodetail in dto.Details)
+                {
+                    var detail = new ProduceOutput_Detail();
+                    detail.Goods_ID = dtodetail.Goods_ID ?? 0;
+                    detail.CalculateGoods_ID = dtodetail.CalculateGoods_ID;
+                    detail.Goods_Name = dtodetail.Goods_Name;
+                    detail.Remark = dtodetail.CalculateSpec_Name;
+                    detail.Number = dtodetail.Number;
+                    detail.SecondNumber = dtodetail.SecondNumber;
+                    detail.SecondNumber2 = dtodetail.SecondNumber2;
+                    detail.RecordCount = dtodetail.RecordCount;
+                    //detail.CalculateCatalog_Name = dtodetail.CalculateCatalog_Name;
+                    //var calculateCatalog = GetCalculateCatalogIDByName(session, detail.Goods_Name);
+                    //if (calculateCatalog != null)
+                    //{
+                    //    detail.CalculateCatalog_ID = calculateCatalog.Item1;
+                    //    detail.CalculateGoods_ID = calculateCatalog.Item2;
+                    //}
+                    if (detail.Goods_ID == 0)
+                    {
+                        var goodsid = GetGoodsIdByName2(session, detail.Goods_Name);
+                        if (goodsid == null || goodsid == 0)
+                        {
+                            throw new Exception("没有找到存货名称：" + detail.Goods_Name + " 对应的存货");
+                        }
+                        detail.Goods_ID = goodsid.Value;
+                    }
+                    var id = GetProductIdByName(session, dtodetail.PlanNumber);
+                    if (id == null)
+                    {
+                        throw new Exception("生产计划中不存在" + dtodetail.PlanNumber + "计划号");
+                    }
+                    detail.PlanNumber_ID = id;
+
+                    dmo.Details.Add(detail);
+                }
+
+                bl.Insert(dmo);
+
+                session.Commit();
+                return dmo.ID;
+
+            }
+
+        }
+
+
+
+        private static Tuple<long?, long?> GetCalculateCatalogIDByName(IDmoSession session ,string name)
       {
           var query = new DQueryDom(new JoinAlias(typeof(CalculateGoods)));
           query.Where.Conditions.Add(DQCondition.EQ("Name", name));
@@ -209,23 +274,32 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
     }
 
 
-   
+        private static long? GetGoodsIdByName2(IDmoSessionWithTransaction session, string name)
+        {
 
-    static long? GetGoodsIdByName(IDmoSession session, string name)
+                var query = new DQueryDom(new JoinAlias(typeof(Goods)));
+                query.Where.Conditions.Add(DQCondition.EQ("Name", name));
+                query.Columns.Add(DQSelectColumn.Field("ID"));
+            var    goodsID = query.EExecuteScalar<long?>(session);
+
+            return goodsID;
+        }
+
+        static long? GetGoodsIdByName(IDmoSession session, string name)
     {
-      // var firstQuery = new DQueryDom(new JoinAlias(typeof(CalculateGoods)));
-      // firstQuery.Columns.Add(DQSelectColumn.Field("Goods_ID"));
-      //  firstQuery.Where.Conditions.Add(DQCondition.EQ("Name", name));
-      //  firstQuery.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
-      //var goodsID =  firstQuery.EExecuteScalar<long?>(session);
-      //  if (goodsID == null || goodsID == 0)
-      //  {
-            var query = new DQueryDom(new JoinAlias(typeof(Goods)));
+            var firstQuery = new DQueryDom(new JoinAlias(typeof(CalculateGoods)));
+            firstQuery.Columns.Add(DQSelectColumn.Field("Goods_ID"));
+            firstQuery.Where.Conditions.Add(DQCondition.EQ("Name", name));
+            firstQuery.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
+            var goodsID = firstQuery.EExecuteScalar<long?>(session);
+            if (goodsID == null || goodsID == 0)
+            {
+                var query = new DQueryDom(new JoinAlias(typeof(Goods)));
             query.Where.Conditions.Add(DQCondition.EQ("Name", name));
             query.Columns.Add(DQSelectColumn.Field("ID"));
-           var  goodsID =  query.EExecuteScalar<long?>(session);
-            
-        //}
+            goodsID =  query.EExecuteScalar<long?>(session);
+
+        }
 
         return goodsID;
 

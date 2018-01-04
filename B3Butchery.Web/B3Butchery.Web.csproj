@@ -118,6 +118,12 @@
     <Compile Include="..\..\..\version\tsapp_version.cs">
       <Link>tsapp_version.cs</Link>
     </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\ButcheryGoods_\ButcheryGoodsEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\ButcheryGoods_\ButcheryGoodsList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\BaseInfos\CalculateCatalog_\CalculateCatalogEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -136,6 +142,12 @@
     <Compile Include="Pages\B3Butchery\BaseInfos\CalculateSpec_\CalculateSpecList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\CategoryClassification_\CategoryClassificationEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\CategoryClassification_\CategoryClassificationList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\BaseInfos\ClientGoodsSet_\ClientGoodsSetEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -149,6 +161,12 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\B3Butchery\BaseInfos\FrozenStore_\FrozenStoreList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\GoodsCategory_\GoodsCategoryEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\GoodsCategory_\GoodsCategoryList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\B3Butchery\BaseInfos\InStoreType_\InStoreTypeEdit.cs">
@@ -185,6 +203,12 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\B3Butchery\BaseInfos\ProductLinkTemplate_\ProductLinkTemplateList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\ProductShift_\ProductShiftEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\BaseInfos\ProductShift_\ProductShiftList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\B3Butchery\BaseInfos\WorkshopCategory_\WorkshopCategoryEdit.cs">
@@ -328,6 +352,9 @@
     <Compile Include="Pages\B3Butchery\Reports\FrozenInStoreDiffReport_\FrozenInStoreDiffReport.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\B3Butchery\Reports\FrozenInStoreDiffReport_\ZeroDiffReport.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\Reports\FrozenOutStoreReport_\FrozenOutStoreReport.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -335,6 +362,12 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\B3Butchery\Reports\OutPutInStoreDiffReport_\OutPutInStoreDiffReport.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Reports\PackingMaterialReport_\PackingMaterialReport.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Reports\PackingMaterialReport_\PackingMaterialReportPrint.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\B3Butchery\Reports\PackingRecipientsAnalyse_\PackingRecipientsAnalyse.cs">
@@ -380,6 +413,7 @@
     <Compile Include="Pages\TypeIocs\ProductNoticeEditIoc.cs" />
     <Compile Include="PluginClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\ButcheryPrintAction.cs" />
     <Compile Include="Utils\ChoiceBoxProvider.cs" />
     <Compile Include="Utils\CustomInputCreator.cs" />
     <Compile Include="Utils\MainToSecondConvertRowManger.cs" />
@@ -459,6 +493,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\B3Butchery\Reports\ProduceFinishReport_\ProduceFinishReport.xml" />
+    <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\ProductShift_\ProductShiftList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\WorkShopCountConfig_\WorkShopCountConfigList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\FrozenInStoreReport_\FrozenInStoreReport.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\FrozenInStoreDiffReport_\FrozenInStoreDiffReport.xml" />
@@ -488,6 +523,9 @@
     <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\CalculateSpec_\CalculateSpecList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\ClientGoodsSet_\ClientGoodsSetList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\ClientGoodsSet_\SelectGoodsDialogs.xml" />
+    <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\ButcheryGoods_\ButcheryGoodsList.xml" />
+    <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\CategoryClassification_\CategoryClassificationList.xml" />
+    <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\GoodsCategory_\GoodsCategoryList.xml" />
     <Content Include="Pages\B3Butchery\BaseInfos\ProductInStore_Temp_\ProductInStore_TempList.xml">
       <SubType>Designer</SubType>
     </Content>

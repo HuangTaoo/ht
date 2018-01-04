@@ -45,7 +45,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
             client.Name = "from生产通知单";//固定值
             var main = new JoinAlias(typeof(ProductNotice));
             var detail = new JoinAlias(typeof(ProductNotice_Detail));
-            var goods= new JoinAlias(typeof(Goods));
+            var goods= new JoinAlias(typeof(ButcheryGoods));
             var query = new DQueryDom(main);
             query.From.AddJoin(JoinType.Left, new DQDmoSource(detail), DQCondition.EQ(main, "ID", detail, "ProductNotice_ID"));
             query.From.AddJoin(JoinType.Left, new DQDmoSource(goods),DQCondition.EQ(detail, "Goods_ID", goods, "ID") );

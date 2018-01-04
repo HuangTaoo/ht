@@ -26,7 +26,18 @@ namespace BWP.B3Butchery.BO
             set { _date = value; }
         }
 
-        [DFDataKind(B3ButcheryDataSource.车间品类)]
+
+
+
+    [LogicName("客户端显示序号")]
+    [DbColumn(AllowNull = false, DefaultValue =0)]
+    public int No { get; set; }
+
+
+
+
+
+    [DFDataKind(B3ButcheryDataSource.车间品类)]
         [DFExtProperty("DisplayField", "WorkshopCategory_Name")]
         [DFExtProperty(B3ButcheryDataSource.车间品类, B3ButcheryDataSource.车间品类)]
         [DFPrompt("车间品类")]

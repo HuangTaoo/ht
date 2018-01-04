@@ -18,4 +18,11 @@
     <Word name="未冻好" value="1" />
     <Word name="返车间" value="2" />
   </NamedValue>
+  <NamedValue type="BWP.B3Butchery.Utils.包装模式,B3Butchery">
+    <Word name="箱装" value="0" />
+    <Word name="袋装" value="1" />
+
+  </NamedValue>
+  
+
 </NamedValueSettings>

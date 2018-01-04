@@ -22,7 +22,15 @@ namespace BWP.B3Butchery.Web
 	{
 		internal static void Register()
 		{
-			ChoiceBoxSettings.Register(B3ButcheryDataSource.生产线, (argu) =>
+
+            ChoiceBoxSettings.Register(B3ButcheryDataSource.生产班组, (argu) =>
+            {
+                return new DomainChoiceBoxQueryHelper<BO.ProductShift>(argu)
+                {
+                    OnlyAvailable = true
+                }.GetData();
+            });
+            ChoiceBoxSettings.Register(B3ButcheryDataSource.生产线, (argu) =>
 			{
 				return new DomainChoiceBoxQueryHelper<BO.ProductLine>(argu)
 				{
@@ -32,6 +40,20 @@ namespace BWP.B3Butchery.Web
       ChoiceBoxSettings.Register(B3ButcheryDataSource.车间品类, (argu) =>
 			{
 				return new DomainChoiceBoxQueryHelper<WorkshopCategory>(argu)
+				{
+					OnlyAvailable = true
+				}.GetData();
+			});
+      ChoiceBoxSettings.Register(B3ButcheryDataSource.类别分类, (argu) =>
+			{
+				return new DomainChoiceBoxQueryHelper<CategoryClassification>(argu)
+				{
+					OnlyAvailable = true
+				}.GetData();
+			});
+      ChoiceBoxSettings.Register(B3ButcheryDataSource.存货类别, (argu) =>
+			{
+				return new DomainChoiceBoxQueryHelper<GoodsCategory>(argu)
 				{
 					OnlyAvailable = true
 				}.GetData();

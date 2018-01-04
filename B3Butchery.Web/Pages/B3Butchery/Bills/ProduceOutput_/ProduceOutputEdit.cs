@@ -30,6 +30,8 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceOutput_
       config.Add("PlanNumber_ID");
       config.Add("AccountingUnit_ID");
       config.Add("Department_ID");
+      config.Add("ProductionUnit_ID");
+            
       config.Add("Employee_ID");
       config.Add("ProductLinks_ID");
       config.Add("FrozenStore_ID");

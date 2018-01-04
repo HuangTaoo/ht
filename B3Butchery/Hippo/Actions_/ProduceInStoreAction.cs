@@ -47,6 +47,7 @@ namespace BWP.B3Butchery.Hippo.Actions_
 			HippoUtil.AddEQ(query, "Employee_ID", queryobj.Employee_ID);
 			HippoUtil.AddEQ(query, "Store_ID", queryobj.Store_ID);
 			HippoUtil.AddEQ(query, "InStoreType_ID", queryobj.InStoreType_ID);
+			HippoUtil.AddEQ(query, "ProductPlan_ID", queryobj.ProductPlan_ID);
 			if (queryobj.MinInStoreDate.HasValue)
 				query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual("InStoreDate", queryobj.MinInStoreDate.Value));
 			if (queryobj.MaxInStoreDate.HasValue)

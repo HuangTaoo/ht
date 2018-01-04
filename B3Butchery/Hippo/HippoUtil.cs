@@ -182,12 +182,13 @@ namespace BWP.B3Butchery.Hippo
                                                    {
 																										 new FieldDesc{ Name="ID",Title="单号"},
 																										 new FieldDesc{Name="BillState",Title="单据状态"},
-																										 new FieldDesc{Name="AccountingUnit_ID",Title="会计单位",DataKind=B3FrameworksConsts.DataSources.授权会计单位全部,DisplayField="AccountingUnit_Name"},
+                                                     new FieldDesc{Name="AccountingUnit_ID",Title="会计单位",DataKind=B3FrameworksConsts.DataSources.授权会计单位全部,DisplayField="AccountingUnit_Name"},
 																										 new FieldDesc{Name="Department_ID",Title="部门",DataKind=B3FrameworksConsts.DataSources.授权部门全部,DisplayField="Department_Name"},
 																										 new FieldDesc{Name="Employee_ID",Title="经办人",DataKind=B3FrameworksConsts.DataSources.授权员工全部,DisplayField="Employee_Name"},
 																										 new FieldDesc{Name="Store_ID",Title="仓库",DataKind=B3FrameworksConsts.DataSources.授权仓库全部,DisplayField="Store_Name"},
 																										  new FieldDesc{Name="InStoreType_ID",Title="入库类型",DataKind=B3ButcheryDataSource.屠宰分割入库类型全部,DisplayField="InStoreType_Name"},
-																										 new FieldDesc{Name="MinInStoreDate",Title="最小入库日期"},
+                                                     new FieldDesc{Name="ProductPlan_ID",Title="生产计划号",DataKind=B3ButcheryDataSource.计划号,DisplayField="ProductPlan_Name"},
+                                                     new FieldDesc{Name="MinInStoreDate",Title="最小入库日期"},
 																										 new FieldDesc{Name="MaxInStoreDate",Title="最大入库日期"},
 
 																									 },
@@ -230,7 +231,6 @@ namespace BWP.B3Butchery.Hippo
 				ItemType = "/MainSystem/B3Butchery/BO/ProductInStore_Detail",
 				DisplayFields = new[] {
 					new FieldDesc {Name = "ProductionDate", Title = "生产日期"},
-					new FieldDesc {Name = "ProductPlan_ID", Title = "生产计划号", DisplayField = "ProductPlan_Name", DataKind=B3ButcheryDataSource.计划号},
 					new FieldDesc {Name = "Goods_ID", Title = "存货名称", DisplayField = "Goods_Name", DataKind=B3UnitedInfosConsts.DataSources.存货},
 					new FieldDesc {Name = "Goods_Code", Title = "存货编码"},
 					new FieldDesc {Name = "Goods_Spec", Title = "规格"},
@@ -238,7 +238,7 @@ namespace BWP.B3Butchery.Hippo
 					new FieldDesc {Name = "SecondNumber", Title = "辅数量"},
 					new FieldDesc {Name = "Remark", Title = "备注"}                      
 								},
-				ItemFormat = "存货名称: [Goods_Name]\n存货编码: [Goods_Code]\n规格: [Goods_Spec]\n主数量: [Number]\n辅数量: [SecondNumber]\n备注: [Remark]",
+				ItemFormat = "存货名称: [Goods_Name]\n存货编码: [Goods_Code]\n规格: [Goods_Spec]\n生产计划号: [ProductPlan_ID]\n主数量: [Number]\n辅数量: [SecondNumber]\n备注: [Remark]",
 				ActionBar = "New"
 			};
 			model.Collections.Add(detail);
