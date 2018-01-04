@@ -2,6 +2,7 @@
 using BWP.B3Butchery.BO;
 using BWP.Web.Utils;
 using TSingSoft.WebControls2;
+using TSingSoft.WebPluginFramework;
 using DataKind = BWP.B3Frameworks.B3FrameworksConsts.DataSources;
 namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
   internal class ProduceFinishList : DomainBillListPage<ProduceFinish, IProduceFinishBL> {
@@ -41,7 +42,18 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
       }
     }
 
-
+    protected override void InitToolBar(HLayoutPanel toolbar)
+    {
+      base.InitToolBar(toolbar);
+      if (User.IsInRole("B3Butchery.报表.生产完工分析")) {
+        var dataAnysBtn = new TSButton {
+          Text = "数据分析",
+          UseSubmitBehavior = false,
+          OnClientClick = string.Format("OpenUrlInTopTab('{0}','生产完工分析');return false;", WpfPageUrl.ToGlobal(AspUtil.AddTimeStampToUrl("~/B3Butchery/Reports/ProduceFinishReport_/ProduceFinishReport.aspx")))
+        };
+        toolbar.Add(dataAnysBtn);
+      }
+    }
 
   }
 }
