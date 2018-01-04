@@ -193,6 +193,17 @@ namespace BWP.B3Butchery.Web
         }.GetData();
       });
 			ChoiceBoxSettings.Register(B3ButcheryDataSource.生产环节模板会计单位部门条件, SelectProductLinkTemplate);
+
+      ChoiceBoxSettings.Register(B3ButcheryDataSource.生产通知单ID, (argu) =>
+      {
+        var queryHelper = new DomainChoiceBoxQueryHelper<ProductNotice>(argu)
+        {
+          OnlyAvailable = false
+        };
+        queryHelper.AddSelectedField("ID");
+        queryHelper.SearchFields.Add("ID");
+        return queryHelper.GetData();
+      });
     }
 
     private static IEnumerable<WordPair> SelectProductLinkTemplate(ChoiceBoxArgument argu)

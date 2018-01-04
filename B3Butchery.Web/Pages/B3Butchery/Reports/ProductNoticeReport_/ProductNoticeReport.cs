@@ -16,6 +16,7 @@ using Forks.EnterpriseServices.DomainObjects2;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.EnterpriseServices.SqlDoms;
 using TSingSoft.WebControls2;
+using BWP.B3Butchery.Utils;
 
 namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
 {
@@ -86,7 +87,8 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
     protected override void AddQueryControls(VLayoutPanel vPanel)
     {
       var customPanel = new LayoutManager("Main", _mainInfo, mQueryContainer);
-      customPanel.Add("ID", QueryCreator.DFTextBox(_mainInfo.Fields["ID"]));
+      customPanel.Add("ID", QueryCreator.DFChoiceBoxEnableMultiSelection(_mainInfo.Fields["ID"], mQueryContainer, "ID", B3ButcheryDataSource.生产通知单ID));
+      customPanel["ID"].NotAutoAddToContainer = true;
       customPanel.Add("BillState", QueryCreator.一般单据状态(_mainInfo.Fields["BillState"]));
       customPanel.Add("AccountingUnit_ID", QueryCreator.DFChoiceBoxEnableMultiSelection(_mainInfo.Fields["AccountingUnit_ID"], mQueryContainer, "AccountingUnit_ID", B3FrameworksConsts.DataSources.授权会计单位全部));
       customPanel["AccountingUnit_ID"].NotAutoAddToContainer = true;
