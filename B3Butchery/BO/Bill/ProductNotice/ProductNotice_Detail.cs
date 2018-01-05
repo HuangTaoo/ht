@@ -9,7 +9,7 @@ using TSingSoft.WebControls2;
 using BWP.B3Frameworks;
 
 namespace BWP.B3Butchery.BO {
-  [Serializable, DFClass, LogicName("生产计划投入明细")]
+  [Serializable, DFClass, LogicName("生产通知单明细")]
   [OrganizationLimitedDmo("Detail_Customer_ID", typeof(ICustomer))]
   public class  ProductNotice_Detail : GoodsDetail
   {
