@@ -15,6 +15,7 @@ using TSingSoft.WebControls2;
 using BWP.B3Butchery.BO;
 using BWP.B3ProduceUnitedInfos;
 using BWP.B3UnitedInfos;
+using BWP.B3UnitedInfos.BO;
 
 namespace BWP.Web.Pages.B3Butchery.Reports.ProduceFinishReport_
 {
@@ -66,6 +67,8 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProduceFinishReport_
       layout["GoodsProperty_ID"].NotAutoAddToContainer = true;
       layout.Add("BrandItem_ID", new SimpleLabel("品牌项"), QueryCreator.DFChoiceBoxEnableMultiSelection(mDFInfo.Fields["ID"], mQueryContainer, "BrandItem_ID", B3UnitedInfosConsts.DataSources.品牌项));
       layout["BrandItem_ID"].NotAutoAddToContainer = true;
+      layout.Add("ProductLine_ID", new SimpleLabel("产品线"), QueryCreator.DFChoiceBoxEnableMultiSelection(mDFInfo.Fields["ID"], mQueryContainer, "ProductLine_ID", B3UnitedInfosConsts.DataSources.产品线全部));
+      layout["ProductLine_ID"].NotAutoAddToContainer = true;
       layout.Add("Date", new SimpleLabel("生产日期"), QueryCreator.TimeRange(mDFInfo.Fields["Date"], mQueryContainer, "MinDate", "MaxDate"));
       layout["Date"].NotAutoAddToContainer = true;
       var state = mQueryContainer.Add(B3ButcheryCustomInputCreator.一般单据状态(mDFInfo.Fields["BillState"], true, false, true, true), "BillState");
@@ -83,6 +86,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProduceFinishReport_
       config.Add("Goods_ID");
       config.Add("GoodsProperty_ID");
       config.Add("BrandItem_ID");
+      config.Add("ProductLine_ID");
       config.Add("Date");
       config.Add("BillState");
 
@@ -103,6 +107,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProduceFinishReport_
       mDisplayHelper.AddOptionItem("客户", "bill", "Customer_Name", false);
       mDisplayHelper.AddOptionItem("存货属性", "detail", "GoodsProperty_Name", false);
       mDisplayHelper.AddOptionItem("品牌项", "detail", "BrandItem_Name", false);
+      mDisplayHelper.AddOptionItem("产品线", "goods", "ProductLine_Name", false);
       mDisplayHelper.AddOptionItem("存货编号", "detail", "Goods_Code", false);
       mDisplayHelper.AddOptionItem("存货名称", "detail", "Goods_Name", false);
       mDisplayHelper.AddOptionItem("规格", "detail", "Goods_Spec", false);
@@ -125,13 +130,17 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProduceFinishReport_
       mDisplayHelper.AddAlias("bill", JoinAlias.Create("bill"));
       var detail = new JoinAlias("detail", typeof(ProduceFinish_Detail));
       var noticDetail = new JoinAlias("noticDetail", typeof(ProductNotice_Detail));
+      var goods = new JoinAlias("goods", typeof(Goods));
       mDisplayHelper.AddAlias("detail", JoinAlias.Create("detail"));
       mDisplayHelper.AddAlias("noticDetail", JoinAlias.Create("noticDetail"));
+      mDisplayHelper.AddAlias("goods", JoinAlias.Create("goods"));
       dom.From.AddJoin(JoinType.Left, new DQDmoSource(detail), DQCondition.EQ(bill, "ID", detail, "ProduceFinish_ID"));
       dom.From.AddJoin(JoinType.Left, new DQDmoSource(noticDetail), DQCondition.EQ(detail, "ProductNotice_Detail_ID", noticDetail, "ID"));
+      dom.From.AddJoin(JoinType.Left, new DQDmoSource(goods), DQCondition.EQ(detail, "Goods_ID", goods, "ID"));
       var goodsChb = mQueryContainer.GetControl<DFChoiceBox>("Goods_ID");
       var proChb = mQueryContainer.GetControl<DFChoiceBox>("GoodsProperty_ID");
       var brandChb = mQueryContainer.GetControl<DFChoiceBox>("BrandItem_ID");
+      var lineChb = mQueryContainer.GetControl<DFChoiceBox>("ProductLine_ID");
       if (!goodsChb.IsEmpty) {
         dom.Where.Conditions.Add(DQCondition.InList(DQExpression.Field(detail, "Goods_ID"), goodsChb.GetValues().Select(x => DQExpression.Value(x)).ToArray()));
       }
@@ -140,6 +149,9 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProduceFinishReport_
       }
       if (!brandChb.IsEmpty) {
         dom.Where.Conditions.Add(DQCondition.InList(DQExpression.Field(detail, "BrandItem_ID"), brandChb.GetValues().Select(x => DQExpression.Value(x)).ToArray()));
+      }
+      if (!lineChb.IsEmpty) {
+        dom.Where.Conditions.Add(DQCondition.InList(DQExpression.Field(goods, "ProductLine_ID"), lineChb.GetValues().Select(x => DQExpression.Value(x)).ToArray()));
       }
       mDisplayHelper.AddSelectColumns(dom, (name) => OptionIsSelected("选项", name), SumColumnIndexs);
       return dom;
