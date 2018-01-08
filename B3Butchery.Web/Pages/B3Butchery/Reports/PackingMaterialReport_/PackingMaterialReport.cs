@@ -284,7 +284,11 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
             {
                 query.Where.Conditions.Add(DQCondition.LessThanOrEqual(main, "Time", enddateInput.Value.Value));
             }
-            return query;
+          query.OrderBy.Expressions.Add(DQOrderByExpression.Create(DQExpression.Field(goods, "PackageModel"), false));
+
+
+
+          return query;
 
 
 

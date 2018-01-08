@@ -1,5 +1,7 @@
 ﻿using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BO;
+using BWP.B3Butchery.BO.BaseInfo;
+using BWP.B3Butchery.Utils;
 using Forks.EnterpriseServices.BusinessInterfaces;
 using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
@@ -104,10 +106,44 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
     {
 
 
-      parameters.Add("$班组测算打印", GetHtml());
+      var query = GetQueryDom();
+      parameters.Add("$Details", GetList());
+      parameters.Add("$DetailsType", typeof(PackingMaterialReportBo));
+      //parameters.Add("$班组测算打印", GetHtml());
 
     }
 
+
+    private List<PackingMaterialReportBo> GetList()
+    {
+      var list = new List<PackingMaterialReportBo>();
+      var query = GetQueryDom();
+      using (var context = new TransactionContext())
+      {
+        using (var reader = context.Session.ExecuteReader(query))
+        {
+
+          while (reader.Read())
+          {
+            int i = 0;
+            var item = new PackingMaterialReportBo();
+            item.Goods_Name = (string)reader[i++];
+            item.PlanNumber = (string)reader[i++];
+            item.Goods_Spec = (string)reader[i++];
+            item.SecondNumber = (Money<decimal>?)reader[i++];
+            item.SecondNumber2 = (Money<decimal>?)reader[i++];
+            item.Number = (Money<decimal>?)reader[i++];
+            item.PackageModel = (NamedValue<包装模式>?)reader[i++];
+            list.Add(item);
+
+          }
+        }
+
+
+
+      }
+      return list;
+    }
     private string GetHtml()
     {
       var sb = new StringBuilder();
@@ -235,7 +271,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
       }
       if (PackMode != null)
       {
-        query.Where.Conditions.Add(DQCondition.LessThanOrEqual(detail, "Goods_PackageModel", PackMode));
+        query.Where.Conditions.Add(DQCondition.LessThanOrEqual(goods, "PackageModel", PackMode));
       }
       if (BeginDate != null)
       {
@@ -245,6 +281,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
       {
         query.Where.Conditions.Add(DQCondition.LessThanOrEqual(main, "Time", EndDate));
       }
+      query.OrderBy.Expressions.Add(DQOrderByExpression.Create(DQExpression.Field(goods, "PackageModel"), false));
       return query;
 
 

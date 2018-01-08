@@ -194,6 +194,7 @@
     <Compile Include="BO\BaseInfo\GoodsCategory_\GoodsCategory.cs" />
     <Compile Include="BO\BaseInfo\HandoverRecord_\HandoverRecord.cs" />
     <Compile Include="BO\BaseInfo\InStoreType_\InStoreType.cs" />
+    <Compile Include="BO\BaseInfo\PackingMaterialReportBo_\PackingMaterialReportBo.cs" />
     <Compile Include="BO\BaseInfo\PlanNoBaseInfo_\PlanNoBaseInfo.cs" />
     <Compile Include="BO\BaseInfo\ProductInStoreTemplate_\ProductInStoreTemplate.cs" />
     <Compile Include="BO\BaseInfo\ProductInStoreTemplate_\ProductInStoreTemplate_GoodsDetail.cs" />
