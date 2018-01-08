@@ -46,7 +46,7 @@ namespace BWP.B3Butchery.BO {
     public long? Customer_ID { get; set; }
 
     [LogicName("生产单位")]
-    [DFDataKind(B3ProduceUnitedInfosDataSources.生产单位全部)]
+    [DFDataKind(B3ProduceUnitedInfosDataSources.生产单位)]
     [DFExtProperty(B3FrameworksConsts.DFExtProperties.DisplayField, "ProductionUnit_Name")]
     public long? ProductionUnit_ID { get; set; }
      

@@ -51,7 +51,6 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
       AddQueryPanelByBrandItem_Name(_checkbox);
       _checkbox.Items.Add(new ListItem("日期", "Date"));
       _checkbox.Items.Add(new ListItem("生产单位", "ProductionUnit_Name"));
-      _checkbox.Items.Add(new ListItem("客户", "Customer_Name"));
       _checkbox.Items.Add(new ListItem("加工要求", "ProduceRequest"));
       _checkbox.Items.Add(new ListItem("生产日期", "ProduceDate"));
       _checkbox.Items.Add(new ListItem("交货日期", "DeliveryDate"));
@@ -75,7 +74,10 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
       mQueryControls.EnableHoldLastControlNames.Add("显示字段");
     }
 
-    protected virtual void AddQueryPanelByBrandItem_Name(CheckBoxListWithReverseSelect _checkbox) { }
+    protected virtual void AddQueryPanelByBrandItem_Name(CheckBoxListWithReverseSelect _checkbox)
+    {
+      _checkbox.Items.Add(new ListItem("客户", "Customer_Name"));
+    }
     protected virtual void AddQueryControlsByBrandItem_ID(LayoutManager manager, DFInfo info) { }
 
     void CreateDataRangePanel(HLayoutPanel hPanel)
@@ -117,7 +119,6 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
       customPanel.CreateDefaultConfig(2).Expand = false;
       vPanel.Add(customPanel.CreateLayout());
     }
-
     string[] mainFields = new string[] { "ID", "AccountingUnit_Name", "Department_Name", "Customer_Name", "ProductionUnit_Name", "Employee_Name", "Date", "BillState" };
     string[] sumFileds = new string[] { "Number", "SecondNumber" };
     string[] detailFields = new string[] { "ProduceRequest", "ProduceDate", "DeliveryDate", "DmoID" };
@@ -151,8 +152,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
 
           else if (mainFields.Contains(field.Value))
           {
-            query.Columns.Add(DQSelectColumn.Field(field.Value));
-            query.GroupBy.Expressions.Add(DQExpression.Field(field.Value));
+            TakeValueCustomer(query, field,detail);//耘垦客户要求客户字段取值明细表中的客户字段
           }
           else if (detailFields.Contains(field.Value))
           {
@@ -196,6 +196,12 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductNoticeReport_
       if (query.Columns.Count == 0)
         throw new Exception("至少选择一条显示列");
       return query;
+    }
+
+    protected virtual void TakeValueCustomer(DQueryDom query, ListItem field, JoinAlias detail)
+    {
+      query.Columns.Add(DQSelectColumn.Field(field.Value));
+      query.GroupBy.Expressions.Add(DQExpression.Field(field.Value));
     }
   }
 }

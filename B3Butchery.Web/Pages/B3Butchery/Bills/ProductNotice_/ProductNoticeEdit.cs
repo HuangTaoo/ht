@@ -152,7 +152,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       base.GetFromUI();
       _detailGrid.GetFromUI();
     }
-
+    protected ProductNotice_Detail last = null;
     private void AddToolsPanel(HLayoutPanel toobar)
     {      
       toobar.Add(new SimpleLabel("选择存货"));
@@ -165,11 +165,13 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       toobar.Add(goodsSelect);
       goodsSelect.SelectedValueChanged += (sender, e) => {
         _detailGrid.GetFromUI();
+        last = Dmo.Details.LastOrDefault();
         foreach (var sGoodsID in goodsSelect.GetValues()) {
           var goods = GoodsBL.Instance.Load(Convert.ToInt64(sGoodsID));
           var detail = new ProductNotice_Detail();
           detail.Goods_ID = goods.ID;
           DmoUtil.RefreshDependency(detail, "Goods_ID");
+          AddBrandItem(detail);
           Dmo.Details.Add(detail);
         }
         goodsSelect.DisplayValue = string.Empty;
@@ -199,6 +201,8 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
             //AspUtil.Alert(this, "载入预报成功");
         };
     }
+
+    protected virtual void AddBrandItem(ProductNotice_Detail detail) { }
 
     private void ReceiveSelectedGoodsDetailDialog() {
       var selectedList = DialogUtil.GetCachedObj<SelectedGoodsDetail>(this);
