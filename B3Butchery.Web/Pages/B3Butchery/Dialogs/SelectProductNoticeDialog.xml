@@ -83,6 +83,30 @@
         <Field name="BillState"/>
         <QBE paramName ="BillState"/>
       </EQ>
+      <EQ>
+        <Field name="BrandItem_ID" alias="detail"/>
+        <QBE paramName="BrandItem_ID"/>
+      </EQ>
+      <Contains>
+        <Field name="ProduceRequest" alias="detail"/>
+        <QBE paramName="ProduceRequest"/>
+      </Contains>
+      <GreaterThanOrEqual>
+        <Field name="ProduceDate" alias="detail"/>
+        <QBE paramName="MinProduceDate" />
+      </GreaterThanOrEqual>
+      <LessThanOrEqual>
+        <Field name="ProduceDate" alias="detail"/>
+        <QBE paramName="MaxProduceDate"/>
+      </LessThanOrEqual>
+      <GreaterThanOrEqual>
+        <Field name="DeliveryDate" alias="detail"/>
+        <QBE paramName="MinDeliveryDate" />
+      </GreaterThanOrEqual>
+      <LessThanOrEqual>
+        <Field name="DeliveryDate" alias="detail"/>
+        <QBE paramName="MaxDeliveryDate"/>
+      </LessThanOrEqual>
     </And>
   </Where>
 </Select>
