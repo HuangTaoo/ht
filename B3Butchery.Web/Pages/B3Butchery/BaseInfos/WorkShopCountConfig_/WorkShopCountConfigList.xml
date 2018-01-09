@@ -22,6 +22,15 @@
           <QBE paramName="Name"/>
         </Contains>
       </Or>
+
+      <EQ>
+        <Field name="No"/>
+        <QBE paramName="No"/>
+      </EQ>
+      <EQ>
+        <Field name="WorkshopCategory_ID"/>
+        <QBE paramName="WorkshopCategory_ID"/>
+      </EQ>
       <EQ>
         <Field name="Stopped"/>
         <QBE paramName="Stopped"/>
