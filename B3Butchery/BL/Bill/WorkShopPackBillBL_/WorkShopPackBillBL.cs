@@ -54,11 +54,11 @@ namespace BWP.B3Butchery.BL
         de.Number = one.Sum(x => (x.Number ?? 0).Value);
         if (de.Goods_SecondUnitII_MainUnitRatio != null && de.Goods_SecondUnitII_MainUnitRatio != 0)
         {
-          de.SecondNumber2 = de.Number / de.Goods_SecondUnitII_MainUnitRatio;
+          de.SecondNumber2 = de.Number / de.Goods_SecondUnitII_MainUnitRatio * de.Goods_SecondUnitII_MainUnitRatio;
         }
         if (de.Goods_MainUnitRatio != null && de.Goods_MainUnitRatio != 0)
         {
-          de.SecondNumber = de.Number / de.Goods_MainUnitRatio;
+          de.SecondNumber = de.Number / de.Goods_MainUnitRatio * de.Goods_SecondUnitRatio;
         }
 
 
