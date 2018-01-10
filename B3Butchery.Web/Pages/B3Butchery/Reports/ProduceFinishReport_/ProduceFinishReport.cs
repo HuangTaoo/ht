@@ -115,7 +115,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProduceFinishReport_
       mDisplayHelper.AddOptionItem("主数量", "detail", "Number", true,true);
       mDisplayHelper.AddOptionItem("辅单位", "detail", "Goods_SecondUnit", false);
       mDisplayHelper.AddOptionItem("辅数量", "detail", "SecondNumber", true,true);
-      mDisplayHelper.AddOptionItem("计划数量", "noticDetail", "DoneNumber", true, true);
+      mDisplayHelper.AddOptionItem("计划数量", "noticDetail", "Number", true, true);
       mDisplayHelper.AddOptionItem("未完成数量", () => {
         return DQExpression.Subtract(DQExpression.Field(JoinAlias.Create("noticDetail"), "Number"), DQExpression.Field(JoinAlias.Create("noticDetail"), "DoneNumber"));
       }, true, true);
