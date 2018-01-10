@@ -49,7 +49,6 @@ namespace BWP.Web.Pages.B3Butchery.Dialogs {
 
     protected override void CreateQueryGridColumns(DFBrowseGrid grid) {
       grid.Columns.Add(new DFBrowseGridColumn("ID"));
-      grid.Columns.Add(new DFBrowseGridColumn("BrandItem_Name"));
       grid.Columns.Add(new DFBrowseGridColumn("ProductionUnit_Name"));
       grid.Columns.Add(new DFBrowseGridColumn("Date"));
       grid.Columns.Add(new DFBrowseGridColumn("ProduceDate"));
