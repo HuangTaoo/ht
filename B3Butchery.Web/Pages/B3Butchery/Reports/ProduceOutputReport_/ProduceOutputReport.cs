@@ -43,8 +43,9 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProduceOutputReport_
 			base.InitQueryPanel(queryPanel);
 			var panel = queryPanel.CreateTab("显示字段");
 			checkbox = new CheckBoxListWithReverseSelect() { RepeatColumns = 6, RepeatDirection = RepeatDirection.Horizontal };
-			//显示字段包括：{日期}、{计划号}、{会计单位}、{部门}、{经办人}、{生产环节}、{存货名称}、{存货编码}、{规格}、{主数量}、{主单位}、{辅数量}、{辅单位}、{备注}
-			checkbox.Items.Add(new ListItem("日期", "Time"));
+      //显示字段包括：{日期}、{计划号}、{会计单位}、{部门}、{经办人}、{生产环节}、{存货名称}、{存货编码}、{规格}、{主数量}、{主单位}、{辅数量}、{辅单位}、{备注}
+      checkbox.Items.Add(new ListItem("ID", "ID"));
+      checkbox.Items.Add(new ListItem("日期", "Time"));
 			checkbox.Items.Add(new ListItem("计划号", "PlanNumber_Name"));
 			checkbox.Items.Add(new ListItem("会计单位", "AccountingUnit_Name"));
 			checkbox.Items.Add(new ListItem("部门", "Department_Name"));
@@ -139,7 +140,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProduceOutputReport_
 			if (sd.Value.HasValue)
 				query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual("Time", sd.Value.Value));
 			if (ed.Value.HasValue)
-				query.Where.Conditions.Add(DQCondition.LessThanOrEqual("Time", ed.Value.Value));
+				query.Where.Conditions.Add(DQCondition.LessThanOrEqual("Time", ed.Value.Value.AddDays(1).AddSeconds(-1)));
 			query.Where.Conditions.Add(DQCondition.And(DQCondition.EQ("BillState", 单据状态.已审核), DQCondition.EQ("Domain_ID", DomainContext.Current.ID)));
 			if (query.Columns.Count == 0)
 				throw new Exception("至少选择一条显示列");

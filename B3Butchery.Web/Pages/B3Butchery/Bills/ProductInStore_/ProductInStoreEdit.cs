@@ -347,6 +347,8 @@ function(result,dfContainer){
         foreach (var de in temp.Details)
         {
           var detail = new ProductInStore_Detail();
+          detail.BrandItem_ID = de.BrandItem_ID;
+          detail.BrandItem_Name = de.BrandItem_Name;
           detail.Goods_ID = de.Goods_ID;
           detail.Goods_Name = de.Goods_Name;
           detail.Goods_Spec = de.Goods_Spec;

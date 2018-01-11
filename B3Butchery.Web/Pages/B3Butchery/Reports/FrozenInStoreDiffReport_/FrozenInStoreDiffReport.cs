@@ -291,7 +291,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
 
                 if (date != null)
                 {
-                    var c2 = DQCondition.LessThanOrEqual(main, "Time", date.Value.AddDays(1));
+                    var c2 = DQCondition.LessThanOrEqual(main, "Time", date.Value.AddDays(1).AddSeconds(-1));
                     var c1 = DQCondition.GreaterThanOrEqual(main, "Time", date.Value);
                     dom.Where.Conditions.Add(DQCondition.And(c1, c2));
                 }
@@ -350,7 +350,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
 
                 if (date != null)
                 {
-                    var c2 = DQCondition.LessThanOrEqual(main, "Date", date.Value.AddDays(2));
+                    var c2 = DQCondition.LessThanOrEqual(main, "Date", date.Value.AddDays(2).AddSeconds(-1));
                     var c1 = DQCondition.GreaterThanOrEqual(main, "Date", date.Value.AddDays(1));
                     dom.Where.Conditions.Add(DQCondition.And(c1, c2));
                 }
@@ -390,7 +390,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
 
                 if (date != null)
                 {
-                    var c2 = DQCondition.LessThanOrEqual(main, "Date", date.Value.AddDays(2));
+                    var c2 = DQCondition.LessThanOrEqual(main, "Date", date.Value.AddDays(2).AddSeconds(-1));
                     var c1 = DQCondition.GreaterThanOrEqual(main, "Date", date.Value.AddDays(1));
                     dom.Where.Conditions.Add(DQCondition.And(c1, c2));
                 }

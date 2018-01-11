@@ -11,11 +11,23 @@ using System.Web.UI.WebControls;
 using BWP.B3Frameworks.Utils;
 using Forks.EnterpriseServices.DataForm;
 using BWP.Web.Pages.B3Butchery.Dialogs;
+using BWP.B3Frameworks;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_Temp_
 {
+
+
+
   public class ProductInStore_TempEdit : DomainBaseInfoEditPage<ProductInStore_Temp, IProductInStore_TempBL>
   {
+    public class IOCs
+    {
+
+      public interface BeforeDetailGridApplyLayout
+      {
+        void Invoke(DFEditGrid grid);
+      }
+    }
     protected override void BuildBody(Control container)
     {
       var mainInfo = container.EAdd(new TitlePanel("基本信息"));
@@ -90,7 +102,12 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_Temp_
       detailGrid = titlePanel.EAdd(new DFEditGrid(detailGridEditor) { Width = Unit.Percentage(100) });     
       detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
       detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
-      detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Spec"));     
+      detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Spec"));
+      foreach (var ioc in TypeIOCCenter.GetIOCList<IOCs.BeforeDetailGridApplyLayout>(this.GetType()))
+      {
+        //耘肯添加数据
+        ioc.Invoke(detailGrid);
+      }
       new MainToSecondConvertRowManger(detailGrid);
       var section = mPageLayoutManager.AddSection("DetailColumns", "明细列");
       section.ApplyLayout(detailGrid, mPageLayoutManager, DFInfo.Get(typeof(ProductInStore_Temp_Detail)));
