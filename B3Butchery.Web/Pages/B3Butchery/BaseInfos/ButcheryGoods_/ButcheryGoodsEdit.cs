@@ -111,8 +111,13 @@ namespace BWP.Web.Pages.B3Butchery.BaseInfos.ButcheryGoods_
             }
         }
 
+    protected override bool EnableReferToCreate
+    {
+      get { return IsManager; }
+    }
 
-        protected override void BuildBasePropertiesEditor(TitlePanel titlePanel, PageLayoutSection pageLayoutSection)
+
+    protected override void BuildBasePropertiesEditor(TitlePanel titlePanel, PageLayoutSection pageLayoutSection)
         {
             var layoutManager = new LayoutManager("", mDFInfo, mDFContainer);
 
