@@ -80,9 +80,13 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProduceOutputReport_
 		protected override void AddQueryControls(VLayoutPanel vPanel)
 		{
 			var customPanel = new LayoutManager("Main", mainInfo, mQueryContainer);
-			//查询条件包括：：{日期}、{计划号}、{会计单位}、{部门}、{经办人}、{生产环节}、{存货名称}、{存货编码}，
+      //查询条件包括：：{日期}、{计划号}、{会计单位}、{部门}、{经办人}、{生产环节}、{存货名称}、{存货编码}，
+      customPanel.Add("ID", QueryCreator.DFTextBoxMultiSelect(mainInfo.Fields["ID"], mQueryContainer, "ID"));
+      customPanel["ID"].NotAutoAddToContainer = true;
 
-			customPanel.Add("PlanNumber_ID", QueryCreator.DFChoiceBoxEnableMultiSelection(mainInfo.Fields["PlanNumber_ID"], mQueryContainer, "PlanNumber_ID", B3ButcheryDataSource.计划号));
+
+
+      customPanel.Add("PlanNumber_ID", QueryCreator.DFChoiceBoxEnableMultiSelection(mainInfo.Fields["PlanNumber_ID"], mQueryContainer, "PlanNumber_ID", B3ButcheryDataSource.计划号));
 			customPanel["PlanNumber_ID"].NotAutoAddToContainer = true;
 
 			customPanel.Add("AccountingUnit_ID", QueryCreator.DFChoiceBoxEnableMultiSelection(mainInfo.Fields["AccountingUnit_ID"], mQueryContainer, "AccountingUnit_ID", DataKind.授权会计单位全部));
