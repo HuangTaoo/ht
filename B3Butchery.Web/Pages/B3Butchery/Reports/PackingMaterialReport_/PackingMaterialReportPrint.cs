@@ -271,7 +271,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
       }
       if (PackMode != null)
       {
-        query.Where.Conditions.Add(DQCondition.LessThanOrEqual(goods, "PackageModel", PackMode));
+        query.Where.Conditions.Add(DQCondition.EQ(goods, "PackageModel", PackMode));
       }
       if (BeginDate != null)
       {
