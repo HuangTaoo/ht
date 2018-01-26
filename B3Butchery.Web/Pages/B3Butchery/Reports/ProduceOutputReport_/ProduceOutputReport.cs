@@ -20,6 +20,7 @@ using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.EnterpriseServices.SqlDoms;
 using TSingSoft.WebControls2;
 using DataKind = BWP.B3Frameworks.B3FrameworksConsts.DataSources;
+using BWP.B3ProduceUnitedInfos;
 
 namespace BWP.Web.Pages.B3Butchery.Reports.ProduceOutputReport_
 {
@@ -44,14 +45,17 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProduceOutputReport_
 			var panel = queryPanel.CreateTab("显示字段");
 			checkbox = new CheckBoxListWithReverseSelect() { RepeatColumns = 6, RepeatDirection = RepeatDirection.Horizontal };
       //显示字段包括：{日期}、{计划号}、{会计单位}、{部门}、{经办人}、{生产环节}、{存货名称}、{存货编码}、{规格}、{主数量}、{主单位}、{辅数量}、{辅单位}、{备注}
-      checkbox.Items.Add(new ListItem("ID", "ID"));
+      checkbox.Items.Add(new ListItem("单据号", "ID"));
       checkbox.Items.Add(new ListItem("日期", "Time"));
 			checkbox.Items.Add(new ListItem("计划号", "PlanNumber_Name"));
 			checkbox.Items.Add(new ListItem("会计单位", "AccountingUnit_Name"));
 			checkbox.Items.Add(new ListItem("部门", "Department_Name"));
 			checkbox.Items.Add(new ListItem("经办人", "Employee_Name"));
 			checkbox.Items.Add(new ListItem("生产环节", "ProductLinks_Name"));
-			checkbox.Items.Add(new ListItem("存货名称", "Name"));
+      checkbox.Items.Add(new ListItem("生产单位", "ProductionUnit_Name"));
+      
+
+      checkbox.Items.Add(new ListItem("存货名称", "Name"));
 			checkbox.Items.Add(new ListItem("存货编码", "Code"));
 			checkbox.Items.Add(new ListItem("规格", "Spec"));
 			checkbox.Items.Add(new ListItem("主数量", "Number"));
@@ -80,9 +84,13 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProduceOutputReport_
 		protected override void AddQueryControls(VLayoutPanel vPanel)
 		{
 			var customPanel = new LayoutManager("Main", mainInfo, mQueryContainer);
-			//查询条件包括：：{日期}、{计划号}、{会计单位}、{部门}、{经办人}、{生产环节}、{存货名称}、{存货编码}，
+      //查询条件包括：：{日期}、{计划号}、{会计单位}、{部门}、{经办人}、{生产环节}、{存货名称}、{存货编码}，
+      customPanel.Add("ID", QueryCreator.DFTextBoxMultiSelect(mainInfo.Fields["ID"], mQueryContainer, "ID"));
+      customPanel["ID"].NotAutoAddToContainer = true;
 
-			customPanel.Add("PlanNumber_ID", QueryCreator.DFChoiceBoxEnableMultiSelection(mainInfo.Fields["PlanNumber_ID"], mQueryContainer, "PlanNumber_ID", B3ButcheryDataSource.计划号));
+
+
+      customPanel.Add("PlanNumber_ID", QueryCreator.DFChoiceBoxEnableMultiSelection(mainInfo.Fields["PlanNumber_ID"], mQueryContainer, "PlanNumber_ID", B3ButcheryDataSource.计划号));
 			customPanel["PlanNumber_ID"].NotAutoAddToContainer = true;
 
 			customPanel.Add("AccountingUnit_ID", QueryCreator.DFChoiceBoxEnableMultiSelection(mainInfo.Fields["AccountingUnit_ID"], mQueryContainer, "AccountingUnit_ID", DataKind.授权会计单位全部));
@@ -97,7 +105,12 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProduceOutputReport_
 			customPanel.Add("ProductLinks_ID", QueryCreator.DFChoiceBoxEnableMultiSelection(mainInfo.Fields["ProductLinks_ID"], mQueryContainer, "ProductLinks_ID", B3ButcheryDataSource.生产环节全部));
 			customPanel["ProductLinks_ID"].NotAutoAddToContainer = true;
 
-			customPanel.Add("AccountingUnit_Name", new SimpleLabel("存货名称"), goodsName = QueryCreator.DFTextBox(detailInfo.Fields["Goods_Name"]));
+      customPanel.Add("ProductionUnit_ID", QueryCreator.DFChoiceBoxEnableMultiSelection(mainInfo.Fields["ProductionUnit_ID"], mQueryContainer, "ProductionUnit_ID", B3ProduceUnitedInfosDataSources.生产单位全部));
+      customPanel["ProductionUnit_ID"].NotAutoAddToContainer = true;
+
+
+
+    customPanel.Add("AccountingUnit_Name", new SimpleLabel("存货名称"), goodsName = QueryCreator.DFTextBox(detailInfo.Fields["Goods_Name"]));
 			customPanel.Add("Department_Name", new SimpleLabel("存货编号"), goodsCode = QueryCreator.DFTextBox(detailInfo.Fields["Goods_Code"]));
 			customPanel.CreateDefaultConfig(2).Expand = false;
 			vPanel.Add(customPanel.CreateLayout());

@@ -43,6 +43,16 @@
         <Field name="Stopped"/>
         <QBE paramName="Stopped"/>
       </EQ>
+
+      <EQ>
+        <Field name="ProductShift_ID"/>
+        <QBE paramName="ProductShift_ID"/>
+      </EQ>
+
+      <EQ>
+        <Field name="PackageModel"/>
+        <QBE paramName="PackageModel"/>
+      </EQ>
       <EQ>
         <Field name="IsLocked"/>
         <QBE paramName="IsLocked"/>

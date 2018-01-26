@@ -267,11 +267,11 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
 
       if (Shift_ID != null)
       {
-        query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual(detail, "Goods_ProductShift_ID", Shift_ID));
+        query.Where.Conditions.Add(DQCondition.EQ(detail, "Goods_ProductShift_ID", Shift_ID));
       }
       if (PackMode != null)
       {
-        query.Where.Conditions.Add(DQCondition.LessThanOrEqual(goods, "PackageModel", PackMode));
+        query.Where.Conditions.Add(DQCondition.EQ(goods, "PackageModel", PackMode));
       }
       if (BeginDate != null)
       {

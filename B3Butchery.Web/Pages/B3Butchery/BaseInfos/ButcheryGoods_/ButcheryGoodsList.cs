@@ -1,7 +1,9 @@
 ﻿using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BO;
 using BWP.B3Frameworks.Utils;
+using BWP.B3UnitedInfos;
 using BWP.B3UnitedInfos.BO;
+using BWP.Web.Utils;
 using BWP.Web.WebControls;
 using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
@@ -14,6 +16,7 @@ using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TSingSoft.WebControls2;
+using TSingSoft.WebPluginFramework;
 using TSingSoft.WebPluginFramework.Controls;
 using TSingSoft.WebPluginFramework.Exports;
 
@@ -28,8 +31,13 @@ namespace BWP.Web.Pages.B3Butchery.BaseInfos.ButcheryGoods_
             var dom = base.GetQueryDom();
             var prop = new JoinAlias(typeof(GoodsProperty));
             dom.From.AddJoin(JoinType.Inner, new DQDmoSource(prop), DQCondition.EQ(prop, "ID", dom.From.RootSource.Alias, "GoodsProperty_ID"));
- 
-            DomainUtil.AddDomainPermissionLimit(dom, typeof(GoodsProperty), prop);
+      var catalog = dom.EJoin<GoodsPropertyCatalog>("GoodsPropertyCatalog_ID", JoinType.Left, prop);
+
+      dom.Columns.Add(DQSelectColumn.Create(DQExpression.Field(prop, "Name"), "存货属性"));
+      dom.Columns.Add(DQSelectColumn.Create(DQExpression.Field(catalog, "Name"), "存货属性分类"));
+
+      TreeUtil.AddTreeCondition<GoodsPropertyCatalog>(dom, mQueryContainer, "存货属性分类", catalog);
+      DomainUtil.AddDomainPermissionLimit(dom, typeof(GoodsProperty), prop);
             return dom;
         }
 
@@ -37,9 +45,11 @@ namespace BWP.Web.Pages.B3Butchery.BaseInfos.ButcheryGoods_
         {
             vPanel.Add(CreateDefaultBaseInfoQueryControls((layoutManager, config) =>
             {
-                config.AddAfter("GoodsProperty_ID", "ID");
-
-     
+              layoutManager.Add("存货属性分类", new SimpleLabel("属性分类"), QueryCreator.DFChoiceBox(mDFInfo.Fields["ID"], B3UnitedInfosConsts.DataSources.存货属性分类));
+              config.AddAfter("GoodsProperty_ID", "ID");
+              config.AddBefore("存货属性分类", "GoodsProperty_ID");
+              config.Add("ProductShift_ID");
+              config.Add("PackageModel");
 
             }));
         }
@@ -49,11 +59,16 @@ namespace BWP.Web.Pages.B3Butchery.BaseInfos.ButcheryGoods_
             base.AddDFBrowseGridColumn(grid, field);
             if (field == "Name")
             {
-                AddDFBrowseGridColumn(grid, "Brand");
-                AddDFBrowseGridColumn(grid, "ProductLine_ID");
-  
 
-            }
+        AddDFBrowseGridColumn(grid, "存货属性");
+        AddDFBrowseGridColumn(grid, "存货属性分类");
+        AddDFBrowseGridColumn(grid, "ProductShift_Name");
+        AddDFBrowseGridColumn(grid, "PackageModel");
+        AddDFBrowseGridColumn(grid, "MainUnit");
+        AddDFBrowseGridColumn(grid, "SecondUnit");
+        AddDFBrowseGridColumn(grid, "SecondUnitII");
+
+      }
         }
 
         protected override void AddGrid(Control vbox)

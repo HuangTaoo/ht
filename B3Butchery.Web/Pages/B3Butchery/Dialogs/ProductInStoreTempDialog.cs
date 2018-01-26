@@ -110,6 +110,8 @@ namespace BWP.Web.Pages.B3Butchery.Dialogs
           tempdetail.Goods_Code = de.Goods_Code;
           tempdetail.Goods_Name = de.Goods_Name;
           tempdetail.Goods_Spec = de.Goods_Spec;
+          tempdetail.BrandItem_ID = de.BrandItem_ID;
+          tempdetail.BrandItem_Name = de.BrandItem_Name;
           detail.Details.Add(tempdetail);
         }
         //detail.Goods_ID = (long)row["Goods_ID"];
@@ -175,6 +177,8 @@ namespace BWP.Web.Pages.B3Butchery.Dialogs
       dom.Columns.Add(DQSelectColumn.Field("Goods_Name", detail));
       dom.Columns.Add(DQSelectColumn.Field("Goods_Code", detail));
       dom.Columns.Add(DQSelectColumn.Field("Goods_Spec", detail));
+      dom.Columns.Add(DQSelectColumn.Field("BrandItem_ID", detail));
+      dom.Columns.Add(DQSelectColumn.Field("BrandItem_Name", detail));
       dom.Where.Conditions.Add(DQCondition.EQ(detail, "ProductInStoreTemp_ID", id));
       var list = new List<ProductInStore_Temp_Detail>();
       using (var context = new TransactionContext())
@@ -188,6 +192,8 @@ namespace BWP.Web.Pages.B3Butchery.Dialogs
             tempdetail.Goods_Name = (string)reader[1];
             tempdetail.Goods_Code = (string)reader[2];
             tempdetail.Goods_Spec = (string)reader[3];
+            tempdetail.BrandItem_ID = (long?)reader[4];
+            tempdetail.BrandItem_Name = (string)reader[5];
             list.Add(tempdetail);
           }
         }
