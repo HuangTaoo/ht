@@ -26,6 +26,7 @@ namespace BWP.B3Butchery.BO {
   [DFCPrompt("地址", Property = "CustomerAddress")]
   [OrganizationLimitedDmo("Customer_ID", typeof(ICustomer))]
   [OrganizationLimitedDmo("Department_ID", typeof(Department))]
+  [OrganizationLimitedDmo("ProductionUnit_ID", typeof(ProductionUnit))]
   [BLType(typeof(IProductNoticeBL))]
   public class ProductNotice : DepartmentWorkFlowBill
     {
