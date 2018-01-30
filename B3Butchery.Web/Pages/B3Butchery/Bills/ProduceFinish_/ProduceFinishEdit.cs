@@ -56,6 +56,11 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
             var empID = long.Parse(selectEmp.Value);
             if (!Dmo.Details.Any(x => x.Goods_ID == empID)) {
               var d = new ProduceFinish_Detail() { Goods_ID = empID };
+              var last = Dmo.Details.LastOrDefault();
+              if (last != null) {
+                d.BrandItem_ID = last.BrandItem_ID;
+                d.BrandItem_Name = last.BrandItem_Name;
+              }
               DmoUtil.RefreshDependency(d, "Goods_ID");
               Dmo.Details.Add(d);
             }

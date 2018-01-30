@@ -254,6 +254,11 @@ function(result,dfContainer){
               Price = 0
             };
             DmoUtil.RefreshDependency(d, "Goods_ID");
+            var last = Dmo.Details.LastOrDefault();
+            if (last != null) {
+              d.BrandItem_ID = last.BrandItem_ID;
+              d.BrandItem_Name = last.BrandItem_Name;
+            }
             Dmo.Details.Add(d);
           }
         }
