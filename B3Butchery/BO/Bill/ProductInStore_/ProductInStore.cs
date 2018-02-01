@@ -11,6 +11,8 @@ using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
 using TSingSoft.WebControls2;
 using BWP.B3Frameworks.Attributes;
+using Forks.Utils;
+using BWP.B3Frameworks.BO.MoneyTemplate;
 
 namespace BWP.B3Butchery.BO
 {
@@ -104,6 +106,19 @@ namespace BWP.B3Butchery.BO
     public string ProductionUnit_Name { get; set; }
 
     #endregion
+
+    [LogicName("金额")]
+    public Money<金额>? Money { get; set; }
+
+    [LogicName("大写金额")]
+    [NonDmoProperty]
+    public string UpperMoney
+    {
+      get
+      {
+        return Money.HasValue ? Money.Value.ToString("C") : "";
+      }
+    }
 
     [LogicName("客户端生成标识字段")]
     public string Client { get; set; }

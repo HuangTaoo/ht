@@ -11,6 +11,7 @@ using BWP.B3UnitedInfos.BO;
 using Forks.EnterpriseServices.DomainObjects2;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.EnterpriseServices;
+using System.Linq;
 
 namespace BWP.B3Butchery.BL
 {
@@ -28,6 +29,7 @@ namespace BWP.B3Butchery.BL
         } 
         detail.Money = detail.Number*detail.Price;
       }
+      dmo.Money = dmo.Details.Sum(x => (x.Money ?? 0).Value);
       base.beforeSave(dmo);
     }
 
