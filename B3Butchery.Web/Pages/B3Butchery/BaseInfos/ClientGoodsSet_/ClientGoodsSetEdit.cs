@@ -100,7 +100,8 @@ namespace BWP.Web.Pages.B3Butchery.BaseInfos.ClientGoodsSet_
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Spec"));
-
+      _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_StandardSecondNumber"));
+      
 
       _detailGrid.ValueColumns.Add("Goods_ID");
 

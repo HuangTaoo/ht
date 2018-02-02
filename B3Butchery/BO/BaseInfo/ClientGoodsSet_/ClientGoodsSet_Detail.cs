@@ -69,7 +69,9 @@ namespace BWP.B3Butchery.BO
       [Join("Goods_ID", "ID")]
       [ReferenceTo(typeof(ButcheryGoods), "StandardSecondNumber")]
       [JsonConverter(typeof(MoneyJsonConverter))]
-      public Money<decimal>? Goods_StandardSecondNumber { get; set; }//仙坛客户端中标准箱数
+
+    [LogicName("标准箱数")]
+    public Money<decimal>? Goods_StandardSecondNumber { get; set; }//仙坛客户端中标准箱数
 
       
 
