@@ -82,6 +82,11 @@ namespace BWP.Web.Pages.B3Butchery.Reports.PackingMaterialReport_
       }));
       toolbar.Add(exporter);
 
+
+      var preBtn = new TSButton("预览");
+      preBtn.OnClientClick = "preventEventDefault(event);if(window.__printUrl){Preview(window.__printUrl);}else{alert('先搜索出结果才能打印');}";
+      toolbar.Add(preBtn);
+
       var printBtn = new TSButton("打印");
       printBtn.OnClientClick = "preventEventDefault(event);if(window.__printUrl){Print(window.__printUrl);}else{alert('先搜索出结果才能打印');}";
       toolbar.Add(printBtn);
