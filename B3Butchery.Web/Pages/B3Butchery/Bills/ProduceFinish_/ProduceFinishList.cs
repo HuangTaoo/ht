@@ -38,7 +38,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
         AddDFBrowseGridColumn(grid, "Department_Name");
         AddDFBrowseGridColumn(grid, "Employee_Name");
 
-        AddDFBrowseGridColumn(grid, "ProductionUnit_ID");
+        AddDFBrowseGridColumn(grid, "ProductionUnit_Name");
       }
     }
 
