@@ -89,6 +89,16 @@ namespace BWP.B3Butchery.BO
     [Join("Goods_ID", "ID")]
     public string Goods_Brand { get; set; }
 
+    [LogicName("产品线")]
+    [ReferenceTo(typeof(Goods), "ProductLine_ID")]
+    [Join("Goods_ID", "ID")]
+    public long? ProductLine_ID { get; set; }
+
+    [LogicName("产品线")]
+    [ReferenceTo(typeof(Goods), "ProductLine_Name")]
+    [Join("Goods_ID", "ID")]
+    public string ProductLine_Name { get; set; }
+
     #endregion
 
 
