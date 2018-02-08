@@ -74,6 +74,8 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
       checkbox.Items.Add(new ListItem("生产计划号", "ProductPlan_Name"));
       checkbox.Items.Add(new ListItem("摘要", "Remark"));
       checkbox.Items.Add(new ListItem("存货名称", "Name"));
+      checkbox.Items.Add(new ListItem("产品线", "ProductLine_Name"));
+      
       checkbox.Items.Add(new ListItem("打印简称", "PrintShortName"));
       checkbox.Items.Add(new ListItem("存货属性", "GoodsProperty_Name"));
       checkbox.Items.Add(new ListItem("存货编码", "Code"));
@@ -125,7 +127,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
     }
 
     DFTextBox goodsOrigin, goodsName;
-    DFChoiceBox _storeInput, cargoSpaceName;
+    DFChoiceBox _storeInput, cargoSpaceName, _productLine;
     protected override void AddQueryControls(VLayoutPanel vPanel)
     {
       var customPanel = new LayoutManager("Main", mainInfo, mQueryContainer);
@@ -156,6 +158,11 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
       customPanel.Add("DRemark", new SimpleLabel("备注"), QueryCreator.DFTextBox(detailInfo.Fields["Remark"]));
       customPanel.Add("CargoSpace_ID", new SimpleLabel("货位"), cargoSpaceName = QueryCreator.DFChoiceBoxEnableMultiSelection(detailInfo.Fields["CargoSpace_ID"], mQueryContainer, "CargoSpace_ID", B3ButcheryDataSource.货位), false);
       customPanel["CargoSpace_ID"].NotAutoAddToContainer = true;
+
+      customPanel.Add("ProductLine_ID", new SimpleLabel("产品线"), _productLine = QueryCreator.DFChoiceBoxEnableMultiSelection(detailInfo.Fields["ID"], mQueryContainer, "ProductLine_ID", B3UnitedInfosConsts.DataSources.产品线全部));
+      customPanel["ProductLine_ID"].NotAutoAddToContainer = true;
+
+
 
       AddOtherQuery(customPanel, mainInfo);
       customPanel.Add("BillState", QueryCreator.一般单据状态(mainInfo.Fields["BillState"]));
@@ -279,6 +286,10 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
           {
             query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(detail, "CargoSpace_Name"), field.Text));
             query.GroupBy.Expressions.Add(DQExpression.Field(detail, "CargoSpace_Name"));
+          } else if (field.Text == "产品线")
+          {
+            query.Columns.Add(DQSelectColumn.Create(DQExpression.Field(goodsAlias, field.Value), field.Text));
+            query.GroupBy.Expressions.Add(DQExpression.Field(goodsAlias, field.Value));
           }
           else
           {
@@ -310,6 +321,11 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
       var gProperty = mQueryContainer.GetControl<DFChoiceBox>("GoodsProperty_ID");
       if (!gProperty.IsEmpty)
         query.Where.Conditions.Add(DQCondition.EQ(goodsProperty, "ID", gProperty.Value));
+
+      if (!_productLine.IsEmpty)
+      {
+        query.Where.Conditions.Add(DQCondition.InList(DQExpression.Field(goodsAlias, "ProductLine_ID"), _productLine.GetValues().Select(x=> DQExpression.Value(x)).ToArray()));
+      }
       TreeUtil.AddTreeCondition<GoodsPropertyCatalog>(query, mQueryContainer, "PropertyCatalog_ID", propertyCatalog);
       TagWebUtil.AddTagQueryCondition(mDmoTypeID, query, bill, mQueryContainer);
       if (query.Columns.Count == 0)
