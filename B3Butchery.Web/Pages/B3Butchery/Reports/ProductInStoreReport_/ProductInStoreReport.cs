@@ -128,7 +128,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
     }
 
     DFTextBox goodsOrigin, goodsName;
-    DFChoiceBox _storeInput, cargoSpaceName, _productLine;
+    DFChoiceBox _storeInput, cargoSpaceName, _productLine, _producttypeLine;
     protected override void AddQueryControls(VLayoutPanel vPanel)
     {
       var customPanel = new LayoutManager("Main", mainInfo, mQueryContainer);
@@ -153,6 +153,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
       customPanel["Goods_ID"].NotAutoAddToContainer = true;
       customPanel.Add("Origin", new SimpleLabel("存货产地"), goodsOrigin = QueryCreator.DFTextBox(detailInfo.Fields["Goods_Code"]));
       customPanel.Add("Goods_Name", new SimpleLabel("存货名称"), goodsName = QueryCreator.DFTextBox(detailInfo.Fields["Goods_Name"]));
+      customPanel.Add("Goods_Code", new SimpleLabel("存货编号"), QueryCreator.DFTextBox(detailInfo.Fields["Goods_Code"]));
       customPanel.Add("Goods_Brand", new SimpleLabel("存货品牌"), QueryCreator.DFChoiceBox(detailInfo.Fields["Goods_Name"], B3ButcheryDataSource.存货品牌));
       customPanel.Add("GoodsProperty_ID", new SimpleLabel("存货属性"), QueryCreator.DFChoiceBox(detailInfo.Fields["ID"], B3UnitedInfos.B3UnitedInfosConsts.DataSources.存货属性全部));
       customPanel.Add("PropertyCatalog_ID", new SimpleLabel("属性分类"), QueryCreator.DFChoiceBox(detailInfo.Fields["ID"], B3UnitedInfos.B3UnitedInfosConsts.DataSources.存货属性分类全部));
@@ -162,6 +163,9 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
 
       customPanel.Add("ProductLine_ID", new SimpleLabel("产品线"), _productLine = QueryCreator.DFChoiceBoxEnableMultiSelection(detailInfo.Fields["ID"], mQueryContainer, "ProductLine_ID", B3UnitedInfosConsts.DataSources.产品线全部));
       customPanel["ProductLine_ID"].NotAutoAddToContainer = true;
+
+      customPanel.Add("ProductLineCategory_ID", new SimpleLabel("产品线分类"), _producttypeLine = QueryCreator.DFChoiceBoxEnableMultiSelection(detailInfo.Fields["ID"], mQueryContainer, "ProductLineCategory_ID", B3UnitedInfosConsts.DataSources.产品线分类));
+      customPanel["ProductLineCategory_ID"].NotAutoAddToContainer = true;
 
 
 
@@ -326,6 +330,10 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
       if (!_productLine.IsEmpty)
       {
         query.Where.Conditions.Add(DQCondition.InList(DQExpression.Field(goodsAlias, "ProductLine_ID"), _productLine.GetValues().Select(x=> DQExpression.Value(x)).ToArray()));
+      }
+      if(!_producttypeLine.IsEmpty)
+      {
+        query.Where.Conditions.Add(DQCondition.InList(DQExpression.Field(goodsAlias, "ProductLineCategory_ID"), _producttypeLine.GetValues().Select(x=> DQExpression.Value(x)).ToArray()));
       }
       TreeUtil.AddTreeCondition<GoodsPropertyCatalog>(query, mQueryContainer, "PropertyCatalog_ID", propertyCatalog);
       TagWebUtil.AddTagQueryCondition(mDmoTypeID, query, bill, mQueryContainer);

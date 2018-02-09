@@ -93,6 +93,10 @@
         <Field name="BrandItem_ID" alias="detail"/>
         <QBE paramName="BrandItem_ID"/>
       </QBEIn>
+      <Contains>
+        <Field name="Goods_Code" alias="detail"/>
+        <QBE paramName="Goods_Code"/>
+      </Contains>
 		</And>
 	</Where>
 </Select>
