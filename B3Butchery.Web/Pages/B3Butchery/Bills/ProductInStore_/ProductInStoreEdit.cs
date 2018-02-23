@@ -26,6 +26,8 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
 {
   public class ProductInStoreEdit : DepartmentWorkFlowBillEditPage<ProductInStore, IProductInStoreBL>
   {
+    protected B3ButcheryUserProfile userProfile = DomainUserProfileUtil.Load<B3ButcheryUserProfile>();
+
     protected override void BuildBody(Control container)
     {
       var mainInfo = container.EAdd(new TitlePanel("基本信息"));
@@ -109,6 +111,9 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
         return CanSave;
       };
       detailGrid = titlePanel.EAdd(new DFEditGrid(detailGridEditor) { Width = Unit.Percentage(100), ShowLineNo = true });
+      mDFContainer.AddNonDFControl(detailGrid, "$DetailGrid");
+      detailGrid.NextRowOnEnter = true;
+      detailGrid.LastRowOnDown = "__DFContainer.getControl('$SelectGoods').behind.focus();";
       if (GlobalFlags.get(B3UnitedInfosConsts.GlobalFlags.库存支持品牌项)) {
         detailGrid.Columns.Add(new DFEditGridColumn("BrandItem_ID"));
       }
@@ -235,6 +240,7 @@ function(result,dfContainer){
           EnableInputArgument = true,
           AutoPostBack = true
         });
+      mDFContainer.AddNonDFControl(selectGoods, "$SelectGoods");
       selectGoods.SelectedValueChanged += delegate
       {
         detailGrid.GetFromUI();
@@ -264,6 +270,10 @@ function(result,dfContainer){
         }
         selectGoods.Clear();
         detailGrid.DataBind();
+
+        var script = B3ButcheryWebUtil.SetCursorPositionScript(userProfile.ProductInStoreCursorLocation, "$DetailGrid", Dmo.Details.Count, detailGrid.PageSize);
+        if (!string.IsNullOrEmpty(script))
+          Page.ClientScript.RegisterStartupScript(GetType(), "Startup", script, true);
       };
 
       var addGoodsbt = hPanel.Add(new DialogButton

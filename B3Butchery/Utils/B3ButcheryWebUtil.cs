@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Web.UI.WebControls;
+using BWP.B3Frameworks.BO.NamedValueTemplate;
 using BWP.B3Frameworks.Utils;
 using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.EnterpriseServices.SqlDoms;
+using Forks.Utils;
 using TSingSoft.WebControls2;
 using TSingSoft.WebControls2.DFGrids;
 using TSingSoft.WebPluginFramework.Controls;
@@ -36,6 +38,25 @@ namespace BWP.B3Butchery.Utils
     {
       var data = new DFDataTableEditor().Load(arg);
       return new QueryResult(data.TotalCount, data.Data.Rows, data.Data.Columns, data.Data.HasSumRow ? data.Data.SumRow : null);
+    }
+
+    public static string SetCursorPositionScript(NamedValue<光标位置>? cursorPosition, string gridKey, int detailsCount, int gridPageSize)
+    {
+      var script = string.Empty;
+      if (detailsCount > 0) {
+        script = @"
+         jQuery(function ($) {
+            $(document).ready(function () {
+                __DFContainer.getControl('$detailGrid').rows[index].click();
+                __DFContainer.getControl('$detailGrid').rows[index].scrollIntoView();
+                __DFContainer.getControl('$detailGrid').rows[index].dfContainer.setFocus('Number');
+            });
+        }); ".Replace("$detailGrid", gridKey).Replace("Number", cursorPosition == 光标位置.辅数量 ? "SecondNumber" : "Number");
+        if (detailsCount > gridPageSize)
+          detailsCount = gridPageSize;
+        script = script.Replace("index", detailsCount.ToString());
+      }
+      return script;
     }
   }
 }

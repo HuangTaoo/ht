@@ -18,6 +18,8 @@ using TSingSoft.WebPluginFramework;
 namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
   public class ProduceFinishEdit : DepartmentWorkFlowBillEditPage<ProduceFinish, IProduceFinishBL> {
 
+    protected B3ButcheryUserProfile userProfile = DomainUserProfileUtil.Load<B3ButcheryUserProfile>();
+
     protected override void BuildBody(Control form) {
       base.BuildBody(form);
       CreateOutputDetailPanel(form.EAdd(new TitlePanel("明细", "明细")));
@@ -50,6 +52,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
 
         hPanel.Add(new SimpleLabel("选择存货"));
         var selectEmp = hPanel.Add(new ChoiceBox(B3UnitedInfosConsts.DataSources.存货) { Width = Unit.Pixel(130), EnableInputArgument = true, AutoPostBack = true });
+        mDFContainer.AddNonDFControl(selectEmp, "$SelectGoods");
         selectEmp.SelectedValueChanged += delegate {
           _detailGrid.GetFromUI();
           if (!selectEmp.IsEmpty) {
@@ -67,6 +70,9 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
           }
           selectEmp.Clear();
           _detailGrid.DataBind();
+          var script = B3ButcheryWebUtil.SetCursorPositionScript(userProfile.ProduceFinishCursorLocation, "$DetailGrid", Dmo.Details.Count, _detailGrid.PageSize);
+          if (!string.IsNullOrEmpty(script))
+            Page.ClientScript.RegisterStartupScript(GetType(), "Startup", script, true);
         };
         var addGoodsbt = hPanel.Add(new DialogButton {
           Text = "选择存货",
@@ -108,6 +114,9 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
         IsEditableFunc = (field, detail) => CanSave
       };
       _detailGrid = new DFEditGrid(detailEditor) { Width = Unit.Percentage(100) };
+      mDFContainer.AddNonDFControl(_detailGrid, "$DetailGrid");
+      _detailGrid.NextRowOnEnter = true;
+      _detailGrid.LastRowOnDown = "__DFContainer.getControl('$SelectGoods').behind.focus();";
       tPanel.Controls.Add(_detailGrid);
       if(_useBrand)
         _detailGrid.Columns.Add(new DFEditGridColumn("BrandItem_ID"));
