@@ -40,7 +40,7 @@ namespace BWP.B3Butchery.Utils
       return new QueryResult(data.TotalCount, data.Data.Rows, data.Data.Columns, data.Data.HasSumRow ? data.Data.SumRow : null);
     }
 
-    public static string SetCursorPositionScript(NamedValue<光标位置>? cursorPosition, string gridKey, int detailsCount, int gridPageSize)
+    public static string SetCursorPositionScript(string cursorField, string gridKey, int detailsCount, int gridPageSize)
     {
       var script = string.Empty;
       if (detailsCount > 0) {
@@ -51,7 +51,7 @@ namespace BWP.B3Butchery.Utils
                 __DFContainer.getControl('$detailGrid').rows[index].scrollIntoView();
                 __DFContainer.getControl('$detailGrid').rows[index].dfContainer.setFocus('Number');
             });
-        }); ".Replace("$detailGrid", gridKey).Replace("Number", cursorPosition == 光标位置.辅数量 ? "SecondNumber" : "Number");
+        }); ".Replace("$detailGrid", gridKey).Replace("Number", cursorField);
         if (detailsCount > gridPageSize)
           detailsCount = gridPageSize;
         script = script.Replace("index", detailsCount.ToString());

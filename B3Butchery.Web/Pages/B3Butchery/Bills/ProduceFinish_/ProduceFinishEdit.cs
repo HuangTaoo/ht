@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BWP.B3Butchery;
 using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BO;
 using BWP.B3Butchery.Utils;
@@ -18,7 +19,7 @@ using TSingSoft.WebPluginFramework;
 namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
   public class ProduceFinishEdit : DepartmentWorkFlowBillEditPage<ProduceFinish, IProduceFinishBL> {
 
-    protected B3ButcheryUserProfile userProfile = DomainUserProfileUtil.Load<B3ButcheryUserProfile>();
+    B3ButcheryConfig butcheryConfig = new B3ButcheryConfig();
 
     protected override void BuildBody(Control form) {
       base.BuildBody(form);
@@ -27,7 +28,9 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
 
     protected override void BuildBasePropertiesEditor(TitlePanel titlePanel, PageLayoutSection section) {
       var layoutManager = new LayoutManager("main", mDFInfo, mDFContainer);
-
+      
+      //var config2 = new B3ButcheryConfig();
+      //con
       var config = new AutoLayoutConfig();
       config.Add("AccountingUnit_ID");
       config.Add("Date");
@@ -70,7 +73,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
           }
           selectEmp.Clear();
           _detailGrid.DataBind();
-          var script = B3ButcheryWebUtil.SetCursorPositionScript(userProfile.ProduceFinishCursorLocation, "$DetailGrid", Dmo.Details.Count, _detailGrid.PageSize);
+          var script = B3ButcheryWebUtil.SetCursorPositionScript(butcheryConfig.ProduceFinishCursorField, "$DetailGrid", Dmo.Details.Count, _detailGrid.PageSize);
           if (!string.IsNullOrEmpty(script))
             Page.ClientScript.RegisterStartupScript(GetType(), "Startup", script, true);
         };

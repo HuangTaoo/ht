@@ -19,11 +19,12 @@ using TSingSoft.WebPluginFramework;
 using BWP.B3UnitedInfos.Utils;
 using BWP.B3Frameworks;
 using BWP.B3Butchery.Utils;
+using BWP.B3Butchery;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
   public class ProductNoticeEdit : DepartmentWorkFlowBillEditPage<ProductNotice, IProductNoticeBL> {
     private DFEditGrid _detailGrid;
-    protected B3ButcheryUserProfile userProfile = DomainUserProfileUtil.Load<B3ButcheryUserProfile>();
+    B3ButcheryConfig butcheryConfig = new B3ButcheryConfig();
 
     protected override void BuildBody(Control control) {
       base.BuildBody(control);
@@ -181,7 +182,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
         }
         goodsSelect.DisplayValue = string.Empty;
         _detailGrid.DataBind();
-        var script = B3ButcheryWebUtil.SetCursorPositionScript(userProfile.ProductNoticeCursorLocation, "$detailGrid", Dmo.Details.Count, _detailGrid.PageSize);
+        var script = B3ButcheryWebUtil.SetCursorPositionScript(butcheryConfig.ProductNoticeCursorField, "$detailGrid", Dmo.Details.Count, _detailGrid.PageSize);
         if (!string.IsNullOrEmpty(script))
           Page.ClientScript.RegisterStartupScript(GetType(), "Startup", script, true);
       };

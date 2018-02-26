@@ -70,17 +70,5 @@ namespace BWP.B3Butchery.BO
     [LogicName("成品入库单入库时间与操作时间间隔(天)")]
     public int? ProductInStoreDaysBrake { get; set; }
 
-    [LogicName("成品入库单光标位置")]
-    public NamedValue<光标位置>? ProductInStoreCursorLocation { get; set; }
-
-    [LogicName("生产完工单光标位置")]
-    public NamedValue<光标位置>? ProduceFinishCursorLocation { get; set; }
-
-    [LogicName("生产通知单光标位置")]
-    public NamedValue<光标位置>? ProductNoticeCursorLocation { get; set; }
-
-
-
-
   }
 }

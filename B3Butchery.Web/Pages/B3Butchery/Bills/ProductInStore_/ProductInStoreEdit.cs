@@ -26,7 +26,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
 {
   public class ProductInStoreEdit : DepartmentWorkFlowBillEditPage<ProductInStore, IProductInStoreBL>
   {
-    protected B3ButcheryUserProfile userProfile = DomainUserProfileUtil.Load<B3ButcheryUserProfile>();
+    B3ButcheryConfig butcheryConfig = new B3ButcheryConfig();
 
     protected override void BuildBody(Control container)
     {
@@ -271,7 +271,7 @@ function(result,dfContainer){
         selectGoods.Clear();
         detailGrid.DataBind();
 
-        var script = B3ButcheryWebUtil.SetCursorPositionScript(userProfile.ProductInStoreCursorLocation, "$DetailGrid", Dmo.Details.Count, detailGrid.PageSize);
+        var script = B3ButcheryWebUtil.SetCursorPositionScript(butcheryConfig.ProductInStoreCursorField, "$DetailGrid", Dmo.Details.Count, detailGrid.PageSize);
         if (!string.IsNullOrEmpty(script))
           Page.ClientScript.RegisterStartupScript(GetType(), "Startup", script, true);
       };
