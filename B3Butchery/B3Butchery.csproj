@@ -148,6 +148,7 @@
       <Link>tsapp_version.cs</Link>
     </Compile>
     <Compile Include="Attributes\MoneyJsonConverter.cs" />
+    <Compile Include="AvailableStroage\ProductInStoreAvailableStorage.cs" />
     <Compile Include="B3ButcheryConfig.cs" />
     <Compile Include="BL\BaseInfo\ButcheryGoods_\ButcheryGoodsBL.cs" />
     <Compile Include="BL\BaseInfo\CalculateCatalogBL_\CalculateCatalogBL.cs" />
