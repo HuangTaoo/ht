@@ -40,5 +40,35 @@ namespace BWP.B3Butchery
 			get { return mDoCheckCreatedInStore; }
 			set { mDoCheckCreatedInStore = value; }
 		}
+
+    StringConfigRef mProductInStoreCursorField = new StringConfigRef("Number");
+    [LogicName("成品入库单新增存货后光标位置")]
+    [ConfigurationItemDescription("默认Number，可选Number（数量）、SecondNumber（辅数量）等字段")]
+    [DomainConfigurationItem]
+    public StringConfigRef ProductInStoreCursorField
+    {
+      get { return mProductInStoreCursorField; }
+      set { mProductInStoreCursorField = value; }
+    }
+
+    StringConfigRef mProduceFinishCursorField = new StringConfigRef("Number");
+    [LogicName("生产完工单新增存货后光标位置")]
+    [ConfigurationItemDescription("默认Number，可选Number（数量）、SecondNumber（辅数量）等字段")]
+    [DomainConfigurationItem]
+    public StringConfigRef ProduceFinishCursorField
+    {
+      get { return mProduceFinishCursorField; }
+      set { mProduceFinishCursorField = value; }
+    }
+
+    StringConfigRef mProductNoticeCursorField = new StringConfigRef("Number");
+    [LogicName("生产通知单新增存货后光标位置")]
+    [ConfigurationItemDescription("默认Number，可选Number（数量）、SecondNumber（辅数量）等字段")]
+    [DomainConfigurationItem]
+    public StringConfigRef ProductNoticeCursorField
+    {
+      get { return mProductNoticeCursorField; }
+      set { mProductNoticeCursorField = value; }
+    }
   }
 }

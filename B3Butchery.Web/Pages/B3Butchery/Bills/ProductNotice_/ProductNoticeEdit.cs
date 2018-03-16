@@ -18,10 +18,14 @@ using TSingSoft.WebControls2;
 using TSingSoft.WebPluginFramework;
 using BWP.B3UnitedInfos.Utils;
 using BWP.B3Frameworks;
+using BWP.B3Butchery.Utils;
+using BWP.B3Butchery;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
   public class ProductNoticeEdit : DepartmentWorkFlowBillEditPage<ProductNotice, IProductNoticeBL> {
     private DFEditGrid _detailGrid;
+    B3ButcheryConfig butcheryConfig = new B3ButcheryConfig();
+
     protected override void BuildBody(Control control) {
       base.BuildBody(control);
       AddDetails(control.EAdd(new TitlePanel("单据明细", "单据明细")));
@@ -66,7 +70,9 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       _detailGrid = new DFEditGrid(editor);
       _detailGrid.DFGridSetEnabled = false;
       _detailGrid.Width = Unit.Percentage(100);
-
+      mDFContainer.AddNonDFControl(_detailGrid, "$detailGrid");
+      _detailGrid.NextRowOnEnter = true;
+      _detailGrid.LastRowOnDown = "__DFContainer.getControl('$SelectGoods').behind.focus();";
       _detailGrid.ShowLineNo = true;
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
@@ -93,7 +99,6 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       _detailGrid.ValueColumns.Add("Goods_UnitConvertDirection");
       _detailGrid.ValueColumns.Add("Goods_MainUnitRatio");
       _detailGrid.ValueColumns.Add("Goods_SecondUnitRatio");
-      mDFContainer.AddNonDFControl(_detailGrid, "$detailGrid");
 
       var section = mPageLayoutManager.AddSection("DetaiColumns", "明细列");
       titlePanel.SetPageLayoutSetting(mPageLayoutManager, section.Name);
@@ -162,6 +167,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
         EnableMultiSelection = true,
         EnableInputArgument = true
       };
+      mDFContainer.AddNonDFControl(goodsSelect, "$SelectGoods");
       toobar.Add(goodsSelect);
       goodsSelect.SelectedValueChanged += (sender, e) => {
         _detailGrid.GetFromUI();
@@ -176,6 +182,9 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
         }
         goodsSelect.DisplayValue = string.Empty;
         _detailGrid.DataBind();
+        var script = B3ButcheryWebUtil.SetCursorPositionScript(butcheryConfig.ProductNoticeCursorField, "$detailGrid", Dmo.Details.Count, _detailGrid.PageSize);
+        if (!string.IsNullOrEmpty(script))
+          Page.ClientScript.RegisterStartupScript(GetType(), "Startup", script, true);
       };
 
       var quickSelctButton = new DialogButton { Url = "~/B3UnitedInfos/Dialogs/QucicklySelectGoodsDetailsDialog.aspx", Text = "快速选择" };

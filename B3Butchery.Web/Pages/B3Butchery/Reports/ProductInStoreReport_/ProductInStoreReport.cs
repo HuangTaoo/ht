@@ -75,7 +75,8 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
       checkbox.Items.Add(new ListItem("摘要", "Remark"));
       checkbox.Items.Add(new ListItem("存货名称", "Name"));
       checkbox.Items.Add(new ListItem("产品线", "ProductLine_Name"));
-      
+      checkbox.Items.Add(new ListItem("产品线分类", "ProductLineCategory_ID"));
+
       checkbox.Items.Add(new ListItem("打印简称", "PrintShortName"));
       checkbox.Items.Add(new ListItem("存货属性", "GoodsProperty_Name"));
       checkbox.Items.Add(new ListItem("存货编码", "Code"));
@@ -84,7 +85,6 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
       checkbox.Items.Add(new ListItem("存货品牌", "Brand"));
       checkbox.Items.Add(new ListItem("存货属性", "存货属性"));
       checkbox.Items.Add(new ListItem("属性分类", "属性分类"));
-      checkbox.Items.Add(new ListItem("产品线", "ProductLine_Name"));
       checkbox.Items.Add(new ListItem("主数量", "Number"));
       checkbox.Items.Add(new ListItem("主单位", "MainUnit"));
       checkbox.Items.Add(new ListItem("辅数量", "SecondNumber"));

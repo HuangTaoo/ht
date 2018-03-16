@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BWP.B3Butchery;
 using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BO;
 using BWP.B3Butchery.Utils;
@@ -18,6 +19,8 @@ using TSingSoft.WebPluginFramework;
 namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
   public class ProduceFinishEdit : DepartmentWorkFlowBillEditPage<ProduceFinish, IProduceFinishBL> {
 
+    B3ButcheryConfig butcheryConfig = new B3ButcheryConfig();
+
     protected override void BuildBody(Control form) {
       base.BuildBody(form);
       CreateOutputDetailPanel(form.EAdd(new TitlePanel("明细", "明细")));
@@ -25,7 +28,9 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
 
     protected override void BuildBasePropertiesEditor(TitlePanel titlePanel, PageLayoutSection section) {
       var layoutManager = new LayoutManager("main", mDFInfo, mDFContainer);
-
+      
+      //var config2 = new B3ButcheryConfig();
+      //con
       var config = new AutoLayoutConfig();
       config.Add("AccountingUnit_ID");
       config.Add("Date");
@@ -50,6 +55,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
 
         hPanel.Add(new SimpleLabel("选择存货"));
         var selectEmp = hPanel.Add(new ChoiceBox(B3UnitedInfosConsts.DataSources.存货) { Width = Unit.Pixel(130), EnableInputArgument = true, AutoPostBack = true });
+        mDFContainer.AddNonDFControl(selectEmp, "$SelectGoods");
         selectEmp.SelectedValueChanged += delegate {
           _detailGrid.GetFromUI();
           if (!selectEmp.IsEmpty) {
@@ -67,6 +73,9 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
           }
           selectEmp.Clear();
           _detailGrid.DataBind();
+          var script = B3ButcheryWebUtil.SetCursorPositionScript(butcheryConfig.ProduceFinishCursorField, "$DetailGrid", Dmo.Details.Count, _detailGrid.PageSize);
+          if (!string.IsNullOrEmpty(script))
+            Page.ClientScript.RegisterStartupScript(GetType(), "Startup", script, true);
         };
         var addGoodsbt = hPanel.Add(new DialogButton {
           Text = "选择存货",
@@ -108,6 +117,9 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProduceFinish_ {
         IsEditableFunc = (field, detail) => CanSave
       };
       _detailGrid = new DFEditGrid(detailEditor) { Width = Unit.Percentage(100) };
+      mDFContainer.AddNonDFControl(_detailGrid, "$DetailGrid");
+      _detailGrid.NextRowOnEnter = true;
+      _detailGrid.LastRowOnDown = "__DFContainer.getControl('$SelectGoods').behind.focus();";
       tPanel.Controls.Add(_detailGrid);
       if(_useBrand)
         _detailGrid.Columns.Add(new DFEditGridColumn("BrandItem_ID"));

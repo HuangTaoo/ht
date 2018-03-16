@@ -10,6 +10,8 @@ using Forks.EnterpriseServices.DomainObjects2;
 using TSingSoft.WebControls2;
 using BWP.B3ProduceUnitedInfos;
 using BWP.B3ProduceUnitedInfos.BO;
+using Forks.Utils;
+using BWP.B3Frameworks.BO.NamedValueTemplate;
 
 namespace BWP.B3Butchery.BO
 {
@@ -67,11 +69,6 @@ namespace BWP.B3Butchery.BO
 
     [LogicName("成品入库单入库时间与操作时间间隔(天)")]
     public int? ProductInStoreDaysBrake { get; set; }
-
-
-
-
-
 
   }
 }
