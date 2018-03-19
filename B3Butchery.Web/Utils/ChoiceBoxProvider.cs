@@ -15,6 +15,7 @@ using BWP.B3Frameworks;
 using TSingSoft.WebPluginFramework;
 using BWP.B3UnitedInfos.BO;
 using Forks.Utils.Collections;
+using BWP.B3SaleInterface.BO;
 
 namespace BWP.B3Butchery.Web
 {
@@ -203,6 +204,22 @@ namespace BWP.B3Butchery.Web
         queryHelper.AddSelectedField("ID");
         queryHelper.SearchFields.Add("ID");
         return queryHelper.GetData();
+      });
+
+      ChoiceBoxSettings.Register(B3ButcheryDataSource.销售地区, (argu) =>
+      {
+        return new DomainChoiceBoxQueryHelper<ISaleZone>(argu)
+        {
+          OnlyAvailable = true
+        }.GetData();
+      });
+
+      ChoiceBoxSettings.Register(B3ButcheryDataSource.销售地区全部, (argu) =>
+      {
+        return new DomainChoiceBoxQueryHelper<ISaleZone>(argu)
+        {
+          OnlyAvailable = false
+        }.GetData();
       });
     }
 

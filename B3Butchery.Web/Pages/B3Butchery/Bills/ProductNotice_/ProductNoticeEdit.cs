@@ -43,6 +43,10 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       config.Add("Employee_ID"); 
       config.Add("ProductionUnit_ID");
       config.Add("CustomerAddress");
+      if (GlobalFlags.get(B3ButcheryFlags.IsYongDa))
+      {
+        config.Add("SaleZone_ID");
+      }
       config.Add("Remark");
 
       pageLayoutSection.SetRequired("AccountingUnit_ID" );
