@@ -51,18 +51,6 @@ namespace BWP.B3Butchery.BO {
     [DFExtProperty(B3FrameworksConsts.DFExtProperties.DisplayField, "ProductionUnit_Name")]
     public long? ProductionUnit_ID { get; set; }
 
-    [LogicName("销售地区")]
-    [DFPrompt("报货区域")]
-    [DFExtProperty("WebControlType", DFEditControl.ChoiceBox)]
-    [DFDataKind(B3ButcheryDataSource.销售地区全部)]
-    [DFExtProperty("DisplayField", "SaleZone_Name")]
-    public long? SaleZone_ID { get; set; }
-
-    [Join("SaleZone_ID", "ID")]
-    [ReferenceTo(typeof(ISaleZone), "Name")]
-    [LogicName("销售地区")]
-    public string SaleZone_Name { get; set; }
-
     private readonly ProductNotice_DetailCollection _details = new ProductNotice_DetailCollection();
 
     [OneToMany(typeof(ProductNotice_Detail), "ID")]

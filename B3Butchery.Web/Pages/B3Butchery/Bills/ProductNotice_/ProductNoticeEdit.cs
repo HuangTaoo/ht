@@ -43,10 +43,6 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       config.Add("Employee_ID"); 
       config.Add("ProductionUnit_ID");
       config.Add("CustomerAddress");
-      if (GlobalFlags.get(B3ButcheryFlags.IsYongDa))
-      {
-        config.Add("SaleZone_ID");
-      }
       config.Add("Remark");
 
       pageLayoutSection.SetRequired("AccountingUnit_ID" );
@@ -96,7 +92,18 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("DmoTypeID"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("DmoID"));      
       _detailGrid.Columns.Add(new DFEditGridColumn("Remark"));
+      if (GlobalFlags.get(B3ButcheryFlags.IsYongDa))
+      {
+        var cargoSpaceColumn = _detailGrid.Columns.EAdd(new DFEditGridColumn<DFChoiceBox>("SaleZone_ID"));
+        cargoSpaceColumn.InitEditControl += (sender, e) =>
+        {
+          e.Control.EnableTopItem = true;
+          e.Control.DataKind = B3ButcheryDataSource.销售地区全部;
+          e.Control.DFDisplayField = "SaleZone_Name";
+          e.Control.Width = Unit.Pixel(160);
+        };
 
+      }
       AddProductNoticeDetailGrid(_detailGrid);
 
       _detailGrid.ValueColumns.Add("Goods_ID");

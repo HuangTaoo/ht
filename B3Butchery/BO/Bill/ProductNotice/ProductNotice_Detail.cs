@@ -7,6 +7,7 @@ using BWP.B3SaleInterface.BO;
 using BWP.B3Frameworks.BO;
 using TSingSoft.WebControls2;
 using BWP.B3Frameworks;
+using BWP.B3Butchery.Utils;
 
 namespace BWP.B3Butchery.BO {
   [Serializable, DFClass, LogicName("生产通知单明细")]
@@ -61,6 +62,17 @@ namespace BWP.B3Butchery.BO {
     public long? OrderByID { get; set; }
     #endregion
 
+    [LogicName("销售地区")]
+    [DFPrompt("报货区域")]
+    [DFExtProperty("WebControlType", DFEditControl.ChoiceBox)]
+    [DFDataKind(B3ButcheryDataSource.销售地区全部)]
+    [DFExtProperty("DisplayField", "SaleZone_Name")]
+    public long? SaleZone_ID { get; set; }
+
+    [Join("SaleZone_ID", "ID")]
+    [ReferenceTo(typeof(ISaleZone), "Name")]
+    [LogicName("销售地区")]
+    public string SaleZone_Name { get; set; }
   }
 
   [Serializable]
