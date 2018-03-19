@@ -98,6 +98,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
         cargoSpaceColumn.InitEditControl += (sender, e) =>
         {
           e.Control.EnableTopItem = true;
+          e.Control.EnableInputArgument = true;
           e.Control.DataKind = B3ButcheryDataSource.销售地区全部;
           e.Control.DFDisplayField = "SaleZone_Name";
           e.Control.Width = Unit.Pixel(160);
