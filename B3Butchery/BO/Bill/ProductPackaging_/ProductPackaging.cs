@@ -16,8 +16,8 @@ namespace BWP.B3Butchery.BO
   [EditUrl("~/B3Butchery/Bills/ProductPackaging_/ProductPackagingEdit.aspx")]
   public class ProductPackaging : DepartmentWorkFlowBill
   {
-    private DateTime _date = DateTime.Today;
-    public DateTime StartDate { get { return _date; } set { _date = value; } }
+    private DateTime? _date = DateTime.Today;
+    public DateTime? StartDate { get { return _date; } set { _date = value; } }
 
 
 
