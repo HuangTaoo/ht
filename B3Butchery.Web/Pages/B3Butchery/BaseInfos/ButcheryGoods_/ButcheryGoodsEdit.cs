@@ -15,6 +15,7 @@ using BWP.Web.Layout;
 using TSingSoft.WebControls2;
 using Forks.EnterpriseServices.DataForm;
 using System.Web.UI.WebControls;
+using TSingSoft.WebPluginFramework;
 
 namespace BWP.Web.Pages.B3Butchery.BaseInfos.ButcheryGoods_
 {
@@ -37,8 +38,15 @@ namespace BWP.Web.Pages.B3Butchery.BaseInfos.ButcheryGoods_
             }
         }
 
+    protected override void InitReferToDmo(ButcheryGoods dmo)
+    {
+      base.InitReferToDmo(dmo);
+      dmo.GoodsPropertyNO = 0;
+      dmo.CreateTime = dmo.ModifyTime = BLContext.Now;
+    }
 
-        private bool IsManager
+
+    private bool IsManager
         {
             get
             {
@@ -115,6 +123,8 @@ namespace BWP.Web.Pages.B3Butchery.BaseInfos.ButcheryGoods_
     {
       get { return IsManager; }
     }
+
+
 
 
     protected override void BuildBasePropertiesEditor(TitlePanel titlePanel, PageLayoutSection pageLayoutSection)

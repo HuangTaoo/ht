@@ -36,6 +36,16 @@
         <Field name="CheckUser_Name"/>
         <QBE paramName="CheckUser_Name"/>
       </Contains>
+
+
+      <GreaterThanOrEqual>
+        <Field name="StartDate"/>
+        <QBE paramName="MinStartDate" />
+      </GreaterThanOrEqual>
+      <LessThanOrEqual>
+        <Field name="StartDate"/>
+        <QBE paramName="MaxStartDate"/>
+      </LessThanOrEqual>
       <GreaterThanOrEqual>
         <Field name="CreateTime"/>
         <QBE paramName="MinCreateTime" />
