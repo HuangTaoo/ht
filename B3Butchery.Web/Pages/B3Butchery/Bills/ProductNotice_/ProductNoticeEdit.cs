@@ -170,7 +170,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductNotice_ {
       _detailGrid.GetFromUI();
     }
     protected ProductNotice_Detail last = null;
-    private void AddToolsPanel(HLayoutPanel toobar)
+    protected virtual void AddToolsPanel(HLayoutPanel toobar)
     {      
       toobar.Add(new SimpleLabel("选择存货"));
       var goodsSelect = new ChoiceBox(B3UnitedInfosConsts.DataSources.存货) {
