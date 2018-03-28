@@ -17,6 +17,8 @@ namespace BWP.B3Butchery.BO
   public class ProductPackaging : DepartmentWorkFlowBill
   {
     private DateTime? _date = DateTime.Today;
+
+    [LogicName("开始日期")]
     public DateTime? StartDate { get { return _date; } set { _date = value; } }
 
 
