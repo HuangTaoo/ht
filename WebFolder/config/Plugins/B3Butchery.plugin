@@ -450,6 +450,14 @@
       <Function index="6" name="锁定"/>
       <Function index="7" name="解锁"/>
     </FunctionGroup>
+
+    <FunctionGroup name="内包材领用配置单" roleSchemas="employee" >
+      <Function index="0" name="访问" />
+      <Function index="1" name="新建" />
+      <Function index="2" name="编辑" />
+      <Function index="3" name="删除" />    
+      <Function index="8" name="管理" />      
+    </FunctionGroup>
     
     
   </Security>
@@ -508,9 +516,10 @@
     
     <Menu id="0043" name="/屠宰分割/信息设置/档案/存货类别" roles="B3Butchery.存货类别.访问" url="B3Butchery/BaseInfos/GoodsCategory_/GoodsCategoryList.aspx"/>
     <Menu id="0044" name="/屠宰分割/报表/归零差异表" roles="B3Butchery.报表.归零差异表" url="B3Butchery/Reports/FrozenInStoreDiffReport_/ZeroDiffReport.aspx"/>
+    <Menu id="0045" name="/屠宰分割/车间/内包材领用配置单" roles="B3Butchery.内包材领用配置单.访问" url="B3Butchery/Bills/PackingBagType_/PackingBagTypeList.aspx"/>
 
-    
-    
+
+
   </Menus>
 
   <Hippo>

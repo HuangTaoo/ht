@@ -171,6 +171,9 @@
     <Compile Include="BL\Bill\FrozenInStoreSetBillBL_\IFrozenInStoreSetBillBL.cs" />
     <Compile Include="BL\Bill\FrozenInStore_\FrozenInStoreBL.cs" />
     <Compile Include="BL\Bill\FrozenOutStore_\FrozenOutStoreBL.cs" />
+    <Compile Include="BL\Bill\PackingBagBL_\PackingBagTypeBL.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="BL\Bill\PackingRecipients_\PackingRecipientsBL.cs" />
     <Compile Include="BL\Bill\PickingBL\PickingBL.cs" />
     <Compile Include="BL\Bill\ProduceFinish_\ProduceFinishBL.cs" />
@@ -221,6 +224,12 @@
     <Compile Include="BO\Bill\FrozenInStore_\FrozenInStore_Detail.cs" />
     <Compile Include="BO\Bill\FrozenOutStore_\FrozenOutStore.cs" />
     <Compile Include="BO\Bill\FrozenOutStore_\FrozenOutStore_Detail.cs" />
+    <Compile Include="BO\Bill\PackingBag_\PackingBagType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BO\Bill\PackingBag_\PackingBagType_Detail.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="BO\Bill\PackingRecipients_\PackingRecipients.cs" />
     <Compile Include="BO\Bill\PackingRecipients_\PackingRecipients_Detail.cs" />
     <Compile Include="BO\Bill\Picking_\Picking.cs" />
@@ -305,6 +314,7 @@
   <ItemGroup>
     <EmbeddedResource Include="DataExchange\ProduceOutputImport.html" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
