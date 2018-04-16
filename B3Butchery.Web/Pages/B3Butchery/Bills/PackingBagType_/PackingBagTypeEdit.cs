@@ -73,8 +73,20 @@ namespace BWP.Web.Pages.B3Butchery.Bills.PackingBagType_
             _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Spec"));
     
             _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("GoodsProperty_Name"));
-         
 
+            _detailGrid.Columns.EAdd(new DFEditGridColumn<DFChoiceBox>("GoodsPacking_ID")).InitEditControl+=
+              (sender, e) =>
+              {
+                e.Control.Width=Unit.Percentage(100);
+                e.Control.DataKind = B3UnitedInfosConsts.DataSources.存货;
+                e.Control.EnableTopItem = true;
+                e.Control.EnableInputArgument = true;
+                e.Control.DFDisplayField = "GoodsPacking_Name";
+              };
+            _detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("StandNumber"));
+
+
+          
             var section = mPageLayoutManager.AddSection("DetaiColumns", "明细列");
             titlePanel.SetPageLayoutSetting(mPageLayoutManager, section.Name);
 

@@ -43,9 +43,21 @@ namespace BWP.B3Butchery.BO
     [ReferenceTo(typeof(ButcheryGoods), "GoodsProperty_Name")]
     public string GoodsProperty_Name { get; set; }
 
-         
 
-    }
+      [LogicName("内包装袋")]
+      public long? GoodsPacking_ID { get; set; }
+
+      [ReferenceTo(typeof(ButcheryGoods), "Name")]
+      [Join("GoodsPacking_ID", "ID")]
+      [DFPrompt("内包装袋")]
+      public string GoodsPacking_Name { get; set; }
+
+
+      [LogicName("标准袋数")]
+    public int? StandNumber { get; set; }
+
+
+  }
 
      [Serializable]
      public class PackingBagType_DetailCollection : DmoCollection<PackingBagType_Detail>

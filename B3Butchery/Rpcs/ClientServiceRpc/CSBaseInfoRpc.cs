@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BWP.B3Butchery.BO;
+using BWP.B3Butchery.Rpcs.ClientServiceRpc.Dtos;
 using BWP.B3Butchery.Rpcs.RpcObject;
 using BWP.B3Frameworks.BO;
 using Forks.EnterpriseServices.BusinessInterfaces;
@@ -19,8 +20,58 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
   public static class CSBaseInfoRpc
   {
 
+    [Rpc(RpcFlags.SkipAuth)]
+    public static string GetPackingBagTypeList()
+    {
+      var list = new List<PackingBagTypeDto>();
 
-        [Rpc(RpcFlags.SkipAuth)]
+      var bill=new JoinAlias(typeof(PackingBagType));
+      var detail=new JoinAlias(typeof(PackingBagType_Detail));
+      var query=new DQueryDom(bill);
+      query.From.AddJoin(JoinType.Left,new DQDmoSource(detail),DQCondition.EQ(bill,"ID",detail, "PackingBagType_ID") );
+      query.Columns.Add(DQSelectColumn.Field("Name",bill));
+      query.Columns.Add(DQSelectColumn.Field("Department_ID", bill));
+      query.Columns.Add(DQSelectColumn.Field("Department_Name", bill));
+
+      query.Columns.Add(DQSelectColumn.Field("Goods_ID", detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_Name", detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_Code", detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_Spec", detail));
+      query.Columns.Add(DQSelectColumn.Field("GoodsProperty_ID", detail));
+      query.Columns.Add(DQSelectColumn.Field("GoodsProperty_Name", detail));
+      query.Columns.Add(DQSelectColumn.Field("GoodsPacking_ID", detail));
+      query.Columns.Add(DQSelectColumn.Field("GoodsPacking_Name", detail));
+      query.Columns.Add(DQSelectColumn.Field("StandNumber", detail));
+
+
+      using (var session=Dmo.NewSession())
+      {
+        using (var reader=session.ExecuteReader(query))
+        {
+          while (reader.Read())
+          {
+            var dto = new PackingBagTypeDto();
+            dto.Name=(string)reader[0];
+            dto.Department_ID = (long?)reader[1];
+            dto.Department_Name = (string)reader[2];
+            dto.Goods_ID = (long?)reader[3];
+            dto.Goods_Name = (string)reader[4];
+            dto.Goods_Code = (string)reader[5];
+            dto.Goods_Spec = (string)reader[6];
+            dto.GoodsProperty_ID = (long?)reader[7];
+            dto.GoodsProperty_Name = (string)reader[8];
+            dto.GoodsPacking_ID = (long?)reader[9];
+            dto.GoodsPacking_Name = (string)reader[10];
+            dto.StandNumber = (int?)reader[11];
+            list.Add(dto);
+          }
+        }
+      }
+
+      return JsonConvert.SerializeObject(list);
+    }
+
+    [Rpc(RpcFlags.SkipAuth)]
         public static string GetAllWorkShopCountConfigList()
         {
             var dmoquery = new DmoQuery(typeof(WorkShopCountConfig));
