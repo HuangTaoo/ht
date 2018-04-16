@@ -21,14 +21,11 @@ namespace BWP.B3Butchery.BO
 
     public class WorkShopPackBill: DepartmentWorkFlowBill
     {
-
-
-
-
-
-
-        [LogicName("中间服务器单据ID")]
-        public long? MiddleWorkBillID { get; set; }
+    
+//
+//
+//        [LogicName("中间服务器单据ID")]
+//        public long? MiddleWorkBillID { get; set; }
 
         [LogicName("仓库")]
         [DFExtProperty("WebControlType", DFEditControl.ChoiceBox)]
