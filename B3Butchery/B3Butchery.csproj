@@ -156,6 +156,7 @@
     <Compile Include="BL\BaseInfo\CalculateSpecBL_\CalculateSpecBL.cs" />
     <Compile Include="BL\BaseInfo\CategoryClassificationBL_\CategoryClassificationBL.cs" />
     <Compile Include="BL\BaseInfo\ClientGoodsSet_\ClientGoodsSetBL.cs" />
+    <Compile Include="BL\BaseInfo\DeviceManageBL_\DeviceManageBL.cs" />
     <Compile Include="BL\BaseInfo\FrozenStore_\FrozenStoreBL.cs" />
     <Compile Include="BL\BaseInfo\GoodsCategoryBL_\GoodsCategoryBL.cs" />
     <Compile Include="BL\BaseInfo\HandoverRecord_\HandoverRecordBL.cs" />
@@ -194,6 +195,7 @@
     <Compile Include="BO\BaseInfo\CategoryClassification_\CategoryClassification.cs" />
     <Compile Include="BO\BaseInfo\ClientGoodsSet_\ClientGoodsSet.cs" />
     <Compile Include="BO\BaseInfo\ClientGoodsSet_\ClientGoodsSet_Detail.cs" />
+    <Compile Include="BO\BaseInfo\DeviceManage_\DeviceManage.cs" />
     <Compile Include="BO\BaseInfo\FrozenStore_\FrozenStore.cs" />
     <Compile Include="BO\BaseInfo\GoodsCategory_\GoodsCategory.cs" />
     <Compile Include="BO\BaseInfo\HandoverRecord_\HandoverRecord.cs" />
