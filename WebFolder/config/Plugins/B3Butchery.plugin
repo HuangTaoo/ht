@@ -32,8 +32,8 @@
       <Function index="7" name="解锁"/>
 
     </FunctionGroup>
-    
-    
+
+
     <FunctionGroup name="生产线" roleSchemas="employee">
       <Function index="0" name="访问"/>
       <Function index="1" name="新建"/>
@@ -54,7 +54,7 @@
       <Function index="6" name="锁定"/>
       <Function index="7" name="解锁"/>
     </FunctionGroup>
-    
+
     <FunctionGroup name="生产环节" roleSchemas="employee">
       <Function index="0" name="访问"/>
       <Function index="1" name="新建"/>
@@ -183,7 +183,7 @@
       <Function index="9" name="速冻出库分析" />
       <Function index="10" name="班组包材领用测算表" />
       <Function index="11" name="归零差异表" />
-      <Function index="12" name="生产完工分析" />      
+      <Function index="12" name="生产完工分析" />
 
     </FunctionGroup>
     <FunctionGroup name="生产环节模板" roleSchemas="employee" >
@@ -309,7 +309,7 @@
       <Function index="6" name="锁定"/>
       <Function index="7" name="解锁"/>
     </FunctionGroup>
-    
+
     <FunctionGroup name="计数分类" roleSchemas="employee" >
       <Function index="0" name="访问"/>
       <Function index="1" name="新建"/>
@@ -320,7 +320,7 @@
       <Function index="6" name="锁定"/>
       <Function index="7" name="解锁"/>
     </FunctionGroup>
-    
+
     <FunctionGroup name="计数名称" roleSchemas="employee" >
       <Function index="0" name="访问"/>
       <Function index="1" name="新建"/>
@@ -331,7 +331,7 @@
       <Function index="6" name="锁定"/>
       <Function index="7" name="解锁"/>
     </FunctionGroup>
-    
+
     <FunctionGroup name="计数规格" roleSchemas="employee" >
       <Function index="0" name="访问"/>
       <Function index="1" name="新建"/>
@@ -353,7 +353,7 @@
       <Function index="6" name="锁定"/>
       <Function index="7" name="解锁"/>
     </FunctionGroup>
-    
+
     <FunctionGroup name="速冻入库配置单" roleSchemas="employee" >
       <Function index="0" name="访问" />
       <Function index="1" name="新建" />
@@ -428,7 +428,7 @@
       <Function index="11" name="撤销完毕"/>
     </FunctionGroup>
 
-    
+
     <FunctionGroup name="类别分类" roleSchemas="employee" >
       <Function index="0" name="访问"/>
       <Function index="1" name="新建"/>
@@ -439,7 +439,7 @@
       <Function index="6" name="锁定"/>
       <Function index="7" name="解锁"/>
     </FunctionGroup>
-    
+
     <FunctionGroup name="存货类别" roleSchemas="employee" >
       <Function index="0" name="访问"/>
       <Function index="1" name="新建"/>
@@ -455,11 +455,18 @@
       <Function index="0" name="访问" />
       <Function index="1" name="新建" />
       <Function index="2" name="编辑" />
-      <Function index="3" name="删除" />    
-      <Function index="8" name="管理" />      
+      <Function index="3" name="删除" />
+      <Function index="8" name="管理" />
     </FunctionGroup>
-    
-    
+
+    <FunctionGroup name="设备管理" roleSchemas="employee" >
+      <Function index="0" name="访问" />
+      <Function index="1" name="新建" />
+      <Function index="2" name="编辑" />
+      <Function index="3" name="删除" />
+      <Function index="8" name="管理" />
+    </FunctionGroup>
+
   </Security>
   <Menus>
     <Menu id="0001"  features="B3Butchery.0007" name="/屠宰分割/信息设置/档案/生产线/新建" roles="B3Butchery.生产线.新建" url="B3Butchery/BaseInfos/ProductLine_/ProductLineEdit.aspx"/>
@@ -489,8 +496,8 @@
     <Menu id="0025"  name="/屠宰分割/功能/存货仓库设置" roles="B3Butchery.功能.存货仓库设置" url="B3Butchery/Tools/GoodsAccStoreSetting_/GoodsAccStoreSetting.aspx"/>
     <Menu id="0026"  name="/屠宰分割/业务单据/包装领用/列表" roles="B3Butchery.包装领用.访问" url="B3Butchery/Bills/PackingRecipients_/PackingRecipientsList.aspx"/>
     <Menu id="0027"  name="/屠宰分割/业务单据/领料单/列表" roles="B3Butchery.领料单.访问" url="B3Butchery/Bills/Picking_/PickingList.aspx"/>
-    
-    
+
+
     <Menu id="0028" features="B3Butchery.0016" name="/屠宰分割/信息设置/档案/车间品类/列表" roles="B3Butchery.车间品类.访问" url="B3Butchery/BaseInfos/WorkshopCategory_/WorkshopCategoryList.aspx"/>
 
     <Menu id="0029" features="B3Butchery.0016" name="/屠宰分割/业务单据/速冻入库配置单/列表" roles="B3Butchery.速冻入库配置单.访问" url="B3Butchery/Bills/FrozenInStoreSetBill_/FrozenInStoreSetBillList.aspx"/>
@@ -509,14 +516,15 @@
     <Menu id="0038" features="B3Butchery.0016" name="/屠宰分割/信息设置/档案/车间计数配置单/列表" roles="B3Butchery.车间计数配置单.访问" url="B3Butchery/BaseInfos/WorkShopCountConfig_/WorkShopCountConfigList.aspx"/>
     <Menu id="0039" name="/屠宰分割/信息设置/档案/存货/列表" roles="B3Butchery.存货.访问" url="B3Butchery/BaseInfos/ButcheryGoods_/ButcheryGoodsList.aspx"/>
     <Menu id="0040"   name="/屠宰分割/信息设置/档案/生产班组/列表" roles="B3Butchery.生产班组.访问" url="B3Butchery/BaseInfos/ProductShift_/ProductShiftList.aspx"/>
-    
+
     <Menu id="0041" name="/屠宰分割/报表/班组包材领用测算表" roles="B3Butchery.报表.班组包材领用测算表" url="B3Butchery/Reports/PackingMaterialReport_/PackingMaterialReport.aspx"/>
-    
+
     <Menu id="0042" name="/屠宰分割/信息设置/档案/类别分类" roles="B3Butchery.类别分类.访问" url="B3Butchery/BaseInfos/CategoryClassification_/CategoryClassificationList.aspx"/>
-    
+
     <Menu id="0043" name="/屠宰分割/信息设置/档案/存货类别" roles="B3Butchery.存货类别.访问" url="B3Butchery/BaseInfos/GoodsCategory_/GoodsCategoryList.aspx"/>
     <Menu id="0044" name="/屠宰分割/报表/归零差异表" roles="B3Butchery.报表.归零差异表" url="B3Butchery/Reports/FrozenInStoreDiffReport_/ZeroDiffReport.aspx"/>
     <Menu id="0045" name="/屠宰分割/车间/内包材领用配置单" roles="B3Butchery.内包材领用配置单.访问" url="B3Butchery/Bills/PackingBagType_/PackingBagTypeList.aspx"/>
+    <Menu id="0046" name="/屠宰分割/车间/设备管理" roles="B3Butchery.设备管理.访问" url="B3Butchery/BaseInfos/DeviceManage_/DeviceManageList.aspx"/>
 
 
 

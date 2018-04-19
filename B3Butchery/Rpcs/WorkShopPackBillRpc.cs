@@ -1,4 +1,6 @@
 ﻿using BWP.B3Butchery.BL;
+using BWP.B3Butchery.BO;
+using BWP.B3Butchery.Rpcs.RpcObject;
 using BWP.B3Frameworks;
 using BWP.B3Frameworks.BO.NamedValueTemplate;
 using Forks.EnterpriseServices.BusinessInterfaces;
@@ -7,7 +9,10 @@ using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.EnterpriseServices.JsonRpc;
 using Newtonsoft.Json;
 using System;
-using BWP.B3Butchery.BO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Web.Script.Serialization;
 using TSingSoft.WebPluginFramework;
 
 namespace BWP.B3Butchery.Rpcs
@@ -20,6 +25,10 @@ namespace BWP.B3Butchery.Rpcs
     [Rpc(RpcFlags.SkipAuth)]
     public static long InertAndCheck(string json)
     {
+      //static JavaScriptSerializer serializer = new JavaScriptSerializer();
+      //var list = serializer.Deserialize<List<CTuple<long, string, string>>>(result);
+
+
       //反序列化读取数据
       WorkShopPackBill jsonDom = JsonConvert.DeserializeObject<WorkShopPackBill>(json);
 
@@ -126,4 +135,5 @@ namespace BWP.B3Butchery.Rpcs
 
   }
 }
+
 
