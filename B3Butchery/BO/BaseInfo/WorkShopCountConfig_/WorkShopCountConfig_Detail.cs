@@ -1,4 +1,4 @@
-﻿using BWP.B3Butchery.Attributes;
+﻿
 using BWP.B3Frameworks.BO;
 using BWP.B3Frameworks.BO.NamedValueTemplate;
 using BWP.B3UnitedInfos.BO;
@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BWP.B3Frameworks.Attributes;
 
 namespace BWP.B3Butchery.BO
 {
@@ -35,13 +36,13 @@ namespace BWP.B3Butchery.BO
         [LogicName("主辅II换算主单位比例")]
         [ReferenceTo(typeof(Goods), "SecondUnitII_MainUnitRatio")]
         [Join("Goods_ID", "ID")]
-        [JsonConverter(typeof(MoneyJsonConverter))]
+        [JsonConverter(typeof(MoneyDecimalJsonConverter))]
         public Money<decimal>? Goods_SecondUnitII_MainUnitRatio { get; set; }
 
         [LogicName("主辅II换算辅单位比例")]
         [ReferenceTo(typeof(Goods), "SecondUnitII_SecondUnitRatio")]
         [Join("Goods_ID", "ID")]
-        [JsonConverter(typeof(MoneyJsonConverter))]
+        [JsonConverter(typeof(MoneyDecimalJsonConverter))]
         public Money<decimal>? Goods_SecondUnitII_SecondUnitRatio { get; set; }
 
 
@@ -70,11 +71,11 @@ namespace BWP.B3Butchery.BO
         public string Goods_MainUnit { get; set; }
         [Join("Goods_ID", "ID")]
         [ReferenceTo(typeof(Goods), "SecondUnitRatio")]
-        [JsonConverter(typeof(MoneyJsonConverter))]
+        [JsonConverter(typeof(MoneyDecimalJsonConverter))]
         public Money<decimal>? Goods_SecondUnitRatio { get; set; }
         [Join("Goods_ID", "ID")]
         [ReferenceTo(typeof(Goods), "MainUnitRatio")]
-        [JsonConverter(typeof(MoneyJsonConverter))]
+        [JsonConverter(typeof(MoneyDecimalJsonConverter))]
         public Money<decimal>? Goods_MainUnitRatio { get; set; }
 
 

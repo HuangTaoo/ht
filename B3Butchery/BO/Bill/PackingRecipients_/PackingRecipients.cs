@@ -41,7 +41,18 @@ namespace BWP.B3Butchery.BO
     [LogicName("仓库")]
     public string Store_Name { get; set; }
 
+    [LogicName("计划号")]
+    [DFExtProperty("WebControlType", DFEditControl.ChoiceBox)]
+    [DFDataKind(B3ButcheryDataSource.计划号)]
+    [DFExtProperty(B3FrameworksConsts.DFExtProperties.QueryDataKind, B3ButcheryDataSource.计划号)]
+    [DFNotEmpty]
+    [DFExtProperty("DisplayField", "PlanNumber_Name")]
+    public long? PlanNumber_ID { get; set; }
 
+    [LogicName("计划号")]
+    [ReferenceTo(typeof(ProductPlan), "PlanNumber")]
+    [Join("PlanNumber_ID", "ID")]
+    public string PlanNumber_Name { get; set; }
 
     private PackingRecipients_DetailCollection mDetails = new PackingRecipients_DetailCollection();
     [OneToMany(typeof(PackingRecipients_Detail), "ID")]

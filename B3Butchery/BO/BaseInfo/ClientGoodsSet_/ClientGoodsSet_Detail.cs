@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using BWP.B3Frameworks.BO;
 using BWP.B3UnitedInfos.BO;
 using Forks.EnterpriseServices;
 using Forks.EnterpriseServices.DomainObjects2;
 using Forks.Utils;
-using BWP.B3Butchery.Attributes;
+using BWP.B3Frameworks.Attributes;
 using Newtonsoft.Json;
 
 namespace BWP.B3Butchery.BO
@@ -57,18 +54,18 @@ namespace BWP.B3Butchery.BO
 
     [Join("Goods_ID", "ID")]
     [ReferenceTo(typeof(Goods), "MainUnitRatio")]
-    [JsonConverter(typeof(MoneyJsonConverter))]  
+    [JsonConverter(typeof(MoneyDecimalJsonConverter))]  
     public Money<decimal>? Goods_MainUnitRatio { get; set; }//主副转换关系 主比例
 
       [Join("Goods_ID", "ID")]
       [ReferenceTo(typeof(Goods), "SecondUnitII_MainUnitRatio")]
-      [JsonConverter(typeof(MoneyJsonConverter))]
+      [JsonConverter(typeof(MoneyDecimalJsonConverter))]
     public Money<decimal>? Goods_SecondUnitII_MainUnitRatio { get; set; }//主副转换关系 主比例
       
 
       [Join("Goods_ID", "ID")]
       [ReferenceTo(typeof(ButcheryGoods), "StandardSecondNumber")]
-      [JsonConverter(typeof(MoneyJsonConverter))]
+      [JsonConverter(typeof(MoneyDecimalJsonConverter))]
 
     [LogicName("标准箱数")]
     public Money<decimal>? Goods_StandardSecondNumber { get; set; }//仙坛客户端中标准箱数

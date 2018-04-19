@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -147,7 +147,6 @@
     <Compile Include="..\..\..\version\tsapp_version.cs">
       <Link>tsapp_version.cs</Link>
     </Compile>
-    <Compile Include="Attributes\MoneyJsonConverter.cs" />
     <Compile Include="AvailableStroage\ProductInStoreAvailableStorage.cs" />
     <Compile Include="B3ButcheryConfig.cs" />
     <Compile Include="BL\BaseInfo\ButcheryGoods_\ButcheryGoodsBL.cs" />
@@ -285,6 +284,7 @@
     <Compile Include="Rpcs\ClientServiceRpc\Dtos\OutputDto.cs" />
     <Compile Include="Rpcs\FrozenInStoreRpc.cs" />
     <Compile Include="Rpcs\GoodsBatchRpc.cs" />
+    <Compile Include="Rpcs\PackingRecipientsRpc.cs" />
     <Compile Include="Rpcs\ProduceOutputRpc.cs" />
     <Compile Include="Rpcs\ProductInStoreRpc.cs" />
     <Compile Include="Rpcs\ProductLinkRpc.cs" />
@@ -299,6 +299,7 @@
     <Compile Include="Rpcs\RpcObject\ProduceOutputQueryDto.cs" />
     <Compile Include="Rpcs\RpcObject\ProductInStoreSimpleDto.cs" />
     <Compile Include="Rpcs\RpcObject\ProductInStoreWithDetailDto.cs" />
+    <Compile Include="Rpcs\WorkShopPackBillRpc.cs" />
     <Compile Include="Tasks\NullifyProductNoticeTask.cs" />
     <Compile Include="Utils\B3ButcheryDataSource.cs" />
     <Compile Include="Utils\B3ButcheryFlags.cs" />

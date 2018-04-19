@@ -1,4 +1,4 @@
-﻿using BWP.B3Butchery.Attributes;
+﻿
 using BWP.B3Butchery.BO;
 using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.EnterpriseServices.JsonRpc;

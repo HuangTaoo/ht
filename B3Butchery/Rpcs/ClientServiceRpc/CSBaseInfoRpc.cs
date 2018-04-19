@@ -71,6 +71,12 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       return JsonConvert.SerializeObject(list);
     }
 
+    [Rpc]
+    public static void TestTest(string value)
+    {
+      var config = JsonConvert.DeserializeObject<WorkShopCountConfig_Detail>(value);
+    }
+
     [Rpc(RpcFlags.SkipAuth)]
         public static string GetAllWorkShopCountConfigList()
         {
