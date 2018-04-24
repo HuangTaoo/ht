@@ -33,11 +33,10 @@ namespace BWP.Web.Pages.B3Butchery.Bills.PackingBagType_
 
             var config = new AutoLayoutConfig();
             layoutManager.Config = config;
-            config.Add("Name");     ;
+            config.Add("Name");     
             config.Add("Department_ID");
             config.Add("Employee_ID");
-
-
+            config.Add("DisplayMark");
             pageLayoutSection.SetRequired("Department_ID", "Name");
             pageLayoutSection.ApplyLayout(layoutManager, config, mPageLayoutManager, mDFInfo);
 

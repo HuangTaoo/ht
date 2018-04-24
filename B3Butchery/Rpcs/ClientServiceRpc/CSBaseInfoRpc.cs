@@ -43,6 +43,8 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       query.Columns.Add(DQSelectColumn.Field("GoodsPacking_Name", detail));
       query.Columns.Add(DQSelectColumn.Field("StandNumber", detail));
 
+      query.Columns.Add(DQSelectColumn.Field("DisplayMark", bill));
+
 
       using (var session=Dmo.NewSession())
       {
@@ -63,6 +65,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
             dto.GoodsPacking_ID = (long?)reader[9];
             dto.GoodsPacking_Name = (string)reader[10];
             dto.StandNumber = (int?)reader[11];
+            dto.DisplayMark = (string)reader[12];
             list.Add(dto);
           }
         }

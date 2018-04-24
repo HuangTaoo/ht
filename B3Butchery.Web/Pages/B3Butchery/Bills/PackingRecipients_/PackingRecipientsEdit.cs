@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BWP.B3Butchery.BL;
 using BWP.B3Butchery.BO;
+using BWP.B3Butchery.Utils;
 using BWP.B3Frameworks.Utils;
 using BWP.B3UnitedInfos;
 using BWP.B3UnitedInfos.BL;
@@ -41,7 +42,6 @@ namespace BWP.Web.Pages.B3Butchery.Bills.PackingRecipients_
       config.Add("Department_ID");
       config.Add("Employee_ID");
       config.Add("Store_ID");
-      config.Add("PlanNumber_ID");
       config.Add("Remark");
 
       pageLayoutSection.SetRequired("AccountingUnit_ID");
@@ -77,6 +77,14 @@ namespace BWP.Web.Pages.B3Butchery.Bills.PackingRecipients_
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Spec"));
+      _detailGrid.Columns.EAdd(new DFEditGridColumn<DFChoiceBox>("PlanNumber_ID")).InitEditControl+= (sender, e) =>
+        {
+          e.Control.DFDisplayField = "PlanNumber_Name";
+          e.Control.EnableTopItem = true;
+          e.Control.EnableInputArgument = true;
+          e.Control.DataKind = B3ButcheryDataSource.计划号;
+          e.Control.Width=Unit.Percentage(100);
+        };
       _detailGrid.Columns.EAdd(new DFEditGridColumn<DFTextBox>("Number")).SumMode = SumMode.Sum;
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_MainUnit"));
       _detailGrid.Columns.EAdd(new DFEditGridColumn<DFTextBox>("SecondNumber")).SumMode = SumMode.Sum;

@@ -33,6 +33,10 @@
         <QBE paramName="CreateUser_Name"/>
       </Contains>
       <Contains>
+        <Field name="DisplayMark"/>
+        <QBE paramName="DisplayMark"/>
+      </Contains>
+      <Contains>
         <Field name="CheckUser_Name"/>
         <QBE paramName="CheckUser_Name"/>
       </Contains>

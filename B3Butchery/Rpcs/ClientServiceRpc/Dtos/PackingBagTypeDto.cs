@@ -21,5 +21,6 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc.Dtos
     public long? GoodsPacking_ID { get; set; }
     public string GoodsPacking_Name { get; set; }
     public int? StandNumber { get; set; }
+    public string DisplayMark { get; set; }
   }
 }

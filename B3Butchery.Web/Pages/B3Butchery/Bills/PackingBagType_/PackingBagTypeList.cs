@@ -17,6 +17,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.PackingBagType_
                 config.AddAfter("Department_ID", "ID");
                 config.AddAfter("Employee_ID", "Department_ID");
                 config.AddAfter("Name", "Employee_ID");
+                config.AddAfter("DisplayMark", "Name");
                 //        config.AddAfter("InStoreDate", "Date");
 
             }));
@@ -30,6 +31,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.PackingBagType_
                 AddDFBrowseGridColumn(grid, "Name");
                 AddDFBrowseGridColumn(grid, "Department_Name");
                 AddDFBrowseGridColumn(grid, "Employee_Name");
+                AddDFBrowseGridColumn(grid, "DisplayMark");
                
                
             }

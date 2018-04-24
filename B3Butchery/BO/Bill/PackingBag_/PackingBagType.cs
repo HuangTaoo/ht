@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BWP.B3Butchery.Utils;
+using BWP.B3Frameworks;
 using BWP.B3Frameworks.BO;
 using DocumentFormat.OpenXml.Math;
 using Forks.EnterpriseServices;
 using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
+using TSingSoft.WebControls2;
 
 namespace BWP.B3Butchery.BO
 {
@@ -17,10 +20,15 @@ namespace BWP.B3Butchery.BO
         [LogicName("部门深度")]
         [ReferenceTo(typeof(Department), "Depth")]
         public int? Department_Depth { get; set; }
-        [DFDataKind("授权部门")]
+
+      [DFExtProperty("WebControlType", DFEditControl.ChoiceBox)]
+      [DFExtProperty(B3FrameworksConsts.DFExtProperties.QueryDataKind, "授权部门")]
+      [DFExtProperty("DisplayField", "Department_Name")]
+      [DFDataKind("授权部门")]
         [DFNotEmpty]
         [LogicName("部门")]
         public long? Department_ID { get; set; }
+
         [Join("Department_ID", "ID")]
         [LogicName("发起部门")]
         [ReferenceTo(typeof(Department), "Name")]
@@ -28,6 +36,9 @@ namespace BWP.B3Butchery.BO
 
         [LogicName("名称")]
         public string Name { get; set; }
+
+    [LogicName("显示标识")]
+    public string DisplayMark { get; set; }
 
 
         private readonly PackingBagType_DetailCollection _details = new PackingBagType_DetailCollection();

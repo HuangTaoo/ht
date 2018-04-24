@@ -24,7 +24,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.PackingRecipients_
         config.AddAfter("Employee_ID", "Department_ID");
         config.AddAfter("Store_ID", "Employee_ID");
         config.AddAfter("Date", "Store_ID");
-        config.AddAfter("PlanNumber_ID", "Date");
+
 //        config.AddAfter("InStoreDate", "Date");
 
       }));
@@ -40,7 +40,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.PackingRecipients_
         AddDFBrowseGridColumn(grid, "Employee_Name");
         AddDFBrowseGridColumn(grid, "Store_Name");
         AddDFBrowseGridColumn(grid, "Date");
-        AddDFBrowseGridColumn(grid, "PlanNumber_Name");
+
         AddDFBrowseGridColumn(grid, "Remark");
       }
     }

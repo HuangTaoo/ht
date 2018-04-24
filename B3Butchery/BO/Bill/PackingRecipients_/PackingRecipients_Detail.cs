@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BWP.B3Butchery.Utils;
+using BWP.B3Frameworks;
 using Forks.EnterpriseServices;
 using Forks.EnterpriseServices.DataForm;
 using Forks.EnterpriseServices.DomainObjects2;
+using TSingSoft.WebControls2;
 
 namespace BWP.B3Butchery.BO
 {
@@ -12,6 +15,20 @@ namespace BWP.B3Butchery.BO
   public class PackingRecipients_Detail : GoodsDetail
   {
     public long PackingRecipients_ID { get; set; }
+
+
+    [LogicName("计划号")]
+    [DFExtProperty("WebControlType", DFEditControl.ChoiceBox)]
+    [DFDataKind(B3ButcheryDataSource.计划号)]
+    [DFExtProperty(B3FrameworksConsts.DFExtProperties.QueryDataKind, B3ButcheryDataSource.计划号)]
+    [DFNotEmpty]
+    [DFExtProperty("DisplayField", "PlanNumber_Name")]
+    public long? PlanNumber_ID { get; set; }
+
+    [LogicName("计划号")]
+    [ReferenceTo(typeof(ProductPlan), "PlanNumber")]
+    [Join("PlanNumber_ID", "ID")]
+    public string PlanNumber_Name { get; set; }
   }
 
   [Serializable]
