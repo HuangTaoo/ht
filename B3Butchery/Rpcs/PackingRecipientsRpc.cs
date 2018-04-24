@@ -32,7 +32,9 @@ namespace BWP.B3Butchery.Rpcs
         using (var session = Dmo.NewSession())
         {
           var bl = BIFactory.Create<IPackingRecipientsBL>(session);
-          bl.InitNewDmo(jsonDom);
+          //          bl.InitNewDmo(jsonDom);
+
+          jsonDom.Domain_ID = DomainContext.Current.ID;
           //插入单据
           bl.Insert(jsonDom);
           //审核
