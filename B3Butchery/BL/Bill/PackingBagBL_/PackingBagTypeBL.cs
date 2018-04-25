@@ -11,7 +11,7 @@ using Forks.EnterpriseServices.BusinessInterfaces;
 namespace BWP.B3Butchery.BL
 {
     [BusinessInterface(typeof(PackingBagTypeBL))]
-    [LogicName("内包材领用配置单")]
+    [LogicName("包材领用配置单")]
     public interface IPackingBagTypeBL : IDomainBillBL<PackingBagType>
     {
 

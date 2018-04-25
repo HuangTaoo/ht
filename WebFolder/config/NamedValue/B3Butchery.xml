@@ -21,7 +21,10 @@
   <NamedValue type="BWP.B3Butchery.Utils.包装模式,B3Butchery">
     <Word name="箱装" value="0" />
     <Word name="袋装" value="1" />
-
+  </NamedValue>
+  <NamedValue type="BWP.B3Butchery.Utils.包装属性,B3Butchery">
+    <Word name="外包装" value="0" />
+    <Word name="内包装" value="1" />
   </NamedValue>
   
 

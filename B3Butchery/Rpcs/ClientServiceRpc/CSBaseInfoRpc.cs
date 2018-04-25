@@ -13,6 +13,8 @@ using Forks.EnterpriseServices.JsonRpc;
 using Forks.EnterpriseServices.SqlDoms;
 using Newtonsoft.Json;
 using TSingSoft.WebPluginFramework;
+using Forks.Utils;
+using BWP.B3Butchery.Utils;
 
 namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
 {
@@ -20,6 +22,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
   public static class CSBaseInfoRpc
   {
 
+    //包材领用配置单同步到MES接口
     [Rpc(RpcFlags.SkipAuth)]
     public static string GetPackingBagTypeList()
     {
@@ -30,6 +33,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       var query=new DQueryDom(bill);
       query.From.AddJoin(JoinType.Inner,new DQDmoSource(detail),DQCondition.EQ(bill,"ID",detail, "PackingBagType_ID") );
       query.Columns.Add(DQSelectColumn.Field("Name",bill));
+
       query.Columns.Add(DQSelectColumn.Field("Department_ID", bill));
       query.Columns.Add(DQSelectColumn.Field("Department_Name", bill));
 
@@ -44,16 +48,18 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       query.Columns.Add(DQSelectColumn.Field("StandNumber", detail));
 
       query.Columns.Add(DQSelectColumn.Field("DisplayMark", bill));
+      query.Columns.Add(DQSelectColumn.Field("Packing_Attr", bill));
+      query.Columns.Add(DQSelectColumn.Field("Packing_Pattern", bill));
 
 
-      using (var session=Dmo.NewSession())
+      using (var session = Dmo.NewSession())
       {
-        using (var reader=session.ExecuteReader(query))
+        using (var reader = session.ExecuteReader(query))
         {
           while (reader.Read())
           {
             var dto = new PackingBagTypeDto();
-            dto.Name=(string)reader[0];
+            dto.Name = (string)reader[0];
             dto.Department_ID = (long?)reader[1];
             dto.Department_Name = (string)reader[2];
             dto.Goods_ID = (long?)reader[3];
@@ -66,6 +72,10 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
             dto.GoodsPacking_Name = (string)reader[10];
             dto.StandNumber = (int?)reader[11];
             dto.DisplayMark = (string)reader[12];
+            var attr = (NamedValue<包装属性>?)reader[13];
+            dto.Packing_Attr = attr == null ? "" : attr.Value.Name;
+            var pattern = (NamedValue<包装模式>?)reader[14];
+            dto.Packing_Pattern = pattern == null ? "" : pattern.Value.Name;
             list.Add(dto);
           }
         }
@@ -74,6 +84,52 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       return JsonConvert.SerializeObject(list);
     }
 
+    //包装物配置单同步到MES接口
+    [Rpc(RpcFlags.SkipAuth)]
+    public static string GetPackagingList()
+    {
+      var list = new List<PackagingDto>();
+
+      var bill = new JoinAlias(typeof(Packaging));
+      var detail = new JoinAlias(typeof(Packaging_Detail));
+      var query = new DQueryDom(bill);
+      query.From.AddJoin(JoinType.Inner, new DQDmoSource(detail), DQCondition.EQ(bill, "ID", detail, "Packaging_ID"));
+      query.Columns.Add(DQSelectColumn.Field("Name", bill));
+
+      query.Columns.Add(DQSelectColumn.Field("Goods_ID", detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_Name", detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_Code", detail));
+      query.Columns.Add(DQSelectColumn.Field("Goods_Spec", detail));
+      query.Columns.Add(DQSelectColumn.Field("GoodsProperty_ID", detail));
+      query.Columns.Add(DQSelectColumn.Field("GoodsProperty_Name", detail));
+      query.Columns.Add(DQSelectColumn.Field("Packing_Attr", bill));
+
+
+      using (var session = Dmo.NewSession())
+      {
+        using (var reader = session.ExecuteReader(query))
+        {
+          while (reader.Read())
+          {
+            var dto = new PackagingDto();
+            dto.Name = (string)reader[0];
+            dto.Goods_ID = (long?)reader[1];
+            dto.Goods_Name = (string)reader[2];
+            dto.Goods_Code = (string)reader[3];
+            dto.Goods_Spec = (string)reader[4];
+            dto.GoodsProperty_ID = (long?)reader[5];
+            dto.GoodsProperty_Name = (string)reader[6];
+            var attr = (NamedValue<包装属性>?)reader[7];
+            dto.Packing_Attr = attr == null ? "" : attr.Value.Name;
+            list.Add(dto);
+          }
+        }
+      }
+
+      return JsonConvert.SerializeObject(list);
+    }
+
+
     [Rpc]
     public static void TestTest(string value)
     {
@@ -81,21 +137,21 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
     }
 
     [Rpc(RpcFlags.SkipAuth)]
-        public static string GetAllWorkShopCountConfigList()
-        {
-            var dmoquery = new DmoQuery(typeof(WorkShopCountConfig));
-            dmoquery.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
-            var list = dmoquery.EExecuteList().Cast<WorkShopCountConfig>().ToList();
+    public static string GetAllWorkShopCountConfigList()
+    {
+      var dmoquery = new DmoQuery(typeof(WorkShopCountConfig));
+      dmoquery.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
+      var list = dmoquery.EExecuteList().Cast<WorkShopCountConfig>().ToList();
 
-            var jsonStr = JsonConvert.SerializeObject(list);
-            //var jsonStr = serializer.Serialize(list);
-            return jsonStr;
-        }
-
-
+      var jsonStr = JsonConvert.SerializeObject(list);
+      //var jsonStr = serializer.Serialize(list);
+      return jsonStr;
+    }
 
 
-        [Rpc(RpcFlags.SkipAuth)]
+
+
+    [Rpc(RpcFlags.SkipAuth)]
     public static List<WorkshopCategory> GetWorkshopCategory()
     {
       var query = new DQueryDom(new JoinAlias(typeof(WorkshopCategory)));
@@ -103,7 +159,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       query.Columns.Add(DQSelectColumn.Field("Name"));
       query.Columns.Add(DQSelectColumn.Field("Spell"));
       query.Columns.Add(DQSelectColumn.Field("Code"));
-      
+
       query.Where.Conditions.Add(DQCondition.EQ("Stopped", false));
       var list = new List<WorkshopCategory>();
       using (var context = new TransactionContext())
@@ -116,7 +172,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
             entity.ID = (long)reader[0];
             entity.Name = (string)reader[1];
             entity.Spell = (string)reader[2];
-            entity.Code= (string)reader[3];
+            entity.Code = (string)reader[3];
             list.Add(entity);
           }
         }
@@ -124,38 +180,38 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       return list;
     }
 
-      [Rpc(RpcFlags.SkipAuth)]
-      public static string GetPlanNoBaseInfo()
+    [Rpc(RpcFlags.SkipAuth)]
+    public static string GetPlanNoBaseInfo()
+    {
+      var query = new DQueryDom(new JoinAlias(typeof(ProductPlan)));
+      query.Columns.Add(DQSelectColumn.Field("PlanNumber"));
+      query.Columns.Add(DQSelectColumn.Field("ID"));
+      query.Where.Conditions.Add(DQCondition.LessThanOrEqual("Date", DateTime.Today));
+      query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual("EndDate", DateTime.Today));
+      query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual("BillState", 20));
+
+      using (var context = new TransactionContext())
       {
-          var query = new DQueryDom(new JoinAlias(typeof(ProductPlan)));
-          query.Columns.Add(DQSelectColumn.Field("PlanNumber"));
-          query.Columns.Add(DQSelectColumn.Field("ID"));
-          query.Where.Conditions.Add(DQCondition.LessThanOrEqual("Date", DateTime.Today));
-          query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual("EndDate", DateTime.Today));
-          query.Where.Conditions.Add(DQCondition.GreaterThanOrEqual("BillState", 20));
+        var list = new List<PlanNoBaseInfo>();
+        ;
 
-          using (var context = new TransactionContext())
+        using (var reader = context.Session.ExecuteReader(query))
+        {
+          while (reader.Read())
           {
-              var list = new List<PlanNoBaseInfo>();
-              ;
-
-              using (var reader = context.Session.ExecuteReader(query))
-              {
-                  while (reader.Read())
-                  {
-                      var plan = new PlanNoBaseInfo();
-                      plan.ID = (long)reader[1];
-                      plan.Name = (string)reader[0];
-                      list.Add(plan);
-                  }
-
-                  return JsonConvert.SerializeObject(list);
-              }
-
-
+            var plan = new PlanNoBaseInfo();
+            plan.ID = (long)reader[1];
+            plan.Name = (string)reader[0];
+            list.Add(plan);
           }
 
+          return JsonConvert.SerializeObject(list);
+        }
+
+
       }
+
+    }
 
 
     [Rpc(RpcFlags.SkipAuth)]
@@ -344,37 +400,37 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       return list;
     }
 
-      [Rpc(RpcFlags.SkipAuth)]
-      public static List<Store> GetStore()
-      {
-          var query = new DQueryDom(new JoinAlias(typeof(Store)));
-          query.Columns.Add(DQSelectColumn.Field("ID"));
-          query.Columns.Add(DQSelectColumn.Field("Name"));
-          query.Columns.Add(DQSelectColumn.Field("Code"));
-          query.Columns.Add(DQSelectColumn.Field("Stopped"));
-          query.Columns.Add(DQSelectColumn.Field("Domain_ID"));
-          query.Columns.Add(DQSelectColumn.Field("Spell"));
+    [Rpc(RpcFlags.SkipAuth)]
+    public static List<Store> GetStore()
+    {
+      var query = new DQueryDom(new JoinAlias(typeof(Store)));
+      query.Columns.Add(DQSelectColumn.Field("ID"));
+      query.Columns.Add(DQSelectColumn.Field("Name"));
+      query.Columns.Add(DQSelectColumn.Field("Code"));
+      query.Columns.Add(DQSelectColumn.Field("Stopped"));
+      query.Columns.Add(DQSelectColumn.Field("Domain_ID"));
+      query.Columns.Add(DQSelectColumn.Field("Spell"));
 
-          var list = new List<Store>();
-          using (var context = new TransactionContext())
+      var list = new List<Store>();
+      using (var context = new TransactionContext())
+      {
+        using (var reader = context.Session.ExecuteReader(query))
+        {
+          while (reader.Read())
           {
-              using (var reader = context.Session.ExecuteReader(query))
-              {
-                  while (reader.Read())
-                  {
-                      var entity = new Store();
-                      entity.ID = (long)reader[0];
-                      entity.Name = (string)reader[1];
-                      entity.Code = (string)reader[2];
-                      entity.Stopped = (bool)reader[3];
-                      entity.Domain_ID = (long)reader[4];
-                      entity.Spell = (string)reader[5];
-                      list.Add(entity);
-                  }
-              }
+            var entity = new Store();
+            entity.ID = (long)reader[0];
+            entity.Name = (string)reader[1];
+            entity.Code = (string)reader[2];
+            entity.Stopped = (bool)reader[3];
+            entity.Domain_ID = (long)reader[4];
+            entity.Spell = (string)reader[5];
+            list.Add(entity);
           }
-          return list;
+        }
       }
+      return list;
+    }
 
   }
 }

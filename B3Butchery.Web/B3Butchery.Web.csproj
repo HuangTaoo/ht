@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -256,6 +256,12 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\B3Butchery\Bills\FrozenOutStore_\FrozenOutStoreList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\Packaging_\PackagingEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\Packaging_\PackagingList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\B3Butchery\Bills\PackingBagType_\PackingBagTypeEdit.cs">
@@ -509,6 +515,7 @@
     <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductNotice_\ProductNoticeList.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Bills\Packaging_\PackagingList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\PackingBagType_\PackingBagTypeList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\ProduceFinishReport_\ProduceFinishReport.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\BaseInfos\ProductShift_\ProductShiftList.xml" />
@@ -557,7 +564,6 @@
     <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductPackaging_\ProductPackagingList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\ProductNoticeReport_\ProductNoticeReport.xml" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

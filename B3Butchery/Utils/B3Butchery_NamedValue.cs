@@ -33,4 +33,11 @@ namespace BWP.B3Butchery.Utils
         public static readonly NamedValue<包装模式> 袋装 = new NamedValue<包装模式>(1);
 
     }
+
+    public sealed class 包装属性
+    {
+      public static readonly NamedValue<包装属性> 外包装 = new NamedValue<包装属性>(0);
+      public static readonly NamedValue<包装属性> 内包装 = new NamedValue<包装属性>(1);
+
+    }
 }

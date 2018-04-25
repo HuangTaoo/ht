@@ -8,33 +8,38 @@ using TSingSoft.WebControls2;
 
 namespace BWP.Web.Pages.B3Butchery.Bills.PackingBagType_
 {
-    class PackingBagTypeList : DomainBillListPage<PackingBagType, IPackingBagTypeBL>
+  class PackingBagTypeList : DomainBillListPage<PackingBagType, IPackingBagTypeBL>
+  {
+    protected override void AddQueryControls(VLayoutPanel vPanel)
     {
-        protected override void AddQueryControls(VLayoutPanel vPanel)
-        {
-            vPanel.Add(CreateDefaultBillQueryControls((panel, config) =>
-            {
-                config.AddAfter("Department_ID", "ID");
-                config.AddAfter("Employee_ID", "Department_ID");
-                config.AddAfter("Name", "Employee_ID");
-                config.AddAfter("DisplayMark", "Name");
-                //        config.AddAfter("InStoreDate", "Date");
+      vPanel.Add(CreateDefaultBillQueryControls((panel, config) =>
+      {
+        config.AddAfter("Department_ID", "ID");
+        config.AddAfter("Employee_ID", "Department_ID");
+        config.AddAfter("Name", "Employee_ID");
+        config.AddAfter("DisplayMark", "Name");
+        config.AddAfter("Packing_Attr", "DisplayMark");
+        config.AddAfter("Packing_Pattern", "Packing_Attr");
 
-            }));
-        }
+        //config.AddAfter("InStoreDate", "Date");
 
-        protected override void AddDFBrowseGridColumn(DFBrowseGrid grid, string field)
-        {
-            base.AddDFBrowseGridColumn(grid, field);
-            if (field == "ID")
-            {
-                AddDFBrowseGridColumn(grid, "Name");
-                AddDFBrowseGridColumn(grid, "Department_Name");
-                AddDFBrowseGridColumn(grid, "Employee_Name");
-                AddDFBrowseGridColumn(grid, "DisplayMark");
-               
-               
-            }
-        }
+      }));
     }
+
+    protected override void AddDFBrowseGridColumn(DFBrowseGrid grid, string field)
+    {
+      base.AddDFBrowseGridColumn(grid, field);
+      if (field == "ID")
+      {
+        AddDFBrowseGridColumn(grid, "Name");
+        AddDFBrowseGridColumn(grid, "Department_Name");
+        AddDFBrowseGridColumn(grid, "Employee_Name");
+        AddDFBrowseGridColumn(grid, "DisplayMark");
+        AddDFBrowseGridColumn(grid, "Packing_Attr");
+        AddDFBrowseGridColumn(grid, "Packing_Pattern");
+
+
+      }
+    }
+  }
 }
