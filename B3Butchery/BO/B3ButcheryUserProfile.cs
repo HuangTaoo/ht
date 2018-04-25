@@ -70,5 +70,19 @@ namespace BWP.B3Butchery.BO
     [LogicName("成品入库单入库时间与操作时间间隔(天)")]
     public int? ProductInStoreDaysBrake { get; set; }
 
+
+
+	  [LogicName("包装领用默认仓库")]
+	  [DFExtProperty("WebControlType", DFEditControl.ChoiceBox)]
+	  [DFDataKind(B3FrameworksConsts.DataSources.授权仓库)]
+	  [DFExtProperty(B3FrameworksConsts.DFExtProperties.QueryDataKind, B3FrameworksConsts.DataSources.授权仓库全部)]
+	  [DFExtProperty("DisplayField", "PackingRecipients_Store_Name")]
+	  public long? PackingRecipients_Store_ID { get; set; }
+
+	  [ReferenceTo(typeof(Store), "Name")]
+	  [Join("PackingRecipients_Store_ID", "ID")]
+	  [LogicName("成品入库默认仓库")]
+	  public string PackingRecipients_Store_Name { get; set; }
+
   }
 }

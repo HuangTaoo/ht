@@ -28,7 +28,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       var bill=new JoinAlias(typeof(PackingBagType));
       var detail=new JoinAlias(typeof(PackingBagType_Detail));
       var query=new DQueryDom(bill);
-      query.From.AddJoin(JoinType.Left,new DQDmoSource(detail),DQCondition.EQ(bill,"ID",detail, "PackingBagType_ID") );
+      query.From.AddJoin(JoinType.Inner,new DQDmoSource(detail),DQCondition.EQ(bill,"ID",detail, "PackingBagType_ID") );
       query.Columns.Add(DQSelectColumn.Field("Name",bill));
       query.Columns.Add(DQSelectColumn.Field("Department_ID", bill));
       query.Columns.Add(DQSelectColumn.Field("Department_Name", bill));
