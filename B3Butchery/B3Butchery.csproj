@@ -171,6 +171,7 @@
     <Compile Include="BL\Bill\FrozenInStoreSetBillBL_\IFrozenInStoreSetBillBL.cs" />
     <Compile Include="BL\Bill\FrozenInStore_\FrozenInStoreBL.cs" />
     <Compile Include="BL\Bill\FrozenOutStore_\FrozenOutStoreBL.cs" />
+    <Compile Include="BL\Bill\PackagingBL_\PackagingBL.cs" />
     <Compile Include="BL\Bill\PackingBagBL_\PackingBagTypeBL.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -225,6 +226,8 @@
     <Compile Include="BO\Bill\FrozenInStore_\FrozenInStore_Detail.cs" />
     <Compile Include="BO\Bill\FrozenOutStore_\FrozenOutStore.cs" />
     <Compile Include="BO\Bill\FrozenOutStore_\FrozenOutStore_Detail.cs" />
+    <Compile Include="BO\Bill\Packaging\Packaging.cs" />
+    <Compile Include="BO\Bill\Packaging\Packaging_Detail.cs" />
     <Compile Include="BO\Bill\PackingBag_\PackingBagType.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -281,6 +284,7 @@
     <Compile Include="Rpcs\ClientServiceRpc\BaseInfoWithCode.cs" />
     <Compile Include="Rpcs\ClientServiceRpc\CSBaseInfoRpc.cs" />
     <Compile Include="Rpcs\ClientServiceRpc\CSBillRpc.cs" />
+    <Compile Include="Rpcs\ClientServiceRpc\Dtos\PackagingDto.cs" />
     <Compile Include="Rpcs\ClientServiceRpc\Dtos\PackingBagTypeDto.cs" />
     <Compile Include="Rpcs\ClientServiceRpc\Dtos\WorkShopDto.cs" />
     <Compile Include="Rpcs\ClientServiceRpc\Dtos\OutputDto.cs" />
