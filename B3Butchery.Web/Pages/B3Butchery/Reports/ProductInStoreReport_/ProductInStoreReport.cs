@@ -318,7 +318,15 @@ namespace BWP.Web.Pages.B3Butchery.Reports.ProductInStoreReport_
       if (!string.IsNullOrEmpty(goodsOrigin.Text))
         query.Where.Conditions.Add(DQCondition.Like(goodsAlias, "Origin", goodsOrigin.Text));
       if (!goodsName.IsEmpty)
-        query.Where.Conditions.Add(DQCondition.Like(goodsAlias, "Name", goodsName.Text));
+      {
+        var nameList = goodsName.Text.Split(' ');
+        var conditonList = new List<IDQExpression>();
+        foreach (var n in nameList)
+        {
+          conditonList.Add(DQCondition.Like(goodsAlias, "Name", n));
+        }
+        query.Where.Conditions.Add(DQCondition.Or(conditonList));
+      }
       query.Where.Conditions.Add(DQCondition.And(DQCondition.EQ("Domain_ID", DomainContext.Current.ID)));
       var brand = mQueryContainer.GetControl<DFChoiceBox>("Goods_Brand");
       if (!brand.IsEmpty)
