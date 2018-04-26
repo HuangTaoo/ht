@@ -12,6 +12,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.ProductInStore_
 		protected override void AddParameters(IDictionary<string, object> dic)
 		{
 			dic.Add("$Details", Dmo.Details);
+      dic.Add("$CargoSpace_Name",Dmo.Details[0].CargoSpace_Name);
 			dic.Add("$DetailType", typeof(ProductInStore_Detail));
 		}
 	}
