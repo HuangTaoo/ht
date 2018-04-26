@@ -9,12 +9,14 @@ using BWP.B3Frameworks;
 using BWP.B3Frameworks.Utils;
 using Forks.EnterpriseServices.BusinessInterfaces;
 using Forks.EnterpriseServices.DomainObjects2;
+using Forks.EnterpriseServices.DomainObjects2.DQuery;
 using Forks.EnterpriseServices.JsonRpc;
 using Newtonsoft.Json;
 using TSingSoft.WebPluginFramework;
 
 namespace BWP.B3Butchery.Rpcs
 {
+
   [Rpc]
   public static class PackingRecipientsRpc
   {
@@ -58,5 +60,7 @@ namespace BWP.B3Butchery.Rpcs
       }
       return returnid;
     }
+
+
   }
 }

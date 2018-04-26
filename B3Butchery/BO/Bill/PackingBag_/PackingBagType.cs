@@ -62,10 +62,6 @@ namespace BWP.B3Butchery.BO
     }
 
 
-    [Serializable]
-    public class PackingBagType_DetailCollection : DmoCollection<PackingBagType_Detail>
-    {
 
-    }
   }
 }

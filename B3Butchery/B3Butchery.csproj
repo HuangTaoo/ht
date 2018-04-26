@@ -286,6 +286,7 @@
     <Compile Include="Rpcs\ClientServiceRpc\Dtos\OutputDto.cs" />
     <Compile Include="Rpcs\FrozenInStoreRpc.cs" />
     <Compile Include="Rpcs\GoodsBatchRpc.cs" />
+    <Compile Include="Rpcs\PackingBagTypeRpc.cs" />
     <Compile Include="Rpcs\PackingRecipientsRpc.cs" />
     <Compile Include="Rpcs\ProduceOutputRpc.cs" />
     <Compile Include="Rpcs\ProductInStoreRpc.cs" />

@@ -13,7 +13,7 @@ namespace BWP.B3Butchery.BO
   public class Packaging_Detail : Base
   {
 
-    public int Packaging_ID { get; set; }
+    public long Packaging_ID { get; set; }
 
     [LogicName("存货")]
     public long? Goods_ID { get; set; }

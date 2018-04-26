@@ -33,11 +33,5 @@ namespace BWP.B3Butchery.BO
       get { return _details; }
     }
 
-
-    [Serializable]
-    public class Packaging_DetailCollection : DmoCollection<Packaging_Detail>
-    {
-
-    }
   }
 }
