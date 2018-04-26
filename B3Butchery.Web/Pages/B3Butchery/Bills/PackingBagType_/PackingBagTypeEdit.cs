@@ -118,9 +118,13 @@ namespace BWP.Web.Pages.B3Butchery.Bills.PackingBagType_
         _detailGrid.GetFromUI();
         foreach (var sGoodsID in goodsSelect.GetValues())
         {
-
+          var goodsid= Convert.ToInt64(sGoodsID);
+          if (Dmo.Details.Any(x => x.Goods_ID == goodsid))
+          {
+            continue;
+          }
           var detail = new PackingBagType_Detail();
-          detail.Goods_ID = Convert.ToInt64(sGoodsID);
+          detail.Goods_ID = goodsid;
           DmoUtil.RefreshDependency(detail, "Goods_ID");
           Dmo.Details.Add(detail);
         }
