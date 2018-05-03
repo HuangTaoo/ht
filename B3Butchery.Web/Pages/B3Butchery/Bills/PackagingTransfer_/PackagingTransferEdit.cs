@@ -71,7 +71,9 @@ namespace BWP.Web.Pages.B3Butchery.Bills.PackagingTransfer_
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Spec"));
-      _detailGrid.Columns.Add(new DFEditGridColumn<DFTextBox>("SecondNumber"));
+      _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("ProductionPlan_PlanNumber"));
+      _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("GoodsPacking_Name"));
+      _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("SecondNumber"));
       var section = mPageLayoutManager.AddSection("DetaiColumns", "明细列");
       titlePanel.SetPageLayoutSetting(mPageLayoutManager, section.Name);
 
