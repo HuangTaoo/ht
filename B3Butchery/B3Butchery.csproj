@@ -168,6 +168,7 @@
     <Compile Include="BL\Bill\FrozenInStore_\FrozenInStoreBL.cs" />
     <Compile Include="BL\Bill\FrozenOutStore_\FrozenOutStoreBL.cs" />
     <Compile Include="BL\Bill\PackagingBL_\PackagingBL.cs" />
+    <Compile Include="BL\Bill\PackagingTransferBL_\PackagingTransferBL.cs" />
     <Compile Include="BL\Bill\PackingBagBL_\PackingBagTypeBL.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -222,6 +223,8 @@
     <Compile Include="BO\Bill\FrozenInStore_\FrozenInStore_Detail.cs" />
     <Compile Include="BO\Bill\FrozenOutStore_\FrozenOutStore.cs" />
     <Compile Include="BO\Bill\FrozenOutStore_\FrozenOutStore_Detail.cs" />
+    <Compile Include="BO\Bill\PackagingTransfer_\PackagingTransfer.cs" />
+    <Compile Include="BO\Bill\PackagingTransfer_\PackagingTransfer_Detail.cs" />
     <Compile Include="BO\Bill\Packaging\Packaging.cs" />
     <Compile Include="BO\Bill\Packaging\Packaging_Detail.cs" />
     <Compile Include="BO\Bill\PackingBag_\PackingBagType.cs">

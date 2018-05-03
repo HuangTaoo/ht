@@ -258,6 +258,12 @@
     <Compile Include="Pages\B3Butchery\Bills\FrozenOutStore_\FrozenOutStoreList.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\PackagingTransfer_\PackagingTransferEdit.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\B3Butchery\Bills\PackagingTransfer_\PackagingTransferList.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\B3Butchery\Bills\Packaging_\PackagingEdit.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -515,6 +521,7 @@
     <EmbeddedResource Include="Pages\B3Butchery\Bills\ProductNotice_\ProductNoticeList.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Pages\B3Butchery\Bills\PackagingTransfer_\PackagingTransferList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\Packaging_\PackagingList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Bills\PackingBagType_\PackingBagTypeList.xml" />
     <EmbeddedResource Include="Pages\B3Butchery\Reports\ProduceFinishReport_\ProduceFinishReport.xml" />
