@@ -14,6 +14,8 @@ namespace BWP.B3Butchery.Rpcs
   {
     public long Goods_ID { get; set; }
     public long GoodsPacking_ID { get; set; }//存货对应的包装袋名
+    public long Department_ID { get; set; }//存货对应的包装袋名
+
   }
 
   [Rpc]
@@ -40,6 +42,7 @@ namespace BWP.B3Butchery.Rpcs
 
           var updateDom = new DQUpdateDom(typeof(PackingBagType_Detail));
           updateDom.Where.Conditions.Add(DQCondition.EQ("Goods_ID", dto.Goods_ID));
+          updateDom.Where.Conditions.Add(DQCondition.InSubQuery(DQExpression.Field("PackingBagType_ID"),GetSubQuery(dto.Department_ID)));
           updateDom.Columns.Add(new DQUpdateColumn("GoodsPacking_ID",dto.GoodsPacking_ID));
 
           session.ExecuteNonQuery(updateDom);
@@ -47,6 +50,14 @@ namespace BWP.B3Butchery.Rpcs
         session.Commit();
       }
       return true;
+    }
+
+    private static DQueryDom GetSubQuery(long dtoDepartmentId)
+    {
+      var query=new DQueryDom(new JoinAlias(typeof(PackingBagType)) );
+      query.Where.Conditions.Add(DQCondition.EQ("Department_ID",dtoDepartmentId));
+      query.Columns.Add(DQSelectColumn.Field("ID"));
+      return query;
     }
   }
 }
