@@ -20,6 +20,16 @@ namespace BWP.B3Butchery.BO
 
     public long PackagingTransfer_ID { get; set; }
 
+
+
+    [LogicName("调出存货")]
+    public long? OutGoods_ID { get; set; }
+
+    [ReferenceTo(typeof(ButcheryGoods), "Name")]
+    [Join("OutGoods_ID", "ID")]
+    [DFPrompt("调出存货")]
+    public string OutGoods_Name { get; set; }
+
     [LogicName("存货")]
     public long? Goods_ID { get; set; }
 

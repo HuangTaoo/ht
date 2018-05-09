@@ -16,6 +16,14 @@ namespace BWP.B3Butchery.BO
   {
     public long PackingRecipients_ID { get; set; }
 
+    [LogicName("产品名称")]
+    public long? GoodsGoods_ID { get; set; }
+
+    [LogicName("产品名称")]
+    [ReferenceTo(typeof(ButcheryGoods), "Name")]
+    [Join("GoodsGoods_ID", "ID")]
+    public string GoodsGoods_Name { get; set; }
+
 
     [LogicName("计划号")]
     [DFExtProperty("WebControlType", DFEditControl.ChoiceBox)]

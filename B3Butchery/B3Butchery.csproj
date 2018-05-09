@@ -294,6 +294,7 @@
     <Compile Include="Rpcs\PackingRecipientsRpc.cs" />
     <Compile Include="Rpcs\ProduceOutputRpc.cs" />
     <Compile Include="Rpcs\ProductInStoreRpc.cs" />
+    <Compile Include="Rpcs\ProductInStoreTemplateRpc.cs" />
     <Compile Include="Rpcs\ProductLinkRpc.cs" />
     <Compile Include="Rpcs\ProductPlanRpc.cs" />
     <Compile Include="Rpcs\GoodsInfoRpc.cs" />
