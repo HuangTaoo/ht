@@ -23,16 +23,13 @@ namespace BWP.B3Butchery
         DisplayOrder = -500
       });
 			HippoUtil.Register();
-      
+
       MultiViewSwitcher.Register("存货编辑", "屠宰分割", "~/B3Butchery/BaseInfos/ButcheryGoods_/ButcheryGoodsEdit.aspx", new string[]{
-        "B3Sale.存货.访问"
+        "B3Butchery.存货.访问"
       });
       MultiViewSwitcher.Register("存货新建", "屠宰分割", "~/B3Butchery/BaseInfos/ButcheryGoods_/ButcheryGoodsEdit.aspx", new string[]{
-        "B3Sale.存货.新建"
+        "B3Butchery.存货.新建"
       });
-
-
-
     }
   }
 }
