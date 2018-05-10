@@ -74,6 +74,7 @@ namespace BWP.Web.Pages.B3Butchery.Bills.PackingRecipients_
       _detailGrid.Width = Unit.Percentage(100);
 
       _detailGrid.ShowLineNo = true;
+      _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("GoodsGoods_Name"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Code"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Name"));
       _detailGrid.Columns.Add(new DFEditGridColumn<DFValueLabel>("Goods_Spec"));

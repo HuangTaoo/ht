@@ -30,6 +30,12 @@ namespace BWP.B3Butchery.BO
 		[LogicName("存货编码")]
 		public string Goods_Code { get; set; }
 
+
+	  [ReferenceTo(typeof(Goods), "Spec")]
+		[Join("Goods_ID", "ID")]
+		[LogicName("规格")]
+		public string Goods_Spec { get; set; }
+
 		[LogicName("主辅转换方向")]
 		[ReferenceTo(typeof(Goods), "UnitConvertDirection")]
 		[Join("Goods_ID", "ID")]
