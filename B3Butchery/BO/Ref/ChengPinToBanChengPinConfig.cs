@@ -17,7 +17,12 @@ namespace BWP.B3Butchery.BO
 		[LogicName("成品")]
 		public long Goods_ID { get; set; }
 
-		[LogicName("半成品")]
+        [ReferenceTo(typeof(Goods), "Name")]
+        [Join("Goods_ID", "ID")]
+        [LogicName("成品")]
+        public string Goods_Name { get; set; }
+
+        [LogicName("半成品")]
 		public long? Goods2_ID { get; set; }
 
 		[ReferenceTo(typeof(Goods), "Name")]
