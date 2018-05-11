@@ -49,9 +49,12 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
             var tablePanel = vPanel.Add(new TableLayoutPanel(5, 5), new VLayoutOption(System.Web.UI.WebControls.HorizontalAlign.Justify));
             var row = 0;
             const int labelWidth = 4;
-            tablePanel.Add(0, 1, row, row + 1, new SimpleLabel("日期", labelWidth));
+            tablePanel.Add(0, 1, row, row + 1, new SimpleLabel("包装日期", labelWidth));
             dateInput = tablePanel.Add(1, 2, row, ++row, new DFDateInput() { Date = DateTime.Today.AddDays(-1)});
-   
+
+            tablePanel.Add(0, 1, row, row + 1, new SimpleLabel("产出日期", labelWidth));
+            dateInput = tablePanel.Add(1, 2, row, ++row, new DFDateInput() { Date = DateTime.Today.AddDays(1) });
+
             tablePanel.Add(0, 1, row, row + 1, new SimpleLabel("会计单位"));
             tablePanel.Add(1, 2, row, ++row, CreateAccPart());
 
@@ -132,7 +135,6 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
             };
             return proudceUnitFilterTree;
         }
-
 
 
 
@@ -270,6 +272,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
             detailGrid.Columns.EAdd(new DFBrowseGridColumn("包装数量")).SumMode = SumMode.Sum;
             detailGrid.Columns.EAdd(new DFBrowseGridColumn("包装辅数量")).SumMode = SumMode.Sum;
             detailGrid.Columns.Add(new DFBrowseGridColumn("对比值"));
+            //detailGrid.Columns.Add(new DFBrowseGridColumn("包材领用"));
         }
 
         #endregion
@@ -394,6 +397,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
             public DateTime? Time { get; set; }
 
 
+            //public long? CollarNumber { get; set; }//包材领用
             public long? Goods_ID { get; set; }
 
             public string Goods_Name { get; set; }
@@ -426,6 +430,7 @@ namespace BWP.Web.Pages.B3Butchery.Reports.FrozenInStoreDiffReport_
                 dom.Columns.Add(DQSelectColumn.Field("GoodsCategory_ID", detail));
                 dom.Columns.Add(DQSelectColumn.Sum(detail, "Number"));
                 dom.Columns.Add(DQSelectColumn.Sum(detail, "SecondNumber2"));
+
 
 
                 dom.GroupBy.Expressions.Add(exp);

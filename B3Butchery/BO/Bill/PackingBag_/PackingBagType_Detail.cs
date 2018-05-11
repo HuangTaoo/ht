@@ -52,8 +52,19 @@ namespace BWP.B3Butchery.BO
       [DFPrompt("包装袋")]
       public string GoodsPacking_Name { get; set; }
 
+        [LogicName("生产班组")]
+        public long? ProductShift_ID { get; set; }
 
-      [LogicName("标准袋数")]
+
+        [ReferenceTo(typeof(ButcheryGoods), "Name")]
+        [Join("ProductShift_ID", "ID")]
+        [LogicName("生产班组")]
+        public string ProductShift_Name { get; set; }
+
+        [LogicName("部门简称")]
+        public string Abbreviation { get; set; }
+
+        [LogicName("标准袋数")]
     public int? StandNumber { get; set; }
 
 

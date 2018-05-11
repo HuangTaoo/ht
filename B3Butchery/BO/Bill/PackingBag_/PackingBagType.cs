@@ -17,9 +17,10 @@ namespace BWP.B3Butchery.BO
   [Serializable, DFClass, LogicName("包材领用配置单")]
   public class PackingBagType : DomainBill
   {
+       
 
 
-    [Join("Department_ID", "ID")]
+        [Join("Department_ID", "ID")]
     [LogicName("部门深度")]
     [ReferenceTo(typeof(Department), "Depth")]
     public int? Department_Depth { get; set; }
@@ -51,8 +52,16 @@ namespace BWP.B3Butchery.BO
     [LogicName("包装属性")]
     public NamedValue<包装属性>? Packing_Attr { get; set; }
 
+        [LogicName("生产班组")]
+        public string ProductShift_Name { get; set; }
 
-    private readonly PackingBagType_DetailCollection _details = new PackingBagType_DetailCollection();
+
+        [LogicName("部门简称")]
+        public string Abbreviation { get; set; }
+
+
+
+        private readonly PackingBagType_DetailCollection _details = new PackingBagType_DetailCollection();
 
     [OneToMany(typeof(PackingBagType_Detail), "ID")]
     [Join("ID", "PackingBagType_ID")]

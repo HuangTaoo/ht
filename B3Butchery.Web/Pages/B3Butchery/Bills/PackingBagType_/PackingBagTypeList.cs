@@ -19,9 +19,12 @@ namespace BWP.Web.Pages.B3Butchery.Bills.PackingBagType_
         config.AddAfter("Name", "Employee_ID");
         config.AddAfter("DisplayMark", "Name");
         config.AddAfter("Packing_Attr", "DisplayMark");
-        config.AddAfter("Packing_Pattern", "Packing_Attr");
+        config.AddAfter("Packing_Pattern", "Packing_Attr"); 
+        config.AddAfter("ProductShift_Name", "Packing_Pattern");
+          config.AddAfter("Abbreviation", "ProductShift_Name");
 
-        //config.AddAfter("InStoreDate", "Date");
+
+          //config.AddAfter("InStoreDate", "Date");
 
       }));
     }
@@ -37,8 +40,8 @@ namespace BWP.Web.Pages.B3Butchery.Bills.PackingBagType_
         AddDFBrowseGridColumn(grid, "DisplayMark");
         AddDFBrowseGridColumn(grid, "Packing_Attr");
         AddDFBrowseGridColumn(grid, "Packing_Pattern");
-
-
+        AddDFBrowseGridColumn(grid, "ProductShift_Name");
+        AddDFBrowseGridColumn(grid, "Abbreviation");
       }
     }
   }

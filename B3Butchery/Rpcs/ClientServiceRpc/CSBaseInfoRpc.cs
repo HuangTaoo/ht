@@ -33,7 +33,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       var query=new DQueryDom(bill);
       query.From.AddJoin(JoinType.Inner,new DQDmoSource(detail),DQCondition.EQ(bill,"ID",detail, "PackingBagType_ID") );
       query.Columns.Add(DQSelectColumn.Field("Name",bill));
-
+      
       query.Columns.Add(DQSelectColumn.Field("Department_ID", bill));
       query.Columns.Add(DQSelectColumn.Field("Department_Name", bill));
 
@@ -50,7 +50,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
       query.Columns.Add(DQSelectColumn.Field("DisplayMark", bill));
       query.Columns.Add(DQSelectColumn.Field("Packing_Attr", bill));
       query.Columns.Add(DQSelectColumn.Field("Packing_Pattern", bill));
-
+      query.Columns.Add(DQSelectColumn.Field("Abbreviation", bill));
 
       using (var session = Dmo.NewSession())
       {
@@ -59,6 +59,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
           while (reader.Read())
           {
             var dto = new PackingBagTypeDto();
+            
             dto.Name = (string)reader[0];
             dto.Department_ID = (long?)reader[1];
             dto.Department_Name = (string)reader[2];
@@ -76,6 +77,7 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc
             dto.Packing_Attr = attr == null ? "" : attr.Value.Name;
             var pattern = (NamedValue<包装模式>?)reader[14];
             dto.Packing_Pattern = pattern == null ? "" : pattern.Value.Name;
+            dto.Abbreviation = reader[15].ToString();
             list.Add(dto);
           }
         }

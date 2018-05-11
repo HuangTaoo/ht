@@ -8,7 +8,8 @@ namespace BWP.B3Butchery.Rpcs.ClientServiceRpc.Dtos
   [Serializable]
   class PackingBagTypeDto
   {
-    public string Name { get; set; }
+        public string Abbreviation { get; set; }
+        public string Name { get; set; }
     public long? Department_ID { get; set; }
     public string Department_Name { get; set; }
     public long? Goods_ID { get; set; }
